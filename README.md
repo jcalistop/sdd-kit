@@ -1,6 +1,6 @@
 # SDD Kit — Spec-Driven Development
 
-Metodología spec-driven portable para equipos pequeños. Extraída y generalizada desde [backoffice-v2](https://github.com/jcalistop/backoffice-v2).
+Metodología spec-driven portable para equipos pequeños. Agnóstica al producto y al stack (vía perfiles).
 
 ## Arquitectura en 3 capas
 
@@ -54,19 +54,28 @@ Añadir perfiles nuevos bajo `profiles/` sin tocar `core/`.
 - **Copia puntual** — `git clone` + carpeta `sdd-kit/` en el proyecto
 - **Subtree** — merge periódico desde upstream en monorepos
 
-## Sincronizar desde backoffice-v2 (mantenedores)
+## Sincronizar cambios del kit (mantenedores)
 
-Si el kit vive embebido en `backoffice-v2` antes de publicar cambios:
+Si el kit vive como **submodule** en un repo consumidor:
 
 ```bash
-# En backoffice-v2, tras commit de sdd-kit/
-git subtree split -P sdd-kit -b sdd-kit-export
-cd ../sdd-kit && git pull ../backoffice-v2 sdd-kit-export:main
+cd .github/docs/sdd-kit   # o la ruta configurada en el proyecto
+# editar, commit y push a este repositorio (sdd-kit)
+cd ../..
+git add .github/docs/sdd-kit
+git commit -m "chore: actualiza puntero sdd-kit"
 ```
 
-## Relación con backoffice-v2
+Alternativa histórica con **subtree** desde un monorepo:
 
-`backoffice-v2` es la **instancia de referencia**. Sus documentos en `.github/docs/sdd/` siguen siendo la fuente operativa hasta que se migre gradualmente al kit. Ver `.github/docs/sdd/PROJECT.md` en ese repo.
+```bash
+git subtree split -P <ruta-al-kit> -b sdd-kit-export
+cd ../sdd-kit && git pull <repo-consumidor> sdd-kit-export:main
+```
+
+## Instancia en el proyecto consumidor
+
+Cada proyecto mantiene su capa operativa en `.github/docs/sdd/` (BACKLOG, specs, releases). El submodule `sdd-kit/` aporta core + perfiles; ver `PROJECT.md` y `sdd.config.yaml` en la instancia del consumidor.
 
 ## Estructura
 

@@ -21,4 +21,4 @@ Sync y promoción **no requieren** spec. Registrar en release con ID `—` si ap
 - `.github/workflows/deps-sync.yml` — sync en push a `dev`
 - `.github/dependabot.yml` — target `dep-integration`
 
-Ver implementación de referencia en backoffice-v2.
+Implementar en el repo consumidor: `.github/workflows/deps-sync.yml` y `.github/dependabot.yml` con target `dep-integration`.
