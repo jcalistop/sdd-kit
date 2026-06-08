@@ -1,0 +1,31 @@
+# Copiar a .github/docs/sdd/sdd.config.yaml en cada proyecto
+
+project:
+  name: "Mi Proyecto"
+  development_branch: dev
+  production_branch: main
+
+# Dominios de iniciativas (taxonomía SDD, no módulos de negocio)
+domains:
+  - auth
+  - ux
+  - infra
+  - docs
+
+stack:
+  profile: laravel-filament   # carpeta en profiles/
+  # Referencias opcionales (el perfil define valores por defecto)
+  ci_workflow: .github/workflows/ci.yml
+
+paths:
+  sdd: .github/docs/sdd
+  business: .github/docs/business
+  contributing: CONTRIBUTING.md
+
+ids:
+  next_sdd: 1
+  next_adr: 1
+
+release:
+  semver: true
+  tag_prefix: v
