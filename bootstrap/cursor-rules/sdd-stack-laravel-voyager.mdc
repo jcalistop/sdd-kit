@@ -1,0 +1,51 @@
+---
+description: SDD — perfil Laravel + Voyager + Livewire (calidad, dominio, migraciones, deploy)
+alwaysApply: true
+---
+
+# SDD Stack — Laravel + Voyager + Livewire
+
+Perfil activo cuando `sdd.config.yaml` → `stack.profile: laravel-voyager`.
+
+## Quality gates
+
+- Tests: `php artisan test --compact` (PHPUnit)
+- Formato: `vendor/bin/pint --dirty`
+- CI: `.github/workflows/ci.yml` en verde antes de merge
+
+## Stack UI
+
+- **PHP 8.3 + Laravel 10 + Livewire 3 + Voyager + Bootstrap 5 + Vite** (no Tailwind)
+- Admin: Voyager `/admin` — no Filament
+- Validación: inline en controllers Voyager o `#[Validate]` en Livewire
+- No crear `app/Http/Requests/` salvo solicitud explícita
+- Laravel 10: modelos con `protected $casts = []` (no `casts()`)
+
+## Dominio de aplicación (anti-regresiones)
+
+- **Año activo:** lógica COMGES pivota en `session('indicator_year')` — validar `ano < 2025` y `ano >= 2025`
+- **Instrumento:** bifurcación por `indicatorType` antes de tocar COMGES
+- **Servicio de Salud:** filtrar por `Auth::user()->cen_hie_dependency_id` — no consultas globales sin filtro
+
+## Esquema y migraciones
+
+- Solo migraciones en `database/migrations/` — no DDL manual salvo excepción documentada
+- Deploy esquema: `php artisan migrate --force` tras backup
+- **Destructivas** (`migrate:fresh`, `migrate:refresh`, `db:wipe`): seguir regla `safe-migrations` del proyecto
+- No asumir que migraciones representan esquema histórico completo (Voyager puede ser fuente)
+
+## Deploy
+
+- Producción: orquestador interno en intranet (ver `profiles/laravel-voyager/deploy.md`)
+- GitHub no despliega automáticamente
+- Variables de entorno solo en servidor, no en repo
+
+## Dependabot (si aplica)
+
+- Rama `deps-integration` — ver `profiles/laravel-voyager/branching-extensions.md`
+- Sin spec para bumps rutinarios
+
+## Secretos `.env`
+
+- No sobrescribir `.env` local del desarrollador salvo solicitud explícita
+- CI remoto usa `.env.example` solo en runner — no replicar en máquina con secretos reales

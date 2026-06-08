@@ -42,9 +42,10 @@ Copiar `sdd.config.example.yaml` a `.github/docs/sdd/sdd.config.yaml` y ajustar:
 
 ## Perfiles disponibles
 
-| Perfil             | Uso                                                              |
-| ------------------ | ---------------------------------------------------------------- |
-| `laravel-filament` | Laravel 10+, Filament 3+, Pint, Pest, migraciones, Laravel Cloud |
+| Perfil             | Uso                                                                      |
+| ------------------ | ------------------------------------------------------------------------ |
+| `laravel-filament` | Laravel 10+, Filament 3+, Pint, Pest, migraciones, Laravel Cloud         |
+| `laravel-voyager`  | Laravel 10+, Voyager, Livewire 3, PHPUnit, deploy híbrido intranet + CI |
 
 Añadir perfiles nuevos bajo `profiles/` sin tocar `core/`.
 
@@ -91,7 +92,8 @@ sdd-kit/
 │   ├── templates/
 │   └── releases/
 ├── profiles/
-│   └── laravel-filament/
+│   ├── laravel-filament/
+│   └── laravel-voyager/
 └── bootstrap/
     ├── init-sdd.sh
     ├── init-sdd.ps1

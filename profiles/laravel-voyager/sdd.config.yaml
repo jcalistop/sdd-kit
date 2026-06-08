@@ -1,0 +1,19 @@
+# Valores por defecto del perfil laravel-voyager
+
+stack:
+  profile: laravel-voyager
+  ci_workflow: .github/workflows/ci.yml
+  quality_gates:
+    test: "php artisan test --compact"
+    format: "vendor/bin/pint --dirty"
+  schema_changes: database/migrations
+  deploy_platform: intranet-orchestrator
+  admin_panel: voyager
+
+domains_suggested:
+  - auth
+  - ux
+  - infra
+  - docs
+  - metas
+  - comges
