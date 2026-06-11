@@ -253,7 +253,10 @@ tu-proyecto/
 
 ## Mantenedores del kit
 
-Planificación y evolución del repositorio (no se copia a proyectos): **[docs/maintainers/](docs/maintainers/)**.
+| Recurso                                | Uso                                                                |
+| -------------------------------------- | ------------------------------------------------------------------ |
+| [docs/maintainers/](docs/maintainers/) | Roadmap y análisis (no se copia a proyectos)                       |
+| [docs/releases/](docs/releases/)       | Historial de versiones del kit ([v1.0.0](docs/releases/v1.0.0.md)) |
 
 Crear perfiles nuevos: **[`core/templates/profile-template.md`](core/templates/profile-template.md)**.
 

@@ -10,6 +10,7 @@
 - [ ] Bootstrap / agentes (`bootstrap/`)
 - [ ] CLI (`cli/`)
 - [ ] Mantenedores (`docs/maintainers/`)
+- [ ] Releases del kit (`docs/releases/`)
 - [ ] Otro: \_
 
 ## Checklist

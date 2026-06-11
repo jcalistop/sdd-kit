@@ -6,7 +6,7 @@ Gracias por interesarte en mejorar el kit. Este repositorio es metodología, doc
 
 1. Revisa el [README](README.md) y [INSTALL.md](INSTALL.md) para entender el alcance del kit.
 2. Para cambios grandes (nuevo perfil, CLI, flujo SDD), abre un issue o comenta en uno existente.
-3. Planificación del mantenedor: [docs/maintainers/](docs/maintainers/).
+3. Planificación del mantenedor: [docs/maintainers/](docs/maintainers/). Releases: [docs/releases/](docs/releases/).
 
 ## Tipos de contribución
 
@@ -17,12 +17,13 @@ Gracias por interesarte en mejorar el kit. Este repositorio es metodología, doc
 | Bootstrap / agentes                | `bootstrap/`         | Prompts en `agent-prompts/`; reglas Cursor se generan en install               |
 | CLI                                | `cli/`               | Python 3.10+, sin dependencias externas obligatorias                           |
 | Docs de mantenimiento              | `docs/maintainers/`  | Solo evolución del repo, no se copia a proyectos                               |
+| Releases del kit                   | `docs/releases/`     | CHANGELOG y notas `vX.Y.Z.md`; publicar en GitHub Releases                     |
 
 ## Flujo de trabajo
 
 1. **Fork** del repositorio y rama desde `main` (`feat/...`, `fix/...`, `docs/...`).
 2. Cambios **pequeños y enfocados** — un PR por tema.
-3. Actualiza documentación afectada (README, INSTALL, perfil, release-notes si aplica).
+3. Actualiza documentación afectada (README, INSTALL, perfil, [docs/releases/CHANGELOG.md](docs/releases/CHANGELOG.md) si aplica).
 4. Abre un **Pull Request** con la plantilla completada.
 
 ### Nuevo perfil de stack

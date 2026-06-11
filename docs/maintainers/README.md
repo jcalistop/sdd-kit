@@ -5,11 +5,14 @@
 
 ## Contenido
 
-| Documento                            | Uso                                                              |
-| ------------------------------------ | ---------------------------------------------------------------- |
-| [ANALYSIS.md](ANALYSIS.md)           | Analisis critico del kit: fortalezas, debilidades, oportunidades |
-| [ROADMAP.md](ROADMAP.md)             | Plan de evolucion por fases (1–4) y metricas de exito            |
-| [release-notes.md](release-notes.md) | Notas de version del kit (mantenedores)                          |
+| Documento                  | Uso                                                              |
+| -------------------------- | ---------------------------------------------------------------- |
+| [ANALYSIS.md](ANALYSIS.md) | Analisis critico del kit: fortalezas, debilidades, oportunidades |
+| [ROADMAP.md](ROADMAP.md)   | Plan de evolucion por fases (1–4) y metricas de exito            |
+
+## Historial de versiones
+
+Notas de release y changelog del kit: **[docs/releases/](../releases/)** (no en este directorio).
 
 ## Kit vs documentacion de mantenimiento
 
@@ -17,6 +20,7 @@
 | -------------------- | --------------------------------------------------------------------- | -------------------------- |
 | **Kit (consumible)** | `core/`, `profiles/`, `bootstrap/`, `cli/`, `README.md`, `INSTALL.md` | Proyectos que adoptan SDD  |
 | **Mantenimiento**    | `docs/maintainers/` (este directorio)                                 | Quienes evolucionan el kit |
+| **Releases del kit** | `docs/releases/`                                                      | Historial de versiones     |
 
 ## Referencias al kit
 
