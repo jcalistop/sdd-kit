@@ -22,6 +22,7 @@ Todo vive bajo la ruta `paths.sdd` del config (por defecto `.github/docs/sdd/`):
 ├── workflow.md                     # este archivo (copia o enlace al kit)
 ├── BACKLOG.md                      # tablero único de iniciativas
 ├── checklist-pr.md                 # DoD trazabilidad (+ perfil stack)
+├── healthy-development.md          # arquitectura, patrones, codigo limpio
 ├── templates/
 ├── specs/<dominio>/SDD-NNN-*.md
 ├── archive/<YYYY>/<dominio>/SDD-NNN-*.md
@@ -70,16 +71,27 @@ Rama `hotfix/…` → PR a rama de producción (ver [`branching.md`](branching.m
 
 ## Tipos de spec
 
-| Tipo            | Cuándo                            | Profundidad                       |
-| --------------- | --------------------------------- | --------------------------------- |
-| `feature`       | Funcionalidad nueva visible       | Completa                          |
-| `bugfix`        | Comportamiento incorrecto         | Simplificada                      |
-| `performance`   | Optimización sin cambio funcional | Simplificada                      |
-| `refactor`      | Reestructuración interna          | Completa + equivalencia funcional |
-| `db-change`     | Cambio de esquema o datos         | Completa + sección "Cambio de BD" |
-| `documentation` | Doc, manual, release              | Simplificada                      |
+| Tipo            | Cuándo                                                            | Profundidad                                  |
+| --------------- | ----------------------------------------------------------------- | -------------------------------------------- |
+| `feature`       | Funcionalidad nueva visible                                       | Completa                                     |
+| `bugfix`        | Comportamiento incorrecto                                         | Simplificada                                 |
+| `performance`   | Optimización sin cambio funcional                                 | Simplificada                                 |
+| `refactor`      | Reestructuración interna                                          | Completa + equivalencia funcional            |
+| `db-change`     | Cambio de esquema o datos                                         | Completa + sección "Cambio de BD"            |
+| `documentation` | Doc, manual, release                                              | Simplificada                                 |
+| `transcription` | Convertir fuentes a Markdown legible por agente (PDF, DOCX, etc.) | Simplificada — ver perfil `reports-latex-md` |
 
-Combinaciones permitidas: `feature + db-change`, `bugfix + db-change`, etc.
+Combinaciones permitidas: `feature + db-change`, `bugfix + db-change`, `feature + transcription`, etc.
+
+### Fase opcional: Transcription
+
+Antes de **Draft**, cuando el perfil o el spec lo requiera (p. ej. `reports-latex-md`):
+
+| Etapa             | Artefacto                                        | Criterio de salida                                                  |
+| ----------------- | ------------------------------------------------ | ------------------------------------------------------------------- |
+| **Transcription** | `.md` en `data/transcripts/` (ruta del proyecto) | Fuentes no legibles convertidas; método y limitaciones documentados |
+
+No es un estado en cabecera del spec: se registra en BACKLOG o como spec tipo `transcription` hasta completar. Detalle: [`profiles/reports-latex-md/workflow-extensions.md`](../profiles/reports-latex-md/workflow-extensions.md).
 
 ---
 
