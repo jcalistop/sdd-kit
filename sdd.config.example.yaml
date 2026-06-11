@@ -13,7 +13,7 @@ domains:
   - docs
 
 stack:
-  profile: laravel-filament   # carpeta en profiles/
+  profile: laravel-filament # carpeta en profiles/
   # Referencias opcionales (el perfil define valores por defecto)
   ci_workflow: .github/workflows/ci.yml
 
@@ -29,3 +29,8 @@ ids:
 release:
   semver: true
   tag_prefix: v
+
+# Adaptadores de agente IA (rellenado por install-agents.py / init-sdd)
+agent:
+  targets: []
+  install_mode: auto # auto | explicit | none
