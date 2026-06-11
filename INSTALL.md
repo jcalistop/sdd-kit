@@ -1,5 +1,42 @@
 # Instalación — SDD Kit
 
+## Requisitos previos
+
+| Requisito        | Obligatorio             | Notas                                                                                 |
+| ---------------- | ----------------------- | ------------------------------------------------------------------------------------- |
+| Git              | Sí                      | Para submodule o copia versionada                                                     |
+| Python 3.10+     | Recomendado             | CLI, `install-agents.py`, wrappers `sdd.ps1` / `sdd.sh`                               |
+| Stack del perfil | Según perfil            | PHP/Composer (Laravel), Node (React), etc. — ver `profiles/<perfil>/README.md`        |
+| Agente IA        | Recomendado             | Cursor, Claude Code, Codex o Copilot — ver [core/agent-setup.md](core/agent-setup.md) |
+| Pandoc + LaTeX   | Solo `reports-latex-md` | Compilación de informes                                                               |
+| `gh` CLI         | Opcional                | `sdd backlog sync` con GitHub Issues                                                  |
+
+---
+
+## Modo agente (recomendado en proyectos existentes)
+
+En repos **con código y documentación previa**, evita ejecutar `init-sdd` manualmente sin revisar el contexto. Flujo seguro:
+
+1. **Humano:** añade el submodule (un comando Git).
+2. **Humano:** pega el prompt de adopción en el agente (ver [README.md](README.md) — Paso 3, proyecto existente).
+3. **Agente:** lee `core/adoption-guide.md` Etapa 1, ejecuta `init-sdd` solo si no hay instancia SDD, completa config y BACKLOG sin specs retrospectivos, instala adaptadores y corre `validate-sdd`.
+
+El agente debe **preguntar antes de sobrescribir** cualquier archivo en `.github/docs/sdd/` o `business/` que ya exista.
+
+### Prompt de adopción (plantilla)
+
+```
+Adopta SDD en este proyecto con perfil <PERFIL>.
+
+- Proyecto EXISTENTE. Kit en sdd-kit/.
+- Sigue sdd-kit/core/adoption-guide.md Etapa 1.
+- No sobrescribas archivos existentes sin confirmación.
+- Inventario pre-SDD en BACKLOG (ID —), 3–5 ítems Discovery.
+- init-sdd + adaptadores (-Agent auto) + validate-sdd.
+```
+
+---
+
 ## Opción 1: Clonar como submodule (recomendado)
 
 Desde la raíz del proyecto destino:
@@ -116,8 +153,19 @@ Añadir perfiles en `profiles/<nombre>/` sin modificar `core/`. Guía: [core/tem
 
 ## Proyectos existentes
 
-No requiere reescribir documentación ni specs retrospectivos. Ver [core/adoption-guide.md](core/adoption-guide.md):
+No requiere reescribir documentación ni specs retrospectivos.
 
-1. **Etapa 1** — BACKLOG + inventario (día 1)
+**Instalación:** usar [Modo agente](#modo-agente-recomendado-en-proyectos-existentes) arriba. Si instalas a mano, revisa que `init-sdd` no pise archivos ya editados (el script no sobrescribe `business/README.md` si existe, pero sí copia plantillas core a `.github/docs/sdd/`).
+
+Ver [core/adoption-guide.md](core/adoption-guide.md):
+
+1. **Etapa 1** — BACKLOG + inventario (día 1); sin specs para lo ya en producción
 2. **Etapa 2** — nuevas features con ciclo SDD completo
 3. **Etapa 3** — cobertura completa y migración de docs legacy
+
+### Qué debe evitar el agente (y tú) en repos existentes
+
+- Crear specs retrospectivos para todo el código ya desplegado
+- Sobrescribir wiki/Notion/READMEs sin migración planificada (Etapa 3)
+- Ejecutar `init-sdd` repetido esperando “resetear” la instancia SDD
+- Mover o borrar documentación fuera de `paths.sdd` sin petición explícita

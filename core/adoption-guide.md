@@ -20,16 +20,27 @@
 
 ## Antes de empezar
 
-| Situacion del proyecto          | Que hacer                                                         |
-| ------------------------------- | ----------------------------------------------------------------- |
-| **Proyecto nuevo**              | `init-sdd.ps1` / `init-sdd.sh` (detecta agente con `-Agent auto`) |
-| **Proyecto existente sin docs** | Misma instalacion + Etapa 1 (inventario en BACKLOG)               |
-| **Proyecto existente con docs** | Instalacion + migrar docs utiles a `business/` en Etapa 3         |
+| Situacion del proyecto          | Que hacer                                                |
+| ------------------------------- | -------------------------------------------------------- |
+| **Proyecto nuevo**              | Submodule + `init-sdd` (humano o agente); `-Agent auto`  |
+| **Proyecto existente sin docs** | Submodule + **modo agente** (recomendado) + Etapa 1      |
+| **Proyecto existente con docs** | Submodule + modo agente; migrar a `business/` en Etapa 3 |
+
+### Instalacion recomendada
+
+**Humano (siempre):** añadir submodule:
 
 ```powershell
 git submodule add https://github.com/jcalistop/sdd-kit.git sdd-kit
+```
+
+**Proyecto nuevo:** ejecutar bootstrap:
+
+```powershell
 .\sdd-kit\bootstrap\init-sdd.ps1 -Profile laravel-filament -Project "Mi App"
 ```
+
+**Proyecto existente:** delegar al agente con el prompt de [`INSTALL.md`](../INSTALL.md) (seccion Modo agente). El agente ejecuta `init-sdd` solo si no hay instancia SDD, lee documentacion previa y **no sobrescribe** archivos sin aprobacion.
 
 Por defecto se detecta el agente/IDE e instalan instrucciones (Cursor, Claude Code, Codex o Copilot). Ver [`agent-setup.md`](agent-setup.md).
 

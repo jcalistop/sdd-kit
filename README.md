@@ -59,6 +59,22 @@ Más detalle: [`core/concepts.md`](core/concepts.md) · ciclo completo: [`core/w
 
 ---
 
+## Requisitos previos
+
+Antes de instalar, verifica lo siguiente (además del stack de tu perfil: PHP, Node, etc.).
+
+| Requisito                                           | Obligatorio                    | Para qué                                                      |
+| --------------------------------------------------- | ------------------------------ | ------------------------------------------------------------- |
+| **Git**                                             | Sí                             | Submodule del kit en tu repo                                  |
+| **Python 3.10+**                                    | Recomendado                    | CLI (`validate`, `backlog`, `spec new`) y `install-agents.py` |
+| **Agente IA** (Cursor, Claude Code, Codex, Copilot) | Recomendado                    | Adopción guiada y flujo spec → código                         |
+| **Pandoc + LaTeX**                                  | Solo perfil `reports-latex-md` | Compilar informes a PDF/DOCX                                  |
+| **`gh` CLI**                                        | Opcional                       | Sync de BACKLOG con GitHub Issues                             |
+
+Comprobar Python: `python --version` o `py -3 --version` (Windows).
+
+---
+
 ## Empieza aquí (desarrollador principiante)
 
 ### Paso 1 — Elige tu perfil
@@ -74,20 +90,62 @@ El **perfil** adapta tests, deploy y checklist a tu tecnología (o a informes, s
 | [`react-vite`](profiles/react-vite/README.md)             | Frontend React + Vite                  |
 | [`reports-latex-md`](profiles/reports-latex-md/README.md) | Informes Markdown/LaTeX → PDF/DOCX     |
 
-### Paso 2 — Instala en tu proyecto
+### Paso 2 — Añade el kit (solo tú, un comando)
 
-Desde la raíz de tu repo (con Git):
+Desde la raíz de tu repo:
 
 ```powershell
 git submodule add https://github.com/jcalistop/sdd-kit.git sdd-kit
+git submodule update --init
+```
+
+En Linux/macOS es el mismo comando `git submodule`. **Detén aquí** si vas a usar modo agente (recomendado abajo).
+
+### Paso 3 — Adopta SDD (elige tu escenario)
+
+#### Proyecto nuevo — puedes ejecutar `init-sdd` tú mismo
+
+```powershell
 .\sdd-kit\bootstrap\init-sdd.ps1 -Profile laravel-filament -Project "Mi App"
 ```
 
-En Linux/macOS, cambia el perfil y usa `init-sdd.sh`. Guía completa: **[INSTALL.md](INSTALL.md)**.
+En Linux/macOS: `./sdd-kit/bootstrap/init-sdd.sh --profile laravel-filament --project "Mi App"`.
 
-Por defecto detecta tu agente/IDE e instala las instrucciones correspondientes (`-Agent auto`). Ver **[`core/agent-setup.md`](core/agent-setup.md)**.
+Por defecto detecta tu agente/IDE (`-Agent auto`) e instala las reglas SDD. Ver **[`core/agent-setup.md`](core/agent-setup.md)**.
 
-### Paso 3 — Completa lo mínimo (día 1)
+#### Proyecto existente — modo agente (recomendado)
+
+> **No ejecutes `init-sdd` a ciegas** en un repo con código y documentación ya en marcha. Un bootstrap manual puede pisar archivos o crear estructura sin contexto del proyecto.
+
+**Tú:** añade el submodule (Paso 2) y abre el chat del agente.
+
+**El agente:** sigue [`core/adoption-guide.md`](core/adoption-guide.md) Etapa 1, lee lo que ya existe y no sobrescribe documentación sin tu aprobación.
+
+Copia y adapta este prompt:
+
+```
+Adopta SDD en este proyecto con perfil [laravel-filament|python-django|…].
+
+Contexto:
+- Proyecto EXISTENTE con código y posible documentación previa.
+- El kit está en sdd-kit/ (submodule).
+
+Instrucciones:
+1. Lee sdd-kit/core/adoption-guide.md (Etapa 1) y sdd-kit/core/agent-setup.md.
+2. Ejecuta init-sdd solo si no existe .github/docs/sdd/; si ya existe, NO sobrescribas archivos sin preguntar.
+3. Completa sdd.config.yaml, business/README.md y BACKLOG (inventario pre-SDD con ID —, sin specs retrospectivos).
+4. Instala adaptadores de agente (-Agent auto).
+5. Ejecuta validate-sdd y reporta resultado.
+6. Propón 3–5 ítems en Discovery para el backlog real.
+
+No reescribir el pasado. No crear specs para features ya implementadas.
+```
+
+Guía detallada: **[INSTALL.md](INSTALL.md)** — sección «Modo agente».
+
+### Paso 4 — Completa lo mínimo (día 1)
+
+Si no usaste el prompt anterior, completa a mano o pide al agente:
 
 | Archivo                            | Qué poner                                                      |
 | ---------------------------------- | -------------------------------------------------------------- |
@@ -95,9 +153,9 @@ Por defecto detecta tu agente/IDE e instala las instrucciones correspondientes (
 | `.github/docs/business/README.md`  | Qué hace el sistema y quién lo usa                             |
 | `.github/docs/sdd/BACKLOG.md`      | 3–5 tareas reales en **Discovery** (lo que viene ahora)        |
 
-Checklist detallado: **[`core/adoption-guide.md`](core/adoption-guide.md)** — Etapa 1.
+Checklist: **[`core/adoption-guide.md`](core/adoption-guide.md)** — Etapa 1.
 
-### Paso 4 — Valida que todo esté bien
+### Paso 5 — Valida que todo esté bien
 
 ```powershell
 .\sdd-kit\bootstrap\validate-sdd.ps1
@@ -105,7 +163,7 @@ Checklist detallado: **[`core/adoption-guide.md`](core/adoption-guide.md)** — 
 
 Si pasa sin errores críticos, la estructura está lista.
 
-### Paso 5 — Tu primer spec con el agente
+### Paso 6 — Tu primer spec con el agente
 
 Con adaptadores instalados, el agente ya tiene las reglas SDD. Si no, pide explícitamente:
 
