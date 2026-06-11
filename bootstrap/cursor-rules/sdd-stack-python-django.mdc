@@ -1,0 +1,71 @@
+---
+description: SDD — perfil Python + Django (calidad, admin, migraciones, DRF/Celery opcional, deploy)
+alwaysApply: true
+---
+
+# SDD Stack — Python + Django
+
+Perfil activo cuando `sdd.config.yaml` → `stack.profile: python-django`.
+
+## Quality gates
+
+- Tests: `pytest --cov`
+- Lint: `ruff check .`
+- Types: `mypy .` (si el proyecto lo usa)
+- Django: `python manage.py check`
+- CI: `.github/workflows/ci.yml` en verde antes de merge
+
+## Estructura típica
+
+- Proyecto en `config/` (settings, urls, wsgi/asgi)
+- Apps en `apps/<nombre>/` (models, views, admin, urls, migrations)
+- Templates en `templates/`, static en `static/` o app static
+- Tests en `tests/` con pytest-django
+
+## Convenciones
+
+- Lógica de negocio en modelos/servicios; vistas delgadas
+- Migraciones solo vía `manage.py makemigrations` — no DDL manual sin spec
+- No raw SQL sin justificación en spec
+- Formularios POST con CSRF salvo excepción documentada
+
+## Admin
+
+- Registrar modelos en `admin.py` cuando el spec lo indique
+- Verificar permisos staff y reglas de `domain-rules.md` en cambios visibles
+- Specs con admin: completar `profiles/python-django/spec-impact.md`
+
+## DRF (opcional)
+
+- Serializers, viewsets, permisos y paginación documentados en spec
+- Tests con `APIClient` para endpoints tocados
+- Si el spec no menciona API, no agregar DRF por defecto
+
+## Esquema y migraciones
+
+- Solo migraciones en `apps/<app>/migrations/`
+- Deploy: `python manage.py migrate` tras backup si `db-change`
+- `collectstatic` si hay cambios en assets estáticos
+
+## Celery (opcional)
+
+- Tareas idempotentes o con retry documentado en spec
+- Variables en `.env.example` (sin valores secretos)
+
+## Reglas de negocio del proyecto
+
+- Fuente única: `.github/docs/business/domain-rules.md`
+- Si contiene placeholders (`_ej._`, `_..._`, `{{PROJECT_NAME}}`): **estado plantilla** — no asumir reglas; preguntar al humano o iniciar sesión guiada (ver `sdd-agent-workflow.mdc`)
+- Cada spec debe indicar en "Impacto técnico" qué reglas de `domain-rules.md` aplican
+- En PR: verificar permisos, filtrado de datos y terminología del dominio
+- Variables sensibles solo en `.env` / PaaS — actualizar `.env.example` con claves nuevas (sin valores)
+
+## Deploy
+
+- Ver `profiles/python-django/deploy.md` (Docker, PaaS o servidor)
+- Smoke: admin login + rutas críticas tras deploy
+
+## Dependabot (si aplica)
+
+- Rama `deps-integration` — ver `profiles/python-django/branching-extensions.md`
+- Sin spec para bumps rutinarios de dependencias

@@ -1,5 +1,5 @@
 ---
-description: SDD — perfil Laravel + Voyager + Livewire (calidad, dominio, migraciones, deploy)
+description: SDD — perfil Laravel + Voyager + Livewire (calidad, migraciones, deploy)
 alwaysApply: true
 ---
 
@@ -21,17 +21,18 @@ Perfil activo cuando `sdd.config.yaml` → `stack.profile: laravel-voyager`.
 - No crear `app/Http/Requests/` salvo solicitud explícita
 - Laravel 10: modelos con `protected $casts = []` (no `casts()`)
 
-## Dominio de aplicación (anti-regresiones)
+## Reglas de negocio del proyecto
 
-- **Año activo:** lógica COMGES pivota en `session('indicator_year')` — validar `ano < 2025` y `ano >= 2025`
-- **Instrumento:** bifurcación por `indicatorType` antes de tocar COMGES
-- **Servicio de Salud:** filtrar por `Auth::user()->cen_hie_dependency_id` — no consultas globales sin filtro
+- Fuente única: `.github/docs/business/domain-rules.md`
+- Si contiene placeholders (`_ej._`, `_..._`, `{{PROJECT_NAME}}`): **estado plantilla** — no asumir reglas; preguntar al humano o iniciar sesión guiada (ver `sdd-agent-workflow.mdc`)
+- Cada spec debe indicar en "Impacto técnico" qué reglas de `domain-rules.md` aplican
+- En PR: verificar autorización, filtros de datos y reglas transversales definidas ahí
 
 ## Esquema y migraciones
 
 - Solo migraciones en `database/migrations/` — no DDL manual salvo excepción documentada
 - Deploy esquema: `php artisan migrate --force` tras backup
-- **Destructivas** (`migrate:fresh`, `migrate:refresh`, `db:wipe`): seguir regla `safe-migrations` del proyecto
+- **Destructivas** (`migrate:fresh`, `migrate:refresh`, `db:wipe`): requieren autorización explícita del humano
 - No asumir que migraciones representan esquema histórico completo (Voyager puede ser fuente)
 
 ## Deploy

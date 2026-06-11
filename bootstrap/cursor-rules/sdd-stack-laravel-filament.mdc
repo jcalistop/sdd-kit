@@ -24,6 +24,13 @@ Perfil activo cuando `sdd.config.yaml` → `stack.profile: laravel-filament`.
 - Specs con UI: completar tabla en `profiles/laravel-filament/spec-impact.md`
 - Verificar policies/roles en cambios visibles
 
+## Reglas de negocio del proyecto
+
+- Fuente única: `.github/docs/business/domain-rules.md`
+- Si contiene placeholders (`_ej._`, `_..._`, `{{PROJECT_NAME}}`): **estado plantilla** — no asumir reglas; preguntar al humano o iniciar sesión guiada (ver `sdd-agent-workflow.mdc`)
+- Cada spec debe indicar en "Impacto técnico" qué reglas de `domain-rules.md` aplican
+- En PR: verificar checklist de reglas transversales del perfil y las de `domain-rules.md`
+
 ## Deploy
 
 - Producción: Laravel Cloud al merge en `main` (ver `profiles/laravel-filament/deploy.md`)
