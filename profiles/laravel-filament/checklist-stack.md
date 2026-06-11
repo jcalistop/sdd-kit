@@ -36,6 +36,15 @@
 
 ---
 
+## Reglas de negocio _(si aplica)_
+
+> Definidas en `.github/docs/business/domain-rules.md`.
+
+- [ ] Reglas `DR-*` citadas en spec verificadas en flujos tocados _(o No aplica)_
+- [ ] Terminología alineada con glosario de `business/glossary.md` _(o No aplica)_
+
+---
+
 ## Post-deploy _(si cierra release)_
 
 - [ ] `php artisan optimize:clear` documentado si aplica

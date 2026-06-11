@@ -15,6 +15,7 @@ Responder cada ítem. Si no aplica: "No aplica — [razón]".
 | ¿Requiere `php artisan optimize:clear` / limpieza de caché al deploy? |           |
 | ¿Introduce dependencia o integración externa nueva?                   |           |
 | ¿Introduce decisión arquitectónica transversal? Si sí → ADR.          |           |
+| ¿Afecta reglas en `business/domain-rules.md`? Si sí, listar cuáles.   |           |
 
 ## Regla de esquema
 

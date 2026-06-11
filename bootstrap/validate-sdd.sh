@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Valida coherencia documental de una instancia SDD.
 # Uso: ./sdd-kit/bootstrap/validate-sdd.sh [.github/docs/sdd]
+# Codigos de salida: 0=OK, 1=fallo del script/entorno (FATAL), 2=incoherencias documentales (ERROR)
 
 set -euo pipefail
 
@@ -8,20 +9,28 @@ SDD_PATH="${1:-.github/docs/sdd}"
 ERRORS=0
 WARNINGS=0
 
+fatal() {
+  echo "FATAL: $1"
+  echo ""
+  echo "La validacion no pudo ejecutarse (exit 1)."
+  exit 1
+}
+
 err() { echo "ERROR: $1"; ERRORS=$((ERRORS + 1)); }
 warn() { echo "WARN:  $1"; WARNINGS=$((WARNINGS + 1)); }
 ok() { echo "OK:    $1"; }
 
+echo ""
+echo "=== Validacion SDD ($SDD_PATH) ==="
+echo ""
+
 if [[ ! -d "$SDD_PATH" ]]; then
-  err "No existe el directorio SDD: $SDD_PATH"
-  echo "Ejecuta init-sdd o indica la ruta correcta."
-  exit 1
+  fatal "No existe el directorio SDD: $SDD_PATH"
 fi
 
 BACKLOG="$SDD_PATH/BACKLOG.md"
 if [[ ! -f "$BACKLOG" ]]; then
-  err "Falta BACKLOG.md en $SDD_PATH"
-  exit 1
+  fatal "Falta BACKLOG.md en $SDD_PATH"
 fi
 
 # --- Extraer IDs del BACKLOG por seccion ---
@@ -37,7 +46,7 @@ while IFS= read -r line; do
   [[ "$line" =~ ^\| ]] || continue
   [[ "$line" =~ ^\|[[:space:]]*[-:] ]] && continue
   id=$(echo "$line" | cut -d'|' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-  [[ "$id" =~ ^SDD-[0-9]+$ ]] || continue
+  [[ "$id" =~ ^SDD-[0-9]+[a-z]?$ ]] || continue
   if [[ -n "${BACKLOG_IDS[$id]:-}" && "${BACKLOG_IDS[$id]}" != "$current_section" ]]; then
     err "ID $id duplicado en BACKLOG (secciones: ${BACKLOG_IDS[$id]} y $current_section)"
   else
@@ -51,7 +60,7 @@ declare -A FILE_IDS
 declare -A FILE_DUP
 while IFS= read -r -d '' f; do
   base=$(basename "$f")
-  if [[ "$base" =~ ^(SDD-[0-9]+) ]]; then
+  if [[ "$base" =~ ^(SDD-[0-9]+[a-z]?) ]]; then
     id="${BASH_REMATCH[1]}"
     if [[ "$f" == *"/specs/"* ]]; then
       FILE_IDS["$id"]="specs"
@@ -140,6 +149,10 @@ fi
 echo ""
 echo "Resumen: $ERRORS error(es), $WARNINGS advertencia(s)"
 if [[ $ERRORS -gt 0 ]]; then
-  exit 1
+  echo ""
+  echo "Validacion documental SDD FALLIDA. Corrige los ERROR listados arriba (exit 2)."
+  exit 2
 fi
+echo ""
+echo "Validacion documental SDD OK."
 exit 0

@@ -1,5 +1,6 @@
 # Valida coherencia documental de una instancia SDD.
 # Uso: .\sdd-kit\bootstrap\validate-sdd.ps1 [-SddPath ".github/docs/sdd"]
+# Codigos de salida: 0=OK, 1=fallo del script/entorno (FATAL), 2=incoherencias documentales (ERROR)
 
 param(
     [string]$SddPath = ".github/docs/sdd"
@@ -9,18 +10,28 @@ $ErrorActionPreference = "Continue"
 $errors = 0
 $warnings = 0
 
+function Write-Fatal($msg) {
+    Write-Host "FATAL: $msg" -ForegroundColor Magenta
+}
+
 function Write-Err($msg) { Write-Host "ERROR: $msg" -ForegroundColor Red; $script:errors++ }
 function Write-Warn($msg) { Write-Host "WARN:  $msg" -ForegroundColor Yellow; $script:warnings++ }
 function Write-Ok($msg) { Write-Host "OK:    $msg" -ForegroundColor Green }
 
+Write-Host ""
+Write-Host "=== Validacion SDD ($SddPath) ===" -ForegroundColor Cyan
+Write-Host ""
+
 if (-not (Test-Path $SddPath)) {
-    Write-Err "No existe el directorio SDD: $SddPath"
+    Write-Fatal "No existe el directorio SDD: $SddPath"
+    Write-Host "La validacion no pudo ejecutarse (exit 1)." -ForegroundColor Magenta
     exit 1
 }
 
 $backlogPath = Join-Path $SddPath "BACKLOG.md"
 if (-not (Test-Path $backlogPath)) {
-    Write-Err "Falta BACKLOG.md en $SddPath"
+    Write-Fatal "Falta BACKLOG.md en $SddPath"
+    Write-Host "La validacion no pudo ejecutarse (exit 1)." -ForegroundColor Magenta
     exit 1
 }
 
@@ -38,7 +49,7 @@ foreach ($line in $backlogLines) {
     if ($line -match '^\|\s*[-:]') { continue }
     $cols = ($line.Trim('|').Split('|') | ForEach-Object { $_.Trim() })
     if ($cols.Count -lt 1) { continue }
-    if ($cols[0] -notmatch '^(SDD-\d+)$') { continue }
+    if ($cols[0] -notmatch '^(SDD-\d+[a-z]?)$') { continue }
     $id = $Matches[1]
     if ($backlogIds.ContainsKey($id) -and $backlogIds[$id] -ne $currentSection) {
         Write-Err "ID $id duplicado en BACKLOG (secciones: $($backlogIds[$id]) y $currentSection)"
@@ -59,7 +70,7 @@ $specDirs = @(
 foreach ($dir in $specDirs) {
     if (-not (Test-Path $dir)) { continue }
     Get-ChildItem -Path $dir -Recurse -Filter "SDD-*.md" -File | ForEach-Object {
-        if ($_.Name -match '^(SDD-\d+)') {
+        if ($_.Name -match '^(SDD-\d+[a-z]?)') {
             $id = $Matches[1]
             $loc = if ($_.FullName -match [regex]::Escape("\specs\")) { "specs" } else { "archive" }
             if ($seenFiles.ContainsKey($id)) {
@@ -132,5 +143,13 @@ if (-not (Test-Path (Join-Path $SddPath "sdd.config.yaml"))) {
 
 Write-Host ""
 Write-Host "Resumen: $errors error(es), $warnings advertencia(s)"
-if ($errors -gt 0) { exit 1 }
+
+if ($errors -gt 0) {
+    Write-Host ""
+    Write-Host "Validacion documental SDD FALLIDA. Corrige los ERROR listados arriba (exit 2)." -ForegroundColor Red
+    exit 2
+}
+
+Write-Host ""
+Write-Host "Validacion documental SDD OK." -ForegroundColor Green
 exit 0
