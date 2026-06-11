@@ -1,0 +1,71 @@
+name: Reporte de bug
+description: Algo no funciona como se espera en el kit (scripts, CLI, docs, perfiles)
+title: "[bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por el reporte. Incluye la mayor cantidad de detalle posible para reproducir el problema.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área afectada
+      options:
+        - Bootstrap / init-sdd
+        - CLI (sdd.py)
+        - Core / documentación
+        - Perfil de stack
+        - Reglas / prompts de agente
+        - Otro
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Commit o versión del kit
+      description: Hash de commit, tag o fecha aproximada
+      placeholder: "ej. main @ abc1234"
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para reproducir
+      placeholder: |
+        1. Clonar / submodule en ...
+        2. Ejecutar ...
+        3. Ver error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamiento esperado
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamiento actual
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Entorno
+      description: SO, shell, Python, perfil usado, agente/IDE
+      placeholder: "Windows 11, PowerShell 7, Python 3.12, laravel-filament, Cursor"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs o capturas
+      description: Salida de consola, mensaje de error completo
+      render: shell

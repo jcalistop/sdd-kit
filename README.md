@@ -198,3 +198,14 @@ tu-proyecto/
 Planificación y evolución del repositorio (no se copia a proyectos): **[docs/maintainers/](docs/maintainers/)**.
 
 Crear perfiles nuevos: **[`core/templates/profile-template.md`](core/templates/profile-template.md)**.
+
+## Comunidad y legal
+
+| Documento                                | Descripción                             |
+| ---------------------------------------- | --------------------------------------- |
+| [CONTRIBUTING.md](CONTRIBUTING.md)       | Cómo contribuir (perfiles, core, CLI)   |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Código de conducta                      |
+| [SECURITY.md](SECURITY.md)               | Reporte responsable de vulnerabilidades |
+| [LICENSE](LICENSE)                       | MIT                                     |
+
+[![CI](https://github.com/jcalistop/sdd-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/jcalistop/sdd-kit/actions/workflows/ci.yml)

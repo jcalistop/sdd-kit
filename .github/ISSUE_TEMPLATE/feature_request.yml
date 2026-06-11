@@ -1,0 +1,53 @@
+name: Solicitud de mejora
+description: Propón una idea, perfil nuevo o mejora al flujo SDD
+title: "[feat]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe el problema o la oportunidad. Revisa el [ROADMAP](https://github.com/jcalistop/sdd-kit/blob/main/docs/maintainers/ROADMAP.md) antes de proponer algo ya planificado.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options:
+        - Core / metodología SDD
+        - Nuevo perfil de stack
+        - CLI / automatización
+        - Agentes / Cursor rules
+        - Documentación
+        - Otro
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema u oportunidad
+      description: ¿Qué dolor resuelve o qué habilita?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Propuesta
+      description: Solución sugerida o enfoque preferido
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: Otras formas de resolverlo sin cambiar el kit
+
+  - type: checkboxes
+    id: willing
+    attributes:
+      label: Contribución
+      options:
+        - label: Estoy dispuesto a abrir un PR con esta mejora
+          required: false

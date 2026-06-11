@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compilar módulos Python de la CLI
+        run: python -m compileall -q cli/
+
+      - name: Validar JSON de agent-prompts
+        run: |
+          python -c "import json; json.load(open('bootstrap/agent-prompts/manifest.json'))"
+          python -c "import json; json.load(open('bootstrap/agent-prompts/stack-descriptions.json'))"
+
+      - name: Verificar archivos obligatorios por perfil
+        run: |
+          python <<'PY'
+          import sys
+          from pathlib import Path
+
+          required = [
+              "README.md",
+              "sdd.config.yaml",
+              "checklist-stack.md",
+              "spec-impact.md",
+              "deploy.md",
+              "release-deploy-section.md",
+          ]
+          profiles = Path("profiles")
+          errors = []
+          for profile_dir in sorted(profiles.iterdir()):
+              if not profile_dir.is_dir():
+                  continue
+              for name in required:
+                  if not (profile_dir / name).is_file():
+                      errors.append(f"{profile_dir.name}: falta {name}")
+          if errors:
+              print("\n".join(errors))
+              sys.exit(1)
+          print(f"OK: {len(list(profiles.iterdir()))} perfiles verificados")
+          PY
