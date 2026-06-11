@@ -1,0 +1,18 @@
+# Valores por defecto del perfil python-fastapi
+
+stack:
+  profile: python-fastapi
+  ci_workflow: .github/workflows/ci.yml
+  quality_gates:
+    test: "pytest --cov"
+    lint: "ruff check ."
+    types: "mypy ."
+  schema_changes: alembic/versions
+  deploy_platform: docker-or-paas
+
+domains_suggested:
+  - auth
+  - api
+  - ux
+  - infra
+  - docs

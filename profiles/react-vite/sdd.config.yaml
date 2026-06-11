@@ -1,0 +1,18 @@
+# Valores por defecto del perfil react-vite
+
+stack:
+  profile: react-vite
+  ci_workflow: .github/workflows/ci.yml
+  quality_gates:
+    test: "vitest run"
+    lint: "eslint ."
+    format: "prettier --check ."
+    types: "tsc --noEmit"
+  deploy_platform: static-hosting
+
+domains_suggested:
+  - auth
+  - ux
+  - catalogos
+  - infra
+  - docs

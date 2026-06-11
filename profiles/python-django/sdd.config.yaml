@@ -1,0 +1,20 @@
+# Valores por defecto del perfil python-django
+
+stack:
+  profile: python-django
+  ci_workflow: .github/workflows/ci.yml
+  quality_gates:
+    test: "pytest --cov"
+    lint: "ruff check ."
+    types: "mypy ."
+    django_check: "python manage.py check"
+  schema_changes: apps/*/migrations
+  deploy_platform: docker-or-paas
+
+domains_suggested:
+  - auth
+  - admin
+  - api
+  - ux
+  - infra
+  - docs
