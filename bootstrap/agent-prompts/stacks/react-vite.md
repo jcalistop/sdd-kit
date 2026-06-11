@@ -1,0 +1,49 @@
+# SDD Stack — React + Vite
+
+Perfil activo cuando `sdd.config.yaml` → `stack.profile: react-vite`.
+
+## Quality gates
+
+- Tests: `vitest run` (o `npm run test`)
+- Lint: `eslint .`
+- Format: `prettier --check .`
+- Types: `tsc --noEmit`
+- CI: `.github/workflows/ci.yml` en verde antes de merge
+
+## Estructura típica
+
+- Componentes en `src/components/`
+- Páginas en `src/pages/`
+- Rutas en `src/routes/` (React Router)
+- API clients en `src/api/` o `src/services/`
+- Tests junto al componente (`*.test.tsx`) o en `src/`
+
+## UI y datos
+
+- Manejar estados loading / error / empty en componentes con datos async
+- Validación de formularios en cliente; errores visibles y accesibles
+- Specs con UI: completar `profiles/react-vite/spec-impact.md`
+- Variables públicas solo con prefijo `VITE_` — documentar en `.env.example`
+
+## Accesibilidad
+
+- Labels en inputs; botones con texto o `aria-label`
+- No depender solo de color para estados de error
+
+## Build y deploy
+
+- `npm run build` debe pasar antes de merge que cierra release
+- Deploy: hosting estático (ver `profiles/react-vite/deploy.md`)
+- SPA: verificar rewrite a `index.html` para rutas cliente
+
+## Reglas de negocio del proyecto
+
+- Fuente única: `.github/docs/business/domain-rules.md`
+- Si contiene placeholders (`_ej._`, `_..._`, `{{PROJECT_NAME}}`): **estado plantilla** — no asumir reglas; preguntar al humano o iniciar sesión guiada (ver `sdd-agent-workflow.mdc`)
+- Cada spec debe indicar en "Impacto técnico" qué reglas de `domain-rules.md` aplican
+- En PR: verificar flujos UI contra reglas de roles y validaciones del dominio
+
+## Dependabot (si aplica)
+
+- Rama `deps-integration` — ver `profiles/react-vite/branching-extensions.md`
+- Sin spec para bumps rutinarios de npm

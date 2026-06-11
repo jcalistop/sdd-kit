@@ -1,0 +1,8 @@
+{
+  "laravel-filament": "SDD — perfil Laravel + Filament (calidad, migraciones, deploy)",
+  "laravel-voyager": "SDD — perfil Laravel + Voyager + Livewire (calidad, migraciones, deploy)",
+  "python-django": "SDD — perfil Python + Django (calidad, admin, migraciones, DRF/Celery opcional, deploy)",
+  "python-fastapi": "SDD — perfil Python + FastAPI (calidad, API, migraciones, deploy)",
+  "react-vite": "SDD — perfil React + Vite (calidad, componentes, rutas, deploy)",
+  "reports-latex-md": "SDD — perfil Informes LaTeX + Markdown (documentos, transcripción, publicación)"
+}

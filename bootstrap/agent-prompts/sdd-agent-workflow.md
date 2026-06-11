@@ -1,0 +1,254 @@
+# SDD Agent Workflow
+
+Ejecutar el ciclo SDD de forma autonoma. El **humano aprueba** en Ready (spec) y en merge (PR). Adaptado a **desarrollador solo**.
+
+**Lectura previa:** `BACKLOG.md`, `sdd.config.yaml`, `workflow.md`, `healthy-development.md`, `business/README.md`, `business/domain-rules.md`, spec de ejemplo en `profiles/<stack>/examples/` o `core/examples/SDD-001-evento-no-tecnico.md`.
+
+---
+
+## Contexto de negocio (antes de Discovery)
+
+**Siempre** leer `.github/docs/business/domain-rules.md` (o ruta `paths.business` del config).
+
+### Detectar estado plantilla
+
+El archivo esta en **estado plantilla** si contiene marcadores como `_ej.`, `_..._`, `{{PROJECT_NAME}}` o filas de glosario vacias.
+
+| Estado                                        | Accion del agente                                                                                            |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Plantilla** + proyecto con codigo existente | Preguntar al humano: "domain-rules.md no tiene reglas documentadas. Quieres formalizarlas ahora o posponer?" |
+| **Plantilla** + proyecto nuevo                | Iniciar **sesion guiada** (ver abajo) antes del primer spec no trivial                                       |
+| **Completado**                                | Usar reglas como referencia en specs y PRs; citar reglas aplicables en "Impacto tecnico"                     |
+
+### Sesion guiada (formalizar domain-rules.md)
+
+Hacer al humano estas preguntas (adaptar al proyecto; no todas aplican):
+
+1. Que hace el sistema y quienes lo usan (sector, usuarios)?
+2. Cuantos roles hay y que puede hacer cada uno?
+3. Hay filtrado por organizacion, sucursal o tenant?
+4. Hay periodos activos (ano fiscal, temporada) que bifurquen la logica?
+5. Que validaciones de negocio son inviolables (ej. stock >= 0, montos positivos)?
+6. Que acciones requieren rol elevado o aprobacion?
+7. Hay terminos del dominio que deban ir al glosario?
+
+Con las respuestas, **escribir** `business/domain-rules.md` y `business/README.md` (contexto minimo). Pedir aprobacion humana antes de continuar con specs.
+
+**Prohibido:** asumir reglas de negocio no documentadas. Si el humano pospone, registrar en BACKLOG nota "domain-rules pendiente" y no inferir restricciones en specs.
+
+---
+
+## Nivel de experiencia — elegir plantilla de spec
+
+SDD ofrece dos plantillas. El agente elige cual usar segun estas reglas:
+
+| Condicion                                                                                                                       | Plantilla a usar                                                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `domain-rules.md` **completado** (sin placeholders `_ej._`, `_..._`, `{{PROJECT_NAME}}`)                                        | [`spec-template.md`](templates/spec-template.md) (completa) — igual que siempre                                                                                                                                                               |
+| `domain-rules.md` en **plantilla** Y el humano usa vocabulario tecnico (BD, migracion, middleware, endpoint, API, modelo, etc.) | [`spec-template.md`](templates/spec-template.md) (completa)                                                                                                                                                                                   |
+| `domain-rules.md` en **plantilla** Y el humano NO usa vocabulario tecnico                                                       | **Ofrecer** [`spec-simple-template.md`](templates/spec-simple-template.md): "Veo que el dominio es mas de proceso que tecnico. Puedo crear el spec con una plantilla simple (que, incluye/excluye, criterios). ¿Prefieres esa o la completa?" |
+
+**Regla de oro:** nunca forzar la plantilla simple si el humano no la pide. Siempre preguntar primero. Si el humano pide explicitamente la simple, usarla incluso si `domain-rules.md` esta completado.
+
+**Migracion natural:** La plantilla simple es un subconjunto de la completa. Si un spec simple necesita mas detalle despues, se migra agregando secciones de [`spec-template.md`](templates/spec-template.md) sin cambiar el ID ni el BACKLOG.
+
+---
+
+## Decidir si hace falta spec
+
+| Situacion                                         | Accion                           |
+| ------------------------------------------------- | -------------------------------- |
+| Idea nueva, feature, refactor riesgoso, db-change | Spec obligatorio                 |
+| Bugfix no trivial                                 | Spec simplificado (`bugfix`)     |
+| Typo, copy, formato, bump deps rutinario          | Sin spec — ID `—` en release     |
+| Humano dice "hazlo rapido sin spec"               | Registrar `—` y documentar en PR |
+
+---
+
+## Fase Discovery
+
+**Entrada:** idea del humano (puede ser vaga).
+
+**Acciones del agente:**
+
+1. Verificar **contexto de negocio** (seccion anterior): plantilla vs completado.
+2. Leer `BACKLOG.md` y `business/README.md`.
+3. Identificar **dominio** valido (`sdd.config.yaml` → `domains`).
+4. Identificar **tipo** de spec (`feature`, `bugfix`, etc.).
+5. Agregar fila en seccion **Discovery** del BACKLOG (sin ID aun).
+6. Si `domain-rules.md` esta completado: identificar que reglas del dominio podrian afectar la iniciativa.
+7. Formular 1–3 preguntas de clarificacion **solo si** faltan datos criticos (alcance, usuarios afectados, restricciones).
+
+**Salida:** fila en Discovery con problema entendido y reglas de negocio relevantes identificadas (o nota de que domain-rules esta pendiente).
+
+### Deteccion temprana de antipatrones
+
+En Discovery, detectar y alertar sobre senales de desviacion arquitectonica. No bloquear; solo alertar y documentar en el spec (seccion Riesgos).
+
+| Senal del humano                                  | Alerta del agente                                                                                           |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| "hagamoslo generico por si acaso"                 | **YAGNI + Premature Optimization.** Documentar en Riesgos: "Abstraccion para un solo caso de uso conocido." |
+| "metamos X tecnologia/framework nuevo"            | Preguntar: "Que problema concreto resuelve X que lo actual no? Requiere ADR?"                               |
+| "hay que dividir en microservicios"               | Preguntar: "Cuantas personas desarrollan? Cual es el dolor concreto que justifica dividir?"                 |
+| "reescribamos todo el modulo"                     | **Big Rewrite Risk.** Proponer refactor incremental con spec `refactor` en vez de reescritura masiva.       |
+| "usemos [patron complejo] para [problema simple]" | **Golden Hammer / Over-engineering.** Preguntar si la solucion mas simple resuelve el mismo problema.       |
+| Idea sin exclusiones explicitas                   | Preguntar: "Que NO incluye esta iniciativa?" (previene scope creep y abstracciones prematuras).             |
+
+Si se detecta alguna senal, agregar al spec Draft (en Riesgos): "Alerta temprana: [senal]. Recomendacion: [accion]."
+
+---
+
+## Fase Draft
+
+**Entrada:** Discovery acordado con el humano.
+
+**Acciones:**
+
+1. Asignar `SDD-NNN` desde "Proximo ID disponible" en BACKLOG; incrementar contador.
+2. Crear `specs/<dominio>/SDD-NNN-slug.md` desde `templates/spec-template.md` o `templates/spec-simple-template.md` (segun regla de nivel de experiencia).
+3. Completar cabecera: ID, dominio, tipo, fecha, `Estado: Draft`, version objetivo, owner (nombre del humano o "equipo").
+4. Redactar: problema, objetivo, alcance (incluye / excluye), **reglas de negocio** (citar reglas de `domain-rules.md` que aplican, o "No aplica — domain-rules pendiente").
+5. Completar tabla **Impacto tecnico** del perfil (`profiles/<stack>/spec-impact.md`), incluyendo fila "Afecta reglas en business/domain-rules.md".
+6. Criterios de aceptacion: al menos 2 happy path + 2 error path verificables.
+7. Si `db-change`: seccion "Cambio de BD" completa.
+8. Si decision transversal: crear ADR y referenciar.
+9. Mover fila en BACKLOG: Discovery → **Draft** con enlace al spec.
+10. Ejecutar **auto-verificacion DoR** (abajo).
+
+**Salida:** spec Draft que pasa DoR, o lista de huecos a completar.
+
+### Auto-verificacion DoR (obligatoria antes de pedir revision)
+
+- [ ] Cabecera: ID, dominio, tipo, estado `Draft`, version objetivo, owner
+- [ ] Dominio existe en `sdd.config.yaml` → `domains`
+- [ ] Problema y objetivo: al menos 1 parrafo cada uno
+- [ ] Alcance: al menos 1 inclusion y 1 exclusion explicita
+- [ ] Impacto tecnico: todas las filas respondidas (o "No aplica — razon")
+- [ ] Reglas de negocio: referencia a `domain-rules.md` o justificacion si no aplica
+- [ ] Criterios de aceptacion: happy + error path con items verificables
+- [ ] Riesgos: al menos 1 fila en tabla de riesgos
+- [ ] BACKLOG: fila en Draft con mismo `SDD-NNN`
+- [ ] ID no duplicado en BACKLOG ni en nombres de archivo en `specs/` / `archive/`
+
+Si falla: completar antes de pedir revision humana.
+
+---
+
+## Fase Ready
+
+**Entrada:** humano aprueba el spec Draft.
+
+**Acciones:**
+
+1. Cambiar cabecera spec → `Estado: Ready`.
+2. Mover fila BACKLOG: Draft → **Ready**.
+3. Confirmar dependencias entre `SDD-NNN` resueltas.
+4. Anunciar al humano: listo para implementar.
+
+**Si el humano rechaza:** mantener `Draft`, aplicar cambios solicitados, re-ejecutar DoR.
+
+---
+
+## Fase In Build
+
+**Entrada:** spec en Ready; humano autoriza implementacion.
+
+**Acciones:**
+
+1. Cabecera spec → `Estado: In Build`.
+2. BACKLOG → **In Build**.
+3. Crear rama `feature/SDD-NNN-slug` o `bugfix/SDD-NNN-slug`.
+4. Implementar segun diseno tecnico del spec, `healthy-development.md` y reglas del perfil stack.
+5. Ejecutar quality gates del perfil (tests, lint, build).
+6. No desviarse del alcance sin actualizar el spec primero.
+
+### Verificacion de arquitectura sana (obligatoria, previo a Validating)
+
+Antes de pasar a Validating, auto-verificar TODOS los cambios del spec contra estos checks de `healthy-development.md`:
+
+- [ ] **YAGNI:** ¿Se agrego una abstraccion, interfaz, patron o capa sin al menos 2 usos concretos? → Simplificar.
+- [ ] **DRY:** ¿Se duplico logica de negocio en 2+ archivos? → Extraer modulo o funcion compartida.
+- [ ] **SRP:** ¿Alguna clase o archivo supera ~200 lineas o mezcla mas de una responsabilidad? → Dividir.
+- [ ] **Golden Hammer:** ¿Se uso una herramienta o patron por costumbre, no por necesidad del spec? → Evaluar alternativa.
+- [ ] **Over-engineering:** ¿Se introdujo cola, evento, microservicio o patron complejo sin requisito en spec o ADR? → Revertir o justificar con ADR.
+- [ ] **Big Ball of Mud:** ¿Los cambios tocan mas de 5 archivos sin un limite claro entre capas? → Revisar acoplamiento.
+- [ ] **Lava Flow:** ¿Quedo codigo muerto, comentado o TODOs sin ticket/spec? → Eliminar o crear item en BACKLOG.
+
+Si alguna respuesta es "si", **NO pasar a Validating.** Informar al humano: "Detecte [senal del antipatron]. Recomendacion: [accion de `healthy-development.md`]. ¿Corrijo ahora o documento como deuda?"
+
+**Si el alcance crece:** pausar, actualizar spec (sigue en In Build), informar al humano.
+
+---
+
+## Fase Validating
+
+**Entrada:** codigo listo, quality gates en verde.
+
+**Acciones:**
+
+1. Cabecera spec → `Estado: Validating`.
+2. BACKLOG → **Validating**.
+3. Crear PR hacia rama de desarrollo con plantilla PR.
+4. Completar `checklist-pr.md` + `profiles/<stack>/checklist-stack.md`.
+5. Adjuntar evidencia (comandos, capturas, salidas de tests).
+6. Ejecutar **auto-verificacion DoD** (abajo) y checklist de `healthy-development.md` (revision de PR).
+7. Pedir revision humana para merge.
+
+### Auto-verificacion DoD (obligatoria antes de pedir merge)
+
+- [ ] Quality gates del perfil en verde (local)
+- [ ] Criterios de aceptacion del spec verificados (happy + error)
+- [ ] Reglas de `domain-rules.md` verificadas en flujos tocados (o No aplica documentado)
+- [ ] PR enlaza spec y dominio correctos
+- [ ] Sin `dd()`, `dump()`, debug olvidado
+- [ ] Si cierra item: plan de entrada en release documentado
+
+---
+
+## Fase Released
+
+**Entrada:** PR mergeado; cierre de release acordado (puede ser en batch con otros specs).
+
+**Acciones (en rama de desarrollo, ANTES del PR de campana a produccion):**
+
+1. `git mv specs/<dominio>/SDD-NNN-slug.md` → `archive/<YYYY>/<dominio>/`.
+2. Cabecera en archivo archivado → `Estado: Released`.
+3. BACKLOG → seccion **Released** con fecha y version.
+4. Entrada en `releases/vX.Y.Z/release_vX.Y.Z.md`.
+5. Ejecutar `validate-sdd` y corregir errores.
+
+**Prohibido:** archivar o cerrar BACKLOG en commit posterior al merge en produccion.
+
+---
+
+## Manejo de errores
+
+| Situacion                  | Accion                                                                                         |
+| -------------------------- | ---------------------------------------------------------------------------------------------- |
+| Spec estancado >2 semanas  | Preguntar al humano: replanificar, pausar (Descartado/en pausa) o continuar                    |
+| Conflicto entre dos specs  | Documentar dependencia en cabecera; no implementar el dependiente hasta Ready del bloqueante   |
+| ID duplicado detectado     | Detener; corregir BACKLOG y renombrar archivo antes de continuar                               |
+| Spec y codigo desalineados | Actualizar spec primero, luego codigo                                                          |
+| Humano pide hotfix urgente | Rama `hotfix/` → PR a produccion; spec `bugfix` preferido; si no hay tiempo, ID `—` en release |
+
+---
+
+## Comandos utiles
+
+```bash
+# Validar coherencia documental
+./sdd-kit/bootstrap/sdd.sh validate
+```
+
+En Windows: `.\sdd-kit\bootstrap\sdd.ps1 validate`
+
+---
+
+## Anti-patrones
+
+- Inventar `SDD-NNN` sin actualizar BACKLOG
+- Codigo antes de spec para items no triviales en backlog
+- Specs en `archive/` con estado distinto de `Released`
+- Documentacion SDD fuera de `paths.sdd` sin peticion explicita
+- Asumir roles de equipo (PO, tech lead) — el humano unico decide y aprueba
+- Asumir reglas de negocio no escritas en `domain-rules.md`

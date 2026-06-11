@@ -1,0 +1,47 @@
+# SDD Stack — Laravel + Voyager + Livewire
+
+Perfil activo cuando `sdd.config.yaml` → `stack.profile: laravel-voyager`.
+
+## Quality gates
+
+- Tests: `php artisan test --compact` (PHPUnit)
+- Formato: `vendor/bin/pint --dirty`
+- CI: `.github/workflows/ci.yml` en verde antes de merge
+
+## Stack UI
+
+- **PHP 8.3 + Laravel 10 + Livewire 3 + Voyager + Bootstrap 5 + Vite** (no Tailwind)
+- Admin: Voyager `/admin` — no Filament
+- Validación: inline en controllers Voyager o `#[Validate]` en Livewire
+- No crear `app/Http/Requests/` salvo solicitud explícita
+- Laravel 10: modelos con `protected $casts = []` (no `casts()`)
+
+## Reglas de negocio del proyecto
+
+- Fuente única: `.github/docs/business/domain-rules.md`
+- Si contiene placeholders (`_ej._`, `_..._`, `{{PROJECT_NAME}}`): **estado plantilla** — no asumir reglas; preguntar al humano o iniciar sesión guiada (ver `sdd-agent-workflow.mdc`)
+- Cada spec debe indicar en "Impacto técnico" qué reglas de `domain-rules.md` aplican
+- En PR: verificar autorización, filtros de datos y reglas transversales definidas ahí
+
+## Esquema y migraciones
+
+- Solo migraciones en `database/migrations/` — no DDL manual salvo excepción documentada
+- Deploy esquema: `php artisan migrate --force` tras backup
+- **Destructivas** (`migrate:fresh`, `migrate:refresh`, `db:wipe`): requieren autorización explícita del humano
+- No asumir que migraciones representan esquema histórico completo (Voyager puede ser fuente)
+
+## Deploy
+
+- Producción: orquestador interno en intranet (ver `profiles/laravel-voyager/deploy.md`)
+- GitHub no despliega automáticamente
+- Variables de entorno solo en servidor, no en repo
+
+## Dependabot (si aplica)
+
+- Rama `deps-integration` — ver `profiles/laravel-voyager/branching-extensions.md`
+- Sin spec para bumps rutinarios
+
+## Secretos `.env`
+
+- No sobrescribir `.env` local del desarrollador salvo solicitud explícita
+- CI remoto usa `.env.example` solo en runner — no replicar en máquina con secretos reales
