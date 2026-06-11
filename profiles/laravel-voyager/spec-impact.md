@@ -1,23 +1,22 @@
 # Impacto técnico — Laravel + Voyager + Livewire
 
 > Sección obligatoria en todo spec. Copiar al crear `SDD-NNN` o referenciar desde la plantilla de la instancia.
+> Reglas de negocio específicas del proyecto: `.github/docs/business/domain-rules.md`.
 
 ## Impacto técnico _(obligatorio)_
 
 Responder cada ítem. Si no aplica: "No aplica — [razón]".
 
-| Pregunta                                                                       | Respuesta |
-| ------------------------------------------------------------------------------ | --------- |
-| ¿Afecta flujo pre-2025 (`ano < 2025`)?                                         |           |
-| ¿Afecta flujo 2025+ (`ano >= 2025`)?                                           |           |
-| ¿Afecta un `indicatorType` concreto? ¿Cuál?                                    |           |
-| ¿Afecta filtrado por `cen_hie_dependency_id`?                                  |           |
-| ¿Toca rutas dinámicas (`routes/web.php` o `IndicatorType`)?                    |           |
-| ¿Requiere invalidar caché `indicator_type_routes`?                             |           |
-| ¿Es visible en BREAD de Voyager (`/admin`)?                                    |           |
-| ¿Afecta `CurrentCutoffPolicy` (gates `current-add-edit` / `current-download`)? |           |
-| ¿Incluye `db-change` (solo migraciones en `database/migrations/`)?             |           |
-| ¿Introduce decisión arquitectónica transversal? Si sí → ADR.                   |           |
+| Pregunta                                                                 | Respuesta |
+| ------------------------------------------------------------------------ | --------- |
+| ¿Es visible en BREAD de Voyager (`/admin`)?                              |           |
+| ¿Afecta componentes Livewire (formularios, listas, acciones)?            |           |
+| ¿Requiere policies, roles o permisos nuevos o modificados?               |           |
+| ¿Toca rutas HTTP (`routes/web.php`, `routes/api.php`) o rutas dinámicas? |           |
+| ¿Requiere invalidar caché de rutas o configuración al deploy?            |           |
+| ¿Incluye `db-change` (solo migraciones en `database/migrations/`)?       |           |
+| ¿Afecta reglas en `business/domain-rules.md`? Si sí, listar cuáles.      |           |
+| ¿Introduce decisión arquitectónica transversal? Si sí → ADR.             |           |
 
 ## Regla de esquema
 

@@ -13,12 +13,13 @@
 
 ---
 
-## Dominio de aplicación _(si aplica — proyectos con instrumentos/año activo)_
+## Reglas de negocio del proyecto _(si aplica)_
 
-- [ ] Bifurcación `ano < 2025` / `ano >= 2025` verificada _(o No aplica)_
-- [ ] Filtros por `cen_hie_dependency_id` verificados _(o No aplica)_
-- [ ] Autorización por roles (`admin` / `parametrizador` / `user` / `visualizador`) verificada _(o No aplica)_
-- [ ] Gates `current-add-edit` / `current-download` verificados _(o No aplica)_
+> Definidas en `.github/docs/business/domain-rules.md`. Marcar ítems relevantes o **No aplica**.
+
+- [ ] Autorización por roles verificada según `domain-rules.md` _(o No aplica)_
+- [ ] Filtros de datos (tenant, organización, periodo) verificados _(o No aplica)_
+- [ ] Reglas transversales del dominio cumplidas _(o No aplica)_
 
 ---
 
@@ -30,17 +31,17 @@
 
 ---
 
-## IndicatorType / rutas dinámicas _(si aplica)_
+## Rutas y caché _(si aplica)_
 
-- [ ] Plan de invalidación de caché `indicator_type_routes` documentado si cambió `IndicatorType`
-- [ ] Rutas dinámicas con `view` o `controller` probadas en navegador
+- [ ] Rutas dinámicas o configuración en `routes/web.php` probadas en navegador _(o No aplica)_
+- [ ] Plan de invalidación de caché documentado si el cambio lo requiere _(o No aplica)_
 
 ---
 
 ## Cambio de base de datos _(si aplica)_
 
 - [ ] Migración en `database/migrations/` _(sin DDL manual fuera de migraciones salvo excepción documentada)_
-- [ ] No ejecutar `migrate:fresh` / `db:wipe` contra MySQL de desarrollo sin autorización explícita
+- [ ] No ejecutar `migrate:fresh` / `db:wipe` contra BD de desarrollo sin autorización explícita
 - [ ] Validación post-migración: estructura, smoke, datos coherentes
 - [ ] Rollback documentado o descartado con justificación
 
