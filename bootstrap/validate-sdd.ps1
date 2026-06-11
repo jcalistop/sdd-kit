@@ -38,7 +38,7 @@ foreach ($line in $backlogLines) {
     if ($line -match '^\|\s*[-:]') { continue }
     $cols = ($line.Trim('|').Split('|') | ForEach-Object { $_.Trim() })
     if ($cols.Count -lt 1) { continue }
-    if ($cols[0] -notmatch '^(SDD-\d+)$') { continue }
+    if ($cols[0] -notmatch '^(SDD-\d+[a-z]?)$') { continue }
     $id = $Matches[1]
     if ($backlogIds.ContainsKey($id) -and $backlogIds[$id] -ne $currentSection) {
         Write-Err "ID $id duplicado en BACKLOG (secciones: $($backlogIds[$id]) y $currentSection)"
@@ -59,7 +59,7 @@ $specDirs = @(
 foreach ($dir in $specDirs) {
     if (-not (Test-Path $dir)) { continue }
     Get-ChildItem -Path $dir -Recurse -Filter "SDD-*.md" -File | ForEach-Object {
-        if ($_.Name -match '^(SDD-\d+)') {
+        if ($_.Name -match '^(SDD-\d+[a-z]?)') {
             $id = $Matches[1]
             $loc = if ($_.FullName -match [regex]::Escape("\specs\")) { "specs" } else { "archive" }
             if ($seenFiles.ContainsKey($id)) {

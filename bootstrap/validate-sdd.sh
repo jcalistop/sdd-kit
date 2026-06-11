@@ -37,7 +37,7 @@ while IFS= read -r line; do
   [[ "$line" =~ ^\| ]] || continue
   [[ "$line" =~ ^\|[[:space:]]*[-:] ]] && continue
   id=$(echo "$line" | cut -d'|' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-  [[ "$id" =~ ^SDD-[0-9]+$ ]] || continue
+  [[ "$id" =~ ^SDD-[0-9]+[a-z]?$ ]] || continue
   if [[ -n "${BACKLOG_IDS[$id]:-}" && "${BACKLOG_IDS[$id]}" != "$current_section" ]]; then
     err "ID $id duplicado en BACKLOG (secciones: ${BACKLOG_IDS[$id]} y $current_section)"
   else
@@ -51,7 +51,7 @@ declare -A FILE_IDS
 declare -A FILE_DUP
 while IFS= read -r -d '' f; do
   base=$(basename "$f")
-  if [[ "$base" =~ ^(SDD-[0-9]+) ]]; then
+  if [[ "$base" =~ ^(SDD-[0-9]+[a-z]?) ]]; then
     id="${BASH_REMATCH[1]}"
     if [[ "$f" == *"/specs/"* ]]; then
       FILE_IDS["$id"]="specs"
