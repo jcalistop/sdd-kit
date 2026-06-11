@@ -1,0 +1,31 @@
+# Valores por defecto del perfil reports-latex-md
+
+stack:
+  profile: reports-latex-md
+  ci_workflow: .github/workflows/docs-ci.yml
+  quality_gates:
+    markdown_lint: 'markdownlint "content/**/*.md"'
+    pandoc_pdf: 'pandoc content/manuscript.md -o output/manuscript.pdf'
+    latex_build: 'latexmk -pdf content/manuscript.tex'
+    scripts: 'python -m pytest scripts/tests/ -q'
+  schema_changes: null
+  deploy_platform: document-output
+  output_formats:
+    - pdf
+    - docx
+    - tex
+
+paths_suggested:
+  content: content/
+  data_sources: data/sources/
+  transcripts: data/transcripts/
+  scripts: scripts/
+  templates: templates/
+  output: output/
+
+domains_suggested:
+  - informes
+  - datos
+  - metodologia
+  - visualizacion
+  - transcripcion
