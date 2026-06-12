@@ -34,15 +34,16 @@
 
 ## In Build
 
-| ID      | Dominio | Título                                             | Versión | Spec                                                                                                 |
-| ------- | ------- | -------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------- |
-| SDD-003 | core    | Refactor ciclo SDD: momentos semánticos vs prompts | v1.2.0  | [specs/core/SDD-003-refactor-ciclo-sdd-prompts.md](specs/core/SDD-003-refactor-ciclo-sdd-prompts.md) |
+| ID  | Dominio | Título | Versión | Spec |
+| --- | ------- | ------ | ------- | ---- |
+| —   | —       | —      | —       | —    |
 
 ## Validating
 
-| ID      | Dominio   | Título                                           | Versión | Spec                                                                                                               |
-| ------- | --------- | ------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------ |
-| SDD-002 | bootstrap | Actualización del kit en instancias consumidoras | v1.1.0  | [specs/bootstrap/SDD-002-actualizacion-kit-instancias.md](specs/bootstrap/SDD-002-actualizacion-kit-instancias.md) |
+| ID      | Dominio   | Título                                             | Versión | Spec                                                                                                               |
+| ------- | --------- | -------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| SDD-002 | bootstrap | Actualización del kit en instancias consumidoras   | v1.1.0  | [specs/bootstrap/SDD-002-actualizacion-kit-instancias.md](specs/bootstrap/SDD-002-actualizacion-kit-instancias.md) |
+| SDD-003 | core      | Refactor ciclo SDD: momentos semánticos vs prompts | v1.2.0  | [specs/core/SDD-003-refactor-ciclo-sdd-prompts.md](specs/core/SDD-003-refactor-ciclo-sdd-prompts.md)               |
 
 ## Released
 

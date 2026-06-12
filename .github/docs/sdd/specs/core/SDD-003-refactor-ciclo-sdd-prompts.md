@@ -10,7 +10,7 @@
 | **Dominio**           | `core`                                                            |
 | **Tipo**              | `refactor`                                                        |
 | **Fecha**             | 2026-06-12                                                        |
-| **Estado**            | `In Build`                                                        |
+| **Estado**            | `Validating`                                                      |
 | **Versión objetivo**  | v1.2.0                                                            |
 | **Owner**             | mantenedor                                                        |
 | **Prioridad**         | `P1`                                                              |
