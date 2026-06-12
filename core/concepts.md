@@ -31,29 +31,43 @@ SDD es **escribir el plano** antes de construir. No es burocracia: es evitar tir
 1. **BACKLOG.md** — una lista unica con todo lo que hay que hacer (como una pizarra de post-its).
 2. **Spec** — un documento breve que describe UNA iniciativa: que problema resuelve, que incluye, que NO incluye, y como sabras que esta lista.
 3. **El spec se mueve por 6 estados:** Discovery → Draft → Ready → In Build → Validating → Released. Cada estado dice "en que momento va esto".
-4. **El agente (IA) escribe specs y codigo; el humano aprueba** en dos puntos: cuando el spec esta listo (Ready) y cuando el codigo esta para mezclar (merge del PR).
+4. **El agente (IA) escribe specs y codigo; el humano aprueba** en Ready (spec) y en merge del PR. Antes de publicar en Git, la implementacion se verifica en local (`verify-implementation`).
+5. **Los prompts del catalogo son opcionales** salvo tareas puntuales; los estados del spec son la fuente de verdad (ver [`workflow.md`](workflow.md)).
+
+```mermaid
+sequenceDiagram
+    actor H as Humano
+    participant A as Agente
+    H->>A: Idea / aprobar spec
+    A->>A: Draft → In Build (local)
+    A-->>H: verify-implementation
+    H->>A: OK publicar
+    A->>A: PR → Validating → Released
+```
 
 ---
 
 ## Glosario
 
-| Termino                       | Que significa (en simple)                                                                                                                                                                              |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Spec**                      | Documento que describe una tarea antes de hacerla. Responde: que, por que, como sabre que esta lista.                                                                                                  |
-| **BACKLOG**                   | Lista unica de todas las tareas del proyecto, ordenadas por estado.                                                                                                                                    |
-| **Dominio**                   | Categoria para agrupar specs (ej. `ux`, `api`, `reportes`). Se definen en `sdd.config.yaml`.                                                                                                           |
-| **DoR** (Definition of Ready) | Checklist que verifica que un spec tiene todo lo necesario para empezar a construir.                                                                                                                   |
-| **DoD** (Definition of Done)  | Checklist que verifica que lo construido cumple lo prometido y esta listo para produccion.                                                                                                             |
-| **ADR**                       | Documento que explica una decision importante de arquitectura (ej. "elegimos PostgreSQL en vez de MySQL porque...").                                                                                   |
-| **Release**                   | Una version que se despliega a produccion. Agrupa uno o varios specs terminados.                                                                                                                       |
-| **Estado**                    | Etiqueta que indica en que fase esta un spec: `Draft` (borrador), `Ready` (aprobado para construir), `In Build` (en construccion), `Validating` (en revision), `Released` (terminado y en produccion). |
-| **Discovery**                 | Fase inicial: una idea anotada en el BACKLOG, sin spec todavia.                                                                                                                                        |
-| **Archive**                   | Carpeta donde van los specs ya terminados (`Released`).                                                                                                                                                |
-| **ID `—`**                    | Se usa para cambios tan pequeños que no necesitan spec propio (ej. corregir un typo).                                                                                                                  |
-| **Perfil stack**              | Configuracion especifica para un tipo de tecnologia (Laravel, FastAPI, React...). Define tests, deploy y checklist tecnico.                                                                            |
-| **Dominio de negocio**        | Reglas propias del proyecto (roles, permisos, periodos fiscales) que el agente debe conocer para no inventar. Se documentan en `business/domain-rules.md`.                                             |
-| **Submodulo**                 | Forma de incluir el kit SDD dentro de tu proyecto sin copiarlo manualmente. Se actualiza con `git submodule update`.                                                                                   |
-| **init-sdd**                  | Script que crea la estructura inicial de SDD en un proyecto nuevo o existente.                                                                                                                         |
+| Termino                       | Que significa (en simple)                                                                                                                                                                                          |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Spec**                      | Documento que describe una tarea antes de hacerla. Responde: que, por que, como sabre que esta lista.                                                                                                              |
+| **BACKLOG**                   | Lista unica de todas las tareas del proyecto, ordenadas por estado.                                                                                                                                                |
+| **Dominio**                   | Categoria para agrupar specs (ej. `ux`, `api`, `reportes`). Se definen en `sdd.config.yaml`.                                                                                                                       |
+| **DoR** (Definition of Ready) | Checklist que verifica que un spec tiene todo lo necesario para empezar a construir.                                                                                                                               |
+| **DoD** (Definition of Done)  | Checklist que verifica que lo construido cumple lo prometido y esta listo para produccion.                                                                                                                         |
+| **ADR**                       | Documento que explica una decision importante de arquitectura (ej. "elegimos PostgreSQL en vez de MySQL porque...").                                                                                               |
+| **Release**                   | Una version que se despliega a produccion. Agrupa uno o varios specs terminados.                                                                                                                                   |
+| **Estado**                    | Etiqueta que indica en que fase esta un spec: `Draft` (borrador), `Ready` (aprobado para construir), `In Build` (en construccion local), `Validating` (en revision en PR), `Released` (terminado y en produccion). |
+| **Momento semantico**         | Cambio de estado o gate humano definido en `workflow.md` (no requiere prompt copy-paste).                                                                                                                          |
+| **Prompt**                    | Plantilla del catalogo para disparar al agente; opcional en adopcion madura.                                                                                                                                       |
+| **Discovery**                 | Fase inicial: una idea anotada en el BACKLOG, sin spec todavia.                                                                                                                                                    |
+| **Archive**                   | Carpeta donde van los specs ya terminados (`Released`).                                                                                                                                                            |
+| **ID `—`**                    | Se usa para cambios tan pequeños que no necesitan spec propio (ej. corregir un typo).                                                                                                                              |
+| **Perfil stack**              | Configuracion especifica para un tipo de tecnologia (Laravel, FastAPI, React...). Define tests, deploy y checklist tecnico.                                                                                        |
+| **Dominio de negocio**        | Reglas propias del proyecto (roles, permisos, periodos fiscales) que el agente debe conocer para no inventar. Se documentan en `business/domain-rules.md`.                                                         |
+| **Submodulo**                 | Forma de incluir el kit SDD dentro de tu proyecto sin copiarlo manualmente. Se actualiza con `git submodule update`.                                                                                               |
+| **init-sdd**                  | Script que crea la estructura inicial de SDD en un proyecto nuevo o existente.                                                                                                                                     |
 
 ---
 

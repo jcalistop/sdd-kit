@@ -275,7 +275,7 @@ def cmd_prompt_show(args: argparse.Namespace) -> int:
         print(f"Error: prompt '{args.prompt_id}' no encontrado.", file=sys.stderr)
         print("Usa `sdd prompt list` para ver IDs disponibles.", file=sys.stderr)
         return 1
-    print(format_prompt_show(meta, full=args.full), end="")
+    print(format_prompt_show(meta, full=args.full, sdd_path=sdd), end="")
     return 0
 
 

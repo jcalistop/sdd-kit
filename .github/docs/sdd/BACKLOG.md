@@ -3,7 +3,7 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [docs/maintainers/ROADMAP.md](../../../docs/maintainers/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-002`.
+**Próximo ID disponible:** `SDD-004`.
 
 **Versión acumulada del kit:** `v1.0.0` (ver [docs/releases/](../../../docs/releases/)).
 
@@ -13,6 +13,7 @@
 
 | Dominio  | Idea / necesidad                                                    | Versión | Notas                                       |
 | -------- | ------------------------------------------------------------------- | ------- | ------------------------------------------- |
+| cli      | Suite pytest para la CLI (`backlog`, `prompts`, round-trip)         | —       | Prioridad media; CI hoy solo `compileall`   |
 | docs     | Validación en producción: ciclo SDD con proyecto consumidor externo | —       | Dogfooding en repo ajeno                    |
 | cli      | Dashboard Canvas de métricas SDD                                    | —       | Opcional; `sdd metrics` cubre reporte texto |
 | profiles | Perfiles adicionales (node-express, go-api, vue-vite) a demanda     | —       | Baja prioridad                              |
@@ -39,9 +40,10 @@
 
 ## Validating
 
-| ID  | Dominio | Título | Versión | Spec |
-| --- | ------- | ------ | ------- | ---- |
-| —   | —       | —      | —       | —    |
+| ID      | Dominio   | Título                                             | Versión | Spec                                                                                                               |
+| ------- | --------- | -------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| SDD-002 | bootstrap | Actualización del kit en instancias consumidoras   | v1.1.0  | [specs/bootstrap/SDD-002-actualizacion-kit-instancias.md](specs/bootstrap/SDD-002-actualizacion-kit-instancias.md) |
+| SDD-003 | core      | Refactor ciclo SDD: momentos semánticos vs prompts | v1.2.0  | [specs/core/SDD-003-refactor-ciclo-sdd-prompts.md](specs/core/SDD-003-refactor-ciclo-sdd-prompts.md)               |
 
 ## Released
 

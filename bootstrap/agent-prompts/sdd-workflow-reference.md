@@ -52,7 +52,21 @@ Si falla: completar antes de pedir revisión humana.
 
 ---
 
-## Verificación de arquitectura sana (antes de Validating)
+## Verificación post-implementación (antes de push/PR)
+
+Gate obligatorio en **In Build**, antes de commit de entrega, `push` o PR. Prompt: `verify-implementation`.
+
+- [ ] Quality gates del perfil en verde (local)
+- [ ] Criterios de aceptación del spec verificados (happy + error) con evidencia
+- [ ] Reglas de `domain-rules.md` verificadas (o No aplica documentado)
+- [ ] Checklist de arquitectura sana (sección siguiente) sin bloqueantes
+- [ ] Sin `dd()`, `dump()`, debug olvidado
+
+Si falla: **no** `push` ni PR. Corregir o documentar deuda con acuerdo humano.
+
+---
+
+## Verificación de arquitectura sana (dentro de verify-implementation)
 
 Checks contra `healthy-development.md`:
 
@@ -64,7 +78,7 @@ Checks contra `healthy-development.md`:
 - [ ] **Big Ball of Mud:** >5 archivos sin límite entre capas → revisar acoplamiento
 - [ ] **Lava Flow:** código muerto, TODOs sin ticket → eliminar o BACKLOG
 
-Si alguna respuesta es "sí", **no pasar a Validating.** Informar al humano con opciones: corregir ahora o documentar deuda.
+Si alguna respuesta es "sí", **no publicar en Git.** Informar al humano con opciones: corregir ahora o documentar deuda.
 
 ---
 

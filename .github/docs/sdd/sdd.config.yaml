@@ -19,8 +19,11 @@ stack:
   ci_workflow: .github/workflows/ci.yml
   quality_gates:
     compile: "python -m compileall -q cli/"
-    manifest: "validación JSON agent-prompts"
-    profiles: "verificación archivos obligatorios por perfil"
+    manifest: 'python -c "import json; json.load(open(''bootstrap/agent-prompts/manifest.json''))"'
+    profiles: "verificación archivos obligatorios por perfil (CI)"
+    validate_sdd: ".github/docs/sdd — validate-sdd.ps1"
+  schema_changes: null
+  deploy_platform: github-releases
 
 paths:
   sdd: .github/docs/sdd
@@ -28,13 +31,17 @@ paths:
   contributing: CONTRIBUTING.md
 
 ids:
-  next_sdd: 2
+  next_sdd: 4
   next_adr: 1
 
 release:
   semver: true
   tag_prefix: v
 
+kit:
+  installed_version: "v1.0.0-6-g2104969"
+  installed_at: "2026-06-12"
+
 agent:
   targets: [cursor]
-  install_mode: explicit
+  install_mode: auto

@@ -28,6 +28,8 @@ class PromptMeta:
     cli_alternative: str | None = None
     tags: list[str] = field(default_factory=list)
     human_approval: bool = False
+    deprecated: bool = False
+    replaced_by: str | None = None
     path: Path | None = None
 
 
@@ -126,6 +128,12 @@ def _meta_from_file(path: Path) -> PromptMeta:
         ),
         tags=[str(x) for x in (fm.get("tags") or [])],
         human_approval=bool(fm.get("human_approval")),
+        deprecated=bool(fm.get("deprecated")),
+        replaced_by=(
+            str(fm["replaced_by"])
+            if fm.get("replaced_by") not in (None, "null")
+            else None
+        ),
         path=path,
     )
 
@@ -195,7 +203,20 @@ def format_prompt_list(
     return "\n".join(lines)
 
 
-def format_prompt_show(meta: PromptMeta, *, full: bool = False) -> str:
+def _replacement_prompt(
+    meta: PromptMeta, sdd_path: Path | None, *, seen: frozenset[str]
+) -> PromptMeta | None:
+    if not meta.replaced_by or meta.replaced_by in seen:
+        return None
+    return get_prompt(meta.replaced_by, sdd_path)
+
+
+def format_prompt_show(
+    meta: PromptMeta,
+    *,
+    full: bool = False,
+    sdd_path: Path | None = None,
+) -> str:
     if meta.path is None or not meta.path.is_file():
         return f"Error: no se encontró archivo para prompt '{meta.id}'"
 
@@ -204,7 +225,22 @@ def format_prompt_show(meta: PromptMeta, *, full: bool = False) -> str:
 
     if not full:
         if not body:
+            replacement = _replacement_prompt(meta, sdd_path, seen=frozenset({meta.id}))
+            if replacement and replacement.path:
+                replacement_body = extract_prompt_body(
+                    replacement.path.read_text(encoding="utf-8")
+                )
+                if replacement_body:
+                    return (
+                        f"# Nota: '{meta.id}' está deprecado → usa '{replacement.id}'.\n\n"
+                        f"{replacement_body}"
+                    )
             return f"Error: prompt '{meta.id}' no tiene bloque ## Prompt"
+        if meta.deprecated and meta.replaced_by:
+            return (
+                f"# Nota: '{meta.id}' está deprecado → usa '{meta.replaced_by}'.\n\n"
+                f"{body}"
+            )
         return body
 
     return text.strip() + "\n"

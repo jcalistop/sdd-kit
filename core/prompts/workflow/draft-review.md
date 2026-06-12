@@ -4,7 +4,7 @@ title: Revisar spec Draft (DoR)
 category: workflow
 adoption_stage: 2
 workflow_phase: Draft
-when: Spec Draft creado; quieres verificación DoR antes de aprobar
+when: "(Opcional) Spec Draft creado; quieres informe formal de DoR antes de aprobar"
 prerequisites:
   - Spec en specs/<dominio>/SDD-NNN-*.md con Estado Draft
 related:
@@ -15,7 +15,9 @@ human_approval: true
 
 ## Cuándo usarlo
 
-El spec está en Draft y quieres que el agente auto-verifique Definition of Ready y presente gaps antes de tu aprobación.
+**Opcional.** No es una fase del ciclo: el agente ya auto-verifica DoR al crear el Draft (`discovery-to-draft` o reglas always-on).
+
+Úsalo solo si quieres un informe formal de gaps antes de aprobar con `build-spec` o una frase de aprobación.
 
 ## Qué hará el agente
 
@@ -37,9 +39,9 @@ Instrucciones:
 
 ## Después de pegarlo
 
-Aprueba correcciones o pide ajustes. Cuando el DoR esté completo, usa `approve-ready`.
+Aprueba correcciones o pide ajustes. Cuando el DoR esté completo, aprueba con frase humana o `build-spec`.
 
 ## Ver también
 
 - [`workflow.md`](../../workflow.md) — DoR
-- `sdd prompt show approve-ready`
+- `sdd prompt show build-spec`

@@ -7,6 +7,25 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [1.1.0] - 2026-06-12
+
+Ver [v1.1.0.md](v1.1.0.md).
+
+### Añadido
+
+- Runbook `core/upgrade-guide.md` y prompt `upgrade-kit` para actualizar instancias consumidoras
+- `kit.installed_version` / `kit.installed_at` en `sdd.config.yaml` y plantilla `UPGRADE-LOG.md`
+- `bootstrap/kit-version.py` — detección de versión para `init-sdd` y `validate-sdd`
+- Perfil `profiles/sdd-kit/` para mantenedores (SDD-001)
+
+### Cambiado
+
+- `init-sdd` registra versión del kit al bootstrap
+- `validate-sdd` advierte si la versión registrada difiere del kit en disco
+- README, INSTALL y `adoption-guide` enlazan al flujo de actualización
+
+---
+
 ## [1.0.0] - 2026-06-11
 
 Primera versión **estable**. Ver [v1.0.0.md](v1.0.0.md).

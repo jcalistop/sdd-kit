@@ -146,6 +146,27 @@ else
   ok "sdd.config.yaml presente"
 fi
 
+KIT_VERSION_SCRIPT="$(cd "$(dirname "$0")" && pwd)/kit-version.py"
+if [[ -f "$KIT_VERSION_SCRIPT" ]]; then
+  PROJECT_ROOT="$(cd "$SDD_PATH/../../.." && pwd)"
+  if command -v python3 &>/dev/null; then
+    PY=python3
+  elif command -v python &>/dev/null; then
+    PY=python
+  else
+    PY=""
+  fi
+  if [[ -n "$PY" ]]; then
+    while IFS= read -r line; do
+      if [[ "$line" == WARN:* ]]; then
+        warn "${line#WARN: }"
+      elif [[ "$line" == OK:* ]]; then
+        ok "${line#OK: }"
+      fi
+    done < <("$PY" "$KIT_VERSION_SCRIPT" check "$SDD_PATH" "$PROJECT_ROOT" 2>/dev/null || true)
+  fi
+fi
+
 echo ""
 echo "Resumen: $ERRORS error(es), $WARNINGS advertencia(s)"
 if [[ $ERRORS -gt 0 ]]; then

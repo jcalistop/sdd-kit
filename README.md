@@ -107,11 +107,11 @@ En Linux/macOS es el mismo comando `git submodule`. **Detén aquí** si vas a us
 
 #### Proyecto nuevo — puedes ejecutar `init-sdd` tú mismo
 
-```powershell
-.\sdd-kit\bootstrap\init-sdd.ps1 -Profile laravel-filament -Project "Mi App"
+```bash
+python sdd-kit/cli/sdd.py init --profile laravel-filament --project "Mi App"
 ```
 
-En Linux/macOS: `./sdd-kit/bootstrap/init-sdd.sh --profile laravel-filament --project "Mi App"`.
+Atajos: `./sdd-kit/bootstrap/init-sdd.sh` (bash) · `.\sdd-kit\bootstrap\init-sdd.ps1` (solo PowerShell).
 
 Por defecto detecta tu agente/IDE (`-Agent auto`) e instala las reglas SDD. Ver **[`core/agent-setup.md`](core/agent-setup.md)**.
 
@@ -159,20 +159,31 @@ Con adaptadores instalados, el agente ya tiene las reglas SDD. Para forzar el fl
 python sdd-kit/cli/sdd.py prompt show discovery-to-draft
 ```
 
-Ver [catálogo de prompts](core/prompt-catalog.md) (`draft-review`, `approve-ready`, etc.). Revisa el spec; si está bien, aprueba → pasa a **Ready** → implementación.
+Ver [catálogo de prompts](core/prompt-catalog.md). Con adaptadores instalados el agente sigue el ciclo solo: aprueba el spec (→ **Ready**), implementa en local, **verifica** (`verify-implementation`) y recién entonces publica el PR. Los prompts son disparadores opcionales, no fases obligatorias.
 
 Ejemplos de calidad por perfil: `profiles/<perfil>/examples/SDD-001-*.md`.
+
+### Actualizar el kit
+
+Cuando salga una versión nueva del kit, no basta con `git pull` en el submodule: la instancia en `.github/docs/sdd/` y los adaptadores de agente pueden requerir merge manual.
+
+1. Revisa [`core/upgrade-guide.md`](core/upgrade-guide.md) y el changelog en `docs/releases/`.
+2. Usa el prompt **`upgrade-kit`**: `python sdd-kit/cli/sdd.py prompt show upgrade-kit --full`
+3. Tras validar, actualiza `kit.installed_version` y [`UPGRADE-LOG.md`](.github/docs/sdd/UPGRADE-LOG.md) en tu instancia.
+
+Detalle: **[INSTALL.md](INSTALL.md)** — sección «Actualizar el kit».
 
 ---
 
 ## Cómo trabajar con el agente
 
-| Momento           | Tú (humano)                     | Agente                          |
-| ----------------- | ------------------------------- | ------------------------------- |
-| 💡 Nueva idea     | Describes el problema           | Anota en BACKLOG, propone spec  |
-| 📝 Spec en Draft  | **Apruebas o corriges** el spec | Redacta spec, verifica DoR      |
-| 🔨 Implementación | Autorizas empezar               | Codea según spec y perfil stack |
-| ✅ PR             | **Revisas y mergeas**           | Checklist, tests, evidencia     |
+| Momento           | Tú (humano)                     | Agente                                    |
+| ----------------- | ------------------------------- | ----------------------------------------- |
+| 💡 Nueva idea     | Describes el problema           | Anota en BACKLOG, propone spec            |
+| 📝 Spec en Draft  | **Apruebas o corriges** el spec | Redacta spec, verifica DoR                |
+| 🔨 Implementación | Autorizas empezar               | Codea en local según spec (sin push aún)  |
+| 🔍 Verificación   | Revisas evidencia               | Cruza spec, domain-rules y quality gates  |
+| ✅ PR             | **Revisas y mergeas**           | Publica tras verify OK; checklist y tests |
 
 Adaptadores instalados según tu herramienta (ver `sdd.config.yaml` → `agent.targets`). En Cursor: `sdd-core`, `sdd-agent-workflow`, `sdd-stack-<perfil>`.
 
@@ -237,6 +248,7 @@ tu-proyecto/
 | [`core/workflow.md`](core/workflow.md)                       | Estados, tipos de spec, DoR/DoD             |
 | [`core/healthy-development.md`](core/healthy-development.md) | Buenas prácticas y antipatrones             |
 | [`core/agent-setup.md`](core/agent-setup.md)                 | Cursor, Claude, Codex, Copilot              |
+| [`core/upgrade-guide.md`](core/upgrade-guide.md)             | Actualizar el kit en proyectos existentes   |
 | [`INSTALL.md`](INSTALL.md)                                   | Otras formas de instalar (copia, solo docs) |
 
 ---
