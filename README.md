@@ -90,6 +90,7 @@ El **perfil** adapta tests, deploy y checklist a tu tecnología (o a informes, s
 | [`python-django`](profiles/python-django/README.md)       | Django web, admin, DRF/Celery opcional |
 | [`react-vite`](profiles/react-vite/README.md)             | Frontend React + Vite                  |
 | [`reports-latex-md`](profiles/reports-latex-md/README.md) | Informes Markdown/LaTeX → PDF/DOCX     |
+| [`sdd-kit`](profiles/sdd-kit/README.md)                   | Mantenedores del repositorio sdd-kit   |
 
 ### Paso 2 — Añade el kit (solo tú, un comando)
 
@@ -242,10 +243,12 @@ tu-proyecto/
 
 ## Mantenedores del kit
 
-| Recurso                                | Uso                                                                |
-| -------------------------------------- | ------------------------------------------------------------------ |
-| [docs/maintainers/](docs/maintainers/) | Roadmap y análisis (no se copia a proyectos)                       |
-| [docs/releases/](docs/releases/)       | Historial de versiones del kit ([v1.0.0](docs/releases/v1.0.0.md)) |
+| Recurso                                                      | Uso                                                                |
+| ------------------------------------------------------------ | ------------------------------------------------------------------ |
+| [.github/docs/sdd/BACKLOG.md](.github/docs/sdd/BACKLOG.md)   | Tablero operativo de iniciativas (dogfooding SDD)                  |
+| [.github/docs/sdd/ADOPTION.md](.github/docs/sdd/ADOPTION.md) | Plan de adopción SDD en este repositorio                           |
+| [docs/maintainers/](docs/maintainers/)                       | Análisis y roadmap histórico (no se copia a proyectos)             |
+| [docs/releases/](docs/releases/)                             | Historial de versiones del kit ([v1.0.0](docs/releases/v1.0.0.md)) |
 
 Crear perfiles nuevos: **[`core/templates/profile-template.md`](core/templates/profile-template.md)**.
 

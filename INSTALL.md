@@ -136,14 +136,15 @@ Los archivos en `.github/docs/sdd/` **no** se sobrescriben solos; revisar diff d
 
 ## Perfiles
 
-| Perfil             | Comando init                |
-| ------------------ | --------------------------- |
-| `laravel-filament` | `-Profile laravel-filament` |
-| `laravel-voyager`  | `-Profile laravel-voyager`  |
-| `python-fastapi`   | `-Profile python-fastapi`   |
-| `python-django`    | `-Profile python-django`    |
-| `react-vite`       | `-Profile react-vite`       |
-| `reports-latex-md` | `-Profile reports-latex-md` |
+| Perfil             | Comando init                   |
+| ------------------ | ------------------------------ |
+| `laravel-filament` | `-Profile laravel-filament`    |
+| `laravel-voyager`  | `-Profile laravel-voyager`     |
+| `python-fastapi`   | `-Profile python-fastapi`      |
+| `python-django`    | `-Profile python-django`       |
+| `react-vite`       | `-Profile react-vite`          |
+| `reports-latex-md` | `-Profile reports-latex-md`    |
+| `sdd-kit`          | Solo repo del kit (dogfooding) |
 
 Añadir perfiles en `profiles/<nombre>/` sin modificar `core/`. Guía: [core/templates/profile-template.md](core/templates/profile-template.md).
 

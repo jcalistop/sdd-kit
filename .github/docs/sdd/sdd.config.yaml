@@ -1,0 +1,40 @@
+# Instancia SDD del repositorio sdd-kit (dogfooding)
+# Ver ADOPTION.md para el plan de adopción y separación producto/proceso.
+
+project:
+  name: "SDD Kit"
+  development_branch: main
+  production_branch: main
+
+domains:
+  - core
+  - profiles
+  - bootstrap
+  - cli
+  - docs
+  - infra
+
+stack:
+  profile: sdd-kit
+  ci_workflow: .github/workflows/ci.yml
+  quality_gates:
+    compile: "python -m compileall -q cli/"
+    manifest: "validación JSON agent-prompts"
+    profiles: "verificación archivos obligatorios por perfil"
+
+paths:
+  sdd: .github/docs/sdd
+  business: .github/docs/business
+  contributing: CONTRIBUTING.md
+
+ids:
+  next_sdd: 2
+  next_adr: 1
+
+release:
+  semver: true
+  tag_prefix: v
+
+agent:
+  targets: [cursor]
+  install_mode: explicit

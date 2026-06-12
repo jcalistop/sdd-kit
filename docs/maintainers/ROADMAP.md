@@ -2,6 +2,8 @@
 
 > Plan de evolucion en 3 fases para transformar el kit en una herramienta de desarrollo 100% agentico, multi-stack y con adopcion incremental.
 > Fecha: 2026-06-11
+>
+> **Tablero operativo actual:** [.github/docs/sdd/BACKLOG.md](../../.github/docs/sdd/BACKLOG.md) · Adopcion SDD en el kit: [ADOPTION.md](../../.github/docs/sdd/ADOPTION.md)
 
 ---
 

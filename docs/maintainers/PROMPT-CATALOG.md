@@ -15,10 +15,10 @@ El catálogo centraliza ~15 prompts en fichas con frontmatter YAML, índice Mark
 
 ## Arquitectura: dos capas de prompts
 
-| Capa | Ubicación | Quién lo usa | Siempre activo |
-| ---- | --------- | ------------ | -------------- |
-| **Reglas del agente** | `bootstrap/agent-prompts/` → Cursor/CLAUDE.md/… | Agente | Sí (`alwaysApply` en Cursor) |
-| **Prompts del usuario** | `core/prompts/` + `core/prompt-catalog.md` | Humano (copy-paste al chat) | No |
+| Capa                    | Ubicación                                       | Quién lo usa                | Siempre activo               |
+| ----------------------- | ----------------------------------------------- | --------------------------- | ---------------------------- |
+| **Reglas del agente**   | `bootstrap/agent-prompts/` → Cursor/CLAUDE.md/… | Agente                      | Sí (`alwaysApply` en Cursor) |
+| **Prompts del usuario** | `core/prompts/` + `core/prompt-catalog.md`      | Humano (copy-paste al chat) | No                           |
 
 No duplicar el contenido de `sdd-agent-workflow.md` en las fichas: los prompts del catálogo son cortos (5–15 líneas) y asumen que las reglas ya están instaladas.
 
@@ -77,11 +77,11 @@ Parser de frontmatter sin dependencias externas (regex + líneas YAML simples).
 
 ## Inventario actual (15 prompts)
 
-| ID | Categoría |
-| -- | --------- |
-| `adopt-new`, `adopt-existing`, `validate-setup`, `formalize-domain-rules` | adoption |
-| `discovery-to-draft`, `draft-review`, `approve-ready`, `implement-spec`, `open-pr`, `validate-pr`, `close-release` | workflow |
-| `hotfix-minor`, `spec-stuck`, `migrate-legacy-docs`, `update-submodule` | exceptions |
+| ID                                                                                                                 | Categoría  |
+| ------------------------------------------------------------------------------------------------------------------ | ---------- |
+| `adopt-new`, `adopt-existing`, `validate-setup`, `formalize-domain-rules`                                          | adoption   |
+| `discovery-to-draft`, `draft-review`, `approve-ready`, `implement-spec`, `open-pr`, `validate-pr`, `close-release` | workflow   |
+| `hotfix-minor`, `spec-stuck`, `migrate-legacy-docs`, `update-submodule`                                            | exceptions |
 
 ---
 
@@ -97,13 +97,13 @@ Parser de frontmatter sin dependencias externas (regex + líneas YAML simples).
 
 ## Integración en documentación de usuario
 
-| Archivo | Cambio |
-| ------- | ------ |
-| `README.md` | Fila en navegación rápida; Paso 3/6 apuntan al catálogo |
-| `INSTALL.md` | Prompt de adopción vía `sdd prompt show adopt-existing` |
+| Archivo                  | Cambio                                                               |
+| ------------------------ | -------------------------------------------------------------------- |
+| `README.md`              | Fila en navegación rápida; Paso 3/6 apuntan al catálogo              |
+| `INSTALL.md`             | Prompt de adopción vía `sdd prompt show adopt-existing`              |
 | `core/adoption-guide.md` | Enlaces por etapa; escenario docs dispersos (sin asumir wiki/Notion) |
-| `core/workflow.md` | Tabla fase → prompt ID |
-| `cli/README.md` | Comandos `prompt list/show` |
+| `core/workflow.md`       | Tabla fase → prompt ID                                               |
+| `cli/README.md`          | Comandos `prompt list/show`                                          |
 
 ### Migración de documentación legacy (redacción inclusiva)
 

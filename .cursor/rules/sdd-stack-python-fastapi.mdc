@@ -1,0 +1,54 @@
+---
+description: SDD — perfil Python + FastAPI (calidad, API, migraciones, deploy)
+alwaysApply: false
+---
+
+# SDD Stack — Python + FastAPI
+
+Perfil activo cuando `sdd.config.yaml` → `stack.profile: python-fastapi`.
+
+## Quality gates
+
+- Tests: `pytest --cov`
+- Lint: `ruff check .`
+- Types: `mypy .` (si el proyecto lo usa)
+- CI: `.github/workflows/ci.yml` en verde antes de merge
+
+## Estructura típica
+
+- Routers en `app/routers/` o `app/api/`
+- Modelos SQLAlchemy en `app/models/`
+- Schemas Pydantic en `app/schemas/`
+- Tests en `tests/` con `TestClient` de FastAPI
+
+## API
+
+- Validación con Pydantic en request/response
+- Códigos HTTP coherentes (404, 409, 422)
+- Specs con endpoints: completar `profiles/python-fastapi/spec-impact.md`
+- Documentar cambios breaking en OpenAPI en el spec
+
+## Esquema y migraciones
+
+- Solo migraciones Alembic en `alembic/versions/` (o ruta del proyecto)
+- Deploy esquema: `alembic upgrade head` tras backup si `db-change`
+- No DDL manual fuera de migraciones salvo excepción documentada en spec
+
+## Reglas de negocio del proyecto
+
+- Fuente única: `.github/docs/business/domain-rules.md`
+- Si contiene placeholders (`_ej._`, `_..._`, `{{PROJECT_NAME}}`): **estado plantilla** — no asumir reglas; preguntar al humano o iniciar sesión guiada (ver `sdd-agent-workflow.mdc`)
+- Cada spec debe indicar en "Impacto técnico" qué reglas de `domain-rules.md` aplican
+- En PR: verificar reglas de autorización y filtrado de datos del dominio
+- Variables sensibles solo en `.env` / PaaS — actualizar `.env.example` con claves nuevas (sin valores)
+
+## Deploy
+
+- Ver `profiles/python-fastapi/deploy.md` (Docker, PaaS o servidor)
+- Health check obligatorio en smoke post-deploy
+
+## Dependabot (si aplica)
+
+- Rama `deps-integration` — ver `profiles/python-fastapi/branching-extensions.md`
+- Sin spec para bumps rutinarios de dependencias
+

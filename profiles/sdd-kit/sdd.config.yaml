@@ -1,0 +1,20 @@
+# Valores por defecto del perfil sdd-kit (solo repositorio del kit)
+
+stack:
+  profile: sdd-kit
+  ci_workflow: .github/workflows/ci.yml
+  quality_gates:
+    compile: "python -m compileall -q cli/"
+    manifest: 'python -c "import json; json.load(open(''bootstrap/agent-prompts/manifest.json''))"'
+    profiles: "verificación archivos obligatorios por perfil (CI)"
+    validate_sdd: ".github/docs/sdd — validate-sdd.ps1"
+  schema_changes: null
+  deploy_platform: github-releases
+
+domains_suggested:
+  - core
+  - profiles
+  - bootstrap
+  - cli
+  - docs
+  - infra

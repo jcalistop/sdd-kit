@@ -293,14 +293,14 @@ La matriz de responsabilidades asume roles que no existen en equipos de 1 person
 
 ### Largo plazo — Vision (Fase 3)
 
-| #   | Oportunidad                                                                       | Impacto | Esfuerzo |
-| --- | --------------------------------------------------------------------------------- | ------- | -------- |
-| 11  | **CLI tool `sdd`** — validar, generar specs desde prompts, sincronizar con GitHub | Alto    | Alto     |
+| #   | Oportunidad                                                                                   | Impacto | Esfuerzo |
+| --- | --------------------------------------------------------------------------------------------- | ------- | -------- |
+| 11  | **CLI tool `sdd`** — validar, generar specs desde prompts, sincronizar con GitHub             | Alto    | Alto     |
 | 11b | **Catalogo de prompts usuario** — indice + CLI `prompt list/show` (complementa reglas agente) | Medio   | Bajo     |
-| 12  | **Integracion con GitHub Projects** — BACKLOG sincronizado bidireccionalmente     | Medio   | Alto     |
-| 13  | **Generacion automatica de CHANGELOG.md** — desde `releases/vX.Y.Z/`              | Medio   | Medio    |
-| 14  | **Dashboard de metricas SDD** — velocidad, estancamiento, cobertura               | Bajo    | Alto     |
-| 15  | **Perfiles adicionales** — Go, Node/Express, Vue, Django                          | Medio   | Medio    |
+| 12  | **Integracion con GitHub Projects** — BACKLOG sincronizado bidireccionalmente                 | Medio   | Alto     |
+| 13  | **Generacion automatica de CHANGELOG.md** — desde `releases/vX.Y.Z/`                          | Medio   | Medio    |
+| 14  | **Dashboard de metricas SDD** — velocidad, estancamiento, cobertura                           | Bajo    | Alto     |
+| 15  | **Perfiles adicionales** — Go, Node/Express, Vue, Django                                      | Medio   | Medio    |
 
 ---
 

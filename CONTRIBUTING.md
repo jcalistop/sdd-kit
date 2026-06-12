@@ -6,7 +6,19 @@ Gracias por interesarte en mejorar el kit. Este repositorio es metodología, doc
 
 1. Revisa el [README](README.md) y [INSTALL.md](INSTALL.md) para entender el alcance del kit.
 2. Para cambios grandes (nuevo perfil, CLI, flujo SDD), abre un issue o comenta en uno existente.
-3. Planificación del mantenedor: [docs/maintainers/](docs/maintainers/). Releases: [docs/releases/](docs/releases/).
+3. Planificación del mantenedor: [docs/maintainers/](docs/maintainers/). Tablero operativo: [.github/docs/sdd/BACKLOG.md](.github/docs/sdd/BACKLOG.md). Releases: [docs/releases/](docs/releases/).
+
+## Desarrollo con SDD (mantenedores)
+
+Este repositorio adopta su propia metodología. Ver [.github/docs/sdd/ADOPTION.md](.github/docs/sdd/ADOPTION.md).
+
+| Tipo de cambio                                          | Spec requerido                                   |
+| ------------------------------------------------------- | ------------------------------------------------ |
+| Feature, refactor riesgoso, nuevo perfil, cambio de CLI | Sí — ciclo completo en `.github/docs/sdd/specs/` |
+| Bugfix no trivial                                       | Sí — spec simplificado                           |
+| Typo, bump deps, copy                                   | No — ID `—` en release                           |
+
+Antes de implementar cambios no triviales: fila en [BACKLOG.md](.github/docs/sdd/BACKLOG.md), spec en estado **Ready** y reglas en [domain-rules.md](.github/docs/business/domain-rules.md).
 
 ## Tipos de contribución
 

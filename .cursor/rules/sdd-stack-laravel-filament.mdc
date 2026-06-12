@@ -1,0 +1,43 @@
+---
+description: SDD — perfil Laravel + Filament (calidad, migraciones, deploy)
+alwaysApply: false
+---
+
+# SDD Stack — Laravel + Filament
+
+Perfil activo cuando `sdd.config.yaml` → `stack.profile: laravel-filament`.
+
+## Quality gates
+
+- Tests: `php artisan test --compact`
+- Formato: `vendor/bin/pint --dirty`
+- CI: `.github/workflows/ci.yml` en verde antes de merge
+
+## Esquema
+
+- Solo migraciones en `database/migrations/` — no scripts `deploy/` ni DDL manual
+- Deploy esquema: `php artisan migrate --force` (backup en release si `db-change`)
+
+## UI y permisos
+
+- Stack UI: Filament (versión del proyecto)
+- Specs con UI: completar tabla en `profiles/laravel-filament/spec-impact.md`
+- Verificar policies/roles en cambios visibles
+
+## Reglas de negocio del proyecto
+
+- Fuente única: `.github/docs/business/domain-rules.md`
+- Si contiene placeholders (`_ej._`, `_..._`, `{{PROJECT_NAME}}`): **estado plantilla** — no asumir reglas; preguntar al humano o iniciar sesión guiada (ver `sdd-agent-workflow.mdc`)
+- Cada spec debe indicar en "Impacto técnico" qué reglas de `domain-rules.md` aplican
+- En PR: verificar checklist de reglas transversales del perfil y las de `domain-rules.md`
+
+## Deploy
+
+- Producción: Laravel Cloud al merge en `main` (ver `profiles/laravel-filament/deploy.md`)
+- Variables de entorno solo en Cloud, no en repo
+
+## Dependabot (si aplica)
+
+- Rama `dep-integration` — ver `profiles/laravel-filament/branching-extensions.md`
+- Sin spec para bumps rutinarios
+

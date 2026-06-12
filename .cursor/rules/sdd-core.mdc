@@ -1,0 +1,25 @@
+---
+description: Metodología SDD — specs, backlog, PR y releases (agnóstico)
+alwaysApply: true
+---
+
+# SDD — Spec-Driven Development
+
+Metodología en `sdd-kit/core/` o `.github/docs/sdd/`. Aplica en iniciativas **no triviales** del BACKLOG.
+
+## Leer bajo demanda
+
+`BACKLOG.md` · `sdd.config.yaml` · `workflow.md` · `business/domain-rules.md` · `releases/RUNBOOK.md` · `profiles/<stack>/checklist-stack.md`
+
+Flujo por fase: regla `sdd-agent-workflow.mdc`. Checklists DoR/DoD, antipatrones y errores: `sdd-workflow-reference.mdc`.
+
+## Reglas nucleares
+
+- **Spec antes de código** para ítems no triviales → `specs/<dominio>/SDD-NNN-slug.md`
+- **Actualizar BACKLOG** al cambiar estado; no inventar `SDD-NNN` sin reflejarlo
+- **ADR** solo si la decisión es transversal
+- Al cerrar: `git mv` a `archive/<YYYY>/<dominio>/` + entrada en `releases/vX.Y.Z/`
+- **PR** hacia rama de desarrollo; cambios triviales → ID `—` en release
+- **Reglas de negocio** solo desde `business/domain-rules.md` — no asumir las no escritas
+- No crear documentación SDD fuera de `paths.sdd` salvo petición explícita
+

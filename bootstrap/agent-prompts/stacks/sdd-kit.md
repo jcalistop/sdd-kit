@@ -1,0 +1,37 @@
+# SDD Stack — SDD Kit (mantenedores)
+
+Perfil activo cuando `sdd.config.yaml` → `stack.profile: sdd-kit`.
+
+**Solo** para el repositorio `sdd-kit`. Proyectos consumidores usan su perfil de stack (laravel-filament, python-fastapi, etc.).
+
+## Quality gates
+
+- `python -m compileall -q cli/`
+- JSON válido en `bootstrap/agent-prompts/manifest.json` y `stack-descriptions.json`
+- CI `.github/workflows/ci.yml` en verde
+- `validate-sdd` sobre `.github/docs/sdd/` si cambió documentación SDD
+
+## Estructura del repo
+
+- `core/` — metodología agnóstica (sin stacks)
+- `profiles/<stack>/` — extensiones por tecnología
+- `bootstrap/` — init, validate, install-agents, agent-prompts (fuente única)
+- `cli/` — herramienta `sdd` (Python 3.10+)
+- `.github/docs/sdd/` — instancia SDD del kit (BACKLOG, specs)
+- `.github/docs/business/` — contexto y reglas del producto kit
+
+## Convenciones
+
+- Prompts de agente: editar `bootstrap/agent-prompts/`, luego `python bootstrap/sync-cursor-rules.py`
+- Nuevo perfil: seguir `core/templates/profile-template.md` + entrada en `stack-descriptions.json`
+- Sin lógica de negocio de proyectos consumidores en perfiles
+
+## Reglas del producto kit
+
+- Fuente única: `.github/docs/business/domain-rules.md`
+- Cada spec cita reglas aplicables en "Impacto técnico"
+- Cambios no triviales: fila en BACKLOG y spec antes de implementar
+
+## Deploy
+
+- Ver `profiles/sdd-kit/deploy.md` (tag SemVer, GitHub Release, docs/releases/)

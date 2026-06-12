@@ -173,11 +173,12 @@ Perfil activo cuando `sdd.config.yaml` → `stack.profile: <perfil>`.
 
 ## Perfiles de referencia
 
-| Perfil             | Stack                        |
-| ------------------ | ---------------------------- |
-| `laravel-filament` | Laravel + Filament           |
-| `laravel-voyager`  | Laravel + Voyager + Livewire |
-| `python-fastapi`   | Python + FastAPI             |
-| `python-django`    | Python + Django              |
-| `react-vite`       | React + Vite + TypeScript    |
-| `reports-latex-md` | Informes MD/LaTeX → PDF/DOCX |
+| Perfil             | Stack                                |
+| ------------------ | ------------------------------------ |
+| `laravel-filament` | Laravel + Filament                   |
+| `laravel-voyager`  | Laravel + Voyager + Livewire         |
+| `python-fastapi`   | Python + FastAPI                     |
+| `python-django`    | Python + Django                      |
+| `react-vite`       | React + Vite + TypeScript            |
+| `reports-latex-md` | Informes MD/LaTeX → PDF/DOCX         |
+| `sdd-kit`          | Mantenedores del repositorio sdd-kit |
