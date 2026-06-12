@@ -78,6 +78,21 @@ Por defecto se detecta el agente/IDE e instalan instrucciones (Cursor, Claude Co
 
 ---
 
+## Actualizar el kit (post-adopcion)
+
+Cuando el repositorio **sdd-kit** publica una version nueva, la instancia local no se actualiza sola.
+
+| Paso | Accion                                                                                                |
+| ---- | ----------------------------------------------------------------------------------------------------- |
+| 1    | Leer [`upgrade-guide.md`](upgrade-guide.md) y changelog en `sdd-kit/docs/releases/`                   |
+| 2    | Revisar `kit.installed_version` en `sdd.config.yaml`                                                  |
+| 3    | Prompt `upgrade-kit` en [prompt-catalog.md](prompt-catalog.md) o `sdd prompt show upgrade-kit --full` |
+| 4    | Tras merge y `validate-sdd`, actualizar `UPGRADE-LOG.md` y `kit.installed_version`                    |
+
+No re-ejecutar `init-sdd` para actualizar — riesgo de pisar customizaciones. Ver exclusiones en upgrade-guide.
+
+---
+
 ## Formalizar el contexto de negocio
 
 El agente necesita reglas explicitas en `business/domain-rules.md` para no inventar restricciones ni omitir las que el humano conoce.
@@ -244,17 +259,19 @@ El script verifica:
 - Specs en `specs/` con entrada en BACKLOG
 - Specs en `archive/` en seccion Released
 - Coherencia basica de "Proximo ID disponible"
+- **Advertencia** si `kit.installed_version` difiere del submodule (no bloquea)
 
 ---
 
 ## Referencias
 
-| Documento                                                                                              | Uso                                   |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------- |
-| [`workflow.md`](workflow.md)                                                                           | Ciclo y tipos de spec                 |
-| [`healthy-development.md`](healthy-development.md)                                                     | Arquitectura, patrones, codigo limpio |
-| [`templates/spec-template.md`](templates/spec-template.md)                                             | Plantilla de spec                     |
-| [`templates/spec-simple-template.md`](templates/spec-simple-template.md)                               | Plantilla reducida (no tecnica)       |
-| [`agent-setup.md`](agent-setup.md)                                                                     | Adaptadores multi-herramienta         |
-| [`../bootstrap/agent-prompts/sdd-agent-workflow.md`](../bootstrap/agent-prompts/sdd-agent-workflow.md) | Flujo agentico (fuente unica)         |
-| [`templates/business-domain-template.md`](templates/business-domain-template.md)                       | Reglas de negocio del proyecto        |
+| Documento                                                                                              | Uso                                     |
+| ------------------------------------------------------------------------------------------------------ | --------------------------------------- |
+| [`workflow.md`](workflow.md)                                                                           | Ciclo y tipos de spec                   |
+| [`healthy-development.md`](healthy-development.md)                                                     | Arquitectura, patrones, codigo limpio   |
+| [`templates/spec-template.md`](templates/spec-template.md)                                             | Plantilla de spec                       |
+| [`templates/spec-simple-template.md`](templates/spec-simple-template.md)                               | Plantilla reducida (no tecnica)         |
+| [`agent-setup.md`](agent-setup.md)                                                                     | Adaptadores multi-herramienta           |
+| [`upgrade-guide.md`](upgrade-guide.md)                                                                 | Actualizar kit en instancia consumidora |
+| [`../bootstrap/agent-prompts/sdd-agent-workflow.md`](../bootstrap/agent-prompts/sdd-agent-workflow.md) | Flujo agentico (fuente unica)           |
+| [`templates/business-domain-template.md`](templates/business-domain-template.md)                       | Reglas de negocio del proyecto          |

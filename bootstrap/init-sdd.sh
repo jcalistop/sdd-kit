@@ -45,7 +45,7 @@ mkdir -p "$FULL_SDD"/{specs,archive,adr,releases,templates}
 mkdir -p "$TARGET_ROOT/$BUSINESS_PATH"
 
 # Core docs (copia inicial; proyectos pueden enlazar al kit vía submodule)
-for f in workflow.md operations.md branching.md checklist-pr.md adoption-guide.md agent-setup.md healthy-development.md README.md prompt-catalog.md; do
+for f in workflow.md operations.md branching.md checklist-pr.md adoption-guide.md agent-setup.md healthy-development.md upgrade-guide.md README.md prompt-catalog.md; do
   cp "$KIT_DIR/core/$f" "$FULL_SDD/$f"
 done
 
@@ -58,12 +58,29 @@ cp "$KIT_DIR/core/templates/"* "$FULL_SDD/templates/"
 mkdir -p "$FULL_SDD/profiles"
 cp -r "$PROFILE_DIR" "$FULL_SDD/profiles/"
 
+# Kit version (init traceability)
+KIT_VERSION_SCRIPT="$KIT_DIR/bootstrap/kit-version.py"
+KIT_VERSION="unknown"
+KIT_INSTALLED_AT="$(date +%Y-%m-%d)"
+if [[ -f "$KIT_VERSION_SCRIPT" ]]; then
+  if command -v python3 &>/dev/null; then
+    KIT_VERSION="$(python3 "$KIT_VERSION_SCRIPT" detect "$KIT_DIR" 2>/dev/null || echo unknown)"
+  elif command -v python &>/dev/null; then
+    KIT_VERSION="$(python "$KIT_VERSION_SCRIPT" detect "$KIT_DIR" 2>/dev/null || echo unknown)"
+  fi
+fi
+
 # Config
 cp "$KIT_DIR/sdd.config.example.yaml" "$FULL_SDD/sdd.config.yaml"
 if command -v sed &>/dev/null; then
   sed -i.bak "s/Mi Proyecto/$PROJECT_NAME/" "$FULL_SDD/sdd.config.yaml" && rm -f "$FULL_SDD/sdd.config.yaml.bak"
   sed -i.bak "s/profile: laravel-filament/profile: $PROFILE/" "$FULL_SDD/sdd.config.yaml" && rm -f "$FULL_SDD/sdd.config.yaml.bak"
+  sed -i.bak "s/{{KIT_VERSION}}/$KIT_VERSION/" "$FULL_SDD/sdd.config.yaml" && rm -f "$FULL_SDD/sdd.config.yaml.bak"
+  sed -i.bak "s/{{KIT_INSTALLED_AT}}/$KIT_INSTALLED_AT/" "$FULL_SDD/sdd.config.yaml" && rm -f "$FULL_SDD/sdd.config.yaml.bak"
 fi
+
+sed "s/{{PROJECT_NAME}}/$PROJECT_NAME/; s/{{KIT_VERSION}}/$KIT_VERSION/; s/{{KIT_INSTALLED_AT}}/$KIT_INSTALLED_AT/" \
+  "$KIT_DIR/core/templates/UPGRADE-LOG-template.md" > "$FULL_SDD/UPGRADE-LOG.md"
 
 # BACKLOG
 sed "s/{{PROJECT_NAME}}/$PROJECT_NAME/" "$KIT_DIR/core/templates/BACKLOG-template.md" > "$FULL_SDD/BACKLOG.md"

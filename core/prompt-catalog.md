@@ -16,7 +16,7 @@
 | Adaptadores instalados (`sdd-agent-workflow`) y describes una idea nueva | **No** — el agente sigue el ciclo solo        |
 | Adopción en proyecto existente, formalizar negocio, excepciones          | **Sí** — usa prompts de este catálogo         |
 | Aprobar spec (Ready), revisar PR, cerrar release                         | **Sí** — requieren tu OK explícito            |
-| Validar instalación o actualizar submodule                               | **Sí** — tarea puntual con comandos concretos |
+| Validar instalación o actualizar el kit en instancia                     | **Sí** — tarea puntual con comandos concretos |
 
 ---
 
@@ -43,7 +43,8 @@ flowchart LR
         E1[hotfix-minor]
         E2[spec-stuck]
         E3[migrate-legacy-docs]
-        E4[update-submodule]
+        E4[upgrade-kit]
+        E5[update-submodule]
     end
     A2 --> A3 --> A4 --> W1 --> W2 --> W3 --> W4 --> W5 --> W6 --> W7
 ```
@@ -52,23 +53,24 @@ flowchart LR
 
 ## Por momento
 
-| Momento                | ID                       | Título                            |
-| ---------------------- | ------------------------ | --------------------------------- |
-| Proyecto nuevo         | `adopt-new`              | Adoptar SDD en proyecto nuevo     |
-| Proyecto existente     | `adopt-existing`         | Adoptar SDD en proyecto existente |
-| Post bootstrap         | `validate-setup`         | Validar instalación SDD           |
-| Antes del primer spec  | `formalize-domain-rules` | Formalizar contexto de negocio    |
-| Nueva iniciativa       | `discovery-to-draft`     | Discovery → spec Draft            |
-| Revisar borrador       | `draft-review`           | Revisar spec Draft (DoR)          |
-| Aprobar implementación | `approve-ready`          | Aprobar spec → Ready → In Build   |
-| Codificar              | `implement-spec`         | Implementar spec aprobado         |
-| Abrir PR               | `open-pr`                | Abrir PR con checklist SDD        |
-| Revisar PR             | `validate-pr`            | Validar PR antes de merge         |
-| Cerrar versión         | `close-release`          | Cerrar release y archivar specs   |
-| Urgencia / trivial     | `hotfix-minor`           | Hotfix o cambio sin spec          |
-| Spec atascado          | `spec-stuck`             | Spec estancado o rechazado        |
-| Etapa 3                | `migrate-legacy-docs`    | Migrar docs legacy a business/    |
-| Mantenimiento kit      | `update-submodule`       | Actualizar submodule sdd-kit      |
+| Momento                | ID                       | Título                                 |
+| ---------------------- | ------------------------ | -------------------------------------- |
+| Proyecto nuevo         | `adopt-new`              | Adoptar SDD en proyecto nuevo          |
+| Proyecto existente     | `adopt-existing`         | Adoptar SDD en proyecto existente      |
+| Post bootstrap         | `validate-setup`         | Validar instalación SDD                |
+| Antes del primer spec  | `formalize-domain-rules` | Formalizar contexto de negocio         |
+| Nueva iniciativa       | `discovery-to-draft`     | Discovery → spec Draft                 |
+| Revisar borrador       | `draft-review`           | Revisar spec Draft (DoR)               |
+| Aprobar implementación | `approve-ready`          | Aprobar spec → Ready → In Build        |
+| Codificar              | `implement-spec`         | Implementar spec aprobado              |
+| Abrir PR               | `open-pr`                | Abrir PR con checklist SDD             |
+| Revisar PR             | `validate-pr`            | Validar PR antes de merge              |
+| Cerrar versión         | `close-release`          | Cerrar release y archivar specs        |
+| Urgencia / trivial     | `hotfix-minor`           | Hotfix o cambio sin spec               |
+| Spec atascado          | `spec-stuck`             | Spec estancado o rechazado             |
+| Etapa 3                | `migrate-legacy-docs`    | Migrar docs legacy a business/         |
+| Mantenimiento kit      | `upgrade-kit`            | Actualizar kit en instancia (completo) |
+| Mantenimiento kit      | `update-submodule`       | Atajo legacy → preferir `upgrade-kit`  |
 
 Fichas: [`prompts/`](prompts/) — o `sdd prompt show <id> --full`
 
@@ -92,7 +94,7 @@ Fichas: [`prompts/`](prompts/) — o `sdd prompt show <id> --full`
 | Etapa                      | Prompts                                                                   |
 | -------------------------- | ------------------------------------------------------------------------- |
 | **1** — Mínima viable      | `adopt-new`, `adopt-existing`, `validate-setup`, `formalize-domain-rules` |
-| **2** — Features con SDD   | Todos los de `workflow/` + `hotfix-minor`, `spec-stuck`                   |
+| **2** — Features con SDD   | Todos los de `workflow/` + `hotfix-minor`, `spec-stuck`, `upgrade-kit`    |
 | **3** — Cobertura completa | `migrate-legacy-docs` + ciclo completo en refactors                       |
 
 ---
@@ -134,4 +136,5 @@ Fichas: [`prompts/`](prompts/) — o `sdd prompt show <id> --full`
 - [`hotfix-minor.md`](prompts/exceptions/hotfix-minor.md)
 - [`spec-stuck.md`](prompts/exceptions/spec-stuck.md)
 - [`migrate-legacy-docs.md`](prompts/exceptions/migrate-legacy-docs.md)
+- [`upgrade-kit.md`](prompts/exceptions/upgrade-kit.md)
 - [`update-submodule.md`](prompts/exceptions/update-submodule.md)

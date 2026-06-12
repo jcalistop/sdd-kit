@@ -163,6 +163,16 @@ Ver [catálogo de prompts](core/prompt-catalog.md) (`draft-review`, `approve-rea
 
 Ejemplos de calidad por perfil: `profiles/<perfil>/examples/SDD-001-*.md`.
 
+### Actualizar el kit
+
+Cuando salga una versión nueva del kit, no basta con `git pull` en el submodule: la instancia en `.github/docs/sdd/` y los adaptadores de agente pueden requerir merge manual.
+
+1. Revisa [`core/upgrade-guide.md`](core/upgrade-guide.md) y el changelog en `docs/releases/`.
+2. Usa el prompt **`upgrade-kit`**: `python sdd-kit/cli/sdd.py prompt show upgrade-kit --full`
+3. Tras validar, actualiza `kit.installed_version` y [`UPGRADE-LOG.md`](.github/docs/sdd/UPGRADE-LOG.md) en tu instancia.
+
+Detalle: **[INSTALL.md](INSTALL.md)** — sección «Actualizar el kit».
+
 ---
 
 ## Cómo trabajar con el agente
@@ -237,6 +247,7 @@ tu-proyecto/
 | [`core/workflow.md`](core/workflow.md)                       | Estados, tipos de spec, DoR/DoD             |
 | [`core/healthy-development.md`](core/healthy-development.md) | Buenas prácticas y antipatrones             |
 | [`core/agent-setup.md`](core/agent-setup.md)                 | Cursor, Claude, Codex, Copilot              |
+| [`core/upgrade-guide.md`](core/upgrade-guide.md)             | Actualizar el kit en proyectos existentes   |
 | [`INSTALL.md`](INSTALL.md)                                   | Otras formas de instalar (copia, solo docs) |
 
 ---

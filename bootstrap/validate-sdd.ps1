@@ -141,6 +141,20 @@ if (-not (Test-Path (Join-Path $SddPath "sdd.config.yaml"))) {
     Write-Ok "sdd.config.yaml presente"
 }
 
+$kitVersionScript = Join-Path $PSScriptRoot "kit-version.py"
+if (Test-Path $kitVersionScript) {
+    $py = Get-Command python -ErrorAction SilentlyContinue
+    if (-not $py) { $py = Get-Command python3 -ErrorAction SilentlyContinue }
+    if ($py) {
+        $projectRoot = (Resolve-Path (Join-Path $SddPath "../../..")).Path
+        $checkOut = & $py.Source $kitVersionScript check $SddPath $projectRoot 2>&1
+        foreach ($line in @($checkOut)) {
+            if ($line -match '^WARN:') { Write-Warn ($line -replace '^WARN:\s*', '') }
+            elseif ($line -match '^OK:') { Write-Ok ($line -replace '^OK:\s*', '') }
+        }
+    }
+}
+
 Write-Host ""
 Write-Host "Resumen: $errors error(es), $warnings advertencia(s)"
 

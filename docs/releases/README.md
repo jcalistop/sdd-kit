@@ -5,12 +5,13 @@
 
 ## Dónde mirar
 
-| Recurso                                                          | Uso                                          |
-| ---------------------------------------------------------------- | -------------------------------------------- |
-| [CHANGELOG.md](CHANGELOG.md)                                     | Resumen técnico de cambios por versión       |
-| [v1.0.0.md](v1.0.0.md)                                           | Notas legibles de la versión estable actual  |
-| [v0.1.0.md](v0.1.0.md)                                           | Notas de la pre-release inicial              |
-| [GitHub Releases](https://github.com/jcalistop/sdd-kit/releases) | Publicación oficial y descargas por etiqueta |
+| Recurso                                                          | Uso                                                |
+| ---------------------------------------------------------------- | -------------------------------------------------- |
+| [CHANGELOG.md](CHANGELOG.md)                                     | Resumen técnico de cambios por versión             |
+| [v1.1.0.md](v1.1.0.md)                                           | Notas de la versión actual (upgrade de instancias) |
+| [v1.0.0.md](v1.0.0.md)                                           | Primera versión estable                            |
+| [v0.1.0.md](v0.1.0.md)                                           | Notas de la pre-release inicial                    |
+| [GitHub Releases](https://github.com/jcalistop/sdd-kit/releases) | Publicación oficial y descargas por etiqueta       |
 
 ## Convención
 

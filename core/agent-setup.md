@@ -63,6 +63,10 @@ Con `--no-prompt` y `--agent auto`: solo instala si hay **un** candidato claro; 
 
 ### Reinstalar o actualizar tras actualizar el kit
 
+Flujo completo (submodule, merge de instancia, log de version): [`upgrade-guide.md`](upgrade-guide.md). Prompt: `upgrade-kit` en [prompt-catalog.md](prompt-catalog.md).
+
+Reinstalar solo adaptadores (paso del runbook):
+
 ```powershell
 python .\sdd-kit\bootstrap\install-agents.py install `
   --profile laravel-filament `

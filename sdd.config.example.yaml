@@ -30,6 +30,11 @@ release:
   semver: true
   tag_prefix: v
 
+# Versión del kit SDD instalada (SemVer o git describe). Ver upgrade-guide.md y UPGRADE-LOG.md.
+kit:
+  installed_version: "{{KIT_VERSION}}"
+  installed_at: "{{KIT_INSTALLED_AT}}"
+
 # Adaptadores de agente IA (rellenado por install-agents.py / init-sdd)
 agent:
   targets: []

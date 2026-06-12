@@ -30,7 +30,7 @@ $BusinessPath = Join-Path $TargetRoot ".github/docs/business"
 }
 New-Item -ItemType Directory -Force -Path $BusinessPath | Out-Null
 
-@("workflow.md", "operations.md", "branching.md", "checklist-pr.md", "adoption-guide.md", "agent-setup.md", "healthy-development.md", "README.md", "prompt-catalog.md") | ForEach-Object {
+@("workflow.md", "operations.md", "branching.md", "checklist-pr.md", "adoption-guide.md", "agent-setup.md", "healthy-development.md", "upgrade-guide.md", "README.md", "prompt-catalog.md") | ForEach-Object {
     Copy-Item (Join-Path $KitDir "core\$_") (Join-Path $FullSdd $_) -Force
 }
 
@@ -40,10 +40,30 @@ Copy-Item (Join-Path $KitDir "core\adr\README.md") (Join-Path $FullSdd "adr\READ
 Copy-Item (Join-Path $KitDir "core\templates\*") (Join-Path $FullSdd "templates\") -Force
 Copy-Item $ProfileDir (Join-Path $FullSdd "profiles\$Profile") -Recurse -Force
 
+$kitVersionScript = Join-Path $KitDir "bootstrap\kit-version.py"
+$kitVersion = "unknown"
+$kitInstalledAt = Get-Date -Format "yyyy-MM-dd"
+if (Test-Path $kitVersionScript) {
+    $py = Get-Command python -ErrorAction SilentlyContinue
+    if (-not $py) { $py = Get-Command python3 -ErrorAction SilentlyContinue }
+    if ($py) {
+        $kitVersion = & $py.Source $kitVersionScript detect $KitDir
+        if (-not $kitVersion) { $kitVersion = "unknown" }
+    }
+}
+
 $config = Get-Content (Join-Path $KitDir "sdd.config.example.yaml") -Raw
 $config = $config -replace "Mi Proyecto", $Project
 $config = $config -replace "profile: laravel-filament", "profile: $Profile"
+$config = $config -replace "\{\{KIT_VERSION\}\}", $kitVersion
+$config = $config -replace "\{\{KIT_INSTALLED_AT\}\}", $kitInstalledAt
 Set-Content (Join-Path $FullSdd "sdd.config.yaml") $config -Encoding UTF8
+
+$upgradeLogTpl = Get-Content (Join-Path $KitDir "core\templates\UPGRADE-LOG-template.md") -Raw
+$upgradeLogTpl = $upgradeLogTpl -replace "\{\{PROJECT_NAME\}\}", $Project
+$upgradeLogTpl = $upgradeLogTpl -replace "\{\{KIT_VERSION\}\}", $kitVersion
+$upgradeLogTpl = $upgradeLogTpl -replace "\{\{KIT_INSTALLED_AT\}\}", $kitInstalledAt
+Set-Content (Join-Path $FullSdd "UPGRADE-LOG.md") $upgradeLogTpl -Encoding UTF8
 
 $backlog = Get-Content (Join-Path $KitDir "core\templates\BACKLOG-template.md") -Raw
 $backlog = $backlog -replace "\{\{PROJECT_NAME\}\}", $Project

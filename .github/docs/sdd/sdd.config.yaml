@@ -28,12 +28,16 @@ paths:
   contributing: CONTRIBUTING.md
 
 ids:
-  next_sdd: 2
+  next_sdd: 3
   next_adr: 1
 
 release:
   semver: true
   tag_prefix: v
+
+kit:
+  installed_version: "v1.1.0"
+  installed_at: "2026-06-12"
 
 agent:
   targets: [cursor]

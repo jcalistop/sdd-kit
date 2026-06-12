@@ -126,15 +126,28 @@ Scripts legacy (misma lógica): `./sdd-kit/bootstrap/validate-sdd.sh` · `.\sdd-
 
 ## Actualizar el kit (submodule)
 
+Cuando publica una versión nueva del kit, sigue el runbook **[`core/upgrade-guide.md`](core/upgrade-guide.md)** (detectar versión → changelog → submodule → merge instancia → adaptadores → validate → log).
+
+**Prompt recomendado** (modo agente):
+
 ```bash
-cd sdd-kit
-git pull origin main
-cd ..
-git add sdd-kit
-git commit -m "chore: actualiza sdd-kit"
+python sdd-kit/cli/sdd.py prompt show upgrade-kit --full
 ```
 
-Los archivos en `.github/docs/sdd/` **no** se sobrescriben solos; revisar diff del kit y portar mejoras manualmente o re-ejecutar init en proyecto nuevo.
+Sustituye `<VERSION>` por el tag SemVer (ej. `v1.1.0`).
+
+Resumen manual del submodule:
+
+```bash
+cd sdd-kit
+git fetch origin --tags
+git checkout vX.Y.Z
+cd ..
+git add sdd-kit
+git commit -m "chore: actualiza sdd-kit a vX.Y.Z"
+```
+
+Los archivos en `.github/docs/sdd/` **no** se sobrescriben solos. Registra cada upgrade en `UPGRADE-LOG.md` y actualiza `kit.installed_version` en `sdd.config.yaml` tras validar.
 
 ## Perfiles
 
