@@ -107,11 +107,11 @@ En Linux/macOS es el mismo comando `git submodule`. **Detén aquí** si vas a us
 
 #### Proyecto nuevo — puedes ejecutar `init-sdd` tú mismo
 
-```powershell
-.\sdd-kit\bootstrap\init-sdd.ps1 -Profile laravel-filament -Project "Mi App"
+```bash
+python sdd-kit/cli/sdd.py init --profile laravel-filament --project "Mi App"
 ```
 
-En Linux/macOS: `./sdd-kit/bootstrap/init-sdd.sh --profile laravel-filament --project "Mi App"`.
+Atajos: `./sdd-kit/bootstrap/init-sdd.sh` (bash) · `.\sdd-kit\bootstrap\init-sdd.ps1` (solo PowerShell).
 
 Por defecto detecta tu agente/IDE (`-Agent auto`) e instala las reglas SDD. Ver **[`core/agent-setup.md`](core/agent-setup.md)**.
 
