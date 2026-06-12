@@ -30,10 +30,11 @@ $BusinessPath = Join-Path $TargetRoot ".github/docs/business"
 }
 New-Item -ItemType Directory -Force -Path $BusinessPath | Out-Null
 
-@("workflow.md", "operations.md", "branching.md", "checklist-pr.md", "adoption-guide.md", "agent-setup.md", "healthy-development.md", "README.md") | ForEach-Object {
+@("workflow.md", "operations.md", "branching.md", "checklist-pr.md", "adoption-guide.md", "agent-setup.md", "healthy-development.md", "README.md", "prompt-catalog.md") | ForEach-Object {
     Copy-Item (Join-Path $KitDir "core\$_") (Join-Path $FullSdd $_) -Force
 }
 
+Copy-Item (Join-Path $KitDir "core\prompts") (Join-Path $FullSdd "prompts") -Recurse -Force
 Copy-Item (Join-Path $KitDir "core\releases\*") (Join-Path $FullSdd "releases\") -Recurse -Force
 Copy-Item (Join-Path $KitDir "core\adr\README.md") (Join-Path $FullSdd "adr\README.md") -Force
 Copy-Item (Join-Path $KitDir "core\templates\*") (Join-Path $FullSdd "templates\") -Force

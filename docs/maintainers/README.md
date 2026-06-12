@@ -5,10 +5,11 @@
 
 ## Contenido
 
-| Documento                  | Uso                                                              |
-| -------------------------- | ---------------------------------------------------------------- |
-| [ANALYSIS.md](ANALYSIS.md) | Analisis critico del kit: fortalezas, debilidades, oportunidades |
-| [ROADMAP.md](ROADMAP.md)   | Plan de evolucion por fases (1–4) y metricas de exito            |
+| Documento                            | Uso                                                              |
+| ------------------------------------ | ---------------------------------------------------------------- |
+| [ANALYSIS.md](ANALYSIS.md)           | Analisis critico del kit: fortalezas, debilidades, oportunidades |
+| [ROADMAP.md](ROADMAP.md)             | Plan de evolucion por fases (1–4) y metricas de exito            |
+| [PROMPT-CATALOG.md](PROMPT-CATALOG.md) | Catálogo de prompts usuario: arquitectura, mantenimiento, CLI    |
 
 ## Historial de versiones
 
@@ -28,3 +29,4 @@ Notas de release y changelog del kit: **[docs/releases/](../releases/)** (no en 
 - [INSTALL.md](../../INSTALL.md) — guia de instalacion
 - [core/workflow.md](../../core/workflow.md) — ciclo SDD
 - [core/healthy-development.md](../../core/healthy-development.md) — guia de desarrollo sano (humanos y agentes)
+- [core/prompt-catalog.md](../../core/prompt-catalog.md) — indice de prompts para usuarios del kit

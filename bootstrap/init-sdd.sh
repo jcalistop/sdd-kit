@@ -45,10 +45,11 @@ mkdir -p "$FULL_SDD"/{specs,archive,adr,releases,templates}
 mkdir -p "$TARGET_ROOT/$BUSINESS_PATH"
 
 # Core docs (copia inicial; proyectos pueden enlazar al kit vía submodule)
-for f in workflow.md operations.md branching.md checklist-pr.md adoption-guide.md agent-setup.md healthy-development.md README.md; do
+for f in workflow.md operations.md branching.md checklist-pr.md adoption-guide.md agent-setup.md healthy-development.md README.md prompt-catalog.md; do
   cp "$KIT_DIR/core/$f" "$FULL_SDD/$f"
 done
 
+cp -r "$KIT_DIR/core/prompts" "$FULL_SDD/"
 cp -r "$KIT_DIR/core/releases/"* "$FULL_SDD/releases/"
 cp "$KIT_DIR/core/adr/README.md" "$FULL_SDD/adr/README.md"
 cp "$KIT_DIR/core/templates/"* "$FULL_SDD/templates/"

@@ -25,6 +25,7 @@ Metodología para desarrollar **con un plan antes de codear**. Pensada para equi
 | 🤖  | [Configuración del agente](core/agent-setup.md) | Cursor, Claude, Codex, Copilot              |
 | 🧭  | [Ciclo SDD](core/workflow.md)                   | Estados, DoR/DoD, releases                  |
 | 🛠️  | [CLI](cli/README.md)                            | `validate`, `backlog`, `spec new`           |
+| 💬  | [Catálogo de prompts](core/prompt-catalog.md)   | Plantillas copy-paste por fase y adopción   |
 
 ---
 
@@ -121,27 +122,13 @@ Por defecto detecta tu agente/IDE (`-Agent auto`) e instala las reglas SDD. Ver 
 
 **El agente:** sigue [`core/adoption-guide.md`](core/adoption-guide.md) Etapa 1, lee lo que ya existe y no sobrescribe documentación sin tu aprobación.
 
-Copia y adapta este prompt:
+Usa el prompt **`adopt-existing`** del [catálogo de prompts](core/prompt-catalog.md):
 
-```
-Adopta SDD en este proyecto con perfil [laravel-filament|python-django|…].
-
-Contexto:
-- Proyecto EXISTENTE con código y posible documentación previa.
-- El kit está en sdd-kit/ (submodule).
-
-Instrucciones:
-1. Lee sdd-kit/core/adoption-guide.md (Etapa 1) y sdd-kit/core/agent-setup.md.
-2. Ejecuta init-sdd solo si no existe .github/docs/sdd/; si ya existe, NO sobrescribas archivos sin preguntar.
-3. Completa sdd.config.yaml, business/README.md y BACKLOG (inventario pre-SDD con ID —, sin specs retrospectivos).
-4. Instala adaptadores de agente (-Agent auto).
-5. Ejecuta validate-sdd y reporta resultado.
-6. Propón 3–5 ítems en Discovery para el backlog real.
-
-No reescribir el pasado. No crear specs para features ya implementadas.
+```powershell
+.\sdd-kit\bootstrap\sdd.ps1 prompt show adopt-existing
 ```
 
-Guía detallada: **[INSTALL.md](INSTALL.md)** — sección «Modo agente».
+Copia la salida en el chat del agente (adapta `<PERFIL>`). Guía detallada: **[INSTALL.md](INSTALL.md)** — sección «Modo agente».
 
 ### Paso 4 — Completa lo mínimo (día 1)
 
@@ -165,11 +152,13 @@ Si pasa sin errores críticos, la estructura está lista.
 
 ### Paso 6 — Tu primer spec con el agente
 
-Con adaptadores instalados, el agente ya tiene las reglas SDD. Si no, pide explícitamente:
+Con adaptadores instalados, el agente ya tiene las reglas SDD. Para forzar el flujo explícitamente:
 
-> "Sigue sdd-agent-workflow: crea un spec Draft para [tu idea] en el dominio [ux/api/…]."
+```powershell
+.\sdd-kit\bootstrap\sdd.ps1 prompt show discovery-to-draft
+```
 
-El agente usa la plantilla del perfil. Revisa el spec; si está bien, aprueba → pasa a **Ready** → implementación.
+Ver [catálogo de prompts](core/prompt-catalog.md) (`draft-review`, `approve-ready`, etc.). Revisa el spec; si está bien, aprueba → pasa a **Ready** → implementación.
 
 Ejemplos de calidad por perfil: `profiles/<perfil>/examples/SDD-001-*.md`.
 

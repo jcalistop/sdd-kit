@@ -31,6 +31,8 @@ Variable de entorno opcional: `SDD_PATH` (default: `.github/docs/sdd`).
 | `release changelog [-o path]`                                                                    | Genera `CHANGELOG.md` (Keep a Changelog)   |
 | `release close v1.2.0 [--changelog] [--force]`                                                   | Checklist pre-campaña                      |
 | `metrics [--markdown] [-o report.md]`                                                            | Salud del proceso SDD                      |
+| `prompt list [--category adoption\|workflow\|exceptions] [--phase Draft]`                        | Catálogo de prompts copy-paste             |
+| `prompt show <id> [--full]`                                                                      | Imprime prompt listo para pegar al agente  |
 
 ## GitHub sync
 
@@ -51,4 +53,11 @@ Crear etiquetas en el repo si `gh issue create` falla por labels inexistentes.
 
 # CHANGELOG tras releases
 .\sdd-kit\bootstrap\sdd.ps1 release changelog
+
+# Catálogo de prompts
+.\sdd-kit\bootstrap\sdd.ps1 prompt list
+.\sdd-kit\bootstrap\sdd.ps1 prompt show adopt-existing
+.\sdd-kit\bootstrap\sdd.ps1 prompt show discovery-to-draft --full
 ```
+
+Ver también: [core/prompt-catalog.md](../core/prompt-catalog.md).

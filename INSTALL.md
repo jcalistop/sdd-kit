@@ -23,17 +23,13 @@ En repos **con código y documentación previa**, evita ejecutar `init-sdd` manu
 
 El agente debe **preguntar antes de sobrescribir** cualquier archivo en `.github/docs/sdd/` o `business/` que ya exista.
 
-### Prompt de adopción (plantilla)
+### Prompt de adopción
 
+```powershell
+.\sdd-kit\bootstrap\sdd.ps1 prompt show adopt-existing
 ```
-Adopta SDD en este proyecto con perfil <PERFIL>.
 
-- Proyecto EXISTENTE. Kit en sdd-kit/.
-- Sigue sdd-kit/core/adoption-guide.md Etapa 1.
-- No sobrescribas archivos existentes sin confirmación.
-- Inventario pre-SDD en BACKLOG (ID —), 3–5 ítems Discovery.
-- init-sdd + adaptadores (-Agent auto) + validate-sdd.
-```
+Catálogo completo: [core/prompt-catalog.md](core/prompt-catalog.md) — también en `.github/docs/sdd/` tras `init-sdd`.
 
 ---
 
@@ -166,6 +162,6 @@ Ver [core/adoption-guide.md](core/adoption-guide.md):
 ### Qué debe evitar el agente (y tú) en repos existentes
 
 - Crear specs retrospectivos para todo el código ya desplegado
-- Sobrescribir wiki/Notion/READMEs sin migración planificada (Etapa 3)
+- Reemplazar documentación que ya existe en el proyecto (READMEs, docs en repo, Confluence, Google Docs, correos, lo que sea) sin un plan acordado — eso va en Etapa 3, no en la instalación
 - Ejecutar `init-sdd` repetido esperando “resetear” la instancia SDD
 - Mover o borrar documentación fuera de `paths.sdd` sin petición explícita

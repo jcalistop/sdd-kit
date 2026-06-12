@@ -51,6 +51,17 @@ Discovery → Draft → Ready → In Build → Validating → Released
 | **Validating** | PR + [`checklist-pr.md`](checklist-pr.md) + perfil stack | DoD cumplida                                    |
 | **Released**   | `archive/<YYYY>/<dominio>/` + entrada en release         | Mergeado, desplegado, archivado                 |
 
+**Prompts por fase** (catálogo: [`prompt-catalog.md`](prompt-catalog.md)):
+
+| Fase       | Prompt ID                   |
+| ---------- | --------------------------- |
+| Discovery  | `discovery-to-draft`        |
+| Draft      | `draft-review`              |
+| Ready      | `approve-ready`             |
+| In Build   | `implement-spec`, `open-pr` |
+| Validating | `validate-pr`               |
+| Released   | `close-release`             |
+
 Reglas de transición:
 
 1. Cada cambio de estado en **cabecera del spec** y en **BACKLOG.md**.
@@ -65,7 +76,7 @@ Solo en BACKLOG (no en cabecera del spec). Documentar razón y fecha.
 
 ### Hotfix
 
-Rama `hotfix/…` → PR a rama de producción (ver [`branching.md`](branching.md)). Preferir spec `bugfix`; en urgencia extrema, ID `—` en release.
+Rama `hotfix/…` → PR a rama de producción (ver [`branching.md`](branching.md)). Preferir spec `bugfix`; en urgencia extrema, ID `—` en release. Prompt: `hotfix-minor` en [`prompt-catalog.md`](prompt-catalog.md).
 
 ---
 
@@ -145,7 +156,7 @@ Seguir [`releases/RUNBOOK.md`](releases/RUNBOOK.md). Archivado y BACKLOG **merge
 ### Revisión semanal (~30 min)
 
 - Actualizar BACKLOG según estado real.
-- Specs estancados (>2 semanas) → replanificar o descartar.
+- Specs estancados (>2 semanas) → replanificar o descartar. Prompt: `spec-stuck`.
 - Decisiones transversales → ADR.
 
 ---

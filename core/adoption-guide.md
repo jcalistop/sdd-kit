@@ -40,7 +40,7 @@ git submodule add https://github.com/jcalistop/sdd-kit.git sdd-kit
 .\sdd-kit\bootstrap\init-sdd.ps1 -Profile laravel-filament -Project "Mi App"
 ```
 
-**Proyecto existente:** delegar al agente con el prompt de [`INSTALL.md`](../INSTALL.md) (seccion Modo agente). El agente ejecuta `init-sdd` solo si no hay instancia SDD, lee documentacion previa y **no sobrescribe** archivos sin aprobacion.
+**Proyecto existente:** delegar al agente con el prompt `adopt-existing` del [catalogo de prompts](prompt-catalog.md) (`sdd prompt show adopt-existing`). El agente ejecuta `init-sdd` solo si no hay instancia SDD, lee documentacion previa y **no sobrescribe** archivos sin aprobacion.
 
 Por defecto se detecta el agente/IDE e instalan instrucciones (Cursor, Claude Code, Codex o Copilot). Ver [`agent-setup.md`](agent-setup.md).
 
@@ -59,7 +59,7 @@ Por defecto se detecta el agente/IDE e instalan instrucciones (Cursor, Claude Co
 5. **Inventariar el BACKLOG** — no crear specs retrospectivos:
    - Listar 3–10 capacidades ya existentes en _Released_ con ID `—` y nota "pre-SDD".
    - Agregar 3–5 iniciativas reales como `Discovery` (lo que viene ahora).
-6. **Validar:** `.\sdd-kit\bootstrap\validate-sdd.ps1` (o `.sh`) debe pasar sin errores criticos.
+6. **Validar:** `.\sdd-kit\bootstrap\validate-sdd.ps1` (o `.sh`) debe pasar sin errores criticos. Prompt: `validate-setup` en [prompt-catalog.md](prompt-catalog.md).
 
 ### Que NO hacer en Etapa 1
 
@@ -96,7 +96,7 @@ El agente necesita reglas explicitas en `business/domain-rules.md` para no inven
 | ------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
 | Proyecto nuevo                             | Antes del primer spec no trivial (sesion guiada con el agente)                                        |
 | Proyecto existente sin docs                | Etapa 1: minimo en `README.md`; formalizar `domain-rules.md` cuando el agente lo detecte en plantilla |
-| Proyecto con wiki/Notion                   | Extraer roles y reglas a `domain-rules.md` en Etapa 3                                                 |
+| Proyecto con docs fuera de `business/`     | Extraer roles y reglas a `domain-rules.md` en Etapa 3 (cuando toque migrar)                           |
 | Cambio sin reglas de negocio (infra, copy) | No es obligatorio; el agente marca "No aplica" en el spec                                             |
 
 ### Como detectar estado plantilla
@@ -111,9 +111,7 @@ El agente necesita reglas explicitas en `business/domain-rules.md` para no inven
 4. El humano revisa y aprueba.
 5. A partir de ahi, cada spec cita que reglas aplican en "Impacto tecnico".
 
-**Ejemplo de peticion al agente:**
-
-> "Formaliza el contexto de negocio: hazme las preguntas de domain-rules y escribe el archivo."
+**Prompt al agente:** `formalize-domain-rules` — ver [prompt-catalog.md](prompt-catalog.md) o `sdd prompt show formalize-domain-rules`.
 
 ### Valor para desarrollo agentico
 
@@ -155,6 +153,8 @@ Humano: revisa PR → merge
 Agente: al cerrar release → archiva spec, actualiza BACKLOG
 ```
 
+Prompts por transicion: [prompt-catalog.md](prompt-catalog.md) (`discovery-to-draft` → `close-release`).
+
 ### Referencia de calidad
 
 Usar el spec de ejemplo del perfil como modelo de detalle esperado:
@@ -179,7 +179,7 @@ Usar el spec de ejemplo del perfil como modelo de detalle esperado:
 
 1. **Refactors y mejoras** usan spec (tipo `refactor` o `performance`).
 2. **ADRs** para decisiones arquitectonicas pendientes o nuevas.
-3. **Migrar documentacion legacy** a `business/` (wiki, READMEs dispersos, comentarios de arquitectura).
+3. **Migrar documentacion legacy** a `business/` (cualquier fuente previa: READMEs, docs en repo, herramientas externas, comentarios de arquitectura). Prompt: `migrate-legacy-docs` en [prompt-catalog.md](prompt-catalog.md).
 4. **Completar `business/domain-rules.md`** si aplica — reglas que el agente debe verificar en cada PR (roles, filtros, periodos).
 5. **Revisar dominios** en `sdd.config.yaml` — alinear con la taxonomia real del proyecto.
 
@@ -198,11 +198,13 @@ Registrar en BACKLOG como `Discovery` con nota "deuda tecnica". Priorizar con el
 
 ## Proyectos existentes — escenarios comunes
 
-### "Tenemos wiki / Notion / docs sueltos"
+### "Tenemos documentacion repartida en varios lados"
 
-1. Etapa 1: no migrar todo de golpe.
-2. Extraer a `business/README.md`: vision, roles, glosario, modulos.
-3. Etapa 3: mover reglas de negocio detalladas a `business/domain-rules.md`.
+Da igual si vive en READMEs del repo, carpetas `docs/`, Confluence, Google Docs, Notion, o solo en la cabeza del equipo documentada a medias.
+
+1. Etapa 1: no consolidar todo de golpe ni borrar fuentes originales.
+2. Extraer lo minimo a `business/README.md`: vision, roles, glosario, modulos.
+3. Etapa 3: migrar con plan las reglas de negocio a `business/domain-rules.md`.
 
 ### "No tenemos rama dev, solo main"
 

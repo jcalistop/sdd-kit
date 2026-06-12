@@ -24,6 +24,12 @@ from lib.changelog import generate_changelog  # noqa: E402
 from lib.github_sync import pull_from_github, push_to_github  # noqa: E402
 from lib.metrics import collect_metrics, format_metrics_report  # noqa: E402
 from lib.paths import find_sdd_path, kit_root  # noqa: E402
+from lib.prompts import (  # noqa: E402
+    format_prompt_list,
+    format_prompt_show,
+    get_prompt,
+    load_all_prompts,
+)
 
 
 def cmd_init(args: argparse.Namespace) -> int:
@@ -255,6 +261,24 @@ def cmd_release_close(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_prompt_list(args: argparse.Namespace) -> int:
+    sdd = Path(args.sdd_path) if args.sdd_path else find_sdd_path()
+    prompts = load_all_prompts(sdd)
+    print(format_prompt_list(prompts, category=args.category, phase=args.phase))
+    return 0
+
+
+def cmd_prompt_show(args: argparse.Namespace) -> int:
+    sdd = Path(args.sdd_path) if args.sdd_path else find_sdd_path()
+    meta = get_prompt(args.prompt_id, sdd)
+    if meta is None:
+        print(f"Error: prompt '{args.prompt_id}' no encontrado.", file=sys.stderr)
+        print("Usa `sdd prompt list` para ver IDs disponibles.", file=sys.stderr)
+        return 1
+    print(format_prompt_show(meta, full=args.full), end="")
+    return 0
+
+
 def cmd_metrics(args: argparse.Namespace) -> int:
     sdd = Path(args.sdd_path) if args.sdd_path else find_sdd_path()
     metrics = collect_metrics(sdd, stagnant_days=args.stagnant_days)
@@ -351,10 +375,39 @@ def build_parser() -> argparse.ArgumentParser:
     met_p.add_argument("--stagnant-days", type=int, default=14)
     met_p.set_defaults(func=cmd_metrics)
 
+    pr_p = sub.add_parser("prompt", help="Catálogo de prompts copy-paste")
+    pr_sub = pr_p.add_subparsers(dest="prompt_cmd", required=True)
+
+    pr_list = pr_sub.add_parser("list", help="Listar prompts del catálogo")
+    pr_list.add_argument(
+        "--category",
+        choices=["adoption", "workflow", "exceptions"],
+        help="Filtrar por categoría",
+    )
+    pr_list.add_argument(
+        "--phase",
+        help="Filtrar por fase SDD (Draft, Ready, In Build, Validating, Released)",
+    )
+    pr_list.set_defaults(func=cmd_prompt_list)
+
+    pr_show = pr_sub.add_parser("show", help="Mostrar prompt copy-paste")
+    pr_show.add_argument("prompt_id", help="ID del prompt (ej. adopt-existing)")
+    pr_show.add_argument(
+        "--full",
+        action="store_true",
+        help="Mostrar ficha completa con contexto",
+    )
+    pr_show.set_defaults(func=cmd_prompt_show)
+
     return p
 
 
 def main() -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8")
+        except (AttributeError, OSError, ValueError):
+            pass
     parser = build_parser()
     args = parser.parse_args()
     if args.command == "backlog" and getattr(args, "backlog_cmd", None) == "sync":

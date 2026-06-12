@@ -258,7 +258,18 @@ BACKLOG sincronizado bidireccionalmente:
 `CHANGELOG.md` generado desde `releases/vX.Y.Z/` con formato Keep a Changelog.
 Se ejecuta como parte de `sdd release close` o manualmente con `sdd release changelog`.
 
-#### 3.4 Dashboard de metricas (opcional, canvas)
+#### 3.4 Catalogo de prompts de usuario
+
+Plantillas copy-paste para adopcion, ciclo SDD y excepciones:
+
+- Indice: `core/prompt-catalog.md` (15 fichas en `core/prompts/`)
+- CLI: `sdd prompt list`, `sdd prompt show <id> [--full]`
+- Copiado a instancia con `init-sdd`
+- Notas de mantenimiento: [`docs/maintainers/PROMPT-CATALOG.md`](PROMPT-CATALOG.md)
+
+Complementa las reglas always-on del agente; no las reemplaza. Cursor Skills (`/sdd-adopt`, etc.) quedan como evolucion opcional sobre este catalogo.
+
+#### 3.5 Dashboard de metricas (opcional, canvas)
 
 Visualizacion de salud del proceso SDD via Cursor Canvas:
 
@@ -267,7 +278,7 @@ Visualizacion de salud del proceso SDD via Cursor Canvas:
 - Distribucion por tipo (feature vs bugfix vs refactor)
 - Tasa de cambios con spec vs sin spec (ID `—`)
 
-#### 3.5 Perfiles adicionales (a demanda)
+#### 3.6 Perfiles adicionales (a demanda)
 
 - `node-express` — Node.js + Express + Jest + ESLint
 - `go-api` — Go + net/http o chi + testing + golangci-lint
@@ -419,6 +430,7 @@ gantt
 - [x] `sdd validate`, `backlog`, `spec new/status`, `release changelog/close`, `metrics`
 - [x] `sdd backlog sync` con GitHub Issues (`gh` CLI)
 - [x] CHANGELOG.md formato Keep a Changelog desde `releases/`
+- [x] Catalogo de prompts (`core/prompt-catalog.md`, `sdd prompt list/show`)
 - [ ] Dashboard Canvas interactivo (opcional; `sdd metrics` cubre reporte texto)
 - [ ] Perfiles adicionales node-express, django, etc. (a demanda)
 
