@@ -65,6 +65,7 @@ def combined_body(profile: str) -> str:
     parts = [
         read_prompt(manifest["core"]["file"]),
         read_prompt(manifest["workflow"]["file"]),
+        read_prompt(manifest["reference"]["file"]),
     ]
     stack = read_stack_prompt(profile)
     if stack:
@@ -89,6 +90,10 @@ def write_file(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8")
 
 
+def _always_apply(manifest_entry: dict) -> bool:
+    return bool(manifest_entry.get("alwaysApply", True))
+
+
 def install_cursor(target: Path, profile: str) -> None:
     manifest = load_manifest()
     stack_desc = load_stack_descriptions()
@@ -96,22 +101,39 @@ def install_cursor(target: Path, profile: str) -> None:
     rules_dir.mkdir(parents=True, exist_ok=True)
     tpl = load_template("cursor-rule.mdc.tpl")
 
-    items = [
-        ("sdd-core.mdc", manifest["core"]["description"], manifest["core"]["file"]),
+    items: list[tuple[str, str, str | None, bool]] = [
+        (
+            "sdd-core.mdc",
+            manifest["core"]["description"],
+            manifest["core"]["file"],
+            _always_apply(manifest["core"]),
+        ),
         (
             "sdd-agent-workflow.mdc",
             manifest["workflow"]["description"],
             manifest["workflow"]["file"],
+            _always_apply(manifest["workflow"]),
+        ),
+        (
+            "sdd-workflow-reference.mdc",
+            manifest["reference"]["description"],
+            manifest["reference"]["file"],
+            _always_apply(manifest["reference"]),
         ),
     ]
     stack_body = read_stack_prompt(profile)
     if stack_body:
         desc = stack_desc.get(profile, f"SDD — perfil {profile}")
-        items.append((f"sdd-stack-{profile}.mdc", desc, None))
+        items.append((f"sdd-stack-{profile}.mdc", desc, None, False))
 
-    for filename, description, prompt_file in items:
+    for filename, description, prompt_file, always_apply in items:
         body = read_prompt(prompt_file) if prompt_file else stack_body or ""
-        content = render_template(tpl, DESCRIPTION=description, BODY=body)
+        content = render_template(
+            tpl,
+            DESCRIPTION=description,
+            BODY=body,
+            ALWAYS_APPLY=str(always_apply).lower(),
+        )
         write_file(rules_dir / filename, content)
 
 

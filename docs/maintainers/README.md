@@ -5,11 +5,12 @@
 
 ## Contenido
 
-| Documento                            | Uso                                                              |
-| ------------------------------------ | ---------------------------------------------------------------- |
-| [ANALYSIS.md](ANALYSIS.md)           | Analisis critico del kit: fortalezas, debilidades, oportunidades |
-| [ROADMAP.md](ROADMAP.md)             | Plan de evolucion por fases (1–4) y metricas de exito            |
-| [PROMPT-CATALOG.md](PROMPT-CATALOG.md) | Catálogo de prompts usuario: arquitectura, mantenimiento, CLI    |
+| Documento                                      | Uso                                                              |
+| ---------------------------------------------- | ---------------------------------------------------------------- |
+| [ANALYSIS.md](ANALYSIS.md)                     | Analisis critico del kit: fortalezas, debilidades, oportunidades |
+| [ROADMAP.md](ROADMAP.md)                       | Plan de evolucion por fases (1–4) y metricas de exito            |
+| [PROMPT-CATALOG.md](PROMPT-CATALOG.md)         | Catálogo de prompts usuario: arquitectura, mantenimiento, CLI    |
+| [TOKEN-OPTIMIZATION.md](TOKEN-OPTIMIZATION.md) | Reduccion de tokens en reglas always-on del agente (Cursor)      |
 
 ## Historial de versiones
 

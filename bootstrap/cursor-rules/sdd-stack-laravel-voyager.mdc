@@ -1,6 +1,6 @@
 ---
 description: SDD — perfil Laravel + Voyager + Livewire (calidad, migraciones, deploy)
-alwaysApply: true
+alwaysApply: false
 ---
 
 # SDD Stack — Laravel + Voyager + Livewire
@@ -50,3 +50,4 @@ Perfil activo cuando `sdd.config.yaml` → `stack.profile: laravel-voyager`.
 
 - No sobrescribir `.env` local del desarrollador salvo solicitud explícita
 - CI remoto usa `.env.example` solo en runner — no replicar en máquina con secretos reales
+

@@ -221,7 +221,7 @@ Recomendacion: crear rama `dev` antes de Etapa 2 para separar integracion de pro
 ### "El agente no sigue SDD"
 
 1. Revisar `sdd.config.yaml` → `agent.targets` y que existan los archivos del adaptador (ver [`agent-setup.md`](agent-setup.md)):
-   - Cursor: `.cursor/rules/sdd-core.mdc` y `sdd-agent-workflow.mdc`
+   - Cursor: `.cursor/rules/sdd-core.mdc`, `sdd-agent-workflow.mdc`, `sdd-workflow-reference.mdc` y `sdd-stack-<perfil>.mdc`
    - Claude Code: bloque SDD en `CLAUDE.md`
    - Codex: bloque SDD en `AGENTS.md`
    - Copilot: `.github/copilot-instructions.md`

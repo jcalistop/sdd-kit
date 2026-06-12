@@ -53,12 +53,12 @@ Por defecto (`-Agent auto`) detecta tu IDE/agente y muestra un menú si hay ambi
 .\sdd-kit\bootstrap\init-sdd.ps1 -Profile laravel-filament -Project "Mi App" -Agent none
 ```
 
-| Adaptador | Archivos instalados                                                              |
-| --------- | -------------------------------------------------------------------------------- |
-| `cursor`  | `.cursor/rules/sdd-core.mdc`, `sdd-agent-workflow.mdc`, `sdd-stack-<perfil>.mdc` |
-| `claude`  | `CLAUDE.md` (bloque delimitado)                                                  |
-| `codex`   | `AGENTS.md` (bloque delimitado)                                                  |
-| `copilot` | `.github/copilot-instructions.md`                                                |
+| Adaptador | Archivos instalados                                                                                            |
+| --------- | -------------------------------------------------------------------------------------------------------------- |
+| `cursor`  | `.cursor/rules/sdd-core.mdc`, `sdd-agent-workflow.mdc`, `sdd-workflow-reference.mdc`, `sdd-stack-<perfil>.mdc` |
+| `claude`  | `CLAUDE.md` (bloque delimitado)                                                                                |
+| `codex`   | `AGENTS.md` (bloque delimitado)                                                                                |
+| `copilot` | `.github/copilot-instructions.md`                                                                              |
 
 Retrocompat: `-Cursor` / `--cursor` equivale a `-Agent cursor`. Guía completa: [core/agent-setup.md](core/agent-setup.md).
 

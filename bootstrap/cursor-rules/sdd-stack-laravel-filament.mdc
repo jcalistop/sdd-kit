@@ -1,6 +1,6 @@
 ---
 description: SDD — perfil Laravel + Filament (calidad, migraciones, deploy)
-alwaysApply: true
+alwaysApply: false
 ---
 
 # SDD Stack — Laravel + Filament
@@ -40,3 +40,4 @@ Perfil activo cuando `sdd.config.yaml` → `stack.profile: laravel-filament`.
 
 - Rama `dep-integration` — ver `profiles/laravel-filament/branching-extensions.md`
 - Sin spec para bumps rutinarios
+

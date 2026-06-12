@@ -1,6 +1,6 @@
 ---
 description: SDD — perfil Informes LaTeX + Markdown (documentos, transcripción, publicación)
-alwaysApply: true
+alwaysApply: false
 ---
 
 # SDD Stack — Informes LaTeX + Markdown
@@ -83,3 +83,4 @@ Crear ADR para decisiones **transversales**: plantilla global, metodología de a
 - Inventar cifras o citas no presentes en fuentes/transcripts
 - Omitir compilación PDF antes de Validating si el spec promete PDF
 - Hardcodear rutas locales o credenciales en scripts
+

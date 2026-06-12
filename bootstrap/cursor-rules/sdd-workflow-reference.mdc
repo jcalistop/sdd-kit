@@ -1,0 +1,130 @@
+---
+description: SDD — checklists DoR/DoD, antipatrones y referencia on-demand
+alwaysApply: false
+---
+
+# SDD Workflow — Referencia on-demand
+
+Consultar en **Draft** (DoR), **In Build** (arquitectura sana) y **Validating** (DoD). No cargar en tareas triviales fuera del ciclo SDD.
+
+---
+
+## Sesión guiada (formalizar domain-rules.md)
+
+Preguntas al humano (adaptar; no todas aplican):
+
+1. ¿Qué hace el sistema y quiénes lo usan?
+2. ¿Cuántos roles hay y qué puede hacer cada uno?
+3. ¿Hay filtrado por organización, sucursal o tenant?
+4. ¿Hay periodos activos (año fiscal, temporada)?
+5. ¿Qué validaciones de negocio son inviolables?
+6. ¿Qué acciones requieren rol elevado o aprobación?
+7. ¿Términos del dominio para el glosario?
+
+Con las respuestas, escribir `business/domain-rules.md` y `business/README.md`. Pedir aprobación antes de continuar.
+
+---
+
+## Detección temprana de antipatrones (Discovery)
+
+No bloquear; alertar y documentar en Riesgos del spec.
+
+| Señal del humano | Alerta |
+| ---------------- | ------ |
+| "hagámoslo genérico por si acaso" | YAGNI — abstracción para un solo caso |
+| "metamos X tecnología nueva" | ¿Qué problema resuelve? ¿Requiere ADR? |
+| "dividir en microservicios" | ¿Dolor concreto? ¿Tamaño del equipo? |
+| "reescribamos todo el módulo" | Big Rewrite — proponer refactor incremental |
+| Patrón complejo para problema simple | Golden Hammer — ¿solución más simple? |
+| Idea sin exclusiones | Preguntar qué NO incluye |
+
+---
+
+## Auto-verificación DoR (antes de pedir revisión)
+
+- [ ] Cabecera: ID, dominio, tipo, estado `Draft`, versión objetivo, owner
+- [ ] Dominio existe en `sdd.config.yaml` → `domains`
+- [ ] Problema y objetivo: al menos 1 párrafo cada uno
+- [ ] Alcance: al menos 1 inclusión y 1 exclusión explícita
+- [ ] Impacto técnico: todas las filas respondidas (o "No aplica — razón")
+- [ ] Reglas de negocio: referencia a `domain-rules.md` o justificación
+- [ ] Criterios de aceptación: happy + error path verificables
+- [ ] Riesgos: al menos 1 fila en tabla
+- [ ] BACKLOG: fila en Draft con mismo `SDD-NNN`
+- [ ] ID no duplicado en BACKLOG ni en `specs/` / `archive/`
+
+Si falla: completar antes de pedir revisión humana.
+
+---
+
+## Verificación de arquitectura sana (antes de Validating)
+
+Checks contra `healthy-development.md`:
+
+- [ ] **YAGNI:** abstracción sin al menos 2 usos → simplificar
+- [ ] **DRY:** lógica duplicada en 2+ archivos → extraer módulo
+- [ ] **SRP:** clase/archivo >~200 líneas o mezcla responsabilidades → dividir
+- [ ] **Golden Hammer:** herramienta por costumbre → evaluar alternativa
+- [ ] **Over-engineering:** cola/evento/microservicio sin spec o ADR → revertir o ADR
+- [ ] **Big Ball of Mud:** >5 archivos sin límite entre capas → revisar acoplamiento
+- [ ] **Lava Flow:** código muerto, TODOs sin ticket → eliminar o BACKLOG
+
+Si alguna respuesta es "sí", **no pasar a Validating.** Informar al humano con opciones: corregir ahora o documentar deuda.
+
+---
+
+## Guardia de arquitectura en PRs
+
+Además del DoD de trazabilidad (`checklist-pr.md`), buscar señales en `healthy-development.md`:
+
+- **Big Ball of Mud:** cambios en >5 archivos sin límite claro entre capas
+- **God Object:** clase que creció desproporcionadamente
+- **Copy-Paste:** bloques idénticos en 2+ archivos nuevos
+- **Over-engineering:** abstracciones con un solo uso
+- **Lava Flow:** TODOs sin ticket, código comentado, debug (`dd()`, `dump()`, `console.log`)
+
+**No bloquear el PR.** Reportar: "Encontré [señal]. Opciones: (a) corrijo ahora, (b) deuda en BACKLOG."
+
+---
+
+## Auto-verificación DoD (antes de pedir merge)
+
+- [ ] Quality gates del perfil en verde (local)
+- [ ] Criterios de aceptación verificados (happy + error)
+- [ ] Reglas de `domain-rules.md` verificadas (o No aplica documentado)
+- [ ] PR enlaza spec y dominio correctos
+- [ ] Sin `dd()`, `dump()`, debug olvidado
+- [ ] Plan de entrada en release documentado si cierra ítem
+
+---
+
+## Manejo de errores
+
+| Situación | Acción |
+| --------- | ------ |
+| Spec estancado >2 semanas | Replanificar, pausar o continuar (preguntar) |
+| Conflicto entre specs | Dependencia en cabecera; no implementar dependiente hasta Ready del bloqueante |
+| ID duplicado | Detener; corregir BACKLOG y renombrar archivo |
+| Spec y código desalineados | Actualizar spec primero |
+| Hotfix urgente | Rama `hotfix/`; spec `bugfix` preferido; si no hay tiempo, ID `—` en release |
+
+---
+
+## Releases
+
+Seguir `releases/RUNBOOK.md`: Fase 0 en desarrollo → PR campaña → tag → sync dev → deploy.
+
+- Nunca archivar/BACKLOG en commit posterior al merge en producción
+- PR de campaña: merge commit (no squash)
+- Tras tag: sync ff-only producción → desarrollo
+
+---
+
+## Comandos útiles
+
+```bash
+./sdd-kit/bootstrap/sdd.sh validate
+```
+
+Windows: `.\sdd-kit\bootstrap\sdd.ps1 validate`
+

@@ -5,50 +5,21 @@ alwaysApply: true
 
 # SDD — Spec-Driven Development
 
-Metodología en **`sdd-kit/core/`** o `.github/docs/sdd/` (instancia del proyecto). Consultar antes de iniciativas no triviales.
+Metodología en `sdd-kit/core/` o `.github/docs/sdd/`. Aplica en iniciativas **no triviales** del BACKLOG.
 
-## Lectura obligatoria
+## Leer bajo demanda
 
-1. `workflow.md` — ciclo Discovery → Released
-2. `adoption-guide.md` — adopción incremental (proyectos nuevos/existentes)
-3. `healthy-development.md` — arquitectura, patrones, antipatrones, código limpio
-4. `BACKLOG.md` — estado y próximo `SDD-NNN`
-5. `checklist-pr.md` — DoD trazabilidad
-6. `branching.md` — ramas y releases
-7. `sdd.config.yaml` — dominios, ramas, perfil stack
-8. `business/domain-rules.md` — reglas de negocio del proyecto (si existe; verificar si está en estado plantilla)
+`BACKLOG.md` · `sdd.config.yaml` · `workflow.md` · `business/domain-rules.md` · `releases/RUNBOOK.md` · `profiles/<stack>/checklist-stack.md`
 
-Flujo agentico detallado: regla `sdd-agent-workflow.mdc`.
-Release: `releases/RUNBOOK.md`. Deploy: `profiles/<stack>/deploy.md`.
+Flujo por fase: regla `sdd-agent-workflow.mdc`. Checklists DoR/DoD, antipatrones y errores: `sdd-workflow-reference.mdc`.
 
-## Reglas para el agente
+## Reglas nucleares
 
-- **Spec antes de código** si el ítem está en backlog: `templates/spec-template.md` → `specs/<dominio>/SDD-NNN-slug.md`
-- **Actualizar BACKLOG** al cambiar estado; no inventar IDs sin reflejarlos
-- **ADR** solo si la decisión es transversal → `adr/` con plantilla ADR
+- **Spec antes de código** para ítems no triviales → `specs/<dominio>/SDD-NNN-slug.md`
+- **Actualizar BACKLOG** al cambiar estado; no inventar `SDD-NNN` sin reflejarlo
+- **ADR** solo si la decisión es transversal
 - Al cerrar: `git mv` a `archive/<YYYY>/<dominio>/` + entrada en `releases/vX.Y.Z/`
 - **PR** hacia rama de desarrollo; cambios triviales → ID `—` en release
-- **Dominios** según `sdd.config.yaml` → `domains`
-- **Calidad técnica** según perfil stack (`profiles/<stack>/checklist-stack.md`)
-- **Reglas de negocio** solo desde `business/domain-rules.md` — no asumir las que no estén escritas
+- **Reglas de negocio** solo desde `business/domain-rules.md` — no asumir las no escritas
 - No crear documentación SDD fuera de `paths.sdd` salvo petición explícita
 
-## Guardia de arquitectura en PRs
-
-En cada PR, ademas del DoD de trazabilidad (`checklist-pr.md`), verificar activamente `healthy-development.md`. Buscar senales de antipatrones incluso si el spec y el codigo estan tecnicamente correctos:
-
-- **Big Ball of Mud:** ¿los cambios tocan mas de 5 archivos sin un limite claro entre capas?
-- **God Object:** ¿alguna clase crecio desproporcionadamente en este PR?
-- **Copy-Paste:** ¿hay bloques de codigo identicos en 2+ archivos nuevos?
-- **Over-engineering:** ¿hay abstracciones, interfaces, patrones o capas que solo tienen un uso?
-- **Lava Flow:** ¿quedaron TODOs sin ticket, codigo comentado o debug (`dd()`, `dump()`, `console.log`)?
-
-Si se detecta algo, **NO bloquear el PR.** Reportar al humano: "Encontre [senal del antipatron] segun `healthy-development.md`. Opciones: (a) corrijo ahora, (b) documento como deuda tecnica en BACKLOG."
-
-## Releases
-
-Seguir `releases/RUNBOOK.md`: Fase 0 en desarrollo → PR campaña → tag → sync dev → deploy (perfil).
-
-- Nunca cerrar archivado/BACKLOG en commits posteriores al merge en producción
-- PR de campaña: merge commit (no squash)
-- Tras tag: sync ff-only producción → desarrollo

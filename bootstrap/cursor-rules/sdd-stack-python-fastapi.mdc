@@ -1,6 +1,6 @@
 ---
 description: SDD — perfil Python + FastAPI (calidad, API, migraciones, deploy)
-alwaysApply: true
+alwaysApply: false
 ---
 
 # SDD Stack — Python + FastAPI
@@ -51,3 +51,4 @@ Perfil activo cuando `sdd.config.yaml` → `stack.profile: python-fastapi`.
 
 - Rama `deps-integration` — ver `profiles/python-fastapi/branching-extensions.md`
 - Sin spec para bumps rutinarios de dependencias
+

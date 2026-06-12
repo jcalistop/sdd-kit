@@ -135,7 +135,7 @@ Spec completo que demuestre:
 ```markdown
 ---
 description: SDD — perfil <Stack> (...)
-alwaysApply: true
+alwaysApply: false
 ---
 
 # SDD Stack — <Stack>

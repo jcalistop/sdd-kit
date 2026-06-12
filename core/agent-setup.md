@@ -10,14 +10,16 @@
 
 El **core SDD** (BACKLOG, specs, CLI, `validate-sdd`) no depende de ningún IDE. La capa **agentica** instala instrucciones en el formato que cada herramienta reconoce.
 
-| Herramienta        | Archivo instalado                      | Cuándo se aplica                      |
-| ------------------ | -------------------------------------- | ------------------------------------- |
-| **Cursor**         | `.cursor/rules/sdd-*.mdc` (3 archivos) | Cada chat (`alwaysApply: true`)       |
-| **Claude Code**    | `CLAUDE.md` (bloque delimitado)        | Cada sesión en el proyecto            |
-| **Codex**          | `AGENTS.md` (bloque delimitado)        | Cada sesión Codex en el repo          |
-| **GitHub Copilot** | `.github/copilot-instructions.md`      | Instrucciones persistentes en VS Code |
+| Herramienta        | Archivo instalado                      | Cuándo se aplica                                             |
+| ------------------ | -------------------------------------- | ------------------------------------------------------------ |
+| **Cursor**         | `.cursor/rules/sdd-*.mdc` (4 archivos) | Core + workflow en cada chat; reference y stack bajo demanda |
+| **Claude Code**    | `CLAUDE.md` (bloque delimitado)        | Cada sesión en el proyecto                                   |
+| **Codex**          | `AGENTS.md` (bloque delimitado)        | Cada sesión Codex en el repo                                 |
+| **GitHub Copilot** | `.github/copilot-instructions.md`      | Instrucciones persistentes en VS Code                        |
 
 La fuente única de contenido está en `sdd-kit/bootstrap/agent-prompts/`; los adaptadores solo cambian el envoltorio.
+
+**Cursor — política de tokens:** `sdd-core.mdc` y `sdd-agent-workflow.mdc` usan `alwaysApply: true` (~600 tokens/sesión). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Detalle: [`docs/maintainers/TOKEN-OPTIMIZATION.md`](../docs/maintainers/TOKEN-OPTIMIZATION.md).
 
 ---
 

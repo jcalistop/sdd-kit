@@ -1,6 +1,6 @@
 ---
 description: {{DESCRIPTION}}
-alwaysApply: true
+alwaysApply: {{ALWAYS_APPLY}}
 ---
 
 {{BODY}}

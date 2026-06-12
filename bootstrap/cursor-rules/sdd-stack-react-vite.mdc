@@ -1,6 +1,6 @@
 ---
 description: SDD — perfil React + Vite (calidad, componentes, rutas, deploy)
-alwaysApply: true
+alwaysApply: false
 ---
 
 # SDD Stack — React + Vite
@@ -52,3 +52,4 @@ Perfil activo cuando `sdd.config.yaml` → `stack.profile: react-vite`.
 
 - Rama `deps-integration` — ver `profiles/react-vite/branching-extensions.md`
 - Sin spec para bumps rutinarios de npm
+

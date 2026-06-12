@@ -1,6 +1,6 @@
 ---
 description: SDD — perfil Python + Django (calidad, admin, migraciones, DRF/Celery opcional, deploy)
-alwaysApply: true
+alwaysApply: false
 ---
 
 # SDD Stack — Python + Django
@@ -69,3 +69,4 @@ Perfil activo cuando `sdd.config.yaml` → `stack.profile: python-django`.
 
 - Rama `deps-integration` — ver `profiles/python-django/branching-extensions.md`
 - Sin spec para bumps rutinarios de dependencias
+
