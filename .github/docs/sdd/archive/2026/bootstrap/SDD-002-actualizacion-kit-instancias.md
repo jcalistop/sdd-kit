@@ -10,7 +10,7 @@
 | **Dominio**          | `bootstrap`                                            |
 | **Tipo**             | `feature`                                              |
 | **Fecha**            | 2026-06-12                                             |
-| **Estado**           | `Validating`                                           |
+| **Estado**           | `Released`                                             |
 | **Versión objetivo** | `v1.1.0`                                               |
 | **Owner**            | mantenedor                                             |
 | **Prioridad**        | `P1`                                                   |

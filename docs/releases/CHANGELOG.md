@@ -17,12 +17,23 @@ Ver [v1.1.0.md](v1.1.0.md).
 - `kit.installed_version` / `kit.installed_at` en `sdd.config.yaml` y plantilla `UPGRADE-LOG.md`
 - `bootstrap/kit-version.py` — detección de versión para `init-sdd` y `validate-sdd`
 - Perfil `profiles/sdd-kit/` para mantenedores (SDD-001)
+- Prompt `verify-implementation` — gate obligatorio antes de push/PR (SDD-003)
+- Prompt `build-spec` — fusiona `approve-ready` + `implement-spec` (SDD-003)
+- Diagramas de secuencia Mermaid del ciclo humano–agente (SDD-003)
 
 ### Cambiado
 
 - `init-sdd` registra versión del kit al bootstrap
 - `validate-sdd` advierte si la versión registrada difiere del kit en disco
 - README, INSTALL y `adoption-guide` enlazan al flujo de actualización
+- `workflow.md`, `prompt-catalog.md` y `concepts.md` — momentos semánticos vs prompts (SDD-003)
+- `draft-review` documentado como opcional
+- `checklist-pr.md` — multi-spec y evidencia de verify
+- Reglas Cursor y bootstrap sincronizados con el nuevo flujo
+
+### Deprecado
+
+- `approve-ready` e `implement-spec` → usar `build-spec`
 
 ---
 

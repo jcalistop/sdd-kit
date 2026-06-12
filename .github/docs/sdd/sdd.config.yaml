@@ -3,7 +3,7 @@
 
 project:
   name: "SDD Kit"
-  development_branch: main
+  development_branch: dev
   production_branch: main
 
 domains:
@@ -39,7 +39,7 @@ release:
   tag_prefix: v
 
 kit:
-  installed_version: "v1.0.0-6-g2104969"
+  installed_version: "v1.1.0"
   installed_at: "2026-06-12"
 
 agent:
