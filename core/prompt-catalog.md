@@ -3,7 +3,7 @@
 > Plantillas copy-paste para guiar al agente en adopción, ciclo de specs, PRs y releases.
 > Las **reglas del agente** (`sdd-core`, `sdd-agent-workflow`) ya cubren mucho del flujo; este catálogo son **disparadores explícitos** para momentos donde tú inicias o apruebas.
 
-**CLI:** `sdd prompt list` · `sdd prompt show <id>` · `sdd prompt show <id> --full`
+**CLI:** `python sdd-kit/cli/sdd.py prompt list` · `prompt show <id>` · `prompt show <id> --full`
 
 **Relacionado:** [`workflow.md`](workflow.md) · [`adoption-guide.md`](adoption-guide.md) · [`agent-setup.md`](agent-setup.md)
 

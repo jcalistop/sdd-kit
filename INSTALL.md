@@ -2,14 +2,14 @@
 
 ## Requisitos previos
 
-| Requisito        | Obligatorio             | Notas                                                                                 |
-| ---------------- | ----------------------- | ------------------------------------------------------------------------------------- |
-| Git              | Sí                      | Para submodule o copia versionada                                                     |
-| Python 3.10+     | Recomendado             | CLI, `install-agents.py`, wrappers `sdd.ps1` / `sdd.sh`                               |
-| Stack del perfil | Según perfil            | PHP/Composer (Laravel), Node (React), etc. — ver `profiles/<perfil>/README.md`        |
-| Agente IA        | Recomendado             | Cursor, Claude Code, Codex o Copilot — ver [core/agent-setup.md](core/agent-setup.md) |
-| Pandoc + LaTeX   | Solo `reports-latex-md` | Compilación de informes                                                               |
-| `gh` CLI         | Opcional                | `sdd backlog sync` con GitHub Issues                                                  |
+| Requisito        | Obligatorio             | Notas                                                                                                 |
+| ---------------- | ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| Git              | Sí                      | Para submodule o copia versionada                                                                     |
+| Python 3.10+     | Recomendado             | CLI (`python sdd-kit/cli/sdd.py`), `install-agents.py`; atajos `sdd.sh` / `sdd.ps1` (solo PowerShell) |
+| Stack del perfil | Según perfil            | PHP/Composer (Laravel), Node (React), etc. — ver `profiles/<perfil>/README.md`                        |
+| Agente IA        | Recomendado             | Cursor, Claude Code, Codex o Copilot — ver [core/agent-setup.md](core/agent-setup.md)                 |
+| Pandoc + LaTeX   | Solo `reports-latex-md` | Compilación de informes                                                                               |
+| `gh` CLI         | Opcional                | `sdd backlog sync` con GitHub Issues                                                                  |
 
 ---
 
@@ -25,8 +25,8 @@ El agente debe **preguntar antes de sobrescribir** cualquier archivo en `.github
 
 ### Prompt de adopción
 
-```powershell
-.\sdd-kit\bootstrap\sdd.ps1 prompt show adopt-existing
+```bash
+python sdd-kit/cli/sdd.py prompt show adopt-existing
 ```
 
 Catálogo completo: [core/prompt-catalog.md](core/prompt-catalog.md) — también en `.github/docs/sdd/` tras `init-sdd`.
@@ -86,19 +86,19 @@ Si no quieres el submodule, copia manualmente:
 4. Leer `.github/docs/sdd/adoption-guide.md` — **proyectos existentes**: empezar por Etapa 1.
 5. Consultar `.github/docs/sdd/healthy-development.md` — arquitectura, patrones y codigo limpio.
 6. Crear primer spec real desde `templates/spec-template.md` (usar `profiles/<stack>/examples/` como referencia).
-7. Validar: `.\sdd-kit\bootstrap\validate-sdd.ps1`
+7. Validar: `python sdd-kit/cli/sdd.py validate`
 
 ## CLI SDD (recomendado)
 
 Requiere Python 3.10+. Ver [cli/README.md](cli/README.md).
 
-```powershell
-.\sdd-kit\bootstrap\sdd.ps1 validate
-.\sdd-kit\bootstrap\sdd.ps1 backlog
-.\sdd-kit\bootstrap\sdd.ps1 spec new --domain api --type feature --title "CRUD productos"
-.\sdd-kit\bootstrap\sdd.ps1 release changelog
-.\sdd-kit\bootstrap\sdd.ps1 metrics
-.\sdd-kit\bootstrap\sdd.ps1 backlog sync --dry-run   # requiere gh CLI
+```bash
+python sdd-kit/cli/sdd.py validate
+python sdd-kit/cli/sdd.py backlog
+python sdd-kit/cli/sdd.py spec new --domain api --type feature --title "CRUD productos"
+python sdd-kit/cli/sdd.py release changelog
+python sdd-kit/cli/sdd.py metrics
+python sdd-kit/cli/sdd.py backlog sync --dry-run   # requiere gh CLI
 ```
 
 ## Reinstalar adaptadores de agente
@@ -112,11 +112,13 @@ python .\sdd-kit\bootstrap\install-agents.py detect
 
 Ver [core/agent-setup.md](core/agent-setup.md).
 
-## Validación documental (scripts directos)
+## Validación documental
 
-```powershell
-.\sdd-kit\bootstrap\validate-sdd.ps1
+```bash
+python sdd-kit/cli/sdd.py validate
 ```
+
+Scripts legacy (misma lógica): `./sdd-kit/bootstrap/validate-sdd.sh` · `.\sdd-kit\bootstrap\validate-sdd.ps1` (PowerShell)
 
 ```bash
 ./sdd-kit/bootstrap/validate-sdd.sh

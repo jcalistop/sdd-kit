@@ -125,8 +125,8 @@ Por defecto detecta tu agente/IDE (`-Agent auto`) e instala las reglas SDD. Ver 
 
 Usa el prompt **`adopt-existing`** del [catálogo de prompts](core/prompt-catalog.md):
 
-```powershell
-.\sdd-kit\bootstrap\sdd.ps1 prompt show adopt-existing
+```bash
+python sdd-kit/cli/sdd.py prompt show adopt-existing
 ```
 
 Copia la salida en el chat del agente (adapta `<PERFIL>`). Guía detallada: **[INSTALL.md](INSTALL.md)** — sección «Modo agente».
@@ -145,8 +145,8 @@ Checklist: **[`core/adoption-guide.md`](core/adoption-guide.md)** — Etapa 1.
 
 ### Paso 5 — Valida que todo esté bien
 
-```powershell
-.\sdd-kit\bootstrap\validate-sdd.ps1
+```bash
+python sdd-kit/cli/sdd.py validate
 ```
 
 Si pasa sin errores críticos, la estructura está lista.
@@ -155,8 +155,8 @@ Si pasa sin errores críticos, la estructura está lista.
 
 Con adaptadores instalados, el agente ya tiene las reglas SDD. Para forzar el flujo explícitamente:
 
-```powershell
-.\sdd-kit\bootstrap\sdd.ps1 prompt show discovery-to-draft
+```bash
+python sdd-kit/cli/sdd.py prompt show discovery-to-draft
 ```
 
 Ver [catálogo de prompts](core/prompt-catalog.md) (`draft-review`, `approve-ready`, etc.). Revisa el spec; si está bien, aprueba → pasa a **Ready** → implementación.
@@ -193,12 +193,12 @@ Adaptadores instalados según tu herramienta (ver `sdd.config.yaml` → `agent.t
 
 ---
 
-## CLI (opcional, Python 3.10+)
+## CLI (Python 3.10+)
 
-```powershell
-.\sdd-kit\bootstrap\sdd.ps1 validate
-.\sdd-kit\bootstrap\sdd.ps1 backlog
-.\sdd-kit\bootstrap\sdd.ps1 spec new --domain ux --type feature --title "Mi feature"
+```bash
+python sdd-kit/cli/sdd.py validate
+python sdd-kit/cli/sdd.py backlog
+python sdd-kit/cli/sdd.py spec new --domain ux --type feature --title "Mi feature"
 ```
 
 Detalle: **[cli/README.md](cli/README.md)**.

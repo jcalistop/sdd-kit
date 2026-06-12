@@ -30,7 +30,7 @@ Después de bootstrap o adopción manual, para confirmar que la estructura docum
 Valida la instalación SDD de este proyecto.
 
 Instrucciones:
-1. Ejecuta sdd-kit/bootstrap/validate-sdd.ps1 (o .sh / sdd validate).
+1. Ejecuta `python sdd-kit/cli/sdd.py validate` (o scripts legacy `validate-sdd.sh` / `.ps1`).
 2. Reporta errores críticos y advertencias con rutas de archivo.
 3. Si hay fallos, propón correcciones mínimas (sin sobrescribir sin confirmación).
 4. Verifica que existan adaptadores de agente según sdd.config.yaml → agent.targets.

@@ -104,7 +104,7 @@ agent:
 
 1. Lee [`workflow.md`](workflow.md) y [`adoption-guide.md`](adoption-guide.md).
 2. Pide al agente explícitamente: _"Sigue el flujo de `sdd-agent-workflow` en sdd-kit; crea spec Draft para [idea]."_
-3. Usa la CLI: `.\sdd-kit\bootstrap\sdd.ps1 spec new ...` y `validate`.
+3. Usa la CLI: `python sdd-kit/cli/sdd.py spec new ...` y `validate`.
 
 ---
 

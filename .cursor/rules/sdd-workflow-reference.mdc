@@ -123,8 +123,5 @@ Seguir `releases/RUNBOOK.md`: Fase 0 en desarrollo → PR campaña → tag → s
 ## Comandos útiles
 
 ```bash
-./sdd-kit/bootstrap/sdd.sh validate
+python sdd-kit/cli/sdd.py validate
 ```
-
-Windows: `.\sdd-kit\bootstrap\sdd.ps1 validate`
-

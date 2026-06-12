@@ -4,17 +4,15 @@ Herramienta de línea de comandos para operaciones SDD. Requiere **Python 3.10+*
 
 ## Invocación
 
-Desde la raíz del proyecto consumidor:
-
-```powershell
-.\sdd-kit\bootstrap\sdd.ps1 validate
-.\sdd-kit\bootstrap\sdd.ps1 backlog
-.\sdd-kit\bootstrap\sdd.ps1 spec new --domain ux --type feature --title "Exportar Excel" --version v0.2.0
-```
+Desde la raíz del proyecto consumidor (CMD, PowerShell o bash — requiere Python 3.10+):
 
 ```bash
-./sdd-kit/bootstrap/sdd.sh validate
+python sdd-kit/cli/sdd.py validate
+python sdd-kit/cli/sdd.py backlog
+python sdd-kit/cli/sdd.py spec new --domain ux --type feature --title "Exportar Excel" --version v0.2.0
 ```
+
+Atajos opcionales: `./sdd-kit/bootstrap/sdd.sh` (bash) · `.\sdd-kit\bootstrap\sdd.ps1` (solo PowerShell; en CMD no ejecuta el `.ps1`).
 
 Variable de entorno opcional: `SDD_PATH` (default: `.github/docs/sdd`).
 
@@ -44,20 +42,20 @@ Crear etiquetas en el repo si `gh issue create` falla por labels inexistentes.
 
 ## Ejemplos
 
-```powershell
+```bash
 # Nuevo spec
-.\sdd-kit\bootstrap\sdd.ps1 spec new --domain api --type feature --title "CRUD productos"
+python sdd-kit/cli/sdd.py spec new --domain api --type feature --title "CRUD productos"
 
 # Métricas
-.\sdd-kit\bootstrap\sdd.ps1 metrics --markdown -o .github/docs/sdd/metrics.md
+python sdd-kit/cli/sdd.py metrics --markdown -o .github/docs/sdd/metrics.md
 
 # CHANGELOG tras releases
-.\sdd-kit\bootstrap\sdd.ps1 release changelog
+python sdd-kit/cli/sdd.py release changelog
 
 # Catálogo de prompts
-.\sdd-kit\bootstrap\sdd.ps1 prompt list
-.\sdd-kit\bootstrap\sdd.ps1 prompt show adopt-existing
-.\sdd-kit\bootstrap\sdd.ps1 prompt show discovery-to-draft --full
+python sdd-kit/cli/sdd.py prompt list
+python sdd-kit/cli/sdd.py prompt show adopt-existing
+python sdd-kit/cli/sdd.py prompt show discovery-to-draft --full
 ```
 
 Ver también: [core/prompt-catalog.md](../core/prompt-catalog.md).

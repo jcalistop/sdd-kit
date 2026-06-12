@@ -59,11 +59,11 @@ Convenciones:
 ## CLI
 
 ```bash
-sdd prompt list
-sdd prompt list --category adoption
-sdd prompt list --phase Draft
-sdd prompt show adopt-existing
-sdd prompt show adopt-existing --full
+python cli/sdd.py prompt list
+python cli/sdd.py prompt list --category adoption
+python cli/sdd.py prompt list --phase Draft
+python cli/sdd.py prompt show adopt-existing
+python cli/sdd.py prompt show adopt-existing --full
 ```
 
 Resolución de rutas (`cli/lib/prompts.py`):
@@ -97,13 +97,13 @@ Parser de frontmatter sin dependencias externas (regex + líneas YAML simples).
 
 ## Integración en documentación de usuario
 
-| Archivo                  | Cambio                                                               |
-| ------------------------ | -------------------------------------------------------------------- |
-| `README.md`              | Fila en navegación rápida; Paso 3/6 apuntan al catálogo              |
-| `INSTALL.md`             | Prompt de adopción vía `sdd prompt show adopt-existing`              |
-| `core/adoption-guide.md` | Enlaces por etapa; escenario docs dispersos (sin asumir wiki/Notion) |
-| `core/workflow.md`       | Tabla fase → prompt ID                                               |
-| `cli/README.md`          | Comandos `prompt list/show`                                          |
+| Archivo                  | Cambio                                                                        |
+| ------------------------ | ----------------------------------------------------------------------------- |
+| `README.md`              | Fila en navegación rápida; Paso 3/6 apuntan al catálogo                       |
+| `INSTALL.md`             | Prompt de adopción vía `python sdd-kit/cli/sdd.py prompt show adopt-existing` |
+| `core/adoption-guide.md` | Enlaces por etapa; escenario docs dispersos (sin asumir wiki/Notion)          |
+| `core/workflow.md`       | Tabla fase → prompt ID                                                        |
+| `cli/README.md`          | Comandos `prompt list/show`                                                   |
 
 ### Migración de documentación legacy (redacción inclusiva)
 
