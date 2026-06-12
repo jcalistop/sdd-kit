@@ -159,7 +159,7 @@ Con adaptadores instalados, el agente ya tiene las reglas SDD. Para forzar el fl
 python sdd-kit/cli/sdd.py prompt show discovery-to-draft
 ```
 
-Ver [catálogo de prompts](core/prompt-catalog.md) (`draft-review`, `approve-ready`, etc.). Revisa el spec; si está bien, aprueba → pasa a **Ready** → implementación.
+Ver [catálogo de prompts](core/prompt-catalog.md). Con adaptadores instalados el agente sigue el ciclo solo: aprueba el spec (→ **Ready**), implementa en local, **verifica** (`verify-implementation`) y recién entonces publica el PR. Los prompts son disparadores opcionales, no fases obligatorias.
 
 Ejemplos de calidad por perfil: `profiles/<perfil>/examples/SDD-001-*.md`.
 
@@ -177,12 +177,13 @@ Detalle: **[INSTALL.md](INSTALL.md)** — sección «Actualizar el kit».
 
 ## Cómo trabajar con el agente
 
-| Momento           | Tú (humano)                     | Agente                          |
-| ----------------- | ------------------------------- | ------------------------------- |
-| 💡 Nueva idea     | Describes el problema           | Anota en BACKLOG, propone spec  |
-| 📝 Spec en Draft  | **Apruebas o corriges** el spec | Redacta spec, verifica DoR      |
-| 🔨 Implementación | Autorizas empezar               | Codea según spec y perfil stack |
-| ✅ PR             | **Revisas y mergeas**           | Checklist, tests, evidencia     |
+| Momento           | Tú (humano)                     | Agente                                    |
+| ----------------- | ------------------------------- | ----------------------------------------- |
+| 💡 Nueva idea     | Describes el problema           | Anota en BACKLOG, propone spec            |
+| 📝 Spec en Draft  | **Apruebas o corriges** el spec | Redacta spec, verifica DoR                |
+| 🔨 Implementación | Autorizas empezar               | Codea en local según spec (sin push aún)  |
+| 🔍 Verificación   | Revisas evidencia               | Cruza spec, domain-rules y quality gates  |
+| ✅ PR             | **Revisas y mergeas**           | Publica tras verify OK; checklist y tests |
 
 Adaptadores instalados según tu herramienta (ver `sdd.config.yaml` → `agent.targets`). En Cursor: `sdd-core`, `sdd-agent-workflow`, `sdd-stack-<perfil>`.
 

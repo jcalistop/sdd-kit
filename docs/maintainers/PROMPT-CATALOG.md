@@ -77,11 +77,11 @@ Parser de frontmatter sin dependencias externas (regex + líneas YAML simples).
 
 ## Inventario actual (15 prompts)
 
-| ID                                                                                                                 | Categoría  |
-| ------------------------------------------------------------------------------------------------------------------ | ---------- |
-| `adopt-new`, `adopt-existing`, `validate-setup`, `formalize-domain-rules`                                          | adoption   |
-| `discovery-to-draft`, `draft-review`, `approve-ready`, `implement-spec`, `open-pr`, `validate-pr`, `close-release` | workflow   |
-| `hotfix-minor`, `spec-stuck`, `migrate-legacy-docs`, `update-submodule`                                            | exceptions |
+| ID                                                                                                                                                                      | Categoría  |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `adopt-new`, `adopt-existing`, `validate-setup`, `formalize-domain-rules`                                                                                               | adoption   |
+| `discovery-to-draft`, `draft-review`, `build-spec`, `verify-implementation`, `open-pr`, `validate-pr`, `close-release` (+ deprecados `approve-ready`, `implement-spec`) | workflow   |
+| `hotfix-minor`, `spec-stuck`, `migrate-legacy-docs`, `update-submodule`                                                                                                 | exceptions |
 
 ---
 

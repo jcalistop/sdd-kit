@@ -14,7 +14,9 @@ Una persona + agente de IA. No hay roles separados: el humano decide y aprueba; 
 | _Próximo ID disponible_          | Agente (validar con humano)             | Al crear spec nuevo                       |
 | Spec en `specs/`                 | Agente                                  | Discovery → Validating                    |
 | Revisión de spec (Ready)         | **Humano aprueba**                      | Antes de In Build                         |
-| Código + PR                      | Agente                                  | In Build → Validating                     |
+| Código local                     | Agente                                  | In Build (sin push hasta verify)          |
+| Verificación vs spec             | Agente informa; humano revisa evidencia | `verify-implementation` antes de Git      |
+| Commit + PR                      | Agente                                  | Tras verify OK → Validating               |
 | Merge PR                         | **Humano aprueba**                      | Tras DoD verde                            |
 | `checklist-pr.md` + perfil stack | Agente completa; humano verifica        | Validating                                |
 | `releases/vX.Y.Z/`               | Agente prepara; humano confirma versión | Antes de PR campaña                       |
@@ -34,9 +36,12 @@ No requiere reunión ni calendario fijo.
 ### Flujo resumido
 
 ```
-Humano da dirección → Agente: Discovery/Draft → Humano aprueba spec
-→ Agente: In Build/PR → Humano merge → Agente: release/archivo
+Humano da dirección → Agente: Discovery/Draft → Humano aprueba spec (Ready)
+→ Agente: In Build (local) → verify-implementation → commit/PR
+→ Humano merge → Agente: release/archivo
 ```
+
+Los **prompts** del catálogo son opcionales; los **estados** del spec son la fuente de verdad. Ver [`workflow.md`](workflow.md).
 
 Ver regla `sdd-agent-workflow.mdc` para detalle por fase.
 

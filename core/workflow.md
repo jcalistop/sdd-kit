@@ -42,25 +42,104 @@ Todo vive bajo la ruta `paths.sdd` del config (por defecto `.github/docs/sdd/`):
 Discovery → Draft → Ready → In Build → Validating → Released
 ```
 
-| Etapa          | Artefacto                                                | Criterio de salida                              |
-| -------------- | -------------------------------------------------------- | ----------------------------------------------- |
-| **Discovery**  | notas en BACKLOG                                         | Problema entendido, dominio y tipo declarados   |
-| **Draft**      | `specs/<dominio>/SDD-NNN-slug.md`                        | Definition of Ready (DoR) cumplida              |
-| **Ready**      | spec con `Estado: Ready`                                 | Owner, versión objetivo, dependencias resueltas |
-| **In Build**   | rama + PR hacia rama de desarrollo                       | Quality gates del perfil en verde               |
-| **Validating** | PR + [`checklist-pr.md`](checklist-pr.md) + perfil stack | DoD cumplida                                    |
-| **Released**   | `archive/<YYYY>/<dominio>/` + entrada en release         | Mergeado, desplegado, archivado                 |
+| Etapa          | Artefacto                                                | Criterio de salida                                                      |
+| -------------- | -------------------------------------------------------- | ----------------------------------------------------------------------- |
+| **Discovery**  | notas en BACKLOG                                         | Problema entendido, dominio y tipo declarados                           |
+| **Draft**      | `specs/<dominio>/SDD-NNN-slug.md`                        | Definition of Ready (DoR) cumplida                                      |
+| **Ready**      | spec con `Estado: Ready`                                 | Aprobación humana; alcance congelado; dependencias resueltas            |
+| **In Build**   | código local + evidencia de verificación                 | Quality gates en verde; `verify-implementation` OK; **sin push/PR aún** |
+| **Validating** | PR + [`checklist-pr.md`](checklist-pr.md) + perfil stack | DoD cumplida; revisión humana antes de merge                            |
+| **Released**   | `archive/<YYYY>/<dominio>/` + entrada en release         | Mergeado, desplegado, archivado                                         |
+
+### Momentos semánticos vs prompts
+
+Los **estados** del spec son la fuente de verdad del progreso. Los **prompts** del [catálogo](prompt-catalog.md) son disparadores copy-paste opcionales; no son fases obligatorias 1:1.
+
+| Concepto              | Qué es                                                               |
+| --------------------- | -------------------------------------------------------------------- |
+| **Momento semántico** | Cambio de estado, gate o frase humana con criterio en este documento |
+| **Prompt**            | Plantilla del catálogo para disparar trabajo del agente              |
+| **Regla always-on**   | Comportamiento del agente sin prompt (p. ej. reglas del IDE)         |
+
+| Situación                        | ¿Prompt?    | Notas                                             |
+| -------------------------------- | ----------- | ------------------------------------------------- |
+| Idea nueva (adopción madura)     | No          | El agente sigue el ciclo; describes la necesidad  |
+| Adopción, excepciones, upgrade   | Sí          | Tareas puntuales del catálogo                     |
+| Aprobar spec → Ready             | Semántico   | Frase basta: _"Apruebo SDD-NNN para implementar"_ |
+| Revisar DoR en Draft             | Opcional    | `draft-review`                                    |
+| Implementar spec aprobado        | Opcional    | `build-spec` si retomas sesión                    |
+| Verificar vs spec (antes de Git) | Obligatorio | `verify-implementation` — gate local              |
+| Publicar (commit, push, PR)      | Tras verify | `open-pr` si hace falta ritual explícito          |
+| Revisar antes de merge           | Semántico   | Frase o `validate-pr`                             |
+
+### Secuencia del ciclo (humano ↔ agente)
+
+> ZenUML equivalente en [`prompt-catalog.md`](prompt-catalog.md). Mermaid renderiza en GitHub sin extensiones.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor H as Humano
+    participant A as Agente
+    participant S as Spec / BACKLOG
+    participant G as Git
+
+    H->>A: Iniciativa (texto o discovery-to-draft)
+    A->>S: Draft + auto-DoR
+    opt draft-review (opcional)
+        H->>A: Revisar DoR
+        A-->>H: Gaps
+    end
+    H->>S: Aprobar → Ready
+    A->>S: In Build
+    Note over A: Local — sin push
+    A->>A: Implementar + quality gates
+    H->>A: verify-implementation
+    A-->>H: Evidencia vs spec
+    Note over A,G: Solo tras verify OK
+    A->>G: commit + push + PR (1..N SDD-NNN)
+    A->>S: Validating
+    H->>A: Revisar PR / DoD
+    H->>G: Merge
+    A->>S: Released
+```
+
+### Verificación local antes de Git compartido
+
+| Fase local (In Build)          | Git compartido (→ Validating) |
+| ------------------------------ | ----------------------------- |
+| Rama local opcional            | Commit de entrega             |
+| Código según spec              | `push` al remoto              |
+| Quality gates en verde         | Apertura de PR                |
+| **`verify-implementation` OK** | Estado spec → `Validating`    |
+
+**Permitido antes de verify:** working tree, rama local, commits WIP locales sin push.
+
+**Prohibido antes de verify:** `push`, PR, solicitud de merge.
+
+### Varios specs en un PR
+
+Un PR puede referenciar **varios** `SDD-NNN` cuando:
+
+1. Entrega coherente o misma campaña de release.
+2. Cada spec cumple DoD en ese entregable.
+3. La descripción del PR lista todos los IDs y criterios por spec.
+4. Al cerrar release, cada spec se archiva individualmente.
+
+Detalle en [`checklist-pr.md`](checklist-pr.md).
 
 **Prompts por fase** (catálogo: [`prompt-catalog.md`](prompt-catalog.md)):
 
-| Fase       | Prompt ID                   |
-| ---------- | --------------------------- |
-| Discovery  | `discovery-to-draft`        |
-| Draft      | `draft-review`              |
-| Ready      | `approve-ready`             |
-| In Build   | `implement-spec`, `open-pr` |
-| Validating | `validate-pr`               |
-| Released   | `close-release`             |
+| Fase       | Prompt ID                                        |
+| ---------- | ------------------------------------------------ |
+| Discovery  | `discovery-to-draft`                             |
+| Draft      | `draft-review` _(opcional)_                      |
+| Ready      | `build-spec`                                     |
+| In Build   | `build-spec`, `verify-implementation`, `open-pr` |
+| Validating | `validate-pr`                                    |
+| Released   | `close-release`                                  |
+
+Alias deprecados (v1.2.x): `approve-ready`, `implement-spec` → usar `build-spec`.
 
 Reglas de transición:
 
@@ -69,6 +148,7 @@ Reglas de transición:
 3. Al cerrar: `git mv` del spec y actualizar enlaces en BACKLOG.
 4. Cambios triviales **no requieren spec** — registrar en release con ID `—`.
 5. **`SDD-NNN` es global** en el repositorio (contador en BACKLOG).
+6. **No `push` ni PR** hasta `verify-implementation` en verde.
 
 ### Descartado / en pausa
 

@@ -3,7 +3,7 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [docs/maintainers/ROADMAP.md](../../../docs/maintainers/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-003`.
+**Próximo ID disponible:** `SDD-004`.
 
 **Versión acumulada del kit:** `v1.0.0` (ver [docs/releases/](../../../docs/releases/)).
 
@@ -34,9 +34,9 @@
 
 ## In Build
 
-| ID  | Dominio | Título | Versión | Spec |
-| --- | ------- | ------ | ------- | ---- |
-| —   | —       | —      | —       | —    |
+| ID      | Dominio | Título                                             | Versión | Spec                                                                                                 |
+| ------- | ------- | -------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------- |
+| SDD-003 | core    | Refactor ciclo SDD: momentos semánticos vs prompts | v1.2.0  | [specs/core/SDD-003-refactor-ciclo-sdd-prompts.md](specs/core/SDD-003-refactor-ciclo-sdd-prompts.md) |
 
 ## Validating
 

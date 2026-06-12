@@ -1,7 +1,7 @@
 # Catálogo de prompts SDD
 
 > Plantillas copy-paste para guiar al agente en adopción, ciclo de specs, PRs y releases.
-> Las **reglas del agente** (`sdd-core`, `sdd-agent-workflow`) ya cubren mucho del flujo; este catálogo son **disparadores explícitos** para momentos donde tú inicias o apruebas.
+> Los **estados del spec** son la fuente de verdad; los prompts son **disparadores opcionales** salvo tareas puntuales (adopción, excepciones).
 
 **CLI:** `python sdd-kit/cli/sdd.py prompt list` · `prompt show <id>` · `prompt show <id> --full`
 
@@ -9,35 +9,68 @@
 
 ---
 
-## Cuándo copiar un prompt vs dejar que las reglas actúen solas
+## Momentos semánticos vs prompts
 
-| Situación                                                                | ¿Necesitas prompt?                            |
-| ------------------------------------------------------------------------ | --------------------------------------------- |
-| Adaptadores instalados (`sdd-agent-workflow`) y describes una idea nueva | **No** — el agente sigue el ciclo solo        |
-| Adopción en proyecto existente, formalizar negocio, excepciones          | **Sí** — usa prompts de este catálogo         |
-| Aprobar spec (Ready), revisar PR, cerrar release                         | **Sí** — requieren tu OK explícito            |
-| Validar instalación o actualizar el kit en instancia                     | **Sí** — tarea puntual con comandos concretos |
+| Concepto              | Qué es                                                  |
+| --------------------- | ------------------------------------------------------- |
+| **Momento semántico** | Estado, gate o frase humana definida en `workflow.md`   |
+| **Prompt**            | Plantilla del catálogo para disparar trabajo del agente |
+| **Regla always-on**   | Comportamiento del agente sin prompt (reglas del IDE)   |
+
+| Situación                                  | ¿Prompt?                                  |
+| ------------------------------------------ | ----------------------------------------- |
+| Idea nueva con agente en adopción madura   | **No**                                    |
+| Adopción, excepciones, upgrade kit, hotfix | **Sí**                                    |
+| Aprobar spec → Ready                       | **Semántico** — frase basta               |
+| Revisar DoR (`draft-review`)               | **Opcional**                              |
+| Implementar (`build-spec`)                 | **Opcional** si retomas sesión            |
+| Verificar vs spec antes de Git             | **Obligatorio** — `verify-implementation` |
+| Publicar (commit, push, PR)                | Tras verify — `open-pr` si hace falta     |
+| Revisar antes de merge                     | **Semántico** — frase o `validate-pr`     |
 
 ---
 
-## Mapa: momento → prompt
+## Secuencia del ciclo (humano ↔ agente)
+
+> Mermaid renderiza en GitHub. ZenUML (misma secuencia) en comentarios de mantenedores si se prefiere editor con plugin.
 
 ```mermaid
-flowchart LR
+sequenceDiagram
+    autonumber
+    actor H as Humano
+    participant A as Agente
+    participant S as Spec / BACKLOG
+    participant G as Git
+
+    H->>A: Iniciativa
+    A->>S: Draft + auto-DoR
+    opt draft-review
+        H->>A: Revisar DoR (opcional)
+        A-->>H: Gaps
+    end
+    H->>S: Aprobar → Ready
+    A->>S: In Build
+    Note over A: Local — sin push
+    A->>A: build-spec + quality gates
+    H->>A: verify-implementation
+    A-->>H: Evidencia vs spec
+    Note over A,G: Solo tras verify OK
+    A->>G: commit + push + PR
+    A->>S: Validating
+    H->>A: validate-pr / revisar
+    H->>G: Merge
+    A->>S: Released
+```
+
+### Mapa de catálogo (onboarding y excepciones)
+
+```mermaid
+flowchart TB
     subgraph onboarding [Onboarding]
         A1[adopt-new]
         A2[adopt-existing]
         A3[validate-setup]
         A4[formalize-domain-rules]
-    end
-    subgraph cycle [Ciclo SDD]
-        W1[discovery-to-draft]
-        W2[draft-review]
-        W3[approve-ready]
-        W4[implement-spec]
-        W5[open-pr]
-        W6[validate-pr]
-        W7[close-release]
     end
     subgraph exceptions [Excepciones]
         E1[hotfix-minor]
@@ -46,31 +79,40 @@ flowchart LR
         E4[upgrade-kit]
         E5[update-submodule]
     end
-    A2 --> A3 --> A4 --> W1 --> W2 --> W3 --> W4 --> W5 --> W6 --> W7
+    A2 --> A3 --> A4
 ```
+
+El ciclo principal no es un flowchart lineal: ver secuencia arriba y [`workflow.md`](workflow.md).
 
 ---
 
 ## Por momento
 
-| Momento                | ID                       | Título                                 |
-| ---------------------- | ------------------------ | -------------------------------------- |
-| Proyecto nuevo         | `adopt-new`              | Adoptar SDD en proyecto nuevo          |
-| Proyecto existente     | `adopt-existing`         | Adoptar SDD en proyecto existente      |
-| Post bootstrap         | `validate-setup`         | Validar instalación SDD                |
-| Antes del primer spec  | `formalize-domain-rules` | Formalizar contexto de negocio         |
-| Nueva iniciativa       | `discovery-to-draft`     | Discovery → spec Draft                 |
-| Revisar borrador       | `draft-review`           | Revisar spec Draft (DoR)               |
-| Aprobar implementación | `approve-ready`          | Aprobar spec → Ready → In Build        |
-| Codificar              | `implement-spec`         | Implementar spec aprobado              |
-| Abrir PR               | `open-pr`                | Abrir PR con checklist SDD             |
-| Revisar PR             | `validate-pr`            | Validar PR antes de merge              |
-| Cerrar versión         | `close-release`          | Cerrar release y archivar specs        |
-| Urgencia / trivial     | `hotfix-minor`           | Hotfix o cambio sin spec               |
-| Spec atascado          | `spec-stuck`             | Spec estancado o rechazado             |
-| Etapa 3                | `migrate-legacy-docs`    | Migrar docs legacy a business/         |
-| Mantenimiento kit      | `upgrade-kit`            | Actualizar kit en instancia (completo) |
-| Mantenimiento kit      | `update-submodule`       | Atajo legacy → preferir `upgrade-kit`  |
+| Momento               | ID                       | Título                                  |
+| --------------------- | ------------------------ | --------------------------------------- |
+| Proyecto nuevo        | `adopt-new`              | Adoptar SDD en proyecto nuevo           |
+| Proyecto existente    | `adopt-existing`         | Adoptar SDD en proyecto existente       |
+| Post bootstrap        | `validate-setup`         | Validar instalación SDD                 |
+| Antes del primer spec | `formalize-domain-rules` | Formalizar contexto de negocio          |
+| Nueva iniciativa      | `discovery-to-draft`     | Discovery → spec Draft                  |
+| Revisar borrador      | `draft-review`           | Revisar spec Draft (DoR) — **opcional** |
+| Aprobar + implementar | `build-spec`             | Aprobar → In Build + código local       |
+| Verificar vs spec     | `verify-implementation`  | Gate antes de push/PR — **obligatorio** |
+| Abrir PR              | `open-pr`                | Publicar tras verify OK                 |
+| Revisar PR            | `validate-pr`            | Validar PR antes de merge               |
+| Cerrar versión        | `close-release`          | Cerrar release y archivar specs         |
+| Urgencia / trivial    | `hotfix-minor`           | Hotfix o cambio sin spec                |
+| Spec atascado         | `spec-stuck`             | Spec estancado o rechazado              |
+| Etapa 3               | `migrate-legacy-docs`    | Migrar docs legacy a business/          |
+| Mantenimiento kit     | `upgrade-kit`            | Actualizar kit en instancia (completo)  |
+| Mantenimiento kit     | `update-submodule`       | Atajo legacy → preferir `upgrade-kit`   |
+
+### Alias deprecados (v1.2.x)
+
+| Deprecado        | Usar         |
+| ---------------- | ------------ |
+| `approve-ready`  | `build-spec` |
+| `implement-spec` | `build-spec` |
 
 Fichas: [`prompts/`](prompts/) — o `sdd prompt show <id> --full`
 
@@ -78,14 +120,14 @@ Fichas: [`prompts/`](prompts/) — o `sdd prompt show <id> --full`
 
 ## Por fase SDD
 
-| Fase       | Prompts                                      |
-| ---------- | -------------------------------------------- |
-| Discovery  | `discovery-to-draft`                         |
-| Draft      | `discovery-to-draft`, `draft-review`         |
-| Ready      | `approve-ready`                              |
-| In Build   | `approve-ready`, `implement-spec`, `open-pr` |
-| Validating | `validate-pr`                                |
-| Released   | `close-release`                              |
+| Fase       | Prompts                                           |
+| ---------- | ------------------------------------------------- |
+| Discovery  | `discovery-to-draft`                              |
+| Draft      | `discovery-to-draft`, `draft-review` _(opcional)_ |
+| Ready      | `build-spec`                                      |
+| In Build   | `build-spec`, `verify-implementation`, `open-pr`  |
+| Validating | `validate-pr`                                     |
+| Released   | `close-release`                                   |
 
 ---
 
@@ -125,11 +167,12 @@ Fichas: [`prompts/`](prompts/) — o `sdd prompt show <id> --full`
 
 - [`discovery-to-draft.md`](prompts/workflow/discovery-to-draft.md)
 - [`draft-review.md`](prompts/workflow/draft-review.md)
-- [`approve-ready.md`](prompts/workflow/approve-ready.md)
-- [`implement-spec.md`](prompts/workflow/implement-spec.md)
+- [`build-spec.md`](prompts/workflow/build-spec.md)
+- [`verify-implementation.md`](prompts/workflow/verify-implementation.md)
 - [`open-pr.md`](prompts/workflow/open-pr.md)
 - [`validate-pr.md`](prompts/workflow/validate-pr.md)
 - [`close-release.md`](prompts/workflow/close-release.md)
+- _Deprecados:_ [`approve-ready.md`](prompts/workflow/approve-ready.md), [`implement-spec.md`](prompts/workflow/implement-spec.md)
 
 ### exceptions/
 

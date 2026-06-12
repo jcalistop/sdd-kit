@@ -19,13 +19,14 @@
 
 | Campo                 | Valor                                                                             |
 | --------------------- | --------------------------------------------------------------------------------- |
-| **Spec**              | `SDD-NNN-slug` — enlace a `specs/` o `archive/`                                   |
+| **Spec(s)**           | `SDD-NNN-slug` — uno o varios; enlaces a `specs/` o `archive/`                    |
 | **Dominio**           | según `sdd.config.yaml` → `domains`                                               |
 | **Tipo**              | `feature` / `bugfix` / `refactor` / `performance` / `db-change` / `documentation` |
 | **Versión objetivo**  | `vX.Y.Z`                                                                          |
 | **ADRs relacionados** | enlaces bajo `adr/` _(0..N)_                                                      |
 
-- [ ] Cabecera Spec/ADR completada (o justificación sin spec + registro `—`)
+- [ ] Cabecera Spec/ADR completada por cada `SDD-NNN` (o justificación sin spec + registro `—`)
+- [ ] Si el PR agrupa varios specs: criterios de aceptación verificados **por cada** ID (ver [`workflow.md`](workflow.md))
 
 ---
 
@@ -43,6 +44,7 @@
 
 ## 4. Validación funcional
 
+- [ ] `verify-implementation` completado **antes** de push/PR (evidencia en PR o enlace)
 - [ ] Happy path verificado en dev/staging
 - [ ] Error path / casos límite verificados
 - [ ] Sin regresiones en flujos adyacentes

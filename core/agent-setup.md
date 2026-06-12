@@ -21,6 +21,18 @@ La fuente única de contenido está en `sdd-kit/bootstrap/agent-prompts/`; los a
 
 **Cursor — política de tokens:** `sdd-core.mdc` y `sdd-agent-workflow.mdc` usan `alwaysApply: true` (~600 tokens/sesión). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Detalle: [`docs/maintainers/TOKEN-OPTIMIZATION.md`](../docs/maintainers/TOKEN-OPTIMIZATION.md).
 
+### Ciclo SDD con agente (resumen)
+
+| Qué                      | Detalle                                                                                |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| **Estados**              | Discovery → Draft → Ready → In Build → Validating → Released (`workflow.md`)           |
+| **Prompts**              | Disparadores opcionales del [catálogo](prompt-catalog.md); no son fases obligatorias   |
+| **Aprobaciones humanas** | Ready (spec) y merge del PR — frase corta basta                                        |
+| **Verify local**         | Obligatorio antes de `push`/PR (`verify-implementation`); ver `sdd-workflow-reference` |
+| **Deprecados**           | `approve-ready` / `implement-spec` → `build-spec` (`sdd prompt show` redirige)         |
+
+Tras instalar adaptadores, describe la iniciativa en lenguaje natural; el agente sigue `sdd-agent-workflow` sin copiar prompts en cada paso.
+
 ---
 
 ## Instalación

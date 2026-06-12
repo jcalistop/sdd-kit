@@ -55,11 +55,13 @@ Leer `business/domain-rules.md` (ruta `paths.business` del config).
 
 **Draft** — Asignar `SDD-NNN`; crear spec; completar alcance, impacto técnico y criterios; BACKLOG → Draft; **auto-verificar DoR** (reference).
 
-**Ready** — Humano aprueba → cabecera y BACKLOG a Ready; confirmar dependencias.
+**Ready** — Humano aprueba (frase o `build-spec`) → cabecera y BACKLOG a Ready; confirmar dependencias; congelar alcance.
 
-**In Build** — Estado In Build; rama `feature/` o `bugfix/`; implementar según spec y perfil stack; quality gates en verde; **verificar arquitectura sana** (reference) antes de Validating.
+**In Build** — Estado In Build; rama local; implementar según spec y perfil stack; quality gates en verde. **`draft-review` es opcional** (solo ritual DoR formal). **No push ni PR** hasta verificación local.
 
-**Validating** — PR con checklist core + stack; evidencia de tests; **auto-verificar DoD** (reference); pedir merge al humano.
+**Verify (In Build)** — `verify-implementation` obligatorio: criterios de aceptación, `domain-rules.md`, arquitectura sana (reference). Presentar evidencia. Solo tras OK → commit, push, PR.
+
+**Validating** — PR con checklist core + stack; evidencia de verify + tests; **auto-verificar DoD** (reference); pedir merge al humano.
 
 **Released** — `git mv` a `archive/<YYYY>/<dominio>/`; BACKLOG → Released; entrada en `releases/vX.Y.Z/`; `validate-sdd`. **Antes** del PR de campaña a producción.
 
@@ -73,4 +75,5 @@ Leer `business/domain-rules.md` (ruta `paths.business` del config).
 - Documentación SDD fuera de `paths.sdd` sin petición explícita
 - Asumir roles de equipo — el humano único decide y aprueba
 - Asumir reglas de negocio no escritas en `domain-rules.md`
+- `push` o PR antes de `verify-implementation` en verde
 
