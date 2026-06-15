@@ -17,16 +17,16 @@ Metodología para desarrollar **con un plan antes de codear**. Pensada para equi
 
 ## Navegación rápida
 
-|     | Documento                                       | Para qué                                    |
-| --- | ----------------------------------------------- | ------------------------------------------- |
-| 🚀  | [Instalación](INSTALL.md)                       | Submodule, copia puntual o solo docs        |
-| 📖  | [Conceptos en 5 min](core/concepts.md)          | Primera vez con SDD + glosario              |
-| 🗺️  | [Adopción incremental](core/adoption-guide.md)  | Etapas 1–3 en proyectos nuevos o existentes |
-| 🤖  | [Configuración del agente](core/agent-setup.md) | Cursor, Claude, Codex, Copilot              |
+|     | Documento                                               | Para qué                                    |
+| --- | ------------------------------------------------------- | ------------------------------------------- |
+| 🚀  | [Instalación](INSTALL.md)                               | Submodule, copia puntual o solo docs        |
+| 📖  | [Conceptos en 5 min](core/concepts.md)                  | Primera vez con SDD + glosario              |
+| 🗺️  | [Adopción incremental](core/adoption-guide.md)          | Etapas 1–3 en proyectos nuevos o existentes |
+| 🤖  | [Configuración del agente](core/agent-setup.md)         | Cursor, Claude, Codex, Copilot              |
 | 🎯  | [Skills SDD](core/prompt-catalog.md#skills-cursor-v120) | 6 skills on-demand en Cursor (v1.2.0+)      |
-| 🧭  | [Ciclo SDD](core/workflow.md)                   | Estados, DoR/DoD, releases                  |
-| 🛠️  | [CLI](cli/README.md)                            | `validate`, `backlog`, `spec new`           |
-| 💬  | [Catálogo de prompts](core/prompt-catalog.md)   | Plantillas copy-paste por fase y adopción   |
+| 🧭  | [Ciclo SDD](core/workflow.md)                           | Estados, DoR/DoD, releases                  |
+| 🛠️  | [CLI](cli/README.md)                                    | `validate`, `backlog`, `spec new`           |
+| 💬  | [Catálogo de prompts](core/prompt-catalog.md)           | Plantillas copy-paste por fase y adopción   |
 
 ---
 
@@ -51,10 +51,10 @@ Metodología para desarrollar **con un plan antes de codear**. Pensada para equi
 
 ```mermaid
 flowchart LR
-    A["💡 Idea"] --> B["📄 Spec"]
-    B --> C["💻 Código"]
-    C --> D["🔍 Revisión"]
-    D --> E["🚀 Publicado"]
+    idea[Idea] --> spec[Spec]
+    spec --> code[Código]
+    code --> review[Revisión]
+    review --> release[Publicado]
 ```
 
 Más detalle: [`core/concepts.md`](core/concepts.md) · ciclo completo: [`core/workflow.md`](core/workflow.md).
@@ -237,12 +237,12 @@ Detalle: **[cli/README.md](cli/README.md)**.
 
 Tres capas — no hace falta memorizarlas el día 1:
 
-| Capa             | Dónde                                  | Qué es                                          |
-| ---------------- | -------------------------------------- | ----------------------------------------------- |
-| 🧩 **Core**      | `core/`                                | Ciclo SDD, plantillas, guías (igual para todos) |
-| 📦 **Perfil**    | `profiles/<stack>/`                    | Tests, deploy y checklist de tu stack           |
+| Capa             | Dónde                                  | Qué es                                                          |
+| ---------------- | -------------------------------------- | --------------------------------------------------------------- |
+| 🧩 **Core**      | `core/`                                | Ciclo SDD, plantillas, guías (igual para todos)                 |
+| 📦 **Perfil**    | `profiles/<stack>/`                    | Tests, deploy y checklist de tu stack                           |
 | 🔌 **Bootstrap** | `bootstrap/`                           | `init-sdd`, reglas (`agent-prompts/`), skills (`agent-skills/`) |
-| 📁 **Instancia** | `.github/docs/sdd/` en **tu** proyecto | Tu BACKLOG, specs y releases                    |
+| 📁 **Instancia** | `.github/docs/sdd/` en **tu** proyecto | Tu BACKLOG, specs y releases                                    |
 
 ```
 tu-proyecto/
