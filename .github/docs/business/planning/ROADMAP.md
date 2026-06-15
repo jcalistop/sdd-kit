@@ -1,9 +1,11 @@
 # Roadmap de Evolucion del SDD Kit
 
+> **Snapshot histórico (2026-06).** Para el tablero operativo diario usa [BACKLOG](../../sdd/BACKLOG.md).
+>
 > Plan de evolucion en 3 fases para transformar el kit en una herramienta de desarrollo 100% agentico, multi-stack y con adopcion incremental.
 > Fecha: 2026-06-11
 >
-> **Tablero operativo actual:** [.github/docs/sdd/BACKLOG.md](../../.github/docs/sdd/BACKLOG.md) · Adopcion SDD en el kit: [ADOPTION.md](../../.github/docs/sdd/ADOPTION.md)
+> **Adopcion SDD en el kit:** [ADOPTION.md](../../sdd/ADOPTION.md)
 
 ---
 
@@ -267,7 +269,7 @@ Plantillas copy-paste para adopcion, ciclo SDD y excepciones:
 - Indice: `core/prompt-catalog.md` (15 fichas en `core/prompts/`)
 - CLI: `sdd prompt list`, `sdd prompt show <id> [--full]`
 - Copiado a instancia con `init-sdd`
-- Notas de mantenimiento: [`docs/maintainers/PROMPT-CATALOG.md`](PROMPT-CATALOG.md)
+- Notas de mantenimiento: [`prompt-catalog-meta.md`](prompt-catalog-meta.md) · catálogo público: [`core/prompt-catalog.md`](../../../../core/prompt-catalog.md)
 
 Complementa las reglas always-on del agente; no las reemplaza. **Skills Cursor** (`sdd-draft-spec`, `sdd-build-spec`, etc.) implementadas en v1.2.0 — ver `bootstrap/agent-skills/` y `agent-setup.md`.
 

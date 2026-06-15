@@ -23,7 +23,7 @@ La fuente única de contenido está en `sdd-kit/bootstrap/agent-prompts/` (regla
 
 **Claude / Codex / Copilot:** el preambulo del bloque marcado incluye mapa trigger → prompt kit (paridad con skills Cursor).
 
-**Cursor — política de tokens:** `sdd-core.mdc` y `sdd-agent-workflow.mdc` usan `alwaysApply: true` (~600 tokens/sesión). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Detalle: [`docs/maintainers/TOKEN-OPTIMIZATION.md`](../docs/maintainers/TOKEN-OPTIMIZATION.md).
+**Cursor — política de tokens:** `sdd-core.mdc` y `sdd-agent-workflow.mdc` usan `alwaysApply: true` (~600 tokens/sesión). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Detalle: [`.github/docs/business/planning/TOKEN-OPTIMIZATION.md`](../.github/docs/business/planning/TOKEN-OPTIMIZATION.md).
 
 ### Ciclo SDD con agente (resumen)
 

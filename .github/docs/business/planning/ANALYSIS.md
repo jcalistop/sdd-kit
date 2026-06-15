@@ -58,8 +58,9 @@ sdd-kit/
 ├── INSTALL.md
 ├── sdd.config.example.yaml
 ├── docs/
-│   ├── maintainers/                  # roadmap y analisis (este documento)
-│   └── releases/                     # changelog y notas vX.Y.Z del kit
+│   ├── releases/                     # changelog y notas vX.Y.Z del kit
+│   └── maintainers/                  # stub (planning en business/planning/)
+├── .github/docs/business/planning/   # roadmap y analisis (este documento)
 ├── core/
 │   ├── workflow.md                   # ciclo de 6 estados, tipos de spec, ADR, DoR/DoD
 │   ├── operations.md                 # matriz de responsabilidades, rituales

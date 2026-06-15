@@ -1,4 +1,4 @@
-# Release campaña v1.2.0 — Skills SDD en bootstrap
+# Release campaña v1.2.0 — Skills bootstrap + documentación
 
 ## Cabecera
 
@@ -6,7 +6,7 @@
 | -------------------- | --------------------------------------------- |
 | **Versión**          | **`v1.2.0`**                                  |
 | **Fecha cierre**     | 2026-06-15                                    |
-| **Tipo**             | minor / bootstrap                             |
+| **Tipo**             | minor / bootstrap + docs                      |
 | **Responsable**      | equipo                                        |
 | **Campaña anterior** | [v1.1.0](../../../docs/releases/v1.1.0.md)    |
 | **Changelog kit**    | [v1.2.0.md](../../../docs/releases/v1.2.0.md) |
@@ -15,32 +15,26 @@
 
 ## Información general
 
-Publica skills SDD canónicas en `bootstrap/agent-skills/`, extiende `install-agents.py` para instalarlas en Cursor e inyecta mapa trigger→prompt en adaptadores multi-agente (Claude, Codex, Copilot).
-
-### Entregables principales
-
-- Árbol `bootstrap/agent-skills/` (6 skills + manifest + stacks por perfil)
-- `install_cursor_skills()` y `--kit-path` en `install-agents.py`
-- Tests `bootstrap/test_install_skills.py`
-- Documentación: `agent-setup.md`, `upgrade-guide.md`, `prompt-catalog.md`
+Skills SDD en bootstrap, instalación multi-agente y reordenamiento de documentación (`business/planning/`). **Narrativa completa:** [v1.2.0.md](../../../docs/releases/v1.2.0.md).
 
 ---
 
 ## Specs incluidas
 
-| ID      | Dominio   | Spec archivado                                                                                                       |
-| ------- | --------- | -------------------------------------------------------------------------------------------------------------------- |
-| SDD-004 | bootstrap | [archive/2026/bootstrap/SDD-004-agent-skills-cursor.md](../../archive/2026/bootstrap/SDD-004-agent-skills-cursor.md) |
+| ID      | Dominio   | Spec archivado                                                                                                                       |
+| ------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| SDD-005 | docs      | [archive/2026/docs/SDD-005-reordenamiento-documentacion-kit.md](../../archive/2026/docs/SDD-005-reordenamiento-documentacion-kit.md) |
+| SDD-004 | bootstrap | [archive/2026/bootstrap/SDD-004-agent-skills-cursor.md](../../archive/2026/bootstrap/SDD-004-agent-skills-cursor.md)                 |
 
 ---
 
 ## Validación de cierre
 
-| Gate           | Resultado esperado |
-| -------------- | ------------------ |
-| `sdd validate` | 0 errores          |
-| `validate-sdd` | OK                 |
-| Tag producto   | `v1.2.0`           |
+| Gate           | Resultado |
+| -------------- | --------- |
+| `sdd validate` | 0 errores |
+| `validate-sdd` | OK        |
+| Tag producto   | `v1.2.0`  |
 
 ---
 

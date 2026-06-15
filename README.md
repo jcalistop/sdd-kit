@@ -255,12 +255,13 @@ tu-proyecto/
 
 ## Mantenedores del kit
 
-| Recurso                                                      | Uso                                                                |
-| ------------------------------------------------------------ | ------------------------------------------------------------------ |
-| [.github/docs/sdd/BACKLOG.md](.github/docs/sdd/BACKLOG.md)   | Tablero operativo de iniciativas (dogfooding SDD)                  |
-| [.github/docs/sdd/ADOPTION.md](.github/docs/sdd/ADOPTION.md) | Plan de adopción SDD en este repositorio                           |
-| [docs/maintainers/](docs/maintainers/)                       | Análisis y roadmap histórico (no se copia a proyectos)             |
-| [docs/releases/](docs/releases/)                             | Historial de versiones del kit ([v1.0.0](docs/releases/v1.0.0.md)) |
+| Recurso                                                            | Uso                                                                |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| [.github/docs/sdd/BACKLOG.md](.github/docs/sdd/BACKLOG.md)         | Tablero operativo de iniciativas (dogfooding SDD)                  |
+| [.github/docs/sdd/ADOPTION.md](.github/docs/sdd/ADOPTION.md)       | Plan de adopción SDD en este repositorio                           |
+| [.github/docs/business/planning/](.github/docs/business/planning/) | Análisis y roadmap histórico (no se copia a proyectos)             |
+| [docs/releases/](docs/releases/)                                   | Historial de versiones del kit ([v1.2.0](docs/releases/v1.2.0.md)) |
+| [docs/](docs/)                                                     | Glosario de capas en [docs/README.md](docs/README.md)              |
 
 Crear perfiles nuevos: **[`core/templates/profile-template.md`](core/templates/profile-template.md)**.
 

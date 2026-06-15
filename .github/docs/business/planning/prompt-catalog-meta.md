@@ -1,7 +1,7 @@
 # Catálogo de prompts — notas para mantenedores
 
 > Documentación interna del catálogo de plantillas copy-paste para usuarios del kit.
-> Implementado: 2026-06-12. Audiencia consumidora: [`core/prompt-catalog.md`](../../core/prompt-catalog.md).
+> Audiencia consumidora: [`core/prompt-catalog.md`](../../../../core/prompt-catalog.md) · notas internas en este archivo.
 
 ---
 
