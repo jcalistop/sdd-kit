@@ -10,16 +10,20 @@
 
 El **core SDD** (BACKLOG, specs, CLI, `validate-sdd`) no depende de ningún IDE. La capa **agentica** instala instrucciones en el formato que cada herramienta reconoce.
 
-| Herramienta        | Archivo instalado                      | Cuándo se aplica                                             |
-| ------------------ | -------------------------------------- | ------------------------------------------------------------ |
-| **Cursor**         | `.cursor/rules/sdd-*.mdc` (4 archivos) | Core + workflow en cada chat; reference y stack bajo demanda |
-| **Claude Code**    | `CLAUDE.md` (bloque delimitado)        | Cada sesión en el proyecto                                   |
-| **Codex**          | `AGENTS.md` (bloque delimitado)        | Cada sesión Codex en el repo                                 |
-| **GitHub Copilot** | `.github/copilot-instructions.md`      | Instrucciones persistentes en VS Code                        |
+| Herramienta        | Archivo instalado                                                          | Cuándo se aplica                                                               |
+| ------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Cursor**         | `.cursor/rules/sdd-*.mdc` (4 archivos) + `.cursor/skills/sdd-*` (6 skills) | Core + workflow en cada chat; reference y stack bajo demanda; skills on-demand |
+| **Claude Code**    | `CLAUDE.md` (bloque delimitado)                                            | Cada sesión en el proyecto                                                     |
+| **Codex**          | `AGENTS.md` (bloque delimitado)                                            | Cada sesión Codex en el repo                                                   |
+| **GitHub Copilot** | `.github/copilot-instructions.md`                                          | Instrucciones persistentes en VS Code                                          |
 
-La fuente única de contenido está en `sdd-kit/bootstrap/agent-prompts/`; los adaptadores solo cambian el envoltorio.
+La fuente única de contenido está en `sdd-kit/bootstrap/agent-prompts/` (reglas) y `sdd-kit/bootstrap/agent-skills/` (skills Cursor); los adaptadores solo cambian el envoltorio.
 
-**Cursor — política de tokens:** `sdd-core.mdc` y `sdd-agent-workflow.mdc` usan `alwaysApply: true` (~600 tokens/sesión). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Detalle: [`docs/maintainers/TOKEN-OPTIMIZATION.md`](../docs/maintainers/TOKEN-OPTIMIZATION.md).
+**Skills Cursor (v1.2.0+):** `install-agents.py` instala las 6 skills `sdd-*` desde `bootstrap/agent-skills/manifest.json`. Solo sobrescribe carpetas del manifest; no toca skills Boost del proyecto. **Precedencia:** skills SDD on-demand > `sdd prompt show` copy-paste > reglas on-demand.
+
+**Claude / Codex / Copilot:** el preambulo del bloque marcado incluye mapa trigger → prompt kit (paridad con skills Cursor).
+
+**Cursor — política de tokens:** `sdd-core.mdc` y `sdd-agent-workflow.mdc` usan `alwaysApply: true` (~600 tokens/sesión). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Detalle: [`.github/docs/business/planning/TOKEN-OPTIMIZATION.md`](../.github/docs/business/planning/TOKEN-OPTIMIZATION.md).
 
 ### Ciclo SDD con agente (resumen)
 
@@ -83,7 +87,8 @@ Reinstalar solo adaptadores (paso del runbook):
 python .\sdd-kit\bootstrap\install-agents.py install `
   --profile laravel-filament `
   --agent cursor,claude `
-  --sdd-path .github/docs/sdd
+  --sdd-path .github/docs/sdd `
+  --kit-path .github/docs/sdd-kit
 ```
 
 Los archivos `CLAUDE.md`, `AGENTS.md` y `copilot-instructions.md` usan marcadores `<!-- sdd-kit:agent-instructions:start/end -->` para no pisar contenido ajeno.
@@ -108,8 +113,8 @@ Tras instalar, `sdd.config.yaml` incluye:
 
 ```yaml
 agent:
-  targets: [cursor]
-  install_mode: auto # auto | explicit | none
+    targets: [cursor]
+    install_mode: auto # auto | explicit | none
 ```
 
 Útil para saber qué archivos deberían existir en el proyecto.
@@ -152,5 +157,4 @@ Y actualiza `stack-descriptions.json`. Ver [`templates/profile-template.md`](tem
 ## Fuera de alcance actual
 
 - Antigravity (sin adaptador empaquetado).
-- Validación automática de archivos según `agent.targets` en `validate-sdd`.
-- Skills Cursor opcionales (`/sdd-release`).
+- Validación automática exhaustiva de skills según `agent.targets` (solo advertencia en `validate-sdd` si falta manifest).

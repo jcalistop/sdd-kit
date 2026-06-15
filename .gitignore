@@ -8,3 +8,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.pyo
+
+# Skills SDD instaladas localmente (fuente: bootstrap/agent-skills/)
+.cursor/skills/sdd-*/
+.cursor/skills/.sdd-kit-manifest.json

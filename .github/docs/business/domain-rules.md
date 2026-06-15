@@ -15,15 +15,15 @@ El SDD Kit es un producto de **metodología y tooling**, no una aplicación de n
 
 Estas reglas **nunca** deben violarse en contribuciones al kit:
 
-| #   | Regla                                                                                                                                                     | Verificación en PR                               |
-| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| 1   | **Core agnóstico al stack** — `core/` no menciona Laravel, React, Python, etc.                                                                            | Revisar diff en `core/`                          |
-| 2   | **Perfiles autocontenidos** — todo lo específico de un stack vive en `profiles/<nombre>/`                                                                 | Nuevo código de stack solo en perfiles           |
-| 3   | **Sin lógica de negocio de consumidores en perfiles** — roles, tenants o reglas de dominio de un proyecto van en `business/` del consumidor, no en el kit | Revisar checklist y spec-impact del perfil       |
-| 4   | **El agente ejecuta; el humano aprueba** en Ready (spec) y merge (PR). Estados = progreso; prompts = opcionales. Verify local antes de push/PR            | Ready antes de codificar; verify antes de PR     |
-| 5   | **Adopción incremental** — no exigir specs retrospectivos al adoptar SDD                                                                                  | adoption-guide y ADOPTION.md                     |
-| 6   | **Documentación SDD solo en `paths.sdd`** — specs, BACKLOG y releases de iniciativas en `.github/docs/sdd/`                                               | No crear specs en `core/` ni `docs/maintainers/` |
-| 7   | **Separación producto / proceso / versiones** — producto en raíz; proceso en `.github/docs/sdd/`; versiones del kit en `docs/releases/`                   | Enlaces y rutas correctas en docs                |
+| #   | Regla                                                                                                                                                          | Verificación en PR                                                  |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| 1   | **Core agnóstico al stack** — `core/` no menciona Laravel, React, Python, etc.                                                                                 | Revisar diff en `core/`                                             |
+| 2   | **Perfiles autocontenidos** — todo lo específico de un stack vive en `profiles/<nombre>/`                                                                      | Nuevo código de stack solo en perfiles                              |
+| 3   | **Sin lógica de negocio de consumidores en perfiles** — roles, tenants o reglas de dominio de un proyecto van en `business/` del consumidor, no en el kit      | Revisar checklist y spec-impact del perfil                          |
+| 4   | **El agente ejecuta; el humano aprueba** en Ready (spec) y merge (PR). Estados = progreso; prompts = opcionales. Verify local antes de push/PR                 | Ready antes de codificar; verify antes de PR                        |
+| 5   | **Adopción incremental** — no exigir specs retrospectivos al adoptar SDD                                                                                       | adoption-guide y ADOPTION.md                                        |
+| 6   | **Documentación SDD solo en `paths.sdd`** — specs, BACKLOG y releases de iniciativas en `.github/docs/sdd/`; planificación histórica en `business/planning/`   | No crear specs en `core/` ni duplicar planning fuera de `business/` |
+| 7   | **Separación producto / proceso / versiones** — producto en raíz; proceso en `.github/docs/sdd/`; planning en `business/planning/`; SemVer en `docs/releases/` | Ver glosario en `docs/README.md` y ADOPTION.md                      |
 
 ---
 
@@ -33,8 +33,8 @@ Estas reglas **nunca** deben violarse en contribuciones al kit:
 Kit (producto)     → core/, profiles/, bootstrap/, cli/
 Proceso SDD        → .github/docs/sdd/
 Contexto producto  → .github/docs/business/ (este directorio)
-Mantenimiento      → docs/maintainers/ (análisis, roadmap histórico)
-Releases del kit   → docs/releases/ (SemVer del producto)
+Planificación      → .github/docs/business/planning/ (análisis, roadmap histórico)
+Releases del kit   → docs/releases/ (SemVer del producto; ver docs/README.md)
 ```
 
 ---
@@ -67,14 +67,16 @@ Releases del kit   → docs/releases/ (SemVer del producto)
 
 ## Glosario
 
-| Término           | Definición                                                         |
-| ----------------- | ------------------------------------------------------------------ |
-| **Kit**           | Este repositorio: metodología + perfiles + herramientas            |
-| **Instancia SDD** | `.github/docs/sdd/` en un proyecto (BACKLOG, specs, config)        |
-| **Consumidor**    | Proyecto que instala el kit como submodule                         |
-| **Mantenedor**    | Quien evoluciona el repositorio sdd-kit                            |
-| **Perfil**        | Adaptación SDD a un stack (`profiles/<nombre>/`)                   |
-| **Pre-SDD**       | Trabajo hecho antes de adoptar el ciclo formal (ID `—` en BACKLOG) |
+| Término              | Definición                                                            |
+| -------------------- | --------------------------------------------------------------------- |
+| **Kit**              | Este repositorio: metodología + perfiles + herramientas               |
+| **Instancia SDD**    | `.github/docs/sdd/` en un proyecto (BACKLOG, specs, config)           |
+| **Consumidor**       | Proyecto que instala el kit como submodule                            |
+| **Mantenedor**       | Quien evoluciona el repositorio sdd-kit                               |
+| **Perfil**           | Adaptación SDD a un stack (`profiles/<nombre>/`)                      |
+| **Pre-SDD**          | Trabajo hecho antes de adoptar el ciclo formal (ID `—` en BACKLOG)    |
+| **Release producto** | `docs/releases/vX.Y.Z.md` — notas SemVer para consumidores del kit    |
+| **Release campaña**  | `.github/docs/sdd/releases/vX.Y.Z/` — acta SDD de una versión del kit |
 
 ---
 

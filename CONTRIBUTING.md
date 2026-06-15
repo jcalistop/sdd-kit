@@ -6,7 +6,7 @@ Gracias por interesarte en mejorar el kit. Este repositorio es metodología, doc
 
 1. Revisa el [README](README.md) y [INSTALL.md](INSTALL.md) para entender el alcance del kit.
 2. Para cambios grandes (nuevo perfil, CLI, flujo SDD), abre un issue o comenta en uno existente.
-3. Planificación del mantenedor: [docs/maintainers/](docs/maintainers/). Tablero operativo: [.github/docs/sdd/BACKLOG.md](.github/docs/sdd/BACKLOG.md). Releases: [docs/releases/](docs/releases/).
+3. Planificación del mantenedor: [.github/docs/business/planning/](.github/docs/business/planning/). Tablero operativo: [.github/docs/sdd/BACKLOG.md](.github/docs/sdd/BACKLOG.md). Releases: [docs/releases/](docs/releases/).
 
 ## Desarrollo con SDD (mantenedores)
 
@@ -22,14 +22,14 @@ Antes de implementar cambios no triviales: fila en [BACKLOG.md](.github/docs/sdd
 
 ## Tipos de contribución
 
-| Tipo                               | Dónde                | Notas                                                                          |
-| ---------------------------------- | -------------------- | ------------------------------------------------------------------------------ |
-| Core (workflow, plantillas, guías) | `core/`              | Sin referencias a stacks concretos                                             |
-| Perfil de stack                    | `profiles/<nombre>/` | Sigue [core/templates/profile-template.md](core/templates/profile-template.md) |
-| Bootstrap / agentes                | `bootstrap/`         | Prompts en `agent-prompts/`; reglas Cursor se generan en install               |
-| CLI                                | `cli/`               | Python 3.10+, sin dependencias externas obligatorias                           |
-| Docs de mantenimiento              | `docs/maintainers/`  | Solo evolución del repo, no se copia a proyectos                               |
-| Releases del kit                   | `docs/releases/`     | CHANGELOG y notas `vX.Y.Z.md`; publicar en GitHub Releases                     |
+| Tipo                                 | Dónde                             | Notas                                                                          |
+| ------------------------------------ | --------------------------------- | ------------------------------------------------------------------------------ |
+| Core (workflow, plantillas, guías)   | `core/`                           | Sin referencias a stacks concretos                                             |
+| Perfil de stack                      | `profiles/<nombre>/`              | Sigue [core/templates/profile-template.md](core/templates/profile-template.md) |
+| Bootstrap / agentes                  | `bootstrap/`                      | Prompts en `agent-prompts/`; reglas Cursor se generan en install               |
+| CLI                                  | `cli/`                            | Python 3.10+, sin dependencias externas obligatorias                           |
+| Docs de planificación (mantenedores) | `.github/docs/business/planning/` | Solo evolución del repo, no se copia a proyectos                               |
+| Releases del kit                     | `docs/releases/`                  | CHANGELOG y notas `vX.Y.Z.md`; publicar en GitHub Releases                     |
 
 ## Flujo de trabajo
 

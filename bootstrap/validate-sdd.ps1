@@ -139,6 +139,16 @@ if (-not (Test-Path (Join-Path $SddPath "sdd.config.yaml"))) {
     Write-Warn "Falta sdd.config.yaml"
 } else {
     Write-Ok "sdd.config.yaml presente"
+    $configText = Get-Content (Join-Path $SddPath "sdd.config.yaml") -Raw -Encoding UTF8
+    if ($configText -match 'targets:\s*\[([^\]]*)\]' -and $Matches[1] -match 'cursor') {
+        $projectRoot = (Resolve-Path (Join-Path $SddPath "../../..")).Path
+        $manifestPath = Join-Path $projectRoot ".cursor/skills/.sdd-kit-manifest.json"
+        if (-not (Test-Path $manifestPath)) {
+            Write-Warn "agent.targets incluye cursor pero falta .cursor/skills/.sdd-kit-manifest.json (reinstalar con install-agents.py)"
+        } else {
+            Write-Ok "Manifest de skills SDD presente (.sdd-kit-manifest.json)"
+        }
+    }
 }
 
 $kitVersionScript = Join-Path $PSScriptRoot "kit-version.py"
@@ -152,6 +162,18 @@ if (Test-Path $kitVersionScript) {
             if ($line -match '^WARN:') { Write-Warn ($line -replace '^WARN:\s*', '') }
             elseif ($line -match '^OK:') { Write-Ok ($line -replace '^OK:\s*', '') }
         }
+    }
+}
+
+$projectRootForMaintainers = (Resolve-Path (Join-Path $SddPath "../../..")).Path
+$maintainersPath = Join-Path $projectRootForMaintainers "docs/maintainers"
+if (Test-Path $maintainersPath) {
+    $strayMaintainerDocs = Get-ChildItem -Path $maintainersPath -Filter "*.md" -File | Where-Object { $_.Name -ne "README.md" }
+    foreach ($stray in $strayMaintainerDocs) {
+        Write-Err "docs/maintainers/$($stray.Name) debe estar en business/planning/ (solo README.md stub permitido)"
+    }
+    if ($strayMaintainerDocs.Count -eq 0) {
+        Write-Ok "docs/maintainers/ sin archivos huérfanos (solo stub README)"
     }
 }
 

@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Describe el problema o la oportunidad. Revisa el [ROADMAP](https://github.com/jcalistop/sdd-kit/blob/main/docs/maintainers/ROADMAP.md) antes de proponer algo ya planificado.
+        Describe el problema o la oportunidad. Revisa el [ROADMAP](https://github.com/jcalistop/sdd-kit/blob/main/.github/docs/business/planning/ROADMAP.md) antes de proponer algo ya planificado.
 
   - type: dropdown
     id: area

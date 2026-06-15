@@ -18,7 +18,7 @@ Proyectos sin hoja de ruta, erráticos y de difícil mantención — especialmen
 | Audiencia      | Qué consume                           | Dónde                                                    |
 | -------------- | ------------------------------------- | -------------------------------------------------------- |
 | **Consumidor** | Metodología, perfiles, bootstrap, CLI | `core/`, `profiles/`, `bootstrap/`, `cli/` vía submodule |
-| **Mantenedor** | Evolución del kit, backlog, specs     | `.github/docs/sdd/`, `docs/maintainers/`                 |
+| **Mantenedor** | Evolución del kit, backlog, specs     | `.github/docs/sdd/`, `business/planning/`                |
 
 ## Módulos principales
 
@@ -33,4 +33,5 @@ Proyectos sin hoja de ruta, erráticos y de difícil mantención — especialmen
 
 - [domain-rules.md](domain-rules.md) — reglas que el agente debe respetar al evolucionar el kit
 - [../sdd/BACKLOG.md](../sdd/BACKLOG.md) — iniciativas en curso
+- [planning/](planning/) — análisis y roadmap histórico (mantenedores)
 - [../../README.md](../../README.md) — documentación pública del kit

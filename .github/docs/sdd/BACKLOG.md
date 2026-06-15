@@ -1,11 +1,11 @@
 # Backlog SDD — SDD Kit
 
-> Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [docs/maintainers/ROADMAP.md](../../../docs/maintainers/ROADMAP.md).
+> Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-004`.
+**Próximo ID disponible:** `SDD-006`.
 
-**Versión acumulada del kit:** `v1.1.0` (ver [docs/releases/](../../../docs/releases/)).
+**Versión acumulada del kit:** `v1.2.0` (ver [docs/releases/](../../../docs/releases/)).
 
 ---
 
@@ -20,19 +20,11 @@
 
 ---
 
-## Draft
+## In Build
 
-| ID  | Dominio | Título | Versión | Spec |
-| --- | ------- | ------ | ------- | ---- |
-| —   | —       | —      | —       | —    |
+_(vacío)_
 
 ## Ready
-
-| ID  | Dominio | Título | Versión | Spec |
-| --- | ------- | ------ | ------- | ---- |
-| —   | —       | —      | —       | —    |
-
-## In Build
 
 | ID  | Dominio | Título | Versión | Spec |
 | --- | ------- | ------ | ------- | ---- |
@@ -48,6 +40,8 @@
 
 | ID      | Dominio   | Título                                                                                            | Versión | Fecha      | Spec archivado                                                                                                                   |
 | ------- | --------- | ------------------------------------------------------------------------------------------------- | ------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| SDD-005 | docs      | Reordenamiento documentación kit                                                                  | v1.2.0  | 2026-06-15 | [archive/2026/docs/SDD-005-reordenamiento-documentacion-kit.md](archive/2026/docs/SDD-005-reordenamiento-documentacion-kit.md)   |
+| SDD-004 | bootstrap | Skills SDD en bootstrap (multi-agente)                                                            | v1.2.0  | 2026-06-15 | [archive/2026/bootstrap/SDD-004-agent-skills-cursor.md](archive/2026/bootstrap/SDD-004-agent-skills-cursor.md)                   |
 | SDD-003 | core      | Refactor ciclo SDD: momentos semánticos vs prompts                                                | v1.1.0  | 2026-06-12 | [archive/2026/core/SDD-003-refactor-ciclo-sdd-prompts.md](archive/2026/core/SDD-003-refactor-ciclo-sdd-prompts.md)               |
 | SDD-002 | bootstrap | Actualización del kit en instancias consumidoras                                                  | v1.1.0  | 2026-06-12 | [archive/2026/bootstrap/SDD-002-actualizacion-kit-instancias.md](archive/2026/bootstrap/SDD-002-actualizacion-kit-instancias.md) |
 | SDD-001 | profiles  | Perfil `sdd-kit` para mantenedores                                                                | v1.1.0  | 2026-06-12 | [archive/2026/profiles/SDD-001-perfil-sdd-kit.md](archive/2026/profiles/SDD-001-perfil-sdd-kit.md)                               |

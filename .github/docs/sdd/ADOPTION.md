@@ -19,15 +19,23 @@
 | **Producto**                  | `core/`, `profiles/`, `bootstrap/`, `cli/` | Lo que otros proyectos instalan con `init-sdd`                  |
 | **Proceso SDD**               | `.github/docs/sdd/` (este directorio)      | BACKLOG, specs, releases de iniciativas                         |
 | **Contexto del producto**     | `.github/docs/business/`                   | Qué es el kit y reglas que el agente no debe violar             |
-| **Planificación estratégica** | `docs/maintainers/`                        | Análisis y roadmap histórico (referencia, no tablero operativo) |
+| **Planificación estratégica** | `.github/docs/business/planning/`          | Análisis y roadmap histórico (referencia, no tablero operativo) |
 | **Versiones del kit**         | `docs/releases/`                           | Changelog SemVer del producto (`v1.0.0`, etc.)                  |
 
 **Anti-confusión:**
 
-- `docs/maintainers/ROADMAP.md` = snapshot estratégico histórico.
+- `business/planning/ROADMAP.md` = snapshot estratégico histórico.
 - `BACKLOG.md` (aquí) = tablero operativo de iniciativas.
 - `docs/releases/` = versiones publicadas del **kit**.
-- `.github/docs/sdd/releases/` = releases de **iniciativas SDD** del kit (cuando aplique).
+- `.github/docs/sdd/releases/` = releases de **iniciativas SDD** del kit (acta: specs + gates; narrativa en `docs/releases/`).
+
+### Contrato de releases (tres capas)
+
+| Capa                          | Ruta                                | Rol                                                | ¿Copiado por `init-sdd`?          |
+| ----------------------------- | ----------------------------------- | -------------------------------------------------- | --------------------------------- |
+| Release producto kit          | `docs/releases/vX.Y.Z.md`           | Notas para consumidores y GitHub Releases          | No (vive en submodule)            |
+| Cierre campaña SDD (kit)      | `.github/docs/sdd/releases/vX.Y.Z/` | Acta SDD: specs, gates, enlace al producto         | No                                |
+| Plantillas release consumidor | `core/releases/`                    | RUNBOOK y plantillas para **apps** que adoptan SDD | Sí → `.github/docs/sdd/releases/` |
 
 ## Etapas de adopción
 
@@ -45,6 +53,8 @@
 Todo cambio **no trivial** del kit entra al ciclo: Discovery → Draft → Ready → In Build → Validating → Released.
 
 **Primer spec completado:** `SDD-001` — perfil `profiles/sdd-kit/` ([archivo](archive/2026/profiles/SDD-001-perfil-sdd-kit.md)).
+
+**Campaña v1.2.0 cerrada (2026-06-15):** `SDD-004` — skills en `bootstrap/agent-skills/` ([archivo](archive/2026/bootstrap/SDD-004-agent-skills-cursor.md)); `SDD-005` — reordenamiento documentación ([archivo](archive/2026/docs/SDD-005-reordenamiento-documentacion-kit.md)); release [v1.2.0](releases/v1.2.0/release_v1.2.0.md).
 
 Cambios triviales (typo, bump deps, copy) → ID `—` en release; no requieren spec.
 
@@ -70,5 +80,6 @@ Prompts: [`core/prompt-catalog.md`](../../../core/prompt-catalog.md).
 
 - [BACKLOG.md](BACKLOG.md) — tablero operativo
 - [../business/domain-rules.md](../business/domain-rules.md) — reglas del producto kit
-- [docs/maintainers/ROADMAP.md](../../../docs/maintainers/ROADMAP.md) — roadmap histórico (fases 1–4)
-- [docs/maintainers/ANALYSIS.md](../../../docs/maintainers/ANALYSIS.md) — análisis crítico previo a la adopción
+- [../business/planning/ROADMAP.md](../business/planning/ROADMAP.md) — roadmap histórico (fases 1–4)
+- [../business/planning/ANALYSIS.md](../business/planning/ANALYSIS.md) — análisis crítico previo a la adopción
+- [../../../docs/README.md](../../../docs/README.md) — glosario capas `docs/` vs instancia SDD

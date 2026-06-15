@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "skills": [
+    {
+      "id": "sdd-draft-spec",
+      "prompt": "discovery-to-draft",
+      "description": "Crea un spec SDD en estado Draft. Usar cuando el usuario pida crear spec, draft spec, /create-spec o SDD-NNN nuevo.",
+      "triggers": [
+        "crear spec",
+        "draft spec",
+        "create-spec",
+        "discovery-to-draft"
+      ]
+    },
+    {
+      "id": "sdd-build-spec",
+      "prompt": "build-spec",
+      "description": "Aprueba e implementa un spec SDD (Draft→Ready→In Build) con verify antes de Git. Usar con build-spec o implementar SDD-NNN.",
+      "triggers": [
+        "build-spec",
+        "implementar SDD",
+        "sdd-build-spec"
+      ]
+    },
+    {
+      "id": "sdd-verify-implementation",
+      "prompt": "verify-implementation",
+      "description": "Ejecuta verify-implementation contra un spec antes de commit/push/PR.",
+      "triggers": [
+        "verify-implementation",
+        "verify",
+        "verificar SDD"
+      ]
+    },
+    {
+      "id": "sdd-open-pr",
+      "prompt": "open-pr",
+      "description": "Abre PR hacia rama de desarrollo tras verify OK y commit confirmado.",
+      "triggers": [
+        "open-pr",
+        "crear PR",
+        "abrir PR"
+      ]
+    },
+    {
+      "id": "sdd-close-release",
+      "prompt": "close-release",
+      "description": "Cierra campaña release SDD — archivar specs, releases/, validate-sdd.",
+      "triggers": [
+        "close-release",
+        "cerrar campaña",
+        "cerrar release"
+      ]
+    },
+    {
+      "id": "sdd-upgrade-kit",
+      "prompt": "upgrade-kit",
+      "description": "Actualiza submodule sdd-kit en la instancia consumidora.",
+      "triggers": [
+        "upgrade-kit",
+        "actualizar kit",
+        "upgrade kit"
+      ]
+    }
+  ]
+}

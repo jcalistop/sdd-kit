@@ -17,15 +17,16 @@ Metodología para desarrollar **con un plan antes de codear**. Pensada para equi
 
 ## Navegación rápida
 
-|     | Documento                                       | Para qué                                    |
-| --- | ----------------------------------------------- | ------------------------------------------- |
-| 🚀  | [Instalación](INSTALL.md)                       | Submodule, copia puntual o solo docs        |
-| 📖  | [Conceptos en 5 min](core/concepts.md)          | Primera vez con SDD + glosario              |
-| 🗺️  | [Adopción incremental](core/adoption-guide.md)  | Etapas 1–3 en proyectos nuevos o existentes |
-| 🤖  | [Configuración del agente](core/agent-setup.md) | Cursor, Claude, Codex, Copilot              |
-| 🧭  | [Ciclo SDD](core/workflow.md)                   | Estados, DoR/DoD, releases                  |
-| 🛠️  | [CLI](cli/README.md)                            | `validate`, `backlog`, `spec new`           |
-| 💬  | [Catálogo de prompts](core/prompt-catalog.md)   | Plantillas copy-paste por fase y adopción   |
+|     | Documento                                               | Para qué                                    |
+| --- | ------------------------------------------------------- | ------------------------------------------- |
+| 🚀  | [Instalación](INSTALL.md)                               | Submodule, copia puntual o solo docs        |
+| 📖  | [Conceptos en 5 min](core/concepts.md)                  | Primera vez con SDD + glosario              |
+| 🗺️  | [Adopción incremental](core/adoption-guide.md)          | Etapas 1–3 en proyectos nuevos o existentes |
+| 🤖  | [Configuración del agente](core/agent-setup.md)         | Cursor, Claude, Codex, Copilot              |
+| 🎯  | [Skills SDD](core/prompt-catalog.md#skills-cursor-v120) | 6 skills on-demand en Cursor (v1.2.0+)      |
+| 🧭  | [Ciclo SDD](core/workflow.md)                           | Estados, DoR/DoD, releases                  |
+| 🛠️  | [CLI](cli/README.md)                                    | `validate`, `backlog`, `spec new`           |
+| 💬  | [Catálogo de prompts](core/prompt-catalog.md)           | Plantillas copy-paste por fase y adopción   |
 
 ---
 
@@ -50,10 +51,10 @@ Metodología para desarrollar **con un plan antes de codear**. Pensada para equi
 
 ```mermaid
 flowchart LR
-    A["💡 Idea"] --> B["📄 Spec"]
-    B --> C["💻 Código"]
-    C --> D["🔍 Revisión"]
-    D --> E["🚀 Publicado"]
+    idea[Idea] --> spec[Spec]
+    spec --> code[Código]
+    code --> review[Revisión]
+    review --> release[Publicado]
 ```
 
 Más detalle: [`core/concepts.md`](core/concepts.md) · ciclo completo: [`core/workflow.md`](core/workflow.md).
@@ -113,7 +114,7 @@ python sdd-kit/cli/sdd.py init --profile laravel-filament --project "Mi App"
 
 Atajos: `./sdd-kit/bootstrap/init-sdd.sh` (bash) · `.\sdd-kit\bootstrap\init-sdd.ps1` (solo PowerShell).
 
-Por defecto detecta tu agente/IDE (`-Agent auto`) e instala las reglas SDD. Ver **[`core/agent-setup.md`](core/agent-setup.md)**.
+Por defecto detecta tu agente/IDE (`-Agent auto`) e instala reglas SDD y **skills Cursor** (`sdd-*`). Ver **[`core/agent-setup.md`](core/agent-setup.md)**.
 
 #### Proyecto existente — modo agente (recomendado)
 
@@ -169,7 +170,8 @@ Cuando salga una versión nueva del kit, no basta con `git pull` en el submodule
 
 1. Revisa [`core/upgrade-guide.md`](core/upgrade-guide.md) y el changelog en `docs/releases/`.
 2. Usa el prompt **`upgrade-kit`**: `python sdd-kit/cli/sdd.py prompt show upgrade-kit --full`
-3. Tras validar, actualiza `kit.installed_version` y [`UPGRADE-LOG.md`](.github/docs/sdd/UPGRADE-LOG.md) en tu instancia.
+3. Reinstala adaptadores si cambió `bootstrap/agent-skills/` o `agent-prompts/`: `python sdd-kit/bootstrap/install-agents.py`
+4. Tras validar, actualiza `kit.installed_version` y [`UPGRADE-LOG.md`](.github/docs/sdd/UPGRADE-LOG.md) en tu instancia.
 
 Detalle: **[INSTALL.md](INSTALL.md)** — sección «Actualizar el kit».
 
@@ -185,7 +187,22 @@ Detalle: **[INSTALL.md](INSTALL.md)** — sección «Actualizar el kit».
 | 🔍 Verificación   | Revisas evidencia               | Cruza spec, domain-rules y quality gates  |
 | ✅ PR             | **Revisas y mergeas**           | Publica tras verify OK; checklist y tests |
 
-Adaptadores instalados según tu herramienta (ver `sdd.config.yaml` → `agent.targets`). En Cursor: `sdd-core`, `sdd-agent-workflow`, `sdd-stack-<perfil>`.
+Adaptadores instalados según tu herramienta (ver `sdd.config.yaml` → `agent.targets`). En Cursor: reglas `sdd-core`, `sdd-agent-workflow`, `sdd-stack-<perfil>` y **6 skills** `sdd-*` (on-demand).
+
+### Skills SDD (Cursor, v1.2.0+)
+
+Fuente canónica: [`bootstrap/agent-skills/`](bootstrap/agent-skills/) · instalación: `python sdd-kit/bootstrap/install-agents.py` (también en `init-sdd` y tras `upgrade-kit`).
+
+| Trigger (ej.)                | Skill                       | Prompt kit              |
+| ---------------------------- | --------------------------- | ----------------------- |
+| crear spec / draft spec      | `sdd-draft-spec`            | `discovery-to-draft`    |
+| build-spec / implementar SDD | `sdd-build-spec`            | `build-spec`            |
+| verify-implementation        | `sdd-verify-implementation` | `verify-implementation` |
+| abrir PR                     | `sdd-open-pr`               | `open-pr`               |
+| cerrar campaña               | `sdd-close-release`         | `close-release`         |
+| upgrade-kit                  | `sdd-upgrade-kit`           | `upgrade-kit`           |
+
+**Precedencia:** skill > prompt copy-paste > regla on-demand. Claude/Codex/Copilot reciben el mismo mapa en el preámbulo del bloque marcado. Detalle: [`core/prompt-catalog.md`](core/prompt-catalog.md#skills-cursor-v120) · [`core/agent-setup.md`](core/agent-setup.md).
 
 > 🌱 **Desarrollo sano:** el agente también aplica [`core/healthy-development.md`](core/healthy-development.md) (evitar sobre-ingeniería y antipatrones).
 
@@ -220,11 +237,12 @@ Detalle: **[cli/README.md](cli/README.md)**.
 
 Tres capas — no hace falta memorizarlas el día 1:
 
-| Capa             | Dónde                                  | Qué es                                          |
-| ---------------- | -------------------------------------- | ----------------------------------------------- |
-| 🧩 **Core**      | `core/`                                | Ciclo SDD, plantillas, guías (igual para todos) |
-| 📦 **Perfil**    | `profiles/<stack>/`                    | Tests, deploy y checklist de tu stack           |
-| 📁 **Instancia** | `.github/docs/sdd/` en **tu** proyecto | Tu BACKLOG, specs y releases                    |
+| Capa             | Dónde                                  | Qué es                                                          |
+| ---------------- | -------------------------------------- | --------------------------------------------------------------- |
+| 🧩 **Core**      | `core/`                                | Ciclo SDD, plantillas, guías (igual para todos)                 |
+| 📦 **Perfil**    | `profiles/<stack>/`                    | Tests, deploy y checklist de tu stack                           |
+| 🔌 **Bootstrap** | `bootstrap/`                           | `init-sdd`, reglas (`agent-prompts/`), skills (`agent-skills/`) |
+| 📁 **Instancia** | `.github/docs/sdd/` en **tu** proyecto | Tu BACKLOG, specs y releases                                    |
 
 ```
 tu-proyecto/
@@ -255,12 +273,13 @@ tu-proyecto/
 
 ## Mantenedores del kit
 
-| Recurso                                                      | Uso                                                                |
-| ------------------------------------------------------------ | ------------------------------------------------------------------ |
-| [.github/docs/sdd/BACKLOG.md](.github/docs/sdd/BACKLOG.md)   | Tablero operativo de iniciativas (dogfooding SDD)                  |
-| [.github/docs/sdd/ADOPTION.md](.github/docs/sdd/ADOPTION.md) | Plan de adopción SDD en este repositorio                           |
-| [docs/maintainers/](docs/maintainers/)                       | Análisis y roadmap histórico (no se copia a proyectos)             |
-| [docs/releases/](docs/releases/)                             | Historial de versiones del kit ([v1.0.0](docs/releases/v1.0.0.md)) |
+| Recurso                                                            | Uso                                                                |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| [.github/docs/sdd/BACKLOG.md](.github/docs/sdd/BACKLOG.md)         | Tablero operativo de iniciativas (dogfooding SDD)                  |
+| [.github/docs/sdd/ADOPTION.md](.github/docs/sdd/ADOPTION.md)       | Plan de adopción SDD en este repositorio                           |
+| [.github/docs/business/planning/](.github/docs/business/planning/) | Análisis y roadmap histórico (no se copia a proyectos)             |
+| [docs/releases/](docs/releases/)                                   | Historial de versiones del kit ([v1.2.0](docs/releases/v1.2.0.md)) |
+| [docs/](docs/)                                                     | Glosario de capas en [docs/README.md](docs/README.md)              |
 
 Crear perfiles nuevos: **[`core/templates/profile-template.md`](core/templates/profile-template.md)**.
 

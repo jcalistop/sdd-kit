@@ -5,7 +5,7 @@
 >
 > **Primera vez con SDD?** Empieza por [`concepts.md`](concepts.md) (5 min) y vuelve aqui.
 
-**Relacionado:** [`concepts.md`](concepts.md) · [`workflow.md`](workflow.md) · [`operations.md`](operations.md) · [`../docs/maintainers/ROADMAP.md`](../docs/maintainers/ROADMAP.md)
+**Relacionado:** [`concepts.md`](concepts.md) · [`workflow.md`](workflow.md) · [`operations.md`](operations.md) · [`.github/docs/business/planning/ROADMAP.md`](../.github/docs/business/planning/ROADMAP.md)
 
 ---
 
@@ -57,8 +57,8 @@ Por defecto se detecta el agente/IDE e instalan instrucciones (Cursor, Claude Co
 3. **Completar `business/README.md`:** que hace el sistema, roles, modulos principales.
 4. **Opcional:** copiar y completar `business/domain-rules.md` desde `templates/business-domain-template.md` si el proyecto tiene reglas de negocio transversales (autorizacion, filtros por tenant, periodos activos, etc.).
 5. **Inventariar el BACKLOG** — no crear specs retrospectivos:
-   - Listar 3–10 capacidades ya existentes en _Released_ con ID `—` y nota "pre-SDD".
-   - Agregar 3–5 iniciativas reales como `Discovery` (lo que viene ahora).
+    - Listar 3–10 capacidades ya existentes en _Released_ con ID `—` y nota "pre-SDD".
+    - Agregar 3–5 iniciativas reales como `Discovery` (lo que viene ahora).
 6. **Validar:** `.\sdd-kit\bootstrap\validate-sdd.ps1` (o `.sh`) debe pasar sin errores criticos. Prompt: `validate-setup` en [prompt-catalog.md](prompt-catalog.md).
 
 ### Que NO hacer en Etapa 1
@@ -227,8 +227,8 @@ Ajustar `sdd.config.yaml`:
 
 ```yaml
 project:
-  development_branch: main # o crear rama dev antes de Etapa 2
-  production_branch: main
+    development_branch: main # o crear rama dev antes de Etapa 2
+    production_branch: main
 ```
 
 Recomendacion: crear rama `dev` antes de Etapa 2 para separar integracion de produccion.
@@ -236,10 +236,10 @@ Recomendacion: crear rama `dev` antes de Etapa 2 para separar integracion de pro
 ### "El agente no sigue SDD"
 
 1. Revisar `sdd.config.yaml` → `agent.targets` y que existan los archivos del adaptador (ver [`agent-setup.md`](agent-setup.md)):
-   - Cursor: `.cursor/rules/sdd-core.mdc`, `sdd-agent-workflow.mdc`, `sdd-workflow-reference.mdc` y `sdd-stack-<perfil>.mdc`
-   - Claude Code: bloque SDD en `CLAUDE.md`
-   - Codex: bloque SDD en `AGENTS.md`
-   - Copilot: `.github/copilot-instructions.md`
+    - Cursor: `.cursor/rules/sdd-core.mdc`, `sdd-agent-workflow.mdc`, `sdd-workflow-reference.mdc` y `sdd-stack-<perfil>.mdc`
+    - Claude Code: bloque SDD en `CLAUDE.md`
+    - Codex: bloque SDD en `AGENTS.md`
+    - Copilot: `.github/copilot-instructions.md`
 2. Reinstalar: `python sdd-kit/bootstrap/install-agents.py install --agent auto --profile <perfil>`
 3. Pedir al agente: "Sigue sdd-agent-workflow: crea spec Draft para [idea]".
 4. Ejecutar `validate-sdd` tras cada cambio documental.

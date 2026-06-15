@@ -73,6 +73,113 @@ def combined_body(profile: str) -> str:
     return "\n\n---\n\n".join(parts)
 
 
+def agent_skills_dir() -> Path:
+    return bootstrap_dir() / "agent-skills"
+
+
+def load_skills_manifest() -> dict:
+    path = agent_skills_dir() / "manifest.json"
+    if not path.is_file():
+        return {"version": "1.0", "skills": []}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def read_dev_branch(target: Path, sdd_path: str) -> str:
+    config_path = target / sdd_path / "sdd.config.yaml"
+    if not config_path.is_file():
+        return "dev"
+    for line in config_path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if stripped.startswith("development_branch:"):
+            return stripped.split(":", 1)[1].strip().strip('"').strip("'")
+    return "dev"
+
+
+def read_stack_skills_gates(profile: str) -> str:
+    path = agent_skills_dir() / "stacks" / f"{profile}.md"
+    if path.is_file():
+        return path.read_text(encoding="utf-8").strip()
+    return "| Gate | Comando | Cuándo |\n| --- | --- | --- |\n| Validación SDD | `sdd validate` | Tras cambios en specs/BACKLOG |"
+
+
+def skill_render_context(
+    target: Path,
+    profile: str,
+    sdd_path: str,
+    kit_path: str,
+) -> dict[str, str]:
+    return {
+        "SDD_PATH": sdd_path.replace("\\", "/"),
+        "KIT_PATH": kit_path.replace("\\", "/"),
+        "DEV_BRANCH": read_dev_branch(target, sdd_path),
+        "PROFILE": profile,
+        "STACK_GATES": read_stack_skills_gates(profile),
+    }
+
+
+def build_skills_map_table() -> str:
+    manifest = load_skills_manifest()
+    lines = [
+        "| Trigger (ej.) | Skill Cursor | Prompt kit |",
+        "| --- | --- | --- |",
+    ]
+    for entry in manifest.get("skills", []):
+        triggers = entry.get("triggers", [])
+        trigger_sample = triggers[0] if triggers else "—"
+        lines.append(
+            f"| {trigger_sample} | `{entry['id']}` | `{entry.get('prompt', '—')}` |"
+        )
+    return "\n".join(lines)
+
+
+def build_skills_preamble(sdd_path: str, kit_path: str) -> str:
+    tpl = load_template("skills-map.tpl")
+    return render_template(
+        tpl,
+        SDD_PATH=sdd_path.replace("\\", "/"),
+        KIT_PATH=kit_path.replace("\\", "/"),
+        SKILLS_MAP_TABLE=build_skills_map_table(),
+    ).strip()
+
+
+def install_cursor_skills(
+    target: Path,
+    profile: str,
+    sdd_path: str,
+    kit_path: str,
+) -> None:
+    manifest = load_skills_manifest()
+    skills_root = target / ".cursor" / "skills"
+    skills_root.mkdir(parents=True, exist_ok=True)
+    context = skill_render_context(target, profile, sdd_path, kit_path)
+
+    managed_ids = {entry["id"] for entry in manifest.get("skills", [])}
+    for skill_id in managed_ids:
+        dest_dir = skills_root / skill_id
+        if dest_dir.exists():
+            shutil.rmtree(dest_dir)
+        dest_dir.mkdir(parents=True)
+
+        src_dir = agent_skills_dir() / skill_id
+        if not src_dir.is_dir():
+            raise FileNotFoundError(f"Skill no encontrada en kit: {src_dir}")
+
+        for src_file in src_dir.iterdir():
+            if not src_file.is_file():
+                continue
+            content = render_template(src_file.read_text(encoding="utf-8"), **context)
+            write_file(dest_dir / src_file.name, content)
+
+    marker = {
+        "managed_skills": sorted(managed_ids),
+        "kit_path": kit_path.replace("\\", "/"),
+    }
+    write_file(
+        skills_root / ".sdd-kit-manifest.json",
+        json.dumps(marker, indent=2) + "\n",
+    )
+
+
 def merge_marked_block(existing: str, new_block: str) -> str:
     pattern = re.compile(
         re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END),
@@ -143,9 +250,12 @@ def install_marked_file(
     preamble_tpl: str,
     profile: str,
     sdd_path: str,
+    kit_path: str,
 ) -> None:
     file_path = target / rel_path
-    preamble = render_template(preamble_tpl, SDD_PATH=sdd_path)
+    base_preamble = render_template(preamble_tpl, SDD_PATH=sdd_path)
+    skills_block = build_skills_preamble(sdd_path, kit_path)
+    preamble = f"{base_preamble.strip()}\n\n{skills_block}"
     body = combined_body(profile)
     section_tpl = load_template("marked-section.tpl")
     new_block = render_template(section_tpl, PREAMBLE=preamble.strip(), BODY=body.strip())
@@ -153,33 +263,36 @@ def install_marked_file(
     write_file(file_path, merge_marked_block(existing, new_block))
 
 
-def install_claude(target: Path, profile: str, sdd_path: str) -> None:
+def install_claude(target: Path, profile: str, sdd_path: str, kit_path: str) -> None:
     install_marked_file(
         target,
         "CLAUDE.md",
         load_template("preamble-claude.tpl"),
         profile,
         sdd_path,
+        kit_path,
     )
 
 
-def install_codex(target: Path, profile: str, sdd_path: str) -> None:
+def install_codex(target: Path, profile: str, sdd_path: str, kit_path: str) -> None:
     install_marked_file(
         target,
         "AGENTS.md",
         load_template("preamble-codex.tpl"),
         profile,
         sdd_path,
+        kit_path,
     )
 
 
-def install_copilot(target: Path, profile: str, sdd_path: str) -> None:
+def install_copilot(target: Path, profile: str, sdd_path: str, kit_path: str) -> None:
     install_marked_file(
         target,
         ".github/copilot-instructions.md",
         load_template("preamble-copilot.tpl"),
         profile,
         sdd_path,
+        kit_path,
     )
 
 
@@ -350,6 +463,15 @@ def update_sdd_config(target: Path, sdd_path: str, agents: list[str], install_mo
     config_path.write_text("\n".join(out).rstrip() + "\n", encoding="utf-8")
 
 
+def resolve_kit_path(target: Path, kit: Path, sdd_path: str, kit_path_arg: str | None) -> str:
+    if kit_path_arg:
+        return kit_path_arg.replace("\\", "/").strip("/")
+    try:
+        return kit.relative_to(target).as_posix()
+    except ValueError:
+        return sdd_path.replace("\\", "/").rsplit("/", 1)[0] + "/sdd-kit"
+
+
 def install_agents(
     target: Path,
     kit: Path,
@@ -357,10 +479,13 @@ def install_agents(
     agents: list[str],
     sdd_path: str,
     install_mode: str,
+    kit_path_arg: str | None = None,
 ) -> None:
     if not agents:
         print("SDD Kit: sin adaptadores de agente instalados.")
         return
+
+    kit_path = resolve_kit_path(target, kit, sdd_path, kit_path_arg)
 
     stack_path = bootstrap_dir() / "agent-prompts" / "stacks" / f"{profile}.md"
     if not stack_path.is_file():
@@ -368,14 +493,18 @@ def install_agents(
 
     installers = {
         "cursor": lambda: install_cursor(target, profile),
-        "claude": lambda: install_claude(target, profile, sdd_path),
-        "codex": lambda: install_codex(target, profile, sdd_path),
-        "copilot": lambda: install_copilot(target, profile, sdd_path),
+        "claude": lambda: install_claude(target, profile, sdd_path, kit_path),
+        "codex": lambda: install_codex(target, profile, sdd_path, kit_path),
+        "copilot": lambda: install_copilot(target, profile, sdd_path, kit_path),
     }
 
     for name in agents:
         installers[name]()
         print(f"SDD Kit: adaptador '{name}' instalado.")
+
+    if "cursor" in agents and load_skills_manifest().get("skills"):
+        install_cursor_skills(target, profile, sdd_path, kit_path)
+        print("SDD Kit: skills Cursor SDD instaladas.")
 
     update_sdd_config(target, sdd_path, agents, install_mode)
 
@@ -389,7 +518,15 @@ def cmd_install(args: argparse.Namespace) -> int:
 
     try:
         agents, install_mode = resolve_agents(agent_arg, target, args.no_prompt)
-        install_agents(target, kit, args.profile, agents, args.sdd_path, install_mode)
+        install_agents(
+            target,
+            kit,
+            args.profile,
+            agents,
+            args.sdd_path,
+            install_mode,
+            args.kit_path,
+        )
     except (ValueError, FileNotFoundError) as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 1
@@ -421,6 +558,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="auto | none | cursor | claude | codex | copilot | lista separada por comas",
     )
     install_p.add_argument("--sdd-path", default=".github/docs/sdd", help="Ruta instancia SDD")
+    install_p.add_argument(
+        "--kit-path",
+        default=None,
+        help="Ruta relativa al kit en el proyecto (default: relativa a --kit)",
+    )
     install_p.add_argument("--no-prompt", action="store_true", help="Sin menú interactivo (CI)")
     install_p.add_argument(
         "--cursor",

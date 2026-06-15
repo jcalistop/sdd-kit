@@ -7,6 +7,8 @@
 
 **Relacionado:** [`workflow.md`](workflow.md) · [`adoption-guide.md`](adoption-guide.md) · [`agent-setup.md`](agent-setup.md)
 
+**Notas para mantenedores (arquitectura del catálogo):** [`.github/docs/business/planning/prompt-catalog-meta.md`](../.github/docs/business/planning/prompt-catalog-meta.md)
+
 ---
 
 ## Momentos semánticos vs prompts
@@ -115,6 +117,23 @@ El ciclo principal no es un flowchart lineal: ver secuencia arriba y [`workflow.
 | `implement-spec` | `build-spec` |
 
 Fichas: [`prompts/`](prompts/) — o `sdd prompt show <id> --full`
+
+---
+
+## Skills Cursor (v1.2.0+)
+
+Activación on-demand en Cursor. Fuente: `bootstrap/agent-skills/manifest.json`. Instalación: `install-agents.py` (solo carpetas `sdd-*` del manifest).
+
+| Trigger (ej.)                | Skill                       | Prompt kit              |
+| ---------------------------- | --------------------------- | ----------------------- |
+| crear spec / draft spec      | `sdd-draft-spec`            | `discovery-to-draft`    |
+| build-spec / implementar SDD | `sdd-build-spec`            | `build-spec`            |
+| verify-implementation        | `sdd-verify-implementation` | `verify-implementation` |
+| abrir PR                     | `sdd-open-pr`               | `open-pr`               |
+| cerrar campaña               | `sdd-close-release`         | `close-release`         |
+| upgrade-kit                  | `sdd-upgrade-kit`           | `upgrade-kit`           |
+
+**Precedencia:** skill > prompt copy-paste > regla on-demand. Claude/Codex/Copilot reciben el mismo mapa en el preambulo del bloque marcado.
 
 ---
 

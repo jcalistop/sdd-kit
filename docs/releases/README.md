@@ -1,17 +1,27 @@
 # Releases del SDD Kit
 
-> Historial de **versiones del repositorio** `sdd-kit`.  
-> **No** confundir con `core/releases/` del kit: esa carpeta es la metodología para publicar versiones de **tu aplicación** cuando adoptas SDD.
+> Historial de **versiones del repositorio** `sdd-kit`.
+
+## Contrato de capas (releases)
+
+| Capa                              | Ruta                                     | Rol                                                   | ¿Copiado por `init-sdd`?          |
+| --------------------------------- | ---------------------------------------- | ----------------------------------------------------- | --------------------------------- |
+| **Release producto kit**          | `docs/releases/vX.Y.Z.md` (esta carpeta) | Notas para consumidores y GitHub Releases             | No (vive en submodule)            |
+| **Cierre campaña SDD (kit)**      | `.github/docs/sdd/releases/vX.Y.Z/`      | Acta SDD: specs archivados, gates, enlace al producto | No                                |
+| **Plantillas release consumidor** | `core/releases/`                         | RUNBOOK para **apps** que adoptan SDD                 | Sí → `.github/docs/sdd/releases/` |
+
+Glosario ampliado: [docs/README.md](../README.md).
 
 ## Dónde mirar
 
-| Recurso                                                          | Uso                                                |
-| ---------------------------------------------------------------- | -------------------------------------------------- |
-| [CHANGELOG.md](CHANGELOG.md)                                     | Resumen técnico de cambios por versión             |
-| [v1.1.0.md](v1.1.0.md)                                           | Notas de la versión actual (upgrade de instancias) |
-| [v1.0.0.md](v1.0.0.md)                                           | Primera versión estable                            |
-| [v0.1.0.md](v0.1.0.md)                                           | Notas de la pre-release inicial                    |
-| [GitHub Releases](https://github.com/jcalistop/sdd-kit/releases) | Publicación oficial y descargas por etiqueta       |
+| Recurso                                                          | Uso                                     |
+| ---------------------------------------------------------------- | --------------------------------------- |
+| [CHANGELOG.md](CHANGELOG.md)                                     | Resumen técnico de cambios por versión  |
+| [v1.2.0.md](v1.2.0.md)                                           | Última versión (skills + documentación) |
+| [v1.1.0.md](v1.1.0.md)                                           | Perfil sdd-kit y upgrade en instancias  |
+| [v1.0.0.md](v1.0.0.md)                                           | Primera versión estable                 |
+| [v0.1.0.md](v0.1.0.md)                                           | Pre-release inicial                     |
+| [GitHub Releases](https://github.com/jcalistop/sdd-kit/releases) | Publicación oficial por etiqueta        |
 
 ## Convención
 
@@ -23,4 +33,4 @@
 
 ## Planificación del kit
 
-Roadmap y análisis (no son notas de versión): [docs/maintainers/](../maintainers/)
+Roadmap y análisis (no son notas de versión): [`.github/docs/business/planning/`](../.github/docs/business/planning/)

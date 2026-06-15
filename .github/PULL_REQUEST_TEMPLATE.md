@@ -9,7 +9,7 @@
 - [ ] Core / workflow (`core/`)
 - [ ] Bootstrap / agentes (`bootstrap/`)
 - [ ] CLI (`cli/`)
-- [ ] Mantenedores (`docs/maintainers/`)
+- [ ] Planificación mantenedores (`.github/docs/business/planning/`)
 - [ ] Releases del kit (`docs/releases/`)
 - [ ] Otro: \_
 
