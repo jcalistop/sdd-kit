@@ -269,7 +269,7 @@ Plantillas copy-paste para adopcion, ciclo SDD y excepciones:
 - Copiado a instancia con `init-sdd`
 - Notas de mantenimiento: [`docs/maintainers/PROMPT-CATALOG.md`](PROMPT-CATALOG.md)
 
-Complementa las reglas always-on del agente; no las reemplaza. Cursor Skills (`/sdd-adopt`, etc.) quedan como evolucion opcional sobre este catalogo.
+Complementa las reglas always-on del agente; no las reemplaza. **Skills Cursor** (`sdd-draft-spec`, `sdd-build-spec`, etc.) implementadas en v1.2.0 — ver `bootstrap/agent-skills/` y `agent-setup.md`.
 
 #### 3.5 Dashboard de metricas (opcional, canvas)
 

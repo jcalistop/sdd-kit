@@ -139,6 +139,16 @@ if (-not (Test-Path (Join-Path $SddPath "sdd.config.yaml"))) {
     Write-Warn "Falta sdd.config.yaml"
 } else {
     Write-Ok "sdd.config.yaml presente"
+    $configText = Get-Content (Join-Path $SddPath "sdd.config.yaml") -Raw -Encoding UTF8
+    if ($configText -match 'targets:\s*\[([^\]]*)\]' -and $Matches[1] -match 'cursor') {
+        $projectRoot = (Resolve-Path (Join-Path $SddPath "../../..")).Path
+        $manifestPath = Join-Path $projectRoot ".cursor/skills/.sdd-kit-manifest.json"
+        if (-not (Test-Path $manifestPath)) {
+            Write-Warn "agent.targets incluye cursor pero falta .cursor/skills/.sdd-kit-manifest.json (reinstalar con install-agents.py)"
+        } else {
+            Write-Ok "Manifest de skills SDD presente (.sdd-kit-manifest.json)"
+        }
+    }
 }
 
 $kitVersionScript = Join-Path $PSScriptRoot "kit-version.py"

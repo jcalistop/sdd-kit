@@ -83,15 +83,16 @@ diff -rq sdd-kit/core .github/docs/sdd --exclude=prompts --exclude=profiles
 - `BACKLOG.md`, `specs/`, `archive/` de tu proyecto → **nunca** reemplazar desde el kit.
 - `prompts/` y `prompt-catalog.md` → copiar solo entradas o fichas faltantes.
 
-### 4. Reinstalar adaptadores
+### 4. Reinstalar adaptadores y skills
 
-Si cambió `bootstrap/agent-prompts/`:
+Si cambió `bootstrap/agent-prompts/` o `bootstrap/agent-skills/`:
 
 ```bash
 python sdd-kit/bootstrap/install-agents.py install \
   --profile <PERFIL> \
   --agent auto \
-  --sdd-path .github/docs/sdd
+  --sdd-path .github/docs/sdd \
+  --kit-path sdd-kit
 ```
 
 Ver [`agent-setup.md`](agent-setup.md).
@@ -116,8 +117,8 @@ Actualiza `sdd.config.yaml`:
 
 ```yaml
 kit:
-  installed_version: "vX.Y.Z"
-  installed_at: "YYYY-MM-DD"
+    installed_version: "vX.Y.Z"
+    installed_at: "YYYY-MM-DD"
 ```
 
 **Si el humano rechaza un merge:** documenta archivos pendientes en Notas; **no** actualices `installed_version` hasta completar o acordar deuda.

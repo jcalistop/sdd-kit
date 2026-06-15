@@ -1,0 +1,11 @@
+{
+  "managed_skills": [
+    "sdd-build-spec",
+    "sdd-close-release",
+    "sdd-draft-spec",
+    "sdd-open-pr",
+    "sdd-upgrade-kit",
+    "sdd-verify-implementation"
+  ],
+  "kit_path": "."
+}

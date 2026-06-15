@@ -46,6 +46,8 @@ Todo cambio **no trivial** del kit entra al ciclo: Discovery → Draft → Ready
 
 **Primer spec completado:** `SDD-001` — perfil `profiles/sdd-kit/` ([archivo](archive/2026/profiles/SDD-001-perfil-sdd-kit.md)).
 
+**Campaña v1.2.0 cerrada (2026-06-15):** `SDD-004` — skills en `bootstrap/agent-skills/` ([archivo](archive/2026/bootstrap/SDD-004-agent-skills-cursor.md)); release [v1.2.0](releases/v1.2.0/release_v1.2.0.md).
+
 Cambios triviales (typo, bump deps, copy) → ID `—` en release; no requieren spec.
 
 ### Etapa 3 — Cobertura completa (opcional, mes 2+)

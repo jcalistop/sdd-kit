@@ -7,6 +7,25 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [1.2.0] - 2026-06-15
+
+Ver [v1.2.0.md](v1.2.0.md).
+
+### Añadido
+
+- `bootstrap/agent-skills/` — 6 skills SDD + `manifest.json` y fragmentos por stack (SDD-004)
+- `install-agents.py` — `install_cursor_skills()`, mapa skills en preambulos multi-agente, `--kit-path`
+- `bootstrap/test_install_skills.py` — tests de instalación
+- `validate-sdd` — advertencia si falta `.sdd-kit-manifest.json` con Cursor en targets
+- Sección Skills en `core/prompt-catalog.md` y `core/agent-setup.md`
+
+### Cambiado
+
+- `upgrade-guide.md` — reinstalar skills tras cambios en `agent-skills/`
+- CI valida `agent-skills/manifest.json` y ejecuta tests de skills
+
+---
+
 ## [1.1.0] - 2026-06-12
 
 Ver [v1.1.0.md](v1.1.0.md).
