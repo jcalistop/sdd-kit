@@ -39,8 +39,8 @@ release:
   tag_prefix: v
 
 kit:
-  installed_version: "v1.2.0"
-  installed_at: "2026-06-15"
+  installed_version: "v1.2.1"
+  installed_at: "2026-06-17"
 
 agent:
   targets: [cursor]

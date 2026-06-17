@@ -7,6 +7,17 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [1.2.1] - 2026-06-17
+
+Ver [v1.2.1.md](v1.2.1.md).
+
+### Corregido
+
+- `install-agents.py` — `update_sdd_config()` ya no elimina el bloque `kit:` al reinstalar `agent:` en `sdd.config.yaml`
+- `bootstrap/test_install_skills.py` — test de regresión para preservación del bloque `kit`
+
+---
+
 ## [1.2.0] - 2026-06-15
 
 Ver [v1.2.0.md](v1.2.0.md).
