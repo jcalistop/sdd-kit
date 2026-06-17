@@ -3,7 +3,7 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-006`.
+**Próximo ID disponible:** `SDD-007`.
 
 **Versión acumulada del kit:** `v1.2.1` (ver [docs/releases/](../../../docs/releases/)).
 
@@ -16,9 +16,16 @@
 | cli      | Suite pytest para la CLI (`backlog`, `prompts`, round-trip)         | —       | Prioridad media; CI hoy solo `compileall`   |
 | docs     | Validación en producción: ciclo SDD con proyecto consumidor externo | —       | Dogfooding en repo ajeno                    |
 | cli      | Dashboard Canvas de métricas SDD                                    | —       | Opcional; `sdd metrics` cubre reporte texto |
+| core     | Contrato safe-git agente — **SDD-006 en Draft**                     | v1.3.0  | Incidente consumidor 2026-06-17             |
 | profiles | Perfiles adicionales (node-express, go-api, vue-vite) a demanda     | —       | Baja prioridad                              |
 
 ---
+
+## Draft
+
+| ID      | Dominio | Título                                          | Versión | Spec                                                      |
+| ------- | ------- | ----------------------------------------------- | ------- | --------------------------------------------------------- |
+| SDD-006 | core    | Contrato safe-git para agente (Git destructivo) | v1.3.0  | [SDD-006](specs/core/SDD-006-contrato-safe-git-agente.md) |
 
 ## In Build
 
