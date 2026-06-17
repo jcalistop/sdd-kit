@@ -439,26 +439,18 @@ def update_sdd_config(target: Path, sdd_path: str, agents: list[str], install_mo
     ]
 
     out: list[str] = []
-    skip = False
-    has_agent = False
     i = 0
     while i < len(lines):
         line = lines[i]
         if line.startswith("agent:"):
-            has_agent = True
-            skip = True
             i += 1
             while i < len(lines) and (lines[i].startswith("  ") or lines[i].strip() == ""):
                 i += 1
             continue
-        if not skip:
-            out.append(line)
+        out.append(line)
         i += 1
 
-    if has_agent:
-        out.extend(agent_block)
-    else:
-        out.extend(agent_block)
+    out.extend(agent_block)
 
     config_path.write_text("\n".join(out).rstrip() + "\n", encoding="utf-8")
 

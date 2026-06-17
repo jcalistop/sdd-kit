@@ -77,6 +77,24 @@ class InstallSkillsTest(unittest.TestCase):
         self.assertIn("sdd-build-spec", table)
         self.assertIn("build-spec", table)
 
+    def test_update_sdd_config_preserves_kit_block(self) -> None:
+        config_path = self.target / ".github" / "docs" / "sdd" / "sdd.config.yaml"
+        config_path.write_text(
+            "project:\n  name: Test\n\n"
+            "agent:\n  targets: [claude]\n  install_mode: auto\n\n"
+            'kit:\n  installed_version: "v1.2.0"\n  installed_at: "2026-06-15"\n',
+            encoding="utf-8",
+        )
+
+        ia.update_sdd_config(self.target, ".github/docs/sdd", ["cursor"], "explicit")
+
+        content = config_path.read_text(encoding="utf-8")
+        self.assertIn('installed_version: "v1.2.0"', content)
+        self.assertIn('installed_at: "2026-06-15"', content)
+        self.assertIn("targets: [cursor]", content)
+        self.assertIn("install_mode: explicit", content)
+        self.assertNotIn("targets: [claude]", content)
+
 
 if __name__ == "__main__":
     unittest.main()
