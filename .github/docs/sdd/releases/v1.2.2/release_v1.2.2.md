@@ -2,14 +2,14 @@
 
 ## Cabecera
 
-| Campo                | Valor                                         |
-| -------------------- | --------------------------------------------- |
-| **Versión**          | **`v1.2.2`**                                  |
-| **Fecha cierre**     | 2026-07-14                                    |
-| **Tipo**             | minor / bootstrap                             |
-| **Responsable**      | equipo                                        |
-| **Campaña anterior** | [v1.2.1](release_v1.2.1.md)                   |
-| **Changelog kit**    | —                                             |
+| Campo                | Valor                       |
+| -------------------- | --------------------------- |
+| **Versión**          | **`v1.2.2`**                |
+| **Fecha cierre**     | 2026-07-14                  |
+| **Tipo**             | minor / bootstrap           |
+| **Responsable**      | equipo                      |
+| **Campaña anterior** | [v1.2.1](release_v1.2.1.md) |
+| **Changelog kit**    | —                           |
 
 ---
 
@@ -21,15 +21,15 @@ Optimización de consumo de tokens en reglas Cursor (`alwaysApply`), skills y pi
 
 ## Specs incluidas
 
-| ID      | Dominio   | Spec archivado                                                                                                     |
-| ------- | --------- | ------------------------------------------------------------------------------------------------------------------ |
+| ID      | Dominio   | Spec archivado                                                                                                               |
+| ------- | --------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | SDD-006 | bootstrap | [archive/2026/bootstrap/SDD-006-optimizacion-tokens-kit.md](../../archive/2026/bootstrap/SDD-006-optimizacion-tokens-kit.md) |
 
 ## Cambios sin spec
 
-| Dominio   | Cambio                                              |
-| --------- | --------------------------------------------------- |
-| bootstrap | Dogfooding: spec SDD-006 en `specs/bootstrap/`       |
+| Dominio   | Cambio                                         |
+| --------- | ---------------------------------------------- |
+| bootstrap | Dogfooding: spec SDD-006 en `specs/bootstrap/` |
 
 ---
 
