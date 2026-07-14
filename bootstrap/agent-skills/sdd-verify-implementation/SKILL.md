@@ -9,19 +9,19 @@ Gate **verify-implementation** obligatorio antes de publicación en Git comparti
 
 **Prohibido sin confirmación humana:** `git commit`, `git push`, abrir PR.
 
-## Rutas
+## Checklist
 
-| Artefacto         | Ruta                                                          |
-| ----------------- | ------------------------------------------------------------- |
-| Spec              | `{{SDD_PATH}}/specs/<dominio>/SDD-NNN-*.md`                   |
-| Verify            | `.cursor/rules/sdd-workflow-reference.mdc`                    |
-| Plantilla reporte | [sdd-build-spec/reference.md](../sdd-build-spec/reference.md) |
+- [ ] Quality gates del perfil en verde (local)
+- [ ] Criterios de aceptación del spec verificados (happy + error) con evidencia
+- [ ] Reglas de `domain-rules.md` verificadas (o No aplica documentado)
+- [ ] Arquitectura sana — checks: YAGNI, DRY, SRP, sin debug (`dd()`, `dump()`), sin over-engineering
+- [ ] `python {{KIT_PATH}}/cli/sdd.py validate` sin errores
+
+Si falla: **no** `push` ni PR. Corregir o documentar deuda con acuerdo humano.
 
 ## Procedimiento
 
-Ejecutar **§ B** de [`sdd-build-spec`](../sdd-build-spec/SKILL.md) (sin § A):
-
-1. Leer spec, `domain-rules.md`, `sdd-workflow-reference`.
+1. Leer spec, `domain-rules.md`.
 2. Criterios → evidencia; arquitectura sana.
 3. `python {{KIT_PATH}}/cli/sdd.py validate`
 4. Quality gates si hubo cambios de producto en el working tree.

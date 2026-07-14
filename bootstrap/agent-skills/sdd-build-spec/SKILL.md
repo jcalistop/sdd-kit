@@ -9,6 +9,8 @@ Aprobar e implementar un spec **SDD-NNN** según `sdd-agent-workflow`. Incluye g
 
 **Prohibido sin confirmación humana:** `git commit`, `git push`, abrir PR.
 
+**Lectura previa:** `BACKLOG.md`, `sdd.config.yaml`, `business/domain-rules.md`.
+
 ## Rutas (instancia consumidora)
 
 | Artefacto         | Ruta                                        |
@@ -25,7 +27,7 @@ Aprobar e implementar un spec **SDD-NNN** según `sdd-agent-workflow`. Incluye g
 
 - Humano aprueba spec Draft (`build-spec`, frase de aprobación).
 - Retoma implementación en **Ready** o **In Build**.
-- Solo verify → `sdd-verify-implementation` (§ B sin § A).
+- Solo verify → usar skill `sdd-verify-implementation` (autosuficiente, checklist inline).
 
 ---
 

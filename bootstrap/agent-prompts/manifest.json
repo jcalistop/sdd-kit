@@ -1,12 +1,7 @@
 {
-  "core": {
-    "file": "sdd-core.md",
-    "description": "Metodología SDD — specs, backlog, PR y releases (agnóstico)",
-    "alwaysApply": true
-  },
   "workflow": {
     "file": "sdd-agent-workflow.md",
-    "description": "SDD — flujo agentico autonomo por fase (Discovery a Released)",
+    "description": "SDD — flujo agentico autonomo por fase (Discovery a Released) con reglas nucleares",
     "alwaysApply": true
   },
   "reference": {

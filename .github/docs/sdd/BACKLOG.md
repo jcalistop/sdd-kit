@@ -29,7 +29,15 @@
 
 ## In Build
 
-_(vacío)_
+| ID      | Dominio   | Título                                                                    | Versión | Spec                                                                                                       |
+| ------- | --------- | ------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| SDD-006 | bootstrap | Optimización de tokens en reglas, skills y pipeline de generación del kit | v1.3.0  | [`specs/bootstrap/SDD-006-optimizacion-tokens-kit.md`](specs/bootstrap/SDD-006-optimizacion-tokens-kit.md) |
+
+## Draft
+
+| ID  | Dominio | Título | Versión | Spec |
+| --- | ------- | ------ | ------- | ---- |
+| —   | —       | —      | —       | —    |
 
 ## Ready
 

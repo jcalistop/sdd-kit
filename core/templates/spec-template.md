@@ -47,9 +47,13 @@ _(Insertar tabla del perfil o enlazar sección copiada aquí.)_
 
 ## Reglas de negocio
 
+> Si múltiples specs comparten las mismas reglas (ej. specs que usan el mismo playbook/ADR), referencia el documento fuente en vez de copiar las reglas completas en cada spec. Ejemplo: "Aplica [domain-rules.md](...), [playbook](...), [ADR-001](...). Particularidad de este spec: [lo específico]."
+
 - ***
 
 ## Criterios de aceptación
+
+> Si los criterios de aceptación son idénticos a los de otro spec del mismo dominio (ej. extracción por región), referencia el documento que los define y solo enuncia las particularidades de este spec. Cada spec debe contener solo lo específico.
 
 **Happy path:**
 
