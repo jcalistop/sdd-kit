@@ -10,7 +10,7 @@
 | **Dominio**           | `bootstrap`         |
 | **Tipo**              | `feature`           |
 | **Fecha**             | 2026-07-14          |
-| **Estado**            | `In Build`          |
+| **Estado**            | `Released`          |
 | **Versión objetivo**  | v1.3.0              |
 | **Owner**             | SDD Kit maintainers |
 | **Prioridad**         | `P1`                |

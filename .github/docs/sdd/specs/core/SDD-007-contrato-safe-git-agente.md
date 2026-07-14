@@ -1,4 +1,4 @@
-# SDD-006 — Contrato safe-git para agente (Git destructivo)
+# SDD-007 — Contrato safe-git para agente (Git destructivo)
 
 ---
 
@@ -6,7 +6,7 @@
 
 | Campo                 | Valor                                                                  |
 | --------------------- | ---------------------------------------------------------------------- |
-| **ID**                | `SDD-006`                                                              |
+| **ID**                | `SDD-007`                                                              |
 | **Dominio**           | `core`                                                                 |
 | **Tipo**              | `feature` + `documentation`                                            |
 | **Fecha**             | 2026-06-17                                                             |
