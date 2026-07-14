@@ -7,6 +7,8 @@ description: Crea un spec SDD en estado Draft para una nueva iniciativa siguiend
 
 Crear un spec **Draft** listo para revisión humana (transición a **Ready**). No implementar código ni pasar a In Build.
 
+**Lectura previa:** `BACKLOG.md`, `sdd.config.yaml`, `business/domain-rules.md`.
+
 ## Rutas (instancia consumidora)
 
 | Artefacto          | Ruta                                             |

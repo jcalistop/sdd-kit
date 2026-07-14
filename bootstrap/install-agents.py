@@ -63,7 +63,6 @@ def render_template(tpl: str, **kwargs: str) -> str:
 def combined_body(profile: str) -> str:
     manifest = load_manifest()
     parts = [
-        read_prompt(manifest["core"]["file"]),
         read_prompt(manifest["workflow"]["file"]),
         read_prompt(manifest["reference"]["file"]),
     ]
@@ -150,10 +149,23 @@ def install_cursor_skills(
 ) -> None:
     manifest = load_skills_manifest()
     skills_root = target / ".cursor" / "skills"
-    skills_root.mkdir(parents=True, exist_ok=True)
     context = skill_render_context(target, profile, sdd_path, kit_path)
 
     managed_ids = {entry["id"] for entry in manifest.get("skills", [])}
+
+    # Verificar si las skills ya existen en el proyecto (evitar duplicación)
+    project_marker = skills_root / ".sdd-kit-manifest.json"
+    if project_marker.is_file():
+        try:
+            existing = json.loads(project_marker.read_text(encoding="utf-8"))
+            if existing.get("kit_path") == kit_path and set(existing.get("managed_skills", [])) == managed_ids:
+                print("SDD Kit: skills ya instaladas en .cursor/skills/, omitiendo.")
+                return
+        except (json.JSONDecodeError, KeyError):
+            pass  # Marcador corrupto; reinstalar normalmente
+
+    skills_root.mkdir(parents=True, exist_ok=True)
+
     for skill_id in managed_ids:
         dest_dir = skills_root / skill_id
         if dest_dir.exists():
@@ -209,12 +221,6 @@ def install_cursor(target: Path, profile: str) -> None:
     tpl = load_template("cursor-rule.mdc.tpl")
 
     items: list[tuple[str, str, str | None, bool]] = [
-        (
-            "sdd-core.mdc",
-            manifest["core"]["description"],
-            manifest["core"]["file"],
-            _always_apply(manifest["core"]),
-        ),
         (
             "sdd-agent-workflow.mdc",
             manifest["workflow"]["description"],

@@ -241,6 +241,17 @@ Seguir [`releases/RUNBOOK.md`](releases/RUNBOOK.md). Archivado y BACKLOG **merge
 
 ---
 
+### Optimización de specs repetitivas
+
+Cuando un dominio tiene múltiples specs que siguen el mismo patrón (ej. extracción por región, migración por tabla):
+
+- Usar una **plantilla específica del dominio** referenciada desde cada spec
+- No copiar reglas de negocio transversales ya definidas en `domain-rules.md`
+- No copiar criterios de aceptación idénticos; referenciar el playbook o ADR que los define
+- Cada spec solo debe contener lo **específico**: parámetros, tabla de datos particulares, riesgos únicos
+
+---
+
 ## Nombrado
 
 - **Spec activo:** `specs/<dominio>/SDD-NNN-slug.md`

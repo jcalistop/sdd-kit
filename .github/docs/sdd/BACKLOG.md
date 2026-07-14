@@ -3,9 +3,9 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-006`.
+**Próximo ID disponible:** `SDD-008`.
 
-**Versión acumulada del kit:** `v1.2.1` (ver [docs/releases/](../../../docs/releases/)).
+**Versión acumulada del kit:** `v1.2.2` (ver [docs/releases/](../../../docs/releases/)).
 
 ---
 
@@ -16,13 +16,22 @@
 | cli      | Suite pytest para la CLI (`backlog`, `prompts`, round-trip)         | —       | Prioridad media; CI hoy solo `compileall`   |
 | docs     | Validación en producción: ciclo SDD con proyecto consumidor externo | —       | Dogfooding en repo ajeno                    |
 | cli      | Dashboard Canvas de métricas SDD                                    | —       | Opcional; `sdd metrics` cubre reporte texto |
+| core     | Contrato safe-git agente — **SDD-007 en Draft**                     | v1.3.0  | Incidente consumidor 2026-06-17             |
 | profiles | Perfiles adicionales (node-express, go-api, vue-vite) a demanda     | —       | Baja prioridad                              |
 
 ---
 
+## Draft
+
+| ID      | Dominio | Título                                          | Versión | Spec                                                      |
+| ------- | ------- | ----------------------------------------------- | ------- | --------------------------------------------------------- |
+| SDD-007 | core    | Contrato safe-git para agente (Git destructivo) | v1.3.0  | [SDD-007](specs/core/SDD-007-contrato-safe-git-agente.md) |
+
 ## In Build
 
-_(vacío)_
+| ID  | Dominio | Título | Versión | Spec |
+| --- | ------- | ------ | ------- | ---- |
+| —   | —       | —      | —       | —    |
 
 ## Ready
 
@@ -41,6 +50,7 @@ _(vacío)_
 | ID      | Dominio   | Título                                                                                            | Versión | Fecha      | Spec archivado                                                                                                                   |
 | ------- | --------- | ------------------------------------------------------------------------------------------------- | ------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | —       | bootstrap | Preservar bloque `kit` al reinstalar agent en `sdd.config.yaml`                                   | v1.2.1  | 2026-06-17 | —                                                                                                                                |
+| SDD-006 | bootstrap | Optimización de tokens en reglas, skills y pipeline de generación del kit                         | v1.2.2  | 2026-07-14 | [archive/2026/bootstrap/SDD-006-optimizacion-tokens-kit.md](archive/2026/bootstrap/SDD-006-optimizacion-tokens-kit.md)           |
 | SDD-005 | docs      | Reordenamiento documentación kit                                                                  | v1.2.0  | 2026-06-15 | [archive/2026/docs/SDD-005-reordenamiento-documentacion-kit.md](archive/2026/docs/SDD-005-reordenamiento-documentacion-kit.md)   |
 | SDD-004 | bootstrap | Skills SDD en bootstrap (multi-agente)                                                            | v1.2.0  | 2026-06-15 | [archive/2026/bootstrap/SDD-004-agent-skills-cursor.md](archive/2026/bootstrap/SDD-004-agent-skills-cursor.md)                   |
 | SDD-003 | core      | Refactor ciclo SDD: momentos semánticos vs prompts                                                | v1.1.0  | 2026-06-12 | [archive/2026/core/SDD-003-refactor-ciclo-sdd-prompts.md](archive/2026/core/SDD-003-refactor-ciclo-sdd-prompts.md)               |

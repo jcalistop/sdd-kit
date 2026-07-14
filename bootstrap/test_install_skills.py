@@ -72,6 +72,28 @@ class InstallSkillsTest(unittest.TestCase):
         data = json.loads(marker.read_text(encoding="utf-8"))
         self.assertIn("sdd-draft-spec", data["managed_skills"])
 
+    def test_install_skills_skips_if_already_installed(self) -> None:
+        """Skills no deben reinstalarse si ya existen en el proyecto."""
+        sdd_path = ".github/docs/sdd"
+        kit_path = ".github/docs/sdd-kit"
+
+        # Primera instalación
+        ia.install_cursor_skills(self.target, "laravel-filament", sdd_path, kit_path)
+        marker = self.target / ".cursor" / "skills" / ".sdd-kit-manifest.json"
+        self.assertTrue(marker.is_file())
+
+        # Borramos una skill para verificar que NO se reinstala
+        skill_file = self.target / ".cursor" / "skills" / "sdd-draft-spec" / "SKILL.md"
+        skill_file.unlink()
+        self.assertFalse(skill_file.is_file())
+
+        # Segunda instalación — debe saltar porque el marcador ya existe
+        ia.install_cursor_skills(self.target, "laravel-filament", sdd_path, kit_path)
+        self.assertFalse(
+            skill_file.is_file(),
+            "La skill no debió reinstalarse: el marcador ya existía",
+        )
+
     def test_build_skills_map_table(self) -> None:
         table = ia.build_skills_map_table()
         self.assertIn("sdd-build-spec", table)

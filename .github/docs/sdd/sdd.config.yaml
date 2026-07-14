@@ -31,7 +31,7 @@ paths:
   contributing: CONTRIBUTING.md
 
 ids:
-  next_sdd: 6
+  next_sdd: 8
   next_adr: 1
 
 release:
@@ -39,8 +39,8 @@ release:
   tag_prefix: v
 
 kit:
-  installed_version: "v1.2.1"
-  installed_at: "2026-06-17"
+  installed_version: "v1.2.2"
+  installed_at: "2026-07-14"
 
 agent:
   targets: [cursor]

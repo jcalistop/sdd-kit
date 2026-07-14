@@ -10,12 +10,12 @@
 
 El **core SDD** (BACKLOG, specs, CLI, `validate-sdd`) no depende de ningún IDE. La capa **agentica** instala instrucciones en el formato que cada herramienta reconoce.
 
-| Herramienta        | Archivo instalado                                                          | Cuándo se aplica                                                               |
-| ------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| **Cursor**         | `.cursor/rules/sdd-*.mdc` (4 archivos) + `.cursor/skills/sdd-*` (6 skills) | Core + workflow en cada chat; reference y stack bajo demanda; skills on-demand |
-| **Claude Code**    | `CLAUDE.md` (bloque delimitado)                                            | Cada sesión en el proyecto                                                     |
-| **Codex**          | `AGENTS.md` (bloque delimitado)                                            | Cada sesión Codex en el repo                                                   |
-| **GitHub Copilot** | `.github/copilot-instructions.md`                                          | Instrucciones persistentes en VS Code                                          |
+| Herramienta        | Archivo instalado                                                          | Cuándo se aplica                                                                               |
+| ------------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Cursor**         | `.cursor/rules/sdd-*.mdc` (3 archivos) + `.cursor/skills/sdd-*` (6 skills) | Workflow (con reglas nucleares) en cada chat; reference y stack bajo demanda; skills on-demand |
+| **Claude Code**    | `CLAUDE.md` (bloque delimitado)                                            | Cada sesión en el proyecto                                                                     |
+| **Codex**          | `AGENTS.md` (bloque delimitado)                                            | Cada sesión Codex en el repo                                                                   |
+| **GitHub Copilot** | `.github/copilot-instructions.md`                                          | Instrucciones persistentes en VS Code                                                          |
 
 La fuente única de contenido está en `sdd-kit/bootstrap/agent-prompts/` (reglas) y `sdd-kit/bootstrap/agent-skills/` (skills Cursor); los adaptadores solo cambian el envoltorio.
 
@@ -23,7 +23,7 @@ La fuente única de contenido está en `sdd-kit/bootstrap/agent-prompts/` (regla
 
 **Claude / Codex / Copilot:** el preambulo del bloque marcado incluye mapa trigger → prompt kit (paridad con skills Cursor).
 
-**Cursor — política de tokens:** `sdd-core.mdc` y `sdd-agent-workflow.mdc` usan `alwaysApply: true` (~600 tokens/sesión). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Detalle: [`.github/docs/business/planning/TOKEN-OPTIMIZATION.md`](../.github/docs/business/planning/TOKEN-OPTIMIZATION.md).
+**Cursor — política de tokens:** `sdd-agent-workflow.mdc` usa `alwaysApply: true` (~70 líneas con reglas nucleares integradas, sin forzar lectura previa de archivos). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Las skills `sdd-draft-spec` y `sdd-build-spec` incluyen la instrucción de lectura previa (`BACKLOG.md`, `sdd.config.yaml`, `domain-rules.md`), evitando cargarla en tareas no-SDD. Detalle: [`.github/docs/business/planning/TOKEN-OPTIMIZATION.md`](../.github/docs/business/planning/TOKEN-OPTIMIZATION.md).
 
 ### Ciclo SDD con agente (resumen)
 
@@ -113,8 +113,8 @@ Tras instalar, `sdd.config.yaml` incluye:
 
 ```yaml
 agent:
-    targets: [cursor]
-    install_mode: auto # auto | explicit | none
+  targets: [cursor]
+  install_mode: auto # auto | explicit | none
 ```
 
 Útil para saber qué archivos deberían existir en el proyecto.

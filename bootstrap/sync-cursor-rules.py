@@ -24,7 +24,6 @@ def main() -> int:
         )
 
     mapping = {
-        "core": "sdd-core.mdc",
         "workflow": "sdd-agent-workflow.mdc",
         "reference": "sdd-workflow-reference.mdc",
     }
