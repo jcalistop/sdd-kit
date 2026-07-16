@@ -8,7 +8,7 @@
 
 ## Resumen
 
-El **core SDD** (BACKLOG, specs, CLI, `validate-sdd`) no depende de ningún IDE. La capa **agentica** instala instrucciones en el formato que cada herramienta reconoce.
+El **core SDD** (BACKLOG, specs, CLI, `validate-sdd`) no depende de ningún IDE. La capa **agentica** instala el **harness SDD** en el formato que cada herramienta reconoce: no es un plugin, es la configuración del entorno de ejecución del agente (guías, sensores, skills y reglas).
 
 | Herramienta        | Archivo instalado                                                          | Cuándo se aplica                                                                               |
 | ------------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |

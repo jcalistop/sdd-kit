@@ -11,7 +11,7 @@
 
 Este documento no reemplaza libros ni cursos. Es un **mapa de lectura y checklist practico** para construir software de forma sostenible.
 
-Complementa el ciclo SDD: los specs definen _que_ construir; esta guia orienta _como_ construirlo bien.
+Complementa el ciclo SDD: los specs definen _que_ construir; esta guia orienta _como_ construirlo bien. En el marco de **harness engineering**, estas practicas actuan como guias (antes de codear) y sensores (al revisar) del agent harness SDD.
 
 | Audiencia  | Uso principal                                                                        |
 | ---------- | ------------------------------------------------------------------------------------ |

@@ -1,12 +1,12 @@
 # Releases del SDD Kit
 
-> Historial de **versiones del repositorio** `sdd-kit`.
+> Historial de **versiones del repositorio** `sdd-kit` (el producto / agent harness).
 
 ## Contrato de capas (releases)
 
 | Capa                              | Ruta                                     | Rol                                                   | ¿Copiado por `init-sdd`?          |
 | --------------------------------- | ---------------------------------------- | ----------------------------------------------------- | --------------------------------- |
-| **Release producto kit**          | `docs/releases/vX.Y.Z.md` (esta carpeta) | Notas para consumidores y GitHub Releases             | No (vive en submodule)            |
+| **Release producto kit**          | `docs/releases/vX.Y.Z.md` (esta carpeta) | Notas SemVer del **product harness** para consumidores | No (vive en submodule)            |
 | **Cierre campaña SDD (kit)**      | `.github/docs/sdd/releases/vX.Y.Z/`      | Acta SDD: specs archivados, gates, enlace al producto | No                                |
 | **Plantillas release consumidor** | `core/releases/`                         | RUNBOOK para **apps** que adoptan SDD                 | Sí → `.github/docs/sdd/releases/` |
 

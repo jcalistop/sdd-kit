@@ -18,7 +18,7 @@
 | cli      | Dashboard Canvas de métricas SDD                                    | —       | Opcional; `sdd metrics` cubre reporte texto |
 | core     | Contrato safe-git agente — **SDD-007 en In Build**                  | v1.3.0  | Incidente consumidor 2026-06-17             |
 | core     | Lenguaje guías/sensores (harness) en prompts del agente SDD — **SDD-008 en In Build** | v1.3.0  | Renombrar reglas y verificaciones como guides/sensors |
-| docs     | Posicionar sdd-kit como agent harness en documentacion — **SDD-009 en Draft** | v1.3.0  | README.md, concepts.md, agent-setup.md                 |
+| docs     | Posicionar sdd-kit como agent harness en documentacion — **SDD-009 en In Build** | v1.3.0  | README.md, concepts.md, agent-setup.md                 |
 | cli      | Observabilidad por componente en validate-sdd — **SDD-010 en Draft** | v1.3.0  | Reportar qué componente falló (spec, regla, perfil, dominio) |
 | profiles | Perfiles adicionales (node-express, go-api, vue-vite) a demanda     | —       | Baja prioridad                              |
 
@@ -29,12 +29,12 @@
 | ID      | Dominio | Título                                          | Versión | Spec                                                      |
 | ------- | ------- | ----------------------------------------------- | ------- | --------------------------------------------------------- |
 | SDD-010 | cli     | Observabilidad por componente validate-sdd | v1.3.0  | [SDD-010](specs/cli/SDD-010-observabilidad-componente-validate.md) |
-| SDD-009 | docs    | Posicionar sdd-kit como agent harness       | v1.3.0  | [SDD-009](specs/docs/SDD-009-posicionamiento-agent-harness.md) |
 
 ## In Build
 
 | ID      | Dominio | Título                                          | Versión | Spec                                                                              |
 | ------- | ------- | ----------------------------------------------- | ------- | --------------------------------------------------------------------------------- |
+| SDD-009 | docs    | Posicionar sdd-kit como agent harness       | v1.3.0  | [SDD-009](specs/docs/SDD-009-posicionamiento-agent-harness.md) |
 | SDD-008 | core    | Lenguaje guías/sensores (harness) en prompts    | v1.3.0  | [SDD-008](specs/core/SDD-008-lenguaje-harness-guides-sensors.md) |
 | SDD-007 | core    | Contrato safe-git para agente (Git destructivo) | v1.3.0  | [SDD-007](specs/core/SDD-007-contrato-safe-git-agente.md)                       |
 | SDD-011 | docs    | Contrato dual-release producto ↔ campaña        | v1.3.0  | [SDD-011](specs/docs/SDD-011-contrato-dual-release-producto-campana.md)           |

@@ -10,11 +10,11 @@
 | **Dominio**           | `docs`                                   |
 | **Tipo**              | `documentation`                          |
 | **Fecha**             | 2026-07-15                               |
-| **Estado**            | `Draft`                                  |
+| **Estado**            | `In Build`                               |
 | **Version objetivo**  | `v1.3.0`                                 |
 | **Owner**             | mantenedor                               |
 | **Prioridad**         | `P2`                                     |
-| **ADRs relacionados** | —                                        |
+| **ADRs relacionados** | `ADR-002`                                |
 | **Dependencias**      | SDD-008 (lenguaje guias/sensores — mismo release, sin bloqueo) |
 
 ---
@@ -86,19 +86,19 @@ Particularidad de este spec: el termino "agent harness" se aplica al producto (e
 
 **Happy path:**
 
-- [ ] `README.md` menciona "agent harness" en la descripcion del proyecto (primer parrafo o badges) y en "La idea en 30 segundos"
-- [ ] `core/concepts.md` incluye nota breve: "SDD es un agent harness" con enlace a `research/2026-07-15-harness-engineering.md`
-- [ ] `core/agent-setup.md` nombra el proceso de instalacion de reglas/skills como "configurar el harness SDD"
-- [ ] `core/healthy-development.md` incluye referencia a harness engineering en la introduccion o seccion de arquitectura
-- [ ] `docs/releases/README.md` referencia "product harness" en el contexto de versionado SemVer
-- [ ] `python cli/sdd.py validate` sin errores
-- [ ] Ningun enlace se rompe; todos los cambios son incrementales (no reescriben secciones completas)
-- [ ] El tono es natural, no forzado — no se repite "harness" en cada parrafo
+- [x] `README.md` menciona "agent harness" en la descripcion del proyecto (primer parrafo o badges) y en "La idea en 30 segundos"
+- [x] `core/concepts.md` incluye nota breve: "SDD es un agent harness" con enlace a `research/2026-07-15-harness-engineering.md`
+- [x] `core/agent-setup.md` nombra el proceso de instalacion de reglas/skills como "configurar el harness SDD"
+- [x] `core/healthy-development.md` incluye referencia a harness engineering en la introduccion o seccion de arquitectura
+- [x] `docs/releases/README.md` referencia "product harness" en el contexto de versionado SemVer
+- [x] `python cli/sdd.py validate` sin errores
+- [x] Ningun enlace se rompe; todos los cambios son incrementales (no reescriben secciones completas)
+- [x] El tono es natural, no forzado — no se repite "harness" en cada parrafo
 
 **Error path:**
 
-- [ ] Si el termino genera confusion en feedback de consumidores, se puede revertir por archivo
-- [ ] Si validate-sdd detecta inconsistencia, se corrige antes de merge
+- [x] Si el termino genera confusion en feedback de consumidores, se puede revertir por archivo — rollback por archivo documentado
+- [x] Si validate-sdd detecta inconsistencia, se corrige antes de merge — correr validate en verify
 
 ---
 
@@ -156,3 +156,4 @@ Rollback: revertir cada archivo individualmente. Sin dependencias entre cambios.
 - Este spec es el segundo de la serie harness engineering (SDD-008, SDD-009, SDD-010).
 - Si el feedback de consumidores es positivo, considerar expandir el framing en el adoption guide.
 - El informe de research en `research/2026-07-15-harness-engineering.md` es la referencia tecnica para quien quiera profundizar.
+- **Smoke manual (2026-07-15):** exitoso — tono natural en README, concepts, agent-setup, healthy-development y docs/releases.

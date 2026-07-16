@@ -34,6 +34,8 @@ SDD es **escribir el plano** antes de construir. No es burocracia: es evitar tir
 4. **El agente (IA) escribe specs y codigo; el humano aprueba** en Ready (spec) y en merge del PR. Antes de publicar en Git, la implementacion se verifica en local (`verify-implementation`).
 5. **Los prompts del catalogo son opcionales** salvo tareas puntuales; los estados del spec son la fuente de verdad (ver [`workflow.md`](workflow.md)).
 
+SDD Kit es un **agent harness**: la capa que guia al agente antes de actuar (reglas, specs, perfiles) y verifica su trabajo despues (`verify-implementation`, `validate-sdd`). Mas contexto: [informe de harness engineering](../.github/docs/sdd/research/2026-07-15-harness-engineering.md).
+
 ```mermaid
 sequenceDiagram
     actor H as Humano

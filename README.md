@@ -2,10 +2,11 @@
 
 # SDD Kit — Spec-Driven Development
 
-Metodología para desarrollar **con un plan antes de codear**. Pensada para equipos pequeños y desarrollo asistido por agente de IA (Cursor, Claude Code, Codex, Copilot): el agente redacta specs y código; tú apruebas en puntos clave.
+Metodología para desarrollar **con un plan antes de codear**. Es un **agent harness** para desarrollo spec-first: define reglas, verificaciones y ciclo de trabajo alrededor del agente de IA (Cursor, Claude Code, Codex, Copilot). El agente redacta specs y código; tú apruebas en puntos clave.
 
 [![Repositorio](https://img.shields.io/badge/repo-jcalistop%2Fsdd--kit-24292f?style=flat-square&logo=github)](https://github.com/jcalistop/sdd-kit)
 [![Spec-first](https://img.shields.io/badge/enfoque-spec--first-2563eb?style=flat-square)](core/workflow.md)
+[![Agent-harness](https://img.shields.io/badge/tipo-agent%20harness-0d9488?style=flat-square)](core/concepts.md)
 [![Multi-stack](https://img.shields.io/badge/stacks-Laravel%20%7C%20Django%20%7C%20FastAPI%20%7C%20React-059669?style=flat-square)](profiles/)
 [![Agent-ready](https://img.shields.io/badge/agente-Cursor%20%7C%20Claude%20%7C%20Codex%20%7C%20Copilot-7c3aed?style=flat-square)](core/agent-setup.md)
 
@@ -48,6 +49,8 @@ Metodología para desarrollar **con un plan antes de codear**. Pensada para equi
 2. Antes de codear, escribes un **spec** (documento corto): qué quieres, qué no incluye, cómo sabrás que está listo.
 3. Cuando el spec está **aprobado**, implementas (o el agente implementa).
 4. Al terminar, archivas el spec y registras la **release**.
+
+Ese ciclo —guías antes de actuar, sensores después— es el **agent harness** SDD: el modelo es commodity; la ventaja está en el entorno que lo canaliza.
 
 ```mermaid
 flowchart LR
