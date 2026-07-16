@@ -4,20 +4,21 @@ Perfil de **publicación del producto kit** (no despliegue de aplicación). Los 
 
 ## Principio
 
-El merge a `main` integra cambios; la **versión publicada** se etiqueta con SemVer (`vX.Y.Z`) y se documenta en `docs/releases/`.
+El merge a `main` integra cambios; la **versión publicada** se etiqueta con SemVer (`vX.Y.Z`) y exige **dual-release**:
 
-| Capa    | Dónde                                       | Qué valida                        |
-| ------- | ------------------------------------------- | --------------------------------- |
-| CI      | `.github/workflows/ci.yml`                  | CLI, JSON agent-prompts, perfiles |
-| Release | `docs/releases/vX.Y.Z.md` + GitHub Releases | Notas, CHANGELOG, tag             |
+| Capa | Dónde | Qué valida |
+| ---- | ----- | ---------- |
+| CI | `.github/workflows/ci.yml` | CLI, JSON agent-prompts, perfiles |
+| Nota producto | `docs/releases/vX.Y.Z.md` + GitHub Releases | Notas para consumidores, CHANGELOG, tag |
+| Acta campaña | `.github/docs/sdd/releases/vX.Y.Z/release_vX.Y.Z.md` | Specs archivados, gates, enlace a nota producto |
 
 ## Pasos (alineados con runbook del kit)
 
-1. Revisar `docs/releases/vX.Y.Z/release_vX.Y.Z.md` (o crear nota de release).
-2. Confirmar CI en verde en el commit a etiquetar.
-3. Ejecutar `validate-sdd` sobre `.github/docs/sdd/`.
-4. Actualizar `docs/releases/CHANGELOG.md` (`sdd release changelog` si aplica).
-5. Crear tag `vX.Y.Z` y GitHub Release con notas.
+1. Crear/actualizar `docs/releases/vX.Y.Z.md` y entrada en `docs/releases/CHANGELOG.md`.
+2. Crear acta `.github/docs/sdd/releases/vX.Y.Z/release_vX.Y.Z.md` con **Changelog kit** enlazando la nota producto.
+3. Confirmar CI en verde en el commit a etiquetar.
+4. Ejecutar `validate-sdd` sobre `.github/docs/sdd/` (WARN si falta nota producto).
+5. Crear tag `vX.Y.Z` y GitHub Release con el cuerpo de la nota producto.
 6. Comunicar a consumidores: actualizar submodule (`git submodule update --remote sdd-kit`).
 
 ## Smoke post-publicación

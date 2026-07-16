@@ -23,7 +23,7 @@ Estas reglas **nunca** deben violarse en contribuciones al kit:
 | 4   | **El agente ejecuta; el humano aprueba** en Ready (spec) y merge (PR). Estados = progreso; prompts = opcionales. Verify local antes de push/PR                 | Ready antes de codificar; verify antes de PR                        |
 | 5   | **Adopción incremental** — no exigir specs retrospectivos al adoptar SDD                                                                                       | adoption-guide y ADOPTION.md                                        |
 | 6   | **Documentación SDD solo en `paths.sdd`** — specs, BACKLOG y releases de iniciativas en `.github/docs/sdd/`; planificación histórica en `business/planning/`   | No crear specs en `core/` ni duplicar planning fuera de `business/` |
-| 7   | **Separación producto / proceso / versiones** — producto en raíz; proceso en `.github/docs/sdd/`; planning en `business/planning/`; SemVer en `docs/releases/` | Ver glosario en `docs/README.md` y ADOPTION.md                      |
+| 7   | **Separación producto / proceso / versiones** — producto en raíz; proceso en `.github/docs/sdd/`; planning en `business/planning/`; SemVer en `docs/releases/`. Cierre de versión del kit = **dual-release** (nota producto + acta campaña enlazada) | Ver glosario en `docs/README.md` y ADOPTION.md                      |
 
 ---
 
@@ -34,8 +34,18 @@ Kit (producto)     → core/, profiles/, bootstrap/, cli/
 Proceso SDD        → .github/docs/sdd/
 Contexto producto  → .github/docs/business/ (este directorio)
 Planificación      → .github/docs/business/planning/ (análisis, roadmap histórico)
-Releases del kit   → docs/releases/ (SemVer del producto; ver docs/README.md)
+Release producto   → docs/releases/ (SemVer para consumidores; ver docs/README.md)
+Release campaña    → .github/docs/sdd/releases/ (acta SDD; debe enlazar nota producto)
 ```
+
+### Dual-release al cerrar versión del kit
+
+| Artefacto | Ruta | Fuente de verdad |
+| --------- | ---- | ---------------- |
+| Nota producto | `docs/releases/vX.Y.Z.md` + `CHANGELOG.md` | Qué cambió el kit para consumidores |
+| Acta campaña | `.github/docs/sdd/releases/vX.Y.Z/release_*.md` | Specs/gates del cierre SDD |
+
+La acta **debe** enlazar la nota producto. No unificar carpetas. No exigir `docs/releases/` en proyectos consumidores.
 
 ---
 
@@ -77,6 +87,22 @@ Releases del kit   → docs/releases/ (SemVer del producto; ver docs/README.md)
 | **Pre-SDD**          | Trabajo hecho antes de adoptar el ciclo formal (ID `—` en BACKLOG)    |
 | **Release producto** | `docs/releases/vX.Y.Z.md` — notas SemVer para consumidores del kit    |
 | **Release campaña**  | `.github/docs/sdd/releases/vX.Y.Z/` — acta SDD de una versión del kit |
+| **Dual-release**     | Cierre kit exige nota producto + acta con enlace (SDD-011)            |
+
+---
+
+## Adopción del paradigma harness engineering
+
+sdd-kit adopta el paradigma **Harness Engineering** como marco conceptual complementario (ver [ADR-002](../sdd/adr/ADR-002-2026-07-15-adoptar-harness-engineering-marco-conceptual.md)). El kit se posiciona como un **agent harness** para coding agents: reglas, skills, verificaciones y gates humanos alrededor del modelo.
+
+Taxonomía interna (Martin Fowler):
+
+| Término | Rol | Ejemplos en el kit |
+| ------- | --- | ------------------ |
+| **Guía** (feedforward) | Previene errores antes de actuar | `domain-rules.md`, DoR, perfiles, skills, plantillas |
+| **Sensor** (feedback) | Detecta errores después de actuar | `verify-implementation`, `validate-sdd`, CI, DoD, merge humano |
+
+No reemplaza el vocabulario operativo SDD (spec, checklist, criterios). Informe: [research/2026-07-15-harness-engineering.md](../sdd/research/2026-07-15-harness-engineering.md).
 
 ---
 

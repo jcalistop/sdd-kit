@@ -2,11 +2,19 @@
   "workflow": {
     "file": "sdd-agent-workflow.md",
     "description": "SDD — flujo agentico autonomo por fase (Discovery a Released) con reglas nucleares",
-    "alwaysApply": true
+    "alwaysApply": true,
+    "cacheZone": "stable"
   },
   "reference": {
     "file": "sdd-workflow-reference.md",
     "description": "SDD — checklists DoR/DoD, antipatrones y referencia on-demand",
-    "alwaysApply": false
+    "alwaysApply": false,
+    "cacheZone": "volatile"
+  },
+  "safe_git": {
+    "file": "sdd-safe-git.md",
+    "description": "SDD — contrato safe-git (Git destructivo; guardrail always-on)",
+    "alwaysApply": true,
+    "cacheZone": "stable"
   }
 }

@@ -123,10 +123,14 @@ def build_skills_map_table() -> str:
         "| --- | --- | --- |",
     ]
     for entry in manifest.get("skills", []):
+        # Skills de session_start no tienen triggers; se omiten del mapa
+        if entry.get("session_start"):
+            continue
         triggers = entry.get("triggers", [])
         trigger_sample = triggers[0] if triggers else "—"
+        prompt = entry.get("prompt") or "—"
         lines.append(
-            f"| {trigger_sample} | `{entry['id']}` | `{entry.get('prompt', '—')}` |"
+            f"| {trigger_sample} | `{entry['id']}` | `{prompt}` |"
         )
     return "\n".join(lines)
 
@@ -220,26 +224,39 @@ def install_cursor(target: Path, profile: str) -> None:
     rules_dir.mkdir(parents=True, exist_ok=True)
     tpl = load_template("cursor-rule.mdc.tpl")
 
-    items: list[tuple[str, str, str | None, bool]] = [
+    items: list[tuple[str, str, str | None, bool, str]] = [
         (
             "sdd-agent-workflow.mdc",
             manifest["workflow"]["description"],
             manifest["workflow"]["file"],
             _always_apply(manifest["workflow"]),
+            manifest["workflow"].get("cacheZone", "volatile"),
         ),
         (
             "sdd-workflow-reference.mdc",
             manifest["reference"]["description"],
             manifest["reference"]["file"],
             _always_apply(manifest["reference"]),
+            manifest["reference"].get("cacheZone", "volatile"),
+        ),
+        (
+            "sdd-safe-git.mdc",
+            manifest["safe_git"]["description"],
+            manifest["safe_git"]["file"],
+            _always_apply(manifest["safe_git"]),
+            manifest["safe_git"].get("cacheZone", "volatile"),
         ),
     ]
     stack_body = read_stack_prompt(profile)
     if stack_body:
         desc = stack_desc.get(profile, f"SDD — perfil {profile}")
-        items.append((f"sdd-stack-{profile}.mdc", desc, None, False))
+        items.append((f"sdd-stack-{profile}.mdc", desc, None, False, "volatile"))
 
-    for filename, description, prompt_file, always_apply in items:
+    # Two-zone prompt: reglas estables (cacheables) primero, luego volatiles.
+    # Orden determinista dentro de cada zona para garantizar mismo cache key.
+    items.sort(key=lambda x: (0 if x[4] == "stable" else 1, x[0]))
+
+    for filename, description, prompt_file, always_apply, _cache_zone in items:
         body = read_prompt(prompt_file) if prompt_file else stack_body or ""
         content = render_template(
             tpl,

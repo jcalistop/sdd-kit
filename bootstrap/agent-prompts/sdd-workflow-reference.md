@@ -32,57 +32,58 @@ No bloquear; alertar y documentar en Riesgos del spec.
 | "reescribamos todo el módulo"        | Big Rewrite — proponer refactor incremental |
 | Patrón complejo para problema simple | Golden Hammer — ¿solución más simple?       |
 | Idea sin exclusiones                 | Preguntar qué NO incluye                    |
+| Ampliar Git más allá del pedido      | Safe-git — no pull/reset/merge “por si acaso”; ver `safe-git-contract.md` |
 
 ---
 
-## Auto-verificación DoR (antes de pedir revisión)
+## Auto-verificación DoR (antes de pedir revisión) — [guía]
 
-- [ ] Cabecera: ID, dominio, tipo, estado `Draft`, versión objetivo, owner
-- [ ] Dominio existe en `sdd.config.yaml` → `domains`
-- [ ] Problema y objetivo: al menos 1 párrafo cada uno
-- [ ] Alcance: al menos 1 inclusión y 1 exclusión explícita
-- [ ] Impacto técnico: todas las filas respondidas (o "No aplica — razón")
-- [ ] Reglas de negocio: referencia a `domain-rules.md` o justificación
-- [ ] Criterios de aceptación: happy + error path verificables
-- [ ] Riesgos: al menos 1 fila en tabla
-- [ ] BACKLOG: fila en Draft con mismo `SDD-NNN`
-- [ ] ID no duplicado en BACKLOG ni en `specs/` / `archive/`
+- [ ] [guía] Cabecera: ID, dominio, tipo, estado `Draft`, versión objetivo, owner
+- [ ] [guía] Dominio existe en `sdd.config.yaml` → `domains`
+- [ ] [guía] Problema y objetivo: al menos 1 párrafo cada uno
+- [ ] [guía] Alcance: al menos 1 inclusión y 1 exclusión explícita
+- [ ] [guía] Impacto técnico: todas las filas respondidas (o "No aplica — razón")
+- [ ] [guía] Reglas de negocio: referencia a `domain-rules.md` o justificación
+- [ ] [guía] Criterios de aceptación: happy + error path verificables
+- [ ] [guía] Riesgos: al menos 1 fila en tabla
+- [ ] [guía] BACKLOG: fila en Draft con mismo `SDD-NNN`
+- [ ] [guía] ID no duplicado en BACKLOG ni en `specs/` / `archive/`
 
 Si falla: completar antes de pedir revisión humana.
 
 ---
 
-## Verificación post-implementación (antes de push/PR)
+## Verificación post-implementación (antes de push/PR) — [sensor]
 
 Gate obligatorio en **In Build**, antes de commit de entrega, `push` o PR. Prompt: `verify-implementation`.
 
-- [ ] Quality gates del perfil en verde (local)
-- [ ] Criterios de aceptación del spec verificados (happy + error) con evidencia
-- [ ] Reglas de `domain-rules.md` verificadas (o No aplica documentado)
-- [ ] Checklist de arquitectura sana (sección siguiente) sin bloqueantes
-- [ ] Sin `dd()`, `dump()`, debug olvidado
+- [ ] [sensor] Quality gates del perfil en verde (local)
+- [ ] [sensor] Criterios de aceptación del spec verificados (happy + error) con evidencia
+- [ ] [sensor] Reglas de `domain-rules.md` verificadas (o No aplica documentado)
+- [ ] [sensor] Checklist de arquitectura sana (sección siguiente) sin bloqueantes
+- [ ] [sensor] Sin `dd()`, `dump()`, debug olvidado
 
 Si falla: **no** `push` ni PR. Corregir o documentar deuda con acuerdo humano.
 
 ---
 
-## Verificación de arquitectura sana (dentro de verify-implementation)
+## Verificación de arquitectura sana (dentro de verify-implementation) — [sensor]
 
 Checks contra `healthy-development.md`:
 
-- [ ] **YAGNI:** abstracción sin al menos 2 usos → simplificar
-- [ ] **DRY:** lógica duplicada en 2+ archivos → extraer módulo
-- [ ] **SRP:** clase/archivo >~200 líneas o mezcla responsabilidades → dividir
-- [ ] **Golden Hammer:** herramienta por costumbre → evaluar alternativa
-- [ ] **Over-engineering:** cola/evento/microservicio sin spec o ADR → revertir o ADR
-- [ ] **Big Ball of Mud:** >5 archivos sin límite entre capas → revisar acoplamiento
-- [ ] **Lava Flow:** código muerto, TODOs sin ticket → eliminar o BACKLOG
+- [ ] [sensor] **YAGNI:** abstracción sin al menos 2 usos → simplificar
+- [ ] [sensor] **DRY:** lógica duplicada en 2+ archivos → extraer módulo
+- [ ] [sensor] **SRP:** clase/archivo >~200 líneas o mezcla responsabilidades → dividir
+- [ ] [sensor] **Golden Hammer:** herramienta por costumbre → evaluar alternativa
+- [ ] [sensor] **Over-engineering:** cola/evento/microservicio sin spec o ADR → revertir o ADR
+- [ ] [sensor] **Big Ball of Mud:** >5 archivos sin límite entre capas → revisar acoplamiento
+- [ ] [sensor] **Lava Flow:** código muerto, TODOs sin ticket → eliminar o BACKLOG
 
 Si alguna respuesta es "sí", **no publicar en Git.** Informar al humano con opciones: corregir ahora o documentar deuda.
 
 ---
 
-## Guardia de arquitectura en PRs
+## Guardia de arquitectura en PRs — [sensor]
 
 Además del DoD de trazabilidad (`checklist-pr.md`), buscar señales en `healthy-development.md`:
 
@@ -96,14 +97,14 @@ Además del DoD de trazabilidad (`checklist-pr.md`), buscar señales en `healthy
 
 ---
 
-## Auto-verificación DoD (antes de pedir merge)
+## Auto-verificación DoD (antes de pedir merge) — [sensor]
 
-- [ ] Quality gates del perfil en verde (local)
-- [ ] Criterios de aceptación verificados (happy + error)
-- [ ] Reglas de `domain-rules.md` verificadas (o No aplica documentado)
-- [ ] PR enlaza spec y dominio correctos
-- [ ] Sin `dd()`, `dump()`, debug olvidado
-- [ ] Plan de entrada en release documentado si cierra ítem
+- [ ] [sensor] Quality gates del perfil en verde (local)
+- [ ] [sensor] Criterios de aceptación verificados (happy + error)
+- [ ] [sensor] Reglas de `domain-rules.md` verificadas (o No aplica documentado)
+- [ ] [sensor] PR enlaza spec y dominio correctos
+- [ ] [sensor] Sin `dd()`, `dump()`, debug olvidado
+- [ ] [sensor] Plan de entrada en release documentado si cierra ítem
 
 ---
 

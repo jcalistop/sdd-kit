@@ -7,6 +7,41 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [1.3.0] - 2026-07-15
+
+Ver [v1.3.0.md](v1.3.0.md).
+
+### Añadido
+
+- Contrato safe-git always-on (`core/safe-git-contract.md`, regla Cursor) — SDD-007
+- Lenguaje guías/sensores en workflow, reference y skills — SDD-008
+- Posicionamiento “agent harness” en README y core docs — SDD-009
+- `validate-sdd` con salida por componente — SDD-010
+- Contrato dual-release producto ↔ campaña + WARN validate — SDD-011
+- Governance de tokens A–F (two-zone, compact template, cost-governance) — SDD-012
+- CLI `sdd metrics tokens` + checks WARN en validate-sdd — SDD-013
+
+### Cambiado
+
+- Camino canónico de upgrade: `upgrade-kit` / `sdd-upgrade-kit` + checklist post-upgrade (SDD-014)
+- `upgrade-guide.md` — verificación safe-git, cost-governance, validate por componente, metrics
+- Prompt `upgrade-kit` — reinstalar también si cambió `agent-skills/`
+
+---
+
+## [1.2.2] - 2026-07-14
+
+Ver [v1.2.2.md](v1.2.2.md).
+
+### Cambiado
+
+- Reglas Cursor: fusión `sdd-core` → `sdd-agent-workflow` (menos always-on)
+- Skills: lectura previa acotada a draft/build; verify sin cadena circular
+- `install-agents.py` — no duplicar skills globales si ya existen en el proyecto
+- Plantilla de spec: guía anti-boilerplate (SDD-006)
+
+---
+
 ## [1.2.1] - 2026-06-17
 
 Ver [v1.2.1.md](v1.2.1.md).
@@ -29,15 +64,12 @@ Ver [v1.2.0.md](v1.2.0.md).
 - `bootstrap/test_install_skills.py` — tests de instalación
 - `validate-sdd` — advertencia si falta `.sdd-kit-manifest.json` con Cursor en targets
 - Sección Skills en `core/prompt-catalog.md` y `core/agent-setup.md`
-- `validate-sdd` — falla si quedan `.md` en `docs/maintainers/` salvo README stub (SDD-005)
 - `docs/README.md` — glosario de capas releases
 
 ### Cambiado
 
 - `upgrade-guide.md` — reinstalar skills tras cambios en `agent-skills/`
 - CI valida `agent-skills/manifest.json` y ejecuta tests de skills
-- `docs/maintainers/` → `.github/docs/business/planning/` (SDD-005)
-- Stub de deprecación en `docs/maintainers/README.md`
 - Glosario de capas releases en ADOPTION
 - `.cursor/skills/sdd-*` y manifest fuera de git (fuente: `bootstrap/agent-skills/`)
 

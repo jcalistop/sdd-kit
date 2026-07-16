@@ -1,23 +1,36 @@
 # Releases del SDD Kit
 
-> Historial de **versiones del repositorio** `sdd-kit`.
+> Historial de **versiones del repositorio** `sdd-kit` (el producto / agent harness).
 
 ## Contrato de capas (releases)
 
 | Capa                              | Ruta                                     | Rol                                                   | ¿Copiado por `init-sdd`?          |
 | --------------------------------- | ---------------------------------------- | ----------------------------------------------------- | --------------------------------- |
-| **Release producto kit**          | `docs/releases/vX.Y.Z.md` (esta carpeta) | Notas para consumidores y GitHub Releases             | No (vive en submodule)            |
+| **Release producto kit**          | `docs/releases/vX.Y.Z.md` (esta carpeta) | Notas SemVer del **product harness** para consumidores | No (vive en submodule)            |
 | **Cierre campaña SDD (kit)**      | `.github/docs/sdd/releases/vX.Y.Z/`      | Acta SDD: specs archivados, gates, enlace al producto | No                                |
 | **Plantillas release consumidor** | `core/releases/`                         | RUNBOOK para **apps** que adoptan SDD                 | Sí → `.github/docs/sdd/releases/` |
 
 Glosario ampliado: [docs/README.md](../README.md).
+
+## Contrato dual-write
+
+Al etiquetar `vX.Y.Z` del kit:
+
+1. Esta carpeta: `vX.Y.Z.md` + entrada en [CHANGELOG.md](CHANGELOG.md).
+2. Acta SDD: `.github/docs/sdd/releases/vX.Y.Z/release_vX.Y.Z.md` con **Changelog kit** → este archivo.
+3. `validate-sdd` advierte (WARN) si existe acta de campaña y falta la nota producto aquí.
+
+Consumidores del submodule **solo** leen esta carpeta.
 
 ## Dónde mirar
 
 | Recurso                                                          | Uso                                     |
 | ---------------------------------------------------------------- | --------------------------------------- |
 | [CHANGELOG.md](CHANGELOG.md)                                     | Resumen técnico de cambios por versión  |
-| [v1.2.0.md](v1.2.0.md)                                           | Última versión (skills + documentación) |
+| [v1.3.0.md](v1.3.0.md)                                           | Última versión (harness, safe-git, métricas, upgrade-kit) |
+| [v1.2.2.md](v1.2.2.md)                                           | Optimización de tokens                  |
+| [v1.2.1.md](v1.2.1.md)                                           | Patch bootstrap (bloque `kit`)          |
+| [v1.2.0.md](v1.2.0.md)                                           | Skills + documentación                  |
 | [v1.1.0.md](v1.1.0.md)                                           | Perfil sdd-kit y upgrade en instancias  |
 | [v1.0.0.md](v1.0.0.md)                                           | Primera versión estable                 |
 | [v0.1.0.md](v0.1.0.md)                                           | Pre-release inicial                     |

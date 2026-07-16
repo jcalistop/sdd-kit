@@ -8,11 +8,11 @@
 
 ## Resumen
 
-El **core SDD** (BACKLOG, specs, CLI, `validate-sdd`) no depende de ningún IDE. La capa **agentica** instala instrucciones en el formato que cada herramienta reconoce.
+El **core SDD** (BACKLOG, specs, CLI, `validate-sdd`) no depende de ningún IDE. La capa **agentica** instala el **harness SDD** en el formato que cada herramienta reconoce: no es un plugin, es la configuración del entorno de ejecución del agente (guías, sensores, skills y reglas).
 
 | Herramienta        | Archivo instalado                                                          | Cuándo se aplica                                                                               |
 | ------------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| **Cursor**         | `.cursor/rules/sdd-*.mdc` (3 archivos) + `.cursor/skills/sdd-*` (6 skills) | Workflow (con reglas nucleares) en cada chat; reference y stack bajo demanda; skills on-demand |
+| **Cursor**         | `.cursor/rules/sdd-*.mdc` (workflow + safe-git always-on; reference/stack on-demand) + `.cursor/skills/sdd-*` (6 skills) | Workflow y safe-git en cada chat; reference y stack bajo demanda; skills on-demand |
 | **Claude Code**    | `CLAUDE.md` (bloque delimitado)                                            | Cada sesión en el proyecto                                                                     |
 | **Codex**          | `AGENTS.md` (bloque delimitado)                                            | Cada sesión Codex en el repo                                                                   |
 | **GitHub Copilot** | `.github/copilot-instructions.md`                                          | Instrucciones persistentes en VS Code                                                          |
@@ -21,9 +21,9 @@ La fuente única de contenido está en `sdd-kit/bootstrap/agent-prompts/` (regla
 
 **Skills Cursor (v1.2.0+):** `install-agents.py` instala las 6 skills `sdd-*` desde `bootstrap/agent-skills/manifest.json`. Solo sobrescribe carpetas del manifest; no toca skills Boost del proyecto. **Precedencia:** skills SDD on-demand > `sdd prompt show` copy-paste > reglas on-demand.
 
-**Claude / Codex / Copilot:** el preambulo del bloque marcado incluye mapa trigger → prompt kit (paridad con skills Cursor).
+**Claude / Codex / Copilot:** el preambulo del bloque marcado incluye mapa trigger → prompt kit (paridad con skills Cursor) y mención safe-git.
 
-**Cursor — política de tokens:** `sdd-agent-workflow.mdc` usa `alwaysApply: true` (~70 líneas con reglas nucleares integradas, sin forzar lectura previa de archivos). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Las skills `sdd-draft-spec` y `sdd-build-spec` incluyen la instrucción de lectura previa (`BACKLOG.md`, `sdd.config.yaml`, `domain-rules.md`), evitando cargarla en tareas no-SDD. Detalle: [`.github/docs/business/planning/TOKEN-OPTIMIZATION.md`](../.github/docs/business/planning/TOKEN-OPTIMIZATION.md).
+**Cursor — política de tokens:** `sdd-agent-workflow.mdc` y `sdd-safe-git.mdc` usan `alwaysApply: true` (safe-git es texto corto). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Las skills `sdd-draft-spec` y `sdd-build-spec` incluyen la instrucción de lectura previa (`BACKLOG.md`, `sdd.config.yaml`, `domain-rules.md`), evitando cargarla en tareas no-SDD. Detalle: [`.github/docs/business/planning/TOKEN-OPTIMIZATION.md`](../.github/docs/business/planning/TOKEN-OPTIMIZATION.md). Contrato canónico: [`safe-git-contract.md`](safe-git-contract.md).
 
 ### Ciclo SDD con agente (resumen)
 

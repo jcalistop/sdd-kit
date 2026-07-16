@@ -7,7 +7,14 @@ description: Crea un spec SDD en estado Draft para una nueva iniciativa siguiend
 
 Crear un spec **Draft** listo para revisión humana (transición a **Ready**). No implementar código ni pasar a In Build.
 
-**Lectura previa:** `BACKLOG.md`, `sdd.config.yaml`, `business/domain-rules.md`.
+**Contexto mínimo requerido** (ver `{{SDD_PATH}}/workflow.md` → grafo de dependencias):
+
+1. `{{SDD_PATH}}/BACKLOG.md` — para asignar SDD-NNN y verificar duplicados
+2. `{{SDD_PATH}}/sdd.config.yaml` — para dominios, `ids.next_sdd`, paths
+3. `{{SDD_PATH}}/../business/domain-rules.md` — para reglas aplicables al spec
+
+**NO leer** specs de otras features, ADRs no referenciados ni releases anteriores.
+Si el spec referencia un ADR explícitamente, leer solo ese ADR.
 
 ## Rutas (instancia consumidora)
 
@@ -21,8 +28,6 @@ Crear un spec **Draft** listo para revisión humana (transición a **Ready**). N
 | Config / IDs       | `{{SDD_PATH}}/sdd.config.yaml`                   |
 | Reglas de negocio  | `{{SDD_PATH}}/../business/domain-rules.md`       |
 | DoR / antipatrones | `.cursor/rules/sdd-workflow-reference.mdc`       |
-
-Leer también: `BACKLOG.md`, `sdd.config.yaml`, `domain-rules.md` antes de redactar.
 
 ---
 

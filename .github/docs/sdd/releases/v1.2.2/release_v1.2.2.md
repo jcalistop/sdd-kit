@@ -9,7 +9,7 @@
 | **Tipo**             | minor / bootstrap           |
 | **Responsable**      | equipo                      |
 | **Campaña anterior** | [v1.2.1](release_v1.2.1.md) |
-| **Changelog kit**    | —                           |
+| **Changelog kit**    | [v1.2.2.md](../../../../../docs/releases/v1.2.2.md) |
 
 ---
 

@@ -10,6 +10,16 @@ Tras `install-agents.py` cuando cambien prompts, reglas o **agent-skills**.
 - [ ] Reglas `.cursor/rules/sdd-*.mdc` reinstaladas — deltas de instancia preservados
 - [ ] Skills `sdd-*` reinstaladas desde `{{KIT_PATH}}/bootstrap/agent-skills/` (manifest)
 
+## Artefactos v1.3.0+ (si el tag destino es ≥ v1.3.0)
+
+- [ ] Existe `.cursor/rules/sdd-safe-git.mdc` con `alwaysApply: true`
+- [ ] Skill `sdd-cost-governance` instalada (no confundir con skills de workflow)
+- [ ] No se duplicó una regla de migraciones BD de instancia (`safe-migrations`, etc.) al instalar safe-git
+- [ ] `validate-sdd` / `sdd validate` emite prefijos `[componente]`
+- [ ] (Opcional) `python {{KIT_PATH}}/cli/sdd.py metrics tokens --summary` no falla
+
+Si **solo** se actualizó el submodule y faltan safe-git o cost-governance → **reinstalar** adaptadores; no marcar `kit.installed_version` como completo.
+
 ## Si hay divergencia
 
 1. Preferir contenido del kit; no copiar árbol `prompts/` local.

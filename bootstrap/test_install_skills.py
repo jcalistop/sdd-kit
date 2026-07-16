@@ -117,6 +117,15 @@ class InstallSkillsTest(unittest.TestCase):
         self.assertIn("install_mode: explicit", content)
         self.assertNotIn("targets: [claude]", content)
 
+    def test_install_cursor_emits_safe_git_rule(self) -> None:
+        ia.install_cursor(self.target, "laravel-filament")
+        rule = self.target / ".cursor" / "rules" / "sdd-safe-git.mdc"
+        self.assertTrue(rule.is_file(), "sdd-safe-git.mdc debe emitirse")
+        text = rule.read_text(encoding="utf-8")
+        self.assertIn("alwaysApply: true", text)
+        self.assertIn("Safe-Git", text)
+        self.assertIn("safe_git", ia.load_manifest())
+
 
 if __name__ == "__main__":
     unittest.main()
