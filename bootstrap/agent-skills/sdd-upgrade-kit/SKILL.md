@@ -9,6 +9,13 @@ Actualizar kit SDD (submodule) en la instancia consumidora.
 
 **Prohibido:** `--force` en merge de instancia; push sin confirmación humana.
 
+**Contexto mínimo requerido:**
+
+1. `{{SDD_PATH}}/sdd.config.yaml` — `kit.installed_version`
+2. `{{SDD_PATH}}/UPGRADE-LOG.md` — historial de upgrades
+
+**NO leer** specs, BACKLOG ni domain-rules (no son necesarios para el upgrade del kit).
+
 ## Rutas
 
 | Artefacto     | Ruta                                              |

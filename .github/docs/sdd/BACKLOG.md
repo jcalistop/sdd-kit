@@ -3,7 +3,7 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-012`.
+**Próximo ID disponible:** `SDD-014`.
 
 **Versión acumulada del kit:** `v1.2.2` (ver [docs/releases/](../../../docs/releases/)).
 
@@ -15,7 +15,7 @@
 | -------- | ------------------------------------------------------------------- | ------- | ------------------------------------------- |
 | cli      | Suite pytest para la CLI (`backlog`, `prompts`, round-trip)         | —       | Prioridad media; CI hoy solo `compileall`   |
 | docs     | Validación en producción: ciclo SDD con proyecto consumidor externo | —       | Dogfooding en repo ajeno                    |
-| cli      | Dashboard Canvas de métricas SDD                                    | —       | Opcional; `sdd metrics` cubre reporte texto |
+| cli      | Dashboard Canvas de métricas SDD                                    | —       | Opcional; texto en SDD-013; Canvas aparte   |
 | core     | Contrato safe-git agente — **SDD-007 en In Build**                  | v1.3.0  | Incidente consumidor 2026-06-17             |
 | core     | Lenguaje guías/sensores (harness) en prompts del agente SDD — **SDD-008 en In Build** | v1.3.0  | Renombrar reglas y verificaciones como guides/sensors |
 | docs     | Posicionar sdd-kit como agent harness en documentacion — **SDD-009 en In Build** | v1.3.0  | README.md, concepts.md, agent-setup.md                 |
@@ -28,12 +28,14 @@
 
 | ID      | Dominio | Título                                          | Versión | Spec                                                      |
 | ------- | ------- | ----------------------------------------------- | ------- | --------------------------------------------------------- |
+| SDD-013 | cli     | Observabilidad de tokens (`sdd metrics tokens`) | v1.4.0  | [SDD-013](specs/cli/SDD-013-observabilidad-tokens-metrics.md) |
 | SDD-010 | cli     | Observabilidad por componente validate-sdd | v1.3.0  | [SDD-010](specs/cli/SDD-010-observabilidad-componente-validate.md) |
 
 ## In Build
 
 | ID      | Dominio | Título                                          | Versión | Spec                                                                              |
 | ------- | ------- | ----------------------------------------------- | ------- | --------------------------------------------------------------------------------- |
+| SDD-012 | core    | Governance de tokens en el harness (A–F)        | v1.3.0  | [SDD-012](specs/core/SDD-012-governance-tokens-harness.md) |
 | SDD-009 | docs    | Posicionar sdd-kit como agent harness       | v1.3.0  | [SDD-009](specs/docs/SDD-009-posicionamiento-agent-harness.md) |
 | SDD-008 | core    | Lenguaje guías/sensores (harness) en prompts    | v1.3.0  | [SDD-008](specs/core/SDD-008-lenguaje-harness-guides-sensors.md) |
 | SDD-007 | core    | Contrato safe-git para agente (Git destructivo) | v1.3.0  | [SDD-007](specs/core/SDD-007-contrato-safe-git-agente.md)                       |

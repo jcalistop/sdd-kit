@@ -9,6 +9,14 @@ Gate **verify-implementation** obligatorio (sensor / feedback) antes de publicac
 
 **Prohibido sin confirmación humana:** `git commit`, `git push`, abrir PR.
 
+**Contexto mínimo requerido:**
+
+1. Spec del `SDD-NNN` activo — **solo criterios de aceptación** (happy + error path)
+2. `{{SDD_PATH}}/../business/domain-rules.md` — reglas aplicables
+
+**NO leer** el spec completo si ya se leyó durante la implementación. Solo re-leer la sección de criterios.
+Si verify ya falló 3 veces en esta sesión → **STOP**. Reportar criterios fallidos al humano. No seguir iterando.
+
 ## Checklist (sensores)
 
 - [ ] [sensor] Quality gates del perfil en verde (local)

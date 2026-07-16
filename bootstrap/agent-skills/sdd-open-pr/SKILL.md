@@ -11,6 +11,14 @@ Abrir PR con checklist SDD hacia **`{{DEV_BRANCH}}`**.
 
 **Prohibido:** PR antes de verify; push sin confirmación humana.
 
+**Contexto mínimo requerido:**
+
+1. Spec del `SDD-NNN` — **solo cabecera** (ID, título, dominio, tipo, estado)
+2. `{{SDD_PATH}}/BACKLOG.md` — verificar que el spec está en In Build → mover a Validating
+3. `{{SDD_PATH}}/checklist-pr.md` — checklist PR
+
+**NO leer** el spec completo ni domain-rules (ya verificado en fase anterior).
+
 ## Rutas
 
 | Artefacto    | Ruta                               |

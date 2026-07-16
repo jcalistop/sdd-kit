@@ -7,6 +7,15 @@ description: Cierra campaña release SDD — archivar specs, entrada en releases
 
 Cerrar campaña semver y archivar specs **Released**.
 
+**Contexto mínimo requerido:**
+
+1. `{{SDD_PATH}}/BACKLOG.md` — specs en Validating a archivar
+2. Specs a archivar — **solo cabeceras** (para `git mv` y entradas en release)
+3. `{{SDD_PATH}}/sdd.config.yaml` — versión y dominios
+4. `{{SDD_PATH}}/releases/RUNBOOK.md` — procedimiento de cierre
+
+**NO leer** specs completos ni domain-rules (ya verificados en fases anteriores).
+
 ## Rutas
 
 | Artefacto | Ruta                                     |

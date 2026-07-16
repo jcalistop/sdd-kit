@@ -188,6 +188,60 @@ No es un estado en cabecera del spec: se registra en BACKLOG o como spec tipo `t
 
 ---
 
+## ¿Esta iniciativa necesita spec?
+
+Usar esta checklist **antes** de crear un spec. Si la respuesta es NO a todas las preguntas de la columna izquierda, registrar en release con ID `—` (cambio trivial).
+
+### La iniciativa requiere spec si...
+
+- [ ] Toca 3 o más componentes/dominios del proyecto
+- [ ] Modifica el schema de base de datos
+- [ ] Introduce una dependencia externa nueva
+- [ ] Cambia el contrato de una API pública
+- [ ] Afecta autenticación, autorización o datos multi-tenant
+- [ ] Tiene lifespan esperado > 3 meses (se modificará en el futuro)
+- [ ] Es un refactor que toca > 5 archivos
+- [ ] Requiere ADR (decisión arquitectónica transversal)
+
+### La iniciativa NO requiere spec si...
+
+- [ ] Es un fix de typo, copy, traducción
+- [ ] Es un bump de dependencias (sin cambios de API)
+- [ ] Es una feature de 1 archivo, 1 componente, efímera (< 1 semana de vida esperada)
+- [ ] Es un hotfix crítico (spec post-mortem aceptable si la urgencia lo impide)
+
+### Zona gris (criterio del mantenedor)
+
+| Situación | Recomendación |
+|-----------|---------------|
+| Iniciativa toca 2 componentes pero es simple | Spec simplificado ([modo compacto](#modo-compacto-de-spec)) |
+| Iniciativa es 1 componente pero de alto riesgo | Spec completo |
+| Patrón repetitivo ya documentado | Spec compacto con referencia al patrón |
+
+### Fundamento (token economics)
+
+El spec en sí consume ~2.4% de los tokens de una sesión SDD. La revisión iterativa de código consume ~59.4%. El spec **no es el driver de costo**. El driver es el loop de "genera → verifica → corrige → re-verifica" sin control. Un harness con governance adecuada reduce el costo total 38-41%. Fuente: [research/2026-07-15-token-economics-sdd-harness.md](research/2026-07-15-token-economics-sdd-harness.md).
+
+### Modo compacto de spec
+
+Usar [`spec-compact-template.md`](templates/spec-compact-template.md) cuando:
+
+- El spec sigue un patrón documentado (nuevo perfil, nuevo comando CLI, nueva skill)
+- El dominio y las reglas de negocio ya están establecidos
+- No hay decisiones arquitectónicas nuevas (sin ADR)
+- La iniciativa toca ≤2 componentes
+
+**No usar** modo compacto cuando:
+
+- El spec introduce un nuevo dominio
+- Hay decisiones de diseño no triviales
+- El spec requiere ADR
+- La iniciativa toca 3+ componentes
+
+El modo compacto omite secciones estándar (checklist stack, impacto técnico detallado, diagramas) y referencia `domain-rules.md` y el perfil correspondiente en lugar de repetirlos. Ahorro estimado: 40-60% de tokens vs plantilla completa.
+
+---
+
 ## ADR — cuándo crear uno
 
 Crear ADR cuando la decisión es **arquitectónica y transversal**:
@@ -268,3 +322,33 @@ Para iniciativas grandes: spec `00` (visión) + specs `01+` (entregables). IDs c
 ### Cambio de esquema
 
 Seguir la convención del **perfil stack** (p. ej. migraciones, no DDL manual fuera del repo). Documentar en spec y release.
+
+---
+
+## Governance de costo (circuit breaker del harness)
+
+> Ver skill completa: `sdd-cost-governance/SKILL.md`. Esta sección es el resumen always-on.
+
+### Límites de sesión
+
+| Límite | Valor | Acción |
+|--------|-------|--------|
+| Turnos máximos por fase | 15 | Pausar, pedir aprobación |
+| Turnos máximos totales | 50 | Terminar, reportar estado |
+| Verify fallidos consecutivos | 3 | **STOP.** No seguir iterando. |
+| Tool calls idénticas consecutivas | 3 | Circuit breaker: cambiar approach |
+
+### Anti-patrones de gasto — STOP inmediato
+
+1. Loop "generar → test falla → mismo error → regenerar" sin cambiar approach
+2. Leer mismo archivo 5+ veces sin modificarlo
+3. Re-escribir specs en Ready sin aprobación humana
+4. Ejecutar tests sin cambiar código
+5. Cargar specs de otras features no relacionadas (usar [grafo de dependencias](#grafo-de-dependencias-sdd))
+6. Debug por fuerza bruta (cambios aleatorios sin entender causa raíz)
+
+### Fundamento (token economics)
+
+- Spec = ~2.4% de tokens. Review iterativo = ~59.4%. Fuente: [Tokenomics paper](https://arxiv.org/abs/2601.14470).
+- Harness con governance: -38% tokens, -41% costo, -44% tiempo. Fuente: [Harness Effect paper](https://arxiv.org/abs/2607.06906).
+- KV-cache hit < 90% → hasta 10× más caro. Fuente: [research/2026-07-15-token-economics-sdd-harness.md](research/2026-07-15-token-economics-sdd-harness.md).
