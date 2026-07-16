@@ -10,8 +10,8 @@
 | **Dominio**           | `cli`                                                                 |
 | **Tipo**              | `feature`                                                             |
 | **Fecha**             | 2026-07-15                                                            |
-| **Estado**            | `In Build`                                                            |
-| **Versión objetivo**  | `v1.4.0`                                                              |
+| **Estado**            | `Released`                                                            |
+| **Versión objetivo**  | `v1.3.0`                                                              |
 | **Owner**             | mantenedor                                                            |
 | **Prioridad**         | `P1`                                                                  |
 | **ADRs relacionados** | `ADR-002`                                                             |

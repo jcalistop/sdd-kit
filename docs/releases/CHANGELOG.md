@@ -7,6 +7,28 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [1.3.0] - 2026-07-15
+
+Ver [v1.3.0.md](v1.3.0.md).
+
+### Añadido
+
+- Contrato safe-git always-on (`core/safe-git-contract.md`, regla Cursor) — SDD-007
+- Lenguaje guías/sensores en workflow, reference y skills — SDD-008
+- Posicionamiento “agent harness” en README y core docs — SDD-009
+- `validate-sdd` con salida por componente — SDD-010
+- Contrato dual-release producto ↔ campaña + WARN validate — SDD-011
+- Governance de tokens A–F (two-zone, compact template, cost-governance) — SDD-012
+- CLI `sdd metrics tokens` + checks WARN en validate-sdd — SDD-013
+
+### Cambiado
+
+- Camino canónico de upgrade: `upgrade-kit` / `sdd-upgrade-kit` + checklist post-upgrade (SDD-014)
+- `upgrade-guide.md` — verificación safe-git, cost-governance, validate por componente, metrics
+- Prompt `upgrade-kit` — reinstalar también si cambió `agent-skills/`
+
+---
+
 ## [1.2.2] - 2026-07-14
 
 Ver [v1.2.2.md](v1.2.2.md).

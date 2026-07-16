@@ -132,15 +132,32 @@ git commit -m "chore(sdd): portar cambios kit vX.Y.Z a instancia" -- .github/doc
 
 ---
 
-## Tras v1.3.0+ — safe-git
+## Tras v1.3.0+ — checklist de consumo
 
-Si actualizas a una versión que incluye **SDD-007** (contrato safe-git):
+Tras actualizar a **v1.3.0 o superior**, el bump de submodule **no basta**. Debes completar el flujo de esta guía (pasos 4–8), en especial **reinstalar adaptadores** si cambió `bootstrap/agent-prompts/` o `bootstrap/agent-skills/`.
 
-1. Reinstala adaptadores: `python sdd-kit/bootstrap/install-agents.py install --agent cursor --profile <tu-perfil> ...`
-2. Verifica `.cursor/rules/sdd-safe-git.mdc` con `alwaysApply: true`.
-3. Claude/Codex/Copilot: el preámbulo debe mencionar safe-git o enlace a `core/safe-git-contract.md`.
+### Qué debe quedar instalado / verificable
 
-No duplica reglas de migraciones BD de instancia (`safe-migrations`, etc.).
+| Entregable | Cómo verificar |
+| ---------- | -------------- |
+| **Safe-git** (SDD-007) | Existe `.cursor/rules/sdd-safe-git.mdc` con `alwaysApply: true`. Preámbulos Claude/Codex/Copilot mencionan safe-git o `core/safe-git-contract.md`. **No** duplica reglas de migraciones BD de instancia (`safe-migrations`, etc.). |
+| **Cost-governance** (SDD-012) | Skill `sdd-cost-governance` presente tras `install-agents.py` (entrada `session_start` en el manifest de skills del kit). |
+| **Two-zone / reglas** | Reinstall regenera reglas Cursor en orden stable→volatile (`cacheZone` en manifest). |
+| **Plantilla compacta** | Disponible en el kit: `sdd-kit/core/templates/spec-compact-template.md` (no requiere copiar a instancia salvo que uses plantillas locales). |
+| **validate-sdd por componente** (SDD-010) | Salida con prefijos `[backlog]`, `[specs]`, `[config]`, etc. |
+| **Métricas de tokens** (SDD-013) | CLI del submodule: `python sdd-kit/cli/sdd.py metrics tokens --summary` (opcional; no exige merge a instancia). |
+
+### Comando de reinstall (Cursor)
+
+```bash
+python sdd-kit/bootstrap/install-agents.py install \
+  --profile <PERFIL> \
+  --agent cursor \
+  --sdd-path .github/docs/sdd \
+  --kit-path sdd-kit
+```
+
+Si solo hiciste checkout del tag y **faltan** `sdd-safe-git.mdc` o `sdd-cost-governance`, vuelve a ejecutar el reinstall y el checklist de la skill `sdd-upgrade-kit` (`reference.md`).
 
 ---
 

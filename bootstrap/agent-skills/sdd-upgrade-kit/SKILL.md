@@ -34,11 +34,13 @@ Seguir `{{SDD_PATH}}/upgrade-guide.md`:
 3. Actualizar submodule a tag
 4. Diff `core/` vs instancia (excluir `prompts/`, `profiles/`)
 5. Merge instancia con confirmación humana
-6. Si cambió `agent-prompts/` o `agent-skills/`: `install-agents.py install --agent cursor --profile {{PROFILE}} --sdd-path {{SDD_PATH}} --kit-path {{KIT_PATH}} --no-prompt`
-7. Checklist post-upgrade: [reference.md](reference.md)
+6. Si cambió `agent-prompts/` **o** `agent-skills/`: `install-agents.py install --agent cursor --profile {{PROFILE}} --sdd-path {{SDD_PATH}} --kit-path {{KIT_PATH}} --no-prompt`
+7. Checklist post-upgrade: [reference.md](reference.md) (incluye artefactos v1.3.0+: safe-git, cost-governance)
 8. `sdd validate` + `validate-sdd`
 9. Actualizar `kit.installed_version`, `UPGRADE-LOG.md`, `ADOPTION.md`
 10. Commits separados: submodule + instancia
+
+Si el humano rechazó algún merge de instancia: documentar en `UPGRADE-LOG` y **no** marcar `installed_version` como la versión destino.
 
 ## Recursos
 

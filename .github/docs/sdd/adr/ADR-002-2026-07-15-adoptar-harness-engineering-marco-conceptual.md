@@ -9,7 +9,7 @@
 | **ID**                 | `ADR-002`                                                                                                |
 | **Fecha**              | 2026-07-15                                                                                               |
 | **Estado**             | `Aceptado`                                                                                               |
-| **Specs relacionados** | `SDD-008` (lenguaje guias/sensores), `SDD-009` (posicionamiento docs), `SDD-010` (observabilidad)       |
+| **Specs relacionados** | `SDD-008` (lenguaje guias/sensores, Released), `SDD-009` (posicionamiento docs, Released), `SDD-010` (observabilidad, Released) |
 | **Reemplaza**          | —                                                                                                        |
 
 ---

@@ -9,7 +9,7 @@
 | **ID**                 | `ADR-001`                                                                                                |
 | **Fecha**              | 2026-07-15                                                                                               |
 | **Estado**             | `Aceptado`                                                                                               |
-| **Specs relacionados** | `SDD-007` (safe-git, Ready), `SDD-008` (lenguaje harness, en Draft)                                     |
+| **Specs relacionados** | `SDD-007` (safe-git, Released), `SDD-008` (lenguaje harness, Released)                                  |
 | **Reemplaza**          | —                                                                                                        |
 
 ---

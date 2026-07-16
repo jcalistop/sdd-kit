@@ -10,7 +10,7 @@
 | **Dominio**           | `cli`                           |
 | **Tipo**              | `feature`                       |
 | **Fecha**             | 2026-07-15                      |
-| **Estado**            | `In Build`                      |
+| **Estado**            | `Released`                      |
 | **Version objetivo**  | `v1.3.0`                        |
 | **Owner**             | mantenedor                      |
 | **Prioridad**         | `P2`                             |
