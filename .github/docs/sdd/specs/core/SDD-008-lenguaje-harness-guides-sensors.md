@@ -10,11 +10,11 @@
 | **Dominio**           | `core`                          |
 | **Tipo**              | `feature` + `documentation`     |
 | **Fecha**             | 2026-07-15                      |
-| **Estado**            | `Draft`                         |
+| **Estado**            | `In Build`                      |
 | **Version objetivo**  | `v1.3.0`                        |
 | **Owner**             | mantenedor                      |
 | **Prioridad**         | `P2`                            |
-| **ADRs relacionados** | —                               |
+| **ADRs relacionados** | `ADR-002`                       |
 | **Dependencias**      | —                               |
 
 ---
@@ -85,18 +85,18 @@ Particularidad de este spec: la terminologia harness no se impone como reemplazo
 
 **Happy path:**
 
-- [ ] `sdd-agent-workflow.mdc` incluye glosario guia/sensor con ejemplos concretos del ciclo SDD
-- [ ] `sdd-workflow-reference.mdc` etiqueta cada item DoR/DoD como [guia] o [sensor] sin alterar contenido
-- [ ] Skills `sdd-build-spec` y `sdd-verify-implementation` mencionan guias y sensores en su descripcion
-- [ ] `domain-rules.md` incluye nota explicita "sdd-kit adopta el paradigma harness engineering" con enlace a fuente
-- [ ] `core/prompt-catalog.md` incluye nota breve sobre la distincion guia/sensor
-- [ ] `python cli/sdd.py validate` sin errores tras cambios
-- [ ] Ningun cambio rompe el comportamiento del agente ni modifica el ciclo SDD
+- [x] `sdd-agent-workflow.mdc` incluye glosario guia/sensor con ejemplos concretos del ciclo SDD
+- [x] `sdd-workflow-reference.mdc` etiqueta cada item DoR/DoD como [guia] o [sensor] sin alterar contenido
+- [x] Skills `sdd-build-spec` y `sdd-verify-implementation` mencionan guias y sensores en su descripcion
+- [x] `domain-rules.md` incluye nota explicita "sdd-kit adopta el paradigma harness engineering" con enlace a fuente
+- [x] `core/prompt-catalog.md` incluye nota breve sobre la distincion guia/sensor
+- [x] `python cli/sdd.py validate` sin errores tras cambios
+- [x] Ningun cambio rompe el comportamiento del agente ni modifica el ciclo SDD
 
 **Error path:**
 
-- [ ] Si un termino nuevo genera confusion en el agente (ej. aplica sensor donde deberia aplicar guia), se revierte en el archivo especifico
-- [ ] Si `validate-sdd` detecta inconsistencia, se corrige antes de merge
+- [x] Si un termino nuevo genera confusion en el agente (ej. aplica sensor donde deberia aplicar guia), se revierte en el archivo especifico — mitigado: capa complementaria; rollback por archivo
+- [x] Si `validate-sdd` detecta inconsistencia, se corrige antes de merge — validate OK (0 errores)
 
 ---
 

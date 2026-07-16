@@ -1,11 +1,13 @@
 ---
 name: sdd-build-spec
-description: Aprueba un spec SDD (Draft→Ready→In Build), implementa su alcance y ejecuta verify-implementation antes de Git. Usar cuando el humano aprueba un spec, menciona build-spec, implementar SDD-NNN, verify-implementation, o retoma implementación en Ready/In Build.
+description: Aprueba un spec SDD (Draft→Ready→In Build), implementa con guías (domain-rules, perfil) y ejecuta verify-implementation (sensor) antes de Git. Usar cuando el humano aprueba un spec, menciona build-spec, implementar SDD-NNN, verify-implementation, o retoma implementación en Ready/In Build.
 ---
 
 # SDD Build Spec
 
-Aprobar e implementar un spec **SDD-NNN** según `sdd-agent-workflow`. Incluye gate **verify-implementation** antes de cualquier acción en Git.
+Aprobar e implementar un spec **SDD-NNN** según `sdd-agent-workflow`. Incluye gate **verify-implementation** (sensor) antes de cualquier acción en Git.
+
+Usa **guías** (feedforward) al implementar: `domain-rules.md`, perfil stack, alcance del spec. Al terminar aplica **sensores** (feedback): quality gates, verify-implementation, `validate-sdd`.
 
 **Prohibido sin confirmación humana:** `git commit`, `git push`, abrir PR.
 

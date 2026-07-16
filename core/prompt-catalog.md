@@ -30,6 +30,8 @@
 | Publicar (commit, push, PR)                | Tras verify — `open-pr` si hace falta     |
 | Revisar antes de merge                     | **Semántico** — frase o `validate-pr`     |
 
+**Guía vs sensor (harness):** las guías (DoR, domain-rules, perfiles) previenen errores antes de actuar; los sensores (`verify-implementation`, `validate-sdd`, DoD, CI) detectan errores después. Son capa conceptual complementaria — no reemplazan los términos de esta tabla. Ver [ADR-002](../.github/docs/sdd/adr/ADR-002-2026-07-15-adoptar-harness-engineering-marco-conceptual.md).
+
 ---
 
 ## Secuencia del ciclo (humano ↔ agente)

@@ -91,6 +91,21 @@ La acta **debe** enlazar la nota producto. No unificar carpetas. No exigir `docs
 
 ---
 
+## Adopción del paradigma harness engineering
+
+sdd-kit adopta el paradigma **Harness Engineering** como marco conceptual complementario (ver [ADR-002](../sdd/adr/ADR-002-2026-07-15-adoptar-harness-engineering-marco-conceptual.md)). El kit se posiciona como un **agent harness** para coding agents: reglas, skills, verificaciones y gates humanos alrededor del modelo.
+
+Taxonomía interna (Martin Fowler):
+
+| Término | Rol | Ejemplos en el kit |
+| ------- | --- | ------------------ |
+| **Guía** (feedforward) | Previene errores antes de actuar | `domain-rules.md`, DoR, perfiles, skills, plantillas |
+| **Sensor** (feedback) | Detecta errores después de actuar | `verify-implementation`, `validate-sdd`, CI, DoD, merge humano |
+
+No reemplaza el vocabulario operativo SDD (spec, checklist, criterios). Informe: [research/2026-07-15-harness-engineering.md](../sdd/research/2026-07-15-harness-engineering.md).
+
+---
+
 ## Qué no aplica
 
 Reglas típicas de apps de negocio (roles de usuario final, filtrado por tenant, periodos fiscales) **no aplican** al kit. Si un spec del kit las menciona por error, marcar "No aplica".

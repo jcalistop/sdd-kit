@@ -4,6 +4,15 @@ Ejecutar el ciclo SDD de forma autónoma. El **humano aprueba** en Ready (spec) 
 
 **Referencia on-demand:** checklists DoR/DoD, antipatrones, arquitectura sana → `sdd-workflow-reference.mdc` (léelo en Draft, In Build y Validating).
 
+### Guía vs sensor (harness)
+
+Capa conceptual complementaria (no reemplaza el vocabulario operativo: verificar, checklist, criterios).
+
+| Término | Definición | Ejemplo en SDD |
+| ------- | ---------- | -------------- |
+| **Guía** | Feedforward: previene errores **antes** de actuar | `domain-rules.md`, `sdd.config.yaml`, perfil stack, DoR |
+| **Sensor** | Feedback: detecta errores **después** de actuar | `verify-implementation`, `validate-sdd`, CI gates, DoD |
+
 ---
 
 ## Reglas nucleares
@@ -59,15 +68,15 @@ Leer `business/domain-rules.md` (ruta `paths.business` del config) al iniciar sp
 
 **Discovery** — Verificar domain-rules; leer BACKLOG; identificar dominio y tipo; fila en Discovery; 1–3 preguntas solo si faltan datos críticos. Antipatrones tempranos → ver reference.
 
-**Draft** — Asignar `SDD-NNN`; crear spec; completar alcance, impacto técnico y criterios; BACKLOG → Draft; **auto-verificar DoR** (reference).
+**Draft** — Asignar `SDD-NNN`; crear spec; completar alcance, impacto técnico y criterios; BACKLOG → Draft; **auto-verificar DoR** (guía — reference).
 
 **Ready** — Humano aprueba (frase o `build-spec`) → cabecera y BACKLOG a Ready; confirmar dependencias; congelar alcance.
 
 **In Build** — Estado In Build; rama local; implementar según spec y perfil stack; quality gates en verde. **`draft-review` es opcional** (solo ritual DoR formal). **No push ni PR** hasta verificación local.
 
-**Verify (In Build)** — `verify-implementation` obligatorio: criterios de aceptación, `domain-rules.md`, arquitectura sana (reference). Presentar evidencia. Solo tras OK → commit, push, PR.
+**Verify (In Build)** — `verify-implementation` obligatorio (sensor): criterios de aceptación, `domain-rules.md`, arquitectura sana (reference). Presentar evidencia. Solo tras OK → commit, push, PR.
 
-**Validating** — PR con checklist core + stack; evidencia de verify + tests; **auto-verificar DoD** (reference); pedir merge al humano.
+**Validating** — PR con checklist core + stack; evidencia de verify + tests; **auto-verificar DoD** (sensor — reference); pedir merge al humano.
 
 **Released** — `git mv` a `archive/<YYYY>/<dominio>/`; BACKLOG → Released; entrada en `releases/vX.Y.Z/`; `validate-sdd`. **Antes** del PR de campaña a producción.
 
