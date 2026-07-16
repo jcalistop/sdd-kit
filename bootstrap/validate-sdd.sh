@@ -2,12 +2,42 @@
 # Valida coherencia documental de una instancia SDD.
 # Uso: ./sdd-kit/bootstrap/validate-sdd.sh [.github/docs/sdd]
 # Codigos de salida: 0=OK, 1=fallo del script/entorno (FATAL), 2=incoherencias documentales (ERROR)
+# Salida por componente (SDD-010): [backlog] [specs] [config] [agent] [kit-version] [docs]
 
 set -euo pipefail
 
 SDD_PATH="${1:-.github/docs/sdd}"
 ERRORS=0
 WARNINGS=0
+LAST_COMPONENT=""
+# component stats as parallel arrays via associative: name -> "errors:warnings:messages"
+declare -A COMP_STATS
+declare -a COMP_ORDER=()
+
+ensure_component() {
+  local c="$1"
+  if [[ -z "${COMP_STATS[$c]:-}" ]]; then
+    COMP_STATS[$c]="0:0:0"
+    COMP_ORDER+=("$c")
+  fi
+  if [[ "$LAST_COMPONENT" != "$c" ]]; then
+    echo ""
+    echo "--- [$c] ---"
+    LAST_COMPONENT="$c"
+  fi
+}
+
+bump_stat() {
+  local c="$1" field="$2"
+  local e w m
+  IFS=':' read -r e w m <<< "${COMP_STATS[$c]}"
+  case "$field" in
+    e) e=$((e + 1)); m=$((m + 1)) ;;
+    w) w=$((w + 1)); m=$((m + 1)) ;;
+    m) m=$((m + 1)) ;;
+  esac
+  COMP_STATS[$c]="$e:$w:$m"
+}
 
 fatal() {
   echo "FATAL: $1"
@@ -16,13 +46,12 @@ fatal() {
   exit 1
 }
 
-err() { echo "ERROR: $1"; ERRORS=$((ERRORS + 1)); }
-warn() { echo "WARN:  $1"; WARNINGS=$((WARNINGS + 1)); }
-ok() { echo "OK:    $1"; }
+err() { ensure_component "$1"; echo "[$1] ERROR: $2"; ERRORS=$((ERRORS + 1)); bump_stat "$1" e; }
+warn() { ensure_component "$1"; echo "[$1] WARN:  $2"; WARNINGS=$((WARNINGS + 1)); bump_stat "$1" w; }
+ok() { ensure_component "$1"; echo "[$1] OK:    $2"; bump_stat "$1" m; }
 
 echo ""
 echo "=== Validacion SDD ($SDD_PATH) ==="
-echo ""
 
 if [[ ! -d "$SDD_PATH" ]]; then
   fatal "No existe el directorio SDD: $SDD_PATH"
@@ -48,7 +77,7 @@ while IFS= read -r line; do
   id=$(echo "$line" | cut -d'|' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
   [[ "$id" =~ ^SDD-[0-9]+[a-z]?$ ]] || continue
   if [[ -n "${BACKLOG_IDS[$id]:-}" && "${BACKLOG_IDS[$id]}" != "$current_section" ]]; then
-    err "ID $id duplicado en BACKLOG (secciones: ${BACKLOG_IDS[$id]} y $current_section)"
+    err backlog "ID $id duplicado en BACKLOG (secciones: ${BACKLOG_IDS[$id]} y $current_section)"
   else
     BACKLOG_IDS[$id]="$current_section"
     BACKLOG_SECTION[$id]="$current_section"
@@ -68,33 +97,33 @@ while IFS= read -r -d '' f; do
       FILE_IDS["$id"]="archive"
     fi
     if [[ -n "${FILE_DUP[$id]:-}" ]]; then
-      err "ID $id aparece en mas de un archivo"
+      err specs "ID $id aparece en mas de un archivo"
     fi
     FILE_DUP[$id]=1
   fi
 done < <(find "$SDD_PATH/specs" "$SDD_PATH/archive" -name 'SDD-*.md' -print0 2>/dev/null || true)
 
-# Specs activos deben estar en BACKLOG (no Discovery sin ID es ok)
+# Specs activos deben estar en BACKLOG
 for id in "${!FILE_IDS[@]}"; do
   loc="${FILE_IDS[$id]}"
   if [[ "$loc" == "specs" ]]; then
     if [[ -z "${BACKLOG_IDS[$id]:-}" ]]; then
-      err "Spec $id en specs/ sin entrada en BACKLOG.md"
+      err specs "Spec $id en specs/ sin entrada en BACKLOG.md"
     elif [[ "${BACKLOG_SECTION[$id]}" == "Released" ]]; then
-      err "Spec $id en specs/ pero BACKLOG dice Released (debe estar en archive/)"
+      err specs "Spec $id en specs/ pero BACKLOG dice Released (debe estar en archive/)"
     elif [[ "${BACKLOG_SECTION[$id]}" == "Discovery" ]]; then
-      warn "Spec $id en specs/ pero BACKLOG aun en Discovery (esperado Draft+)"
+      warn specs "Spec $id en specs/ pero BACKLOG aun en Discovery (esperado Draft+)"
     else
-      ok "Spec activo $id coherente con BACKLOG (${BACKLOG_SECTION[$id]})"
+      ok specs "Spec activo $id coherente con BACKLOG (${BACKLOG_SECTION[$id]})"
     fi
   fi
   if [[ "$loc" == "archive" ]]; then
     if [[ -z "${BACKLOG_IDS[$id]:-}" ]]; then
-      err "Spec archivado $id sin entrada en BACKLOG.md"
+      err specs "Spec archivado $id sin entrada en BACKLOG.md"
     elif [[ "${BACKLOG_SECTION[$id]}" != "Released" ]]; then
-      err "Spec $id en archive/ pero BACKLOG no esta en Released (esta en ${BACKLOG_SECTION[$id]})"
+      err specs "Spec $id en archive/ pero BACKLOG no esta en Released (esta en ${BACKLOG_SECTION[$id]})"
     else
-      ok "Spec archivado $id coherente con BACKLOG"
+      ok specs "Spec archivado $id coherente con BACKLOG"
     fi
   fi
 done
@@ -104,7 +133,7 @@ for id in "${!BACKLOG_IDS[@]}"; do
   sec="${BACKLOG_SECTION[$id]}"
   if [[ "$sec" =~ ^(Draft|Ready|In[[:space:]]Build|Validating)$ ]]; then
     if [[ "${FILE_IDS[$id]:-}" != "specs" ]]; then
-      err "BACKLOG: $id en $sec pero no hay archivo en specs/"
+      err specs "BACKLOG: $id en $sec pero no hay archivo en specs/"
     fi
   fi
 done
@@ -132,18 +161,27 @@ if grep -q 'Próximo ID disponible\|Proximo ID disponible' "$BACKLOG"; then
     next_num=$((10#$next_num))
     expected=$((max_num + 1))
     if [[ $next_num -lt $expected ]]; then
-      warn "Proximo ID SDD-$(printf '%03d' $next_num) parece bajo (max usado: SDD-$(printf '%03d' $max_num))"
+      warn backlog "Proximo ID SDD-$(printf '%03d' $next_num) parece bajo (max usado: SDD-$(printf '%03d' $max_num))"
     else
-      ok "Proximo ID disponible coherente (max usado: SDD-$(printf '%03d' $max_num))"
+      ok backlog "Proximo ID disponible coherente (max usado: SDD-$(printf '%03d' $max_num))"
     fi
   fi
 fi
 
-# sdd.config.yaml
+# sdd.config.yaml + agent (cursor manifest)
 if [[ ! -f "$SDD_PATH/sdd.config.yaml" ]]; then
-  warn "Falta sdd.config.yaml"
+  warn config "Falta sdd.config.yaml"
 else
-  ok "sdd.config.yaml presente"
+  ok config "sdd.config.yaml presente"
+  if grep -qE 'targets:[[:space:]]*\[[^]]*cursor' "$SDD_PATH/sdd.config.yaml"; then
+    PROJECT_ROOT="$(cd "$SDD_PATH/../../.." && pwd)"
+    MANIFEST="$PROJECT_ROOT/.cursor/skills/.sdd-kit-manifest.json"
+    if [[ ! -f "$MANIFEST" ]]; then
+      warn agent "agent.targets incluye cursor pero falta .cursor/skills/.sdd-kit-manifest.json (reinstalar con install-agents.py)"
+    else
+      ok agent "Manifest de skills SDD presente (.sdd-kit-manifest.json)"
+    fi
+  fi
 fi
 
 KIT_VERSION_SCRIPT="$(cd "$(dirname "$0")" && pwd)/kit-version.py"
@@ -159,9 +197,9 @@ if [[ -f "$KIT_VERSION_SCRIPT" ]]; then
   if [[ -n "$PY" ]]; then
     while IFS= read -r line; do
       if [[ "$line" == WARN:* ]]; then
-        warn "${line#WARN: }"
+        warn kit-version "${line#WARN: }"
       elif [[ "$line" == OK:* ]]; then
-        ok "${line#OK: }"
+        ok kit-version "${line#OK: }"
       fi
     done < <("$PY" "$KIT_VERSION_SCRIPT" check "$SDD_PATH" "$PROJECT_ROOT" 2>/dev/null || true)
   fi
@@ -181,18 +219,33 @@ if [[ -d "$PRODUCT_RELEASES" && -d "$CAMPAIGN_RELEASES" ]]; then
     campaign_count=$((campaign_count + 1))
     if compgen -G "$dir/release_*.md" > /dev/null; then
       if [[ ! -f "$PRODUCT_RELEASES/$ver.md" ]]; then
-        warn "dual-release: existe acta $ver/ pero falta docs/releases/$ver.md"
+        warn docs "dual-release: existe acta $ver/ pero falta docs/releases/$ver.md"
         dual_warns=$((dual_warns + 1))
       fi
     fi
   done
   if [[ $campaign_count -gt 0 && $dual_warns -eq 0 ]]; then
-    ok "dual-release: actas de campana con nota producto en docs/releases/"
+    ok docs "dual-release: actas de campana con nota producto en docs/releases/"
   fi
 fi
 
 echo ""
-echo "Resumen: $ERRORS error(es), $WARNINGS advertencia(s)"
+echo "--- Resumen ---"
+for c in "${COMP_ORDER[@]}"; do
+  IFS=':' read -r e w m <<< "${COMP_STATS[$c]}"
+  [[ "$m" -eq 0 ]] && continue
+  if [[ "$e" -gt 0 ]]; then
+    status="FAIL"
+  elif [[ "$w" -gt 0 ]]; then
+    status="WARN"
+  else
+    status="OK  "
+  fi
+  printf '[%-12s] %s (%s errores, %s warnings)\n' "$c" "$status" "$e" "$w"
+done
+
+echo ""
+echo "Total: $ERRORS error(es), $WARNINGS advertencia(s)"
 if [[ $ERRORS -gt 0 ]]; then
   echo ""
   echo "Validacion documental SDD FALLIDA. Corrige los ERROR listados arriba (exit 2)."

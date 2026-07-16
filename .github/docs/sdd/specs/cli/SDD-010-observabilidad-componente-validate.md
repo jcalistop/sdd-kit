@@ -10,11 +10,11 @@
 | **Dominio**           | `cli`                           |
 | **Tipo**              | `feature`                       |
 | **Fecha**             | 2026-07-15                      |
-| **Estado**            | `Draft`                         |
+| **Estado**            | `In Build`                      |
 | **Version objetivo**  | `v1.3.0`                        |
 | **Owner**             | mantenedor                      |
 | **Prioridad**         | `P2`                             |
-| **ADRs relacionados** | —                               |
+| **ADRs relacionados** | `ADR-002`                       |
 | **Dependencias**      | — (independiente de SDD-008 y SDD-009) |
 
 ---
@@ -98,19 +98,19 @@ Particularidad de este spec: la observabilidad por componente no modifica la log
 
 **Happy path:**
 
-- [ ] Cada linea de salida de `validate-sdd` incluye prefijo `[componente]` (ej. `[backlog]`, `[specs]`, `[config]`)
-- [ ] Los resultados se agrupan por componente con separador visual (ej. `--- [backlog] ---`)
-- [ ] Resumen final desglosa: `[backlog] 0E/1W | [specs] 1E/0W | [config] OK | ...`
-- [ ] Codigos de salida preservados: 0 cuando 0 errores (advertencias no cambian exit code)
-- [ ] `python cli/sdd.py validate` produce el nuevo formato (el wrapper Python delega sin cambios)
-- [ ] El script bash (`validate-sdd.sh`) recibe los mismos cambios si existe; si no, se documenta como deuda
-- [ ] CI existente no se rompe (`.github/workflows/ci.yml`)
-- [ ] Salida existente de `validate-sdd` en consumidores sigue siendo parseable para grep simple
+- [x] Cada linea de salida de `validate-sdd` incluye prefijo `[componente]` (ej. `[backlog]`, `[specs]`, `[config]`)
+- [x] Los resultados se agrupan por componente con separador visual (ej. `--- [backlog] ---`)
+- [x] Resumen final desglosa: `[backlog] 0E/1W | [specs] 1E/0W | [config] OK | ...`
+- [x] Codigos de salida preservados: 0 cuando 0 errores (advertencias no cambian exit code)
+- [x] `python cli/sdd.py validate` produce el nuevo formato (el wrapper Python delega sin cambios)
+- [x] El script bash (`validate-sdd.sh`) recibe los mismos cambios si existe; si no, se documenta como deuda
+- [x] CI existente no se rompe (`.github/workflows/ci.yml`) — formato aditivo; grep ERROR/WARN sigue funcionando
+- [x] Salida existente de `validate-sdd` en consumidores sigue siendo parseable para grep simple
 
 **Error path:**
 
-- [ ] Si un componente no tiene checks (vacio), no se muestra separador — no genera ruido
-- [ ] Si el script falla en inicializacion (FATAL), el formato por componente no se aplica (no hay nada que agrupar)
+- [x] Si un componente no tiene checks (vacio), no se muestra separador — no genera ruido (Ensure-Component solo al emitir)
+- [x] Si el script falla en inicializacion (FATAL), el formato por componente no se aplica (no hay nada que agrupar)
 
 ---
 
@@ -213,3 +213,4 @@ Rollback: revertir `validate-sdd.ps1` y `validate-sdd.sh` a version anterior. Si
 - Este spec es el tercero de la serie harness engineering (SDD-008, SDD-009, SDD-010).
 - Inspirado en AHE (NexAU): "component observability — harness decomposed into seven orthogonal, file-level components, each git-tracked so every edit is auditable and revertible".
 - Paso siguiente natural: capturar historial de fallos por componente para mejora continua (evaluate -> analyze -> improve). Evaluar en spec futuro si hay demanda.
+- **Smoke manual (2026-07-15):** exitoso — salida por componente legible; resumen desglosado OK; exit 0.

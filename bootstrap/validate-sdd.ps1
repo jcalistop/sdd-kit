@@ -1,6 +1,7 @@
 # Valida coherencia documental de una instancia SDD.
 # Uso: .\sdd-kit\bootstrap\validate-sdd.ps1 [-SddPath ".github/docs/sdd"]
 # Codigos de salida: 0=OK, 1=fallo del script/entorno (FATAL), 2=incoherencias documentales (ERROR)
+# Salida por componente (SDD-010): [backlog] [specs] [config] [agent] [kit-version] [docs]
 
 param(
     [string]$SddPath = ".github/docs/sdd"
@@ -9,18 +10,51 @@ param(
 $ErrorActionPreference = "Continue"
 $errors = 0
 $warnings = 0
+$componentStats = [ordered]@{}
+$lastComponent = $null
+
+function Ensure-Component([string]$Component) {
+    if (-not $script:componentStats.Contains($Component)) {
+        $script:componentStats[$Component] = @{ Errors = 0; Warnings = 0; Messages = 0 }
+    }
+    if ($script:lastComponent -ne $Component) {
+        Write-Host ""
+        Write-Host "--- [$Component] ---" -ForegroundColor DarkCyan
+        $script:lastComponent = $Component
+    }
+}
 
 function Write-Fatal($msg) {
     Write-Host "FATAL: $msg" -ForegroundColor Magenta
 }
 
-function Write-Err($msg) { Write-Host "ERROR: $msg" -ForegroundColor Red; $script:errors++ }
-function Write-Warn($msg) { Write-Host "WARN:  $msg" -ForegroundColor Yellow; $script:warnings++ }
-function Write-Ok($msg) { Write-Host "OK:    $msg" -ForegroundColor Green }
+function Write-Err {
+    param([string]$Component, [string]$Msg)
+    Ensure-Component $Component
+    Write-Host "[$Component] ERROR: $Msg" -ForegroundColor Red
+    $script:errors++
+    $script:componentStats[$Component].Errors++
+    $script:componentStats[$Component].Messages++
+}
+
+function Write-Warn {
+    param([string]$Component, [string]$Msg)
+    Ensure-Component $Component
+    Write-Host "[$Component] WARN:  $Msg" -ForegroundColor Yellow
+    $script:warnings++
+    $script:componentStats[$Component].Warnings++
+    $script:componentStats[$Component].Messages++
+}
+
+function Write-Ok {
+    param([string]$Component, [string]$Msg)
+    Ensure-Component $Component
+    Write-Host "[$Component] OK:    $Msg" -ForegroundColor Green
+    $script:componentStats[$Component].Messages++
+}
 
 Write-Host ""
 Write-Host "=== Validacion SDD ($SddPath) ===" -ForegroundColor Cyan
-Write-Host ""
 
 if (-not (Test-Path $SddPath)) {
     Write-Fatal "No existe el directorio SDD: $SddPath"
@@ -52,7 +86,7 @@ foreach ($line in $backlogLines) {
     if ($cols[0] -notmatch '^(SDD-\d+[a-z]?)$') { continue }
     $id = $Matches[1]
     if ($backlogIds.ContainsKey($id) -and $backlogIds[$id] -ne $currentSection) {
-        Write-Err "ID $id duplicado en BACKLOG (secciones: $($backlogIds[$id]) y $currentSection)"
+        Write-Err -Component "backlog" -Msg "ID $id duplicado en BACKLOG (secciones: $($backlogIds[$id]) y $currentSection)"
     } else {
         $backlogIds[$id] = $currentSection
         $backlogSection[$id] = $currentSection
@@ -74,7 +108,7 @@ foreach ($dir in $specDirs) {
             $id = $Matches[1]
             $loc = if ($_.FullName -match [regex]::Escape("\specs\")) { "specs" } else { "archive" }
             if ($seenFiles.ContainsKey($id)) {
-                Write-Err "ID $id aparece en mas de un archivo"
+                Write-Err -Component "specs" -Msg "ID $id aparece en mas de un archivo"
             }
             $seenFiles[$id] = $_.FullName
             $fileIds[$id] = $loc
@@ -86,22 +120,22 @@ foreach ($id in $fileIds.Keys) {
     $loc = $fileIds[$id]
     if ($loc -eq "specs") {
         if (-not $backlogIds.ContainsKey($id)) {
-            Write-Err "Spec $id en specs/ sin entrada en BACKLOG.md"
+            Write-Err -Component "specs" -Msg "Spec $id en specs/ sin entrada en BACKLOG.md"
         } elseif ($backlogSection[$id] -eq "Released") {
-            Write-Err "Spec $id en specs/ pero BACKLOG dice Released (debe estar en archive/)"
+            Write-Err -Component "specs" -Msg "Spec $id en specs/ pero BACKLOG dice Released (debe estar en archive/)"
         } elseif ($backlogSection[$id] -eq "Discovery") {
-            Write-Warn "Spec $id en specs/ pero BACKLOG aun en Discovery (esperado Draft+)"
+            Write-Warn -Component "specs" -Msg "Spec $id en specs/ pero BACKLOG aun en Discovery (esperado Draft+)"
         } else {
-            Write-Ok "Spec activo $id coherente con BACKLOG ($($backlogSection[$id]))"
+            Write-Ok -Component "specs" -Msg "Spec activo $id coherente con BACKLOG ($($backlogSection[$id]))"
         }
     }
     if ($loc -eq "archive") {
         if (-not $backlogIds.ContainsKey($id)) {
-            Write-Err "Spec archivado $id sin entrada en BACKLOG.md"
+            Write-Err -Component "specs" -Msg "Spec archivado $id sin entrada en BACKLOG.md"
         } elseif ($backlogSection[$id] -ne "Released") {
-            Write-Err "Spec $id en archive/ pero BACKLOG no esta en Released (esta en $($backlogSection[$id]))"
+            Write-Err -Component "specs" -Msg "Spec $id en archive/ pero BACKLOG no esta en Released (esta en $($backlogSection[$id]))"
         } else {
-            Write-Ok "Spec archivado $id coherente con BACKLOG"
+            Write-Ok -Component "specs" -Msg "Spec archivado $id coherente con BACKLOG"
         }
     }
 }
@@ -111,12 +145,12 @@ foreach ($id in $backlogIds.Keys) {
     $sec = $backlogSection[$id]
     if ($activeSections -contains $sec) {
         if ($fileIds[$id] -ne "specs") {
-            Write-Err "BACKLOG: $id en $sec pero no hay archivo en specs/"
+            Write-Err -Component "specs" -Msg "BACKLOG: $id en $sec pero no hay archivo en specs/"
         }
     }
 }
 
-$nextLine = $backlogLines | Where-Object { $_ -match 'Pr[oó]ximo ID disponible' } | Select-Object -First 1
+$nextLine = $backlogLines | Where-Object { $_ -match 'ximo ID disponible' } | Select-Object -First 1
 if ($nextLine -match 'SDD-(\d+)') {
     $nextNum = [int]$Matches[1]
     $maxNum = 0
@@ -129,24 +163,24 @@ if ($nextLine -match 'SDD-(\d+)') {
     }
     $expected = $maxNum + 1
     if ($nextNum -lt $expected) {
-        Write-Warn "Proximo ID SDD-$($nextNum.ToString('000')) parece bajo (max usado: SDD-$($maxNum.ToString('000')))"
+        Write-Warn -Component "backlog" -Msg "Proximo ID SDD-$($nextNum.ToString('000')) parece bajo (max usado: SDD-$($maxNum.ToString('000')))"
     } else {
-        Write-Ok "Proximo ID disponible coherente (max usado: SDD-$($maxNum.ToString('000')))"
+        Write-Ok -Component "backlog" -Msg "Proximo ID disponible coherente (max usado: SDD-$($maxNum.ToString('000')))"
     }
 }
 
 if (-not (Test-Path (Join-Path $SddPath "sdd.config.yaml"))) {
-    Write-Warn "Falta sdd.config.yaml"
+    Write-Warn -Component "config" -Msg "Falta sdd.config.yaml"
 } else {
-    Write-Ok "sdd.config.yaml presente"
+    Write-Ok -Component "config" -Msg "sdd.config.yaml presente"
     $configText = Get-Content (Join-Path $SddPath "sdd.config.yaml") -Raw -Encoding UTF8
     if ($configText -match 'targets:\s*\[([^\]]*)\]' -and $Matches[1] -match 'cursor') {
         $projectRoot = (Resolve-Path (Join-Path $SddPath "../../..")).Path
         $manifestPath = Join-Path $projectRoot ".cursor/skills/.sdd-kit-manifest.json"
         if (-not (Test-Path $manifestPath)) {
-            Write-Warn "agent.targets incluye cursor pero falta .cursor/skills/.sdd-kit-manifest.json (reinstalar con install-agents.py)"
+            Write-Warn -Component "agent" -Msg "agent.targets incluye cursor pero falta .cursor/skills/.sdd-kit-manifest.json (reinstalar con install-agents.py)"
         } else {
-            Write-Ok "Manifest de skills SDD presente (.sdd-kit-manifest.json)"
+            Write-Ok -Component "agent" -Msg "Manifest de skills SDD presente (.sdd-kit-manifest.json)"
         }
     }
 }
@@ -159,8 +193,8 @@ if (Test-Path $kitVersionScript) {
         $projectRoot = (Resolve-Path (Join-Path $SddPath "../../..")).Path
         $checkOut = & $py.Source $kitVersionScript check $SddPath $projectRoot 2>&1
         foreach ($line in @($checkOut)) {
-            if ($line -match '^WARN:') { Write-Warn ($line -replace '^WARN:\s*', '') }
-            elseif ($line -match '^OK:') { Write-Ok ($line -replace '^OK:\s*', '') }
+            if ($line -match '^WARN:') { Write-Warn -Component "kit-version" -Msg ($line -replace '^WARN:\s*', '') }
+            elseif ($line -match '^OK:') { Write-Ok -Component "kit-version" -Msg ($line -replace '^OK:\s*', '') }
         }
     }
 }
@@ -178,17 +212,27 @@ if ((Test-Path $productReleasesPath) -and (Test-Path $campaignReleasesPath)) {
         $productNote = Join-Path $productReleasesPath "$ver.md"
         $hasActa = Get-ChildItem -Path $dir.FullName -Filter "release_*.md" -File -ErrorAction SilentlyContinue
         if ($hasActa -and -not (Test-Path $productNote)) {
-            Write-Warn "dual-release: existe acta $ver/ pero falta docs/releases/$ver.md"
+            Write-Warn -Component "docs" -Msg "dual-release: existe acta $ver/ pero falta docs/releases/$ver.md"
             $dualWarns++
         }
     }
     if ($campaignDirs.Count -gt 0 -and $dualWarns -eq 0) {
-        Write-Ok "dual-release: actas de campana con nota producto en docs/releases/"
+        Write-Ok -Component "docs" -Msg "dual-release: actas de campana con nota producto en docs/releases/"
     }
 }
 
 Write-Host ""
-Write-Host "Resumen: $errors error(es), $warnings advertencia(s)"
+Write-Host "--- Resumen ---" -ForegroundColor Cyan
+foreach ($name in $componentStats.Keys) {
+    $s = $componentStats[$name]
+    if ($s.Messages -eq 0) { continue }
+    $status = if ($s.Errors -gt 0) { "FAIL" } elseif ($s.Warnings -gt 0) { "WARN" } else { "OK  " }
+    $color = if ($s.Errors -gt 0) { "Red" } elseif ($s.Warnings -gt 0) { "Yellow" } else { "Green" }
+    Write-Host ("[{0,-12}] {1} ({2} errores, {3} warnings)" -f $name, $status, $s.Errors, $s.Warnings) -ForegroundColor $color
+}
+
+Write-Host ""
+Write-Host "Total: $errors error(es), $warnings advertencia(s)"
 
 if ($errors -gt 0) {
     Write-Host ""
