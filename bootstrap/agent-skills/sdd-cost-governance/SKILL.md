@@ -36,15 +36,34 @@ Si detectas alguno de estos patrones, **detente y pide instrucciones al humano.*
 
 ## Registro de costo por spec
 
-Al finalizar cada spec (transición a Released), estimar y registrar:
+Al finalizar cada spec (transición a Released), registrar en `{{SDD_PATH}}/metrics/token-usage.json` (schema en `{{SDD_PATH}}/metrics/README.md`).
 
+Schema mínimo por entrada:
+
+```json
+{
+  "spec_id": "SDD-NNN",
+  "domain": "core",
+  "date": "YYYY-MM-DD",
+  "phases": {
+    "draft": { "turns": 0, "tool_calls": 0, "estimated_tokens": 0 },
+    "build": { "turns": 0, "tool_calls": 0, "estimated_tokens": 0 },
+    "verify": { "turns": 0, "tool_calls": 0, "estimated_tokens": 0 }
+  },
+  "total_estimated_tokens": 0,
+  "verify_passed_first_attempt": true,
+  "confidence": "medium"
+}
 ```
-SDD-NNN | Fase más cara | Turns est. | Verify 1er intento | Notas
+
+Consultar estimados:
+
+```bash
+python {{KIT_PATH}}/cli/sdd.py metrics tokens --summary
+python {{KIT_PATH}}/cli/sdd.py metrics tokens SDD-NNN --format json
 ```
 
-El objetivo es construir una base de datos de costo por spec para detectar outliers y patrones de mejora.
-
-**Métrica clave:** si un spec consume >2× el promedio de specs del mismo dominio, requiere análisis post-mortem.
+**Métrica clave:** si un spec consume >2× el promedio de specs del mismo dominio (N≥3), requiere análisis post-mortem (`validate-sdd` emite WARN).
 
 ---
 

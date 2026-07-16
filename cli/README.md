@@ -29,6 +29,7 @@ Variable de entorno opcional: `SDD_PATH` (default: `.github/docs/sdd`).
 | `release changelog [-o path]`                                                                    | Genera `CHANGELOG.md` (Keep a Changelog)   |
 | `release close v1.2.0 [--changelog] [--force]`                                                   | Checklist pre-campaña                      |
 | `metrics [--markdown] [-o report.md]`                                                            | Salud del proceso SDD                      |
+| `metrics tokens [SDD-NNN] [--all] [--summary] [--format json\|table\|text]`                       | Estimación heurística de tokens por spec   |
 | `prompt list [--category adoption\|workflow\|exceptions] [--phase Draft]`                        | Catálogo de prompts copy-paste             |
 | `prompt show <id> [--full]`                                                                      | Imprime prompt listo para pegar al agente  |
 
@@ -48,6 +49,9 @@ python sdd-kit/cli/sdd.py spec new --domain api --type feature --title "CRUD pro
 
 # Métricas
 python sdd-kit/cli/sdd.py metrics --markdown -o .github/docs/sdd/metrics.md
+python sdd-kit/cli/sdd.py metrics tokens --summary
+python sdd-kit/cli/sdd.py metrics tokens SDD-006 --format json
+python sdd-kit/cli/sdd.py metrics tokens --all
 
 # CHANGELOG tras releases
 python sdd-kit/cli/sdd.py release changelog

@@ -1,7 +1,7 @@
 # Valida coherencia documental de una instancia SDD.
 # Uso: .\sdd-kit\bootstrap\validate-sdd.ps1 [-SddPath ".github/docs/sdd"]
 # Codigos de salida: 0=OK, 1=fallo del script/entorno (FATAL), 2=incoherencias documentales (ERROR)
-# Salida por componente (SDD-010): [backlog] [specs] [config] [agent] [kit-version] [docs]
+# Salida por componente (SDD-010): [backlog] [specs] [config] [agent] [kit-version] [docs] [metrics]
 
 param(
     [string]$SddPath = ".github/docs/sdd"
@@ -218,6 +218,72 @@ if ((Test-Path $productReleasesPath) -and (Test-Path $campaignReleasesPath)) {
     }
     if ($campaignDirs.Count -gt 0 -and $dualWarns -eq 0) {
         Write-Ok -Component "docs" -Msg "dual-release: actas de campana con nota producto en docs/releases/"
+    }
+}
+
+# Token usage (SDD-013): WARN only - nunca ERROR
+$metricsDir = Join-Path $SddPath "metrics"
+$tokenUsagePath = Join-Path $metricsDir "token-usage.json"
+if (-not (Test-Path $metricsDir)) {
+    Write-Warn -Component "metrics" -Msg "Falta directorio metrics/ (opcional). No es ERROR."
+} elseif (-not (Test-Path $tokenUsagePath)) {
+    Write-Warn -Component "metrics" -Msg "Falta metrics/token-usage.json - registrar consumo al cerrar specs"
+} else {
+    $usageIds = @{}
+    $usageByDomain = @{}
+    $jsonOk = $false
+    try {
+        $usageObj = Get-Content $tokenUsagePath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $entryList = @()
+        if ($null -ne $usageObj.entries) {
+            $entryList = @($usageObj.entries)
+        }
+        foreach ($entry in $entryList) {
+            if (-not $entry.spec_id) { continue }
+            $sid = [string]$entry.spec_id
+            $tok = 0
+            if ($null -ne $entry.total_estimated_tokens) {
+                $tok = [int]$entry.total_estimated_tokens
+            }
+            $dom = "-"
+            if ($entry.domain) { $dom = [string]$entry.domain }
+            $usageIds[$sid] = $tok
+            if (-not $usageByDomain.ContainsKey($dom)) {
+                $usageByDomain[$dom] = New-Object System.Collections.ArrayList
+            }
+            [void]$usageByDomain[$dom].Add(@{ Id = $sid; Tokens = $tok })
+        }
+        $cnt = $usageIds.Count
+        Write-Ok -Component "metrics" -Msg "token-usage.json presente ($cnt entradas)"
+        $jsonOk = $true
+    } catch {
+        Write-Warn -Component "metrics" -Msg "token-usage.json no es JSON valido"
+    }
+
+    if ($jsonOk) {
+        foreach ($id in @($backlogIds.Keys)) {
+            if ($backlogSection[$id] -eq "Released" -and -not $usageIds.ContainsKey($id)) {
+                Write-Warn -Component "metrics" -Msg "Spec Released $id sin entrada en token-usage.json"
+            }
+        }
+
+        $minSamples = 3
+        $factor = 2.0
+        foreach ($dom in @($usageByDomain.Keys)) {
+            $items = @($usageByDomain[$dom])
+            if ($items.Count -lt $minSamples) { continue }
+            $sum = 0
+            foreach ($it in $items) { $sum += [int]$it.Tokens }
+            $avg = $sum / $items.Count
+            if ($avg -le 0) { continue }
+            foreach ($it in $items) {
+                if ([int]$it.Tokens -gt ($factor * $avg)) {
+                    $avgR = [math]::Round($avg)
+                    $msg = "Outlier tokens: $($it.Id) dominio $dom ($($it.Tokens) > 2x avg $avgR; N>=$minSamples)"
+                    Write-Warn -Component "metrics" -Msg $msg
+                }
+            }
+        }
     }
 }
 

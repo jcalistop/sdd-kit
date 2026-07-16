@@ -352,3 +352,4 @@ Seguir la convención del **perfil stack** (p. ej. migraciones, no DDL manual fu
 - Spec = ~2.4% de tokens. Review iterativo = ~59.4%. Fuente: [Tokenomics paper](https://arxiv.org/abs/2601.14470).
 - Harness con governance: -38% tokens, -41% costo, -44% tiempo. Fuente: [Harness Effect paper](https://arxiv.org/abs/2607.06906).
 - KV-cache hit < 90% → hasta 10× más caro. Fuente: [research/2026-07-15-token-economics-sdd-harness.md](research/2026-07-15-token-economics-sdd-harness.md).
+- Observabilidad: `sdd metrics tokens --summary` (estimación heurística; ver `metrics/README.md`).

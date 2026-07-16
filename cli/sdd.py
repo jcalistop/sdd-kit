@@ -22,7 +22,14 @@ from lib.backlog import (  # noqa: E402
 )
 from lib.changelog import generate_changelog  # noqa: E402
 from lib.github_sync import pull_from_github, push_to_github  # noqa: E402
-from lib.metrics import collect_metrics, format_metrics_report  # noqa: E402
+from lib.metrics import (  # noqa: E402
+    collect_metrics,
+    estimate_tokens,
+    format_metrics_report,
+    format_token_report,
+    list_token_estimates,
+    summarize_token_estimates,
+)
 from lib.paths import find_sdd_path, kit_root  # noqa: E402
 from lib.prompts import (  # noqa: E402
     format_prompt_list,
@@ -292,6 +299,42 @@ def cmd_metrics(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_metrics_tokens(args: argparse.Namespace) -> int:
+    """Estimación heurística de tokens por spec (no facturación exacta)."""
+    sdd = Path(args.sdd_path) if args.sdd_path else find_sdd_path()
+    fmt = getattr(args, "format", "table") or "table"
+
+    if args.spec_id:
+        try:
+            row = estimate_tokens(sdd, args.spec_id)
+        except FileNotFoundError as exc:
+            print(f"Error: {exc}", file=sys.stderr)
+            return 1
+        rows = [row]
+    elif args.summary or args.all:
+        only_usage = bool(args.summary) and not args.all
+        rows = list_token_estimates(sdd, only_with_usage=only_usage)
+        if not rows and only_usage:
+            rows = list_token_estimates(sdd, only_with_usage=False)
+    else:
+        print(
+            "Error: indica SDD-NNN, --all o --summary.",
+            file=sys.stderr,
+        )
+        return 1
+
+    summary = summarize_token_estimates(rows) if args.summary and not args.spec_id else None
+    report = format_token_report(rows, fmt=fmt, summary=summary)
+    print(report, end="" if report.endswith("\n") else "\n")
+    return 0
+
+
+def _dispatch_metrics(args: argparse.Namespace) -> int:
+    if getattr(args, "metrics_cmd", None) == "tokens":
+        return cmd_metrics_tokens(args)
+    return cmd_metrics(args)
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="sdd",
@@ -373,7 +416,36 @@ def build_parser() -> argparse.ArgumentParser:
     met_p.add_argument("--markdown", action="store_true")
     met_p.add_argument("-o", "--output", help="Guardar reporte en archivo")
     met_p.add_argument("--stagnant-days", type=int, default=14)
-    met_p.set_defaults(func=cmd_metrics)
+    met_sub = met_p.add_subparsers(dest="metrics_cmd")
+
+    met_tok = met_sub.add_parser(
+        "tokens",
+        help="Estimación heurística de tokens por spec (no facturación exacta)",
+    )
+    met_tok.add_argument(
+        "spec_id",
+        nargs="?",
+        help="SDD-NNN (omitir con --all o --summary)",
+    )
+    met_tok.add_argument(
+        "--all",
+        action="store_true",
+        help="Todos los specs (specs/ + archive/) con estimación",
+    )
+    met_tok.add_argument(
+        "--summary",
+        action="store_true",
+        help="Resumen: total, promedio, mediana, top consumer",
+    )
+    met_tok.add_argument(
+        "--format",
+        choices=["json", "table", "text"],
+        default="table",
+        help="Formato de salida (default: table)",
+    )
+    met_tok.set_defaults(func=_dispatch_metrics)
+
+    met_p.set_defaults(func=_dispatch_metrics, metrics_cmd=None)
 
     pr_p = sub.add_parser("prompt", help="Catálogo de prompts copy-paste")
     pr_sub = pr_p.add_subparsers(dest="prompt_cmd", required=True)

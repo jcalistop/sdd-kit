@@ -10,7 +10,7 @@
 | **Dominio**           | `cli`                                                                 |
 | **Tipo**              | `feature`                                                             |
 | **Fecha**             | 2026-07-15                                                            |
-| **Estado**            | `Draft`                                                               |
+| **Estado**            | `In Build`                                                            |
 | **Versión objetivo**  | `v1.4.0`                                                              |
 | **Owner**             | mantenedor                                                            |
 | **Prioridad**         | `P1`                                                                  |
@@ -93,20 +93,20 @@ Aplica [`domain-rules.md`](../../../business/domain-rules.md):
 
 **Happy path:**
 
-- [ ] `sdd metrics tokens --summary` imprime tabla con al menos: SDD-NNN, dominio, tokens estimados, verify 1er intento (si hay datos)
-- [ ] `sdd metrics tokens SDD-NNN` y `--all` funcionan; `--format json` emite JSON válido
-- [ ] Heurística documentada (qué cuenta y qué no); `confidence` presente en salida JSON
-- [ ] Schema de `token-usage.json` documentado (compatible con lo anticipado en `sdd-cost-governance`)
-- [ ] `validate-sdd` emite WARN (no ERROR) si specs Released carecen de token-usage
-- [ ] `validate-sdd` emite WARN si un spec supera 2× el promedio del dominio (cuando hay ≥N muestras, N documentado)
-- [ ] `python -m compileall -q cli/` en verde
-- [ ] `python cli/sdd.py validate` sin errores
+- [x] `sdd metrics tokens --summary` imprime tabla con al menos: SDD-NNN, dominio, tokens estimados, verify 1er intento (si hay datos)
+- [x] `sdd metrics tokens SDD-NNN` y `--all` funcionan; `--format json` emite JSON válido
+- [x] Heurística documentada (qué cuenta y qué no); `confidence` presente en salida JSON
+- [x] Schema de `token-usage.json` documentado (compatible con lo anticipado en `sdd-cost-governance`)
+- [x] `validate-sdd` emite WARN (no ERROR) si specs Released carecen de token-usage
+- [x] `validate-sdd` emite WARN si un spec supera 2× el promedio del dominio (cuando hay ≥N muestras, N documentado)
+- [x] `python -m compileall -q cli/` en verde
+- [x] `python cli/sdd.py validate` sin errores
 
 **Error path:**
 
-- [ ] Spec ID inexistente → mensaje claro, exit code ≠ 0
-- [ ] Sin datos de métricas → `--summary` reporta vacío o "sin datos" sin crash
-- [ ] Falta `metrics/` → WARN o creación opcional documentada, no ERROR hard de validate-sdd
+- [x] Spec ID inexistente → mensaje claro, exit code ≠ 0
+- [x] Sin datos de métricas → `--summary` reporta vacío o "sin datos" sin crash
+- [x] Falta `metrics/` → WARN o creación opcional documentada, no ERROR hard de validate-sdd
 
 ---
 
@@ -160,3 +160,5 @@ python cli/sdd.py validate
 
 - Research: `.github/docs/sdd/research/2026-07-15-token-economics-sdd-harness.md` §7.5 (Propuesta E)
 - Complementa SDD-010 (fallas por componente) con dimensión costo
+- **2026-07-15 (build-spec):** Implementado `metrics tokens`, `metrics/token-usage.json` + README, WARN en validate-sdd (ps1/sh), docs CLI/README. Estado → `In Build`. Verify local OK.
+- **2026-07-15 (smoke manual):** Exitoso — humano confirmó `metrics tokens --summary`, JSON por SDD-NNN y WARN de Released sin token-usage en validate-sdd.

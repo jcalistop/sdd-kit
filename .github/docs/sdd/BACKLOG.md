@@ -26,14 +26,15 @@
 
 ## Draft
 
-| ID      | Dominio | Título                                          | Versión | Spec                                                      |
-| ------- | ------- | ----------------------------------------------- | ------- | --------------------------------------------------------- |
-| SDD-013 | cli     | Observabilidad de tokens (`sdd metrics tokens`) | v1.4.0  | [SDD-013](specs/cli/SDD-013-observabilidad-tokens-metrics.md) |
+| ID  | Dominio | Título | Versión | Spec |
+| --- | ------- | ------ | ------- | ---- |
+| —   | —       | —      | —       | —    |
 
 ## In Build
 
 | ID      | Dominio | Título                                          | Versión | Spec                                                                              |
 | ------- | ------- | ----------------------------------------------- | ------- | --------------------------------------------------------------------------------- |
+| SDD-013 | cli     | Observabilidad de tokens (`sdd metrics tokens`) | v1.4.0  | [SDD-013](specs/cli/SDD-013-observabilidad-tokens-metrics.md) |
 | SDD-010 | cli     | Observabilidad por componente validate-sdd | v1.3.0  | [SDD-010](specs/cli/SDD-010-observabilidad-componente-validate.md) |
 | SDD-012 | core    | Governance de tokens en el harness (A–F)        | v1.3.0  | [SDD-012](specs/core/SDD-012-governance-tokens-harness.md) |
 | SDD-009 | docs    | Posicionar sdd-kit como agent harness       | v1.3.0  | [SDD-009](specs/docs/SDD-009-posicionamiento-agent-harness.md) |
