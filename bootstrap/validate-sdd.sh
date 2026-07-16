@@ -167,6 +167,30 @@ if [[ -f "$KIT_VERSION_SCRIPT" ]]; then
   fi
 fi
 
+# Dual-release (producto kit): acta campaña => nota SemVer en docs/releases/
+PROJECT_ROOT_DOCS="$(cd "$SDD_PATH/../../.." && pwd)"
+PRODUCT_RELEASES="$PROJECT_ROOT_DOCS/docs/releases"
+CAMPAIGN_RELEASES="$SDD_PATH/releases"
+if [[ -d "$PRODUCT_RELEASES" && -d "$CAMPAIGN_RELEASES" ]]; then
+  dual_warns=0
+  campaign_count=0
+  for dir in "$CAMPAIGN_RELEASES"/v*/; do
+    [[ -d "$dir" ]] || continue
+    ver="$(basename "$dir")"
+    [[ "$ver" =~ ^v[0-9]+\.[0-9]+\.[0-9]+ ]] || continue
+    campaign_count=$((campaign_count + 1))
+    if compgen -G "$dir/release_*.md" > /dev/null; then
+      if [[ ! -f "$PRODUCT_RELEASES/$ver.md" ]]; then
+        warn "dual-release: existe acta $ver/ pero falta docs/releases/$ver.md"
+        dual_warns=$((dual_warns + 1))
+      fi
+    fi
+  done
+  if [[ $campaign_count -gt 0 && $dual_warns -eq 0 ]]; then
+    ok "dual-release: actas de campana con nota producto en docs/releases/"
+  fi
+fi
+
 echo ""
 echo "Resumen: $ERRORS error(es), $WARNINGS advertencia(s)"
 if [[ $ERRORS -gt 0 ]]; then

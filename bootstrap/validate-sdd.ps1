@@ -165,15 +165,25 @@ if (Test-Path $kitVersionScript) {
     }
 }
 
-$projectRootForMaintainers = (Resolve-Path (Join-Path $SddPath "../../..")).Path
-$maintainersPath = Join-Path $projectRootForMaintainers "docs/maintainers"
-if (Test-Path $maintainersPath) {
-    $strayMaintainerDocs = Get-ChildItem -Path $maintainersPath -Filter "*.md" -File | Where-Object { $_.Name -ne "README.md" }
-    foreach ($stray in $strayMaintainerDocs) {
-        Write-Err "docs/maintainers/$($stray.Name) debe estar en business/planning/ (solo README.md stub permitido)"
+# Dual-release (producto kit): acta campaña => nota SemVer en docs/releases/
+$projectRootForDocs = (Resolve-Path (Join-Path $SddPath "../../..")).Path
+$productReleasesPath = Join-Path $projectRootForDocs "docs/releases"
+$campaignReleasesPath = Join-Path $SddPath "releases"
+if ((Test-Path $productReleasesPath) -and (Test-Path $campaignReleasesPath)) {
+    $campaignDirs = Get-ChildItem -Path $campaignReleasesPath -Directory -ErrorAction SilentlyContinue |
+        Where-Object { $_.Name -match '^v\d+\.\d+\.\d+' }
+    $dualWarns = 0
+    foreach ($dir in $campaignDirs) {
+        $ver = $dir.Name
+        $productNote = Join-Path $productReleasesPath "$ver.md"
+        $hasActa = Get-ChildItem -Path $dir.FullName -Filter "release_*.md" -File -ErrorAction SilentlyContinue
+        if ($hasActa -and -not (Test-Path $productNote)) {
+            Write-Warn "dual-release: existe acta $ver/ pero falta docs/releases/$ver.md"
+            $dualWarns++
+        }
     }
-    if ($strayMaintainerDocs.Count -eq 0) {
-        Write-Ok "docs/maintainers/ sin archivos huérfanos (solo stub README)"
+    if ($campaignDirs.Count -gt 0 -and $dualWarns -eq 0) {
+        Write-Ok "dual-release: actas de campana con nota producto en docs/releases/"
     }
 }
 

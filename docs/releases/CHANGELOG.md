@@ -7,6 +7,19 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [1.2.2] - 2026-07-14
+
+Ver [v1.2.2.md](v1.2.2.md).
+
+### Cambiado
+
+- Reglas Cursor: fusión `sdd-core` → `sdd-agent-workflow` (menos always-on)
+- Skills: lectura previa acotada a draft/build; verify sin cadena circular
+- `install-agents.py` — no duplicar skills globales si ya existen en el proyecto
+- Plantilla de spec: guía anti-boilerplate (SDD-006)
+
+---
+
 ## [1.2.1] - 2026-06-17
 
 Ver [v1.2.1.md](v1.2.1.md).
@@ -29,15 +42,12 @@ Ver [v1.2.0.md](v1.2.0.md).
 - `bootstrap/test_install_skills.py` — tests de instalación
 - `validate-sdd` — advertencia si falta `.sdd-kit-manifest.json` con Cursor en targets
 - Sección Skills en `core/prompt-catalog.md` y `core/agent-setup.md`
-- `validate-sdd` — falla si quedan `.md` en `docs/maintainers/` salvo README stub (SDD-005)
 - `docs/README.md` — glosario de capas releases
 
 ### Cambiado
 
 - `upgrade-guide.md` — reinstalar skills tras cambios en `agent-skills/`
 - CI valida `agent-skills/manifest.json` y ejecuta tests de skills
-- `docs/maintainers/` → `.github/docs/business/planning/` (SDD-005)
-- Stub de deprecación en `docs/maintainers/README.md`
 - Glosario de capas releases en ADOPTION
 - `.cursor/skills/sdd-*` y manifest fuera de git (fuente: `bootstrap/agent-skills/`)
 
