@@ -1,0 +1,20 @@
+---
+description: SDD — contrato safe-git (Git destructivo; guardrail always-on)
+alwaysApply: true
+---
+
+# SDD Safe-Git (guardrail)
+
+Contrato Git destructivo. Canonico: `sdd-kit/core/safe-git-contract.md` (guia harness; no define agentes/subagentes).
+
+## Obligatorio
+
+1. **Alcance literal** — solo lo pedido. "Borra rama local" no implica pull/reset/merge de otras ramas.
+2. **Antes de pull/merge/rebase/reset** en `development_branch`: `status` + `fetch` + `log` local vs remoto. Si hay commits locales no pusheados → informar y **parar**.
+3. **Conflictos** → reportar opciones; **no** auto `merge --abort` + `reset --hard`.
+4. **Prohibido** sin texto explicito del humano: `reset --hard`, `clean -fd(x)`, force-push a ramas compartidas, `branch -D`, restore masivo, rebase interactivo/`--onto`.
+
+## Permitido con confirmacion escrita
+
+Ej.: "resetea dev a origin/dev aceptando perder commits locales" tras mostrar `git log origin/<rama>..HEAD`.
+

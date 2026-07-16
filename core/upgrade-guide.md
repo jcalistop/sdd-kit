@@ -132,6 +132,18 @@ git commit -m "chore(sdd): portar cambios kit vX.Y.Z a instancia" -- .github/doc
 
 ---
 
+## Tras v1.3.0+ — safe-git
+
+Si actualizas a una versión que incluye **SDD-007** (contrato safe-git):
+
+1. Reinstala adaptadores: `python sdd-kit/bootstrap/install-agents.py install --agent cursor --profile <tu-perfil> ...`
+2. Verifica `.cursor/rules/sdd-safe-git.mdc` con `alwaysApply: true`.
+3. Claude/Codex/Copilot: el preámbulo debe mencionar safe-git o enlace a `core/safe-git-contract.md`.
+
+No duplica reglas de migraciones BD de instancia (`safe-migrations`, etc.).
+
+---
+
 ## Prompt para el agente
 
 ```bash

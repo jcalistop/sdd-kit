@@ -61,6 +61,8 @@ Los **estados** del spec son la fuente de verdad del progreso. Los **prompts** d
 | **Prompt**            | Plantilla del catálogo para disparar trabajo del agente              |
 | **Regla always-on**   | Comportamiento del agente sin prompt (p. ej. reglas del IDE)         |
 
+Contratos always-on del kit: workflow SDD y [safe-git](safe-git-contract.md) (Git destructivo). Detalle de instalación: [`agent-setup.md`](agent-setup.md).
+
 | Situación                        | ¿Prompt?    | Notas                                             |
 | -------------------------------- | ----------- | ------------------------------------------------- |
 | Idea nueva (adopción madura)     | No          | El agente sigue el ciclo; describes la necesidad  |

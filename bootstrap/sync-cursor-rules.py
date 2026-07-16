@@ -26,6 +26,7 @@ def main() -> int:
     mapping = {
         "workflow": "sdd-agent-workflow.mdc",
         "reference": "sdd-workflow-reference.mdc",
+        "safe_git": "sdd-safe-git.mdc",
     }
     for key, filename in mapping.items():
         entry = manifest[key]

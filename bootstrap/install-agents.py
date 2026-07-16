@@ -233,6 +233,12 @@ def install_cursor(target: Path, profile: str) -> None:
             manifest["reference"]["file"],
             _always_apply(manifest["reference"]),
         ),
+        (
+            "sdd-safe-git.mdc",
+            manifest["safe_git"]["description"],
+            manifest["safe_git"]["file"],
+            _always_apply(manifest["safe_git"]),
+        ),
     ]
     stack_body = read_stack_prompt(profile)
     if stack_body:

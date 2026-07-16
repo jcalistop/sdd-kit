@@ -82,3 +82,4 @@ Leer `business/domain-rules.md` (ruta `paths.business` del config) al iniciar sp
 - Asumir roles de equipo — el humano único decide y aprueba
 - Asumir reglas de negocio no escritas en `domain-rules.md`
 - `push` o PR antes de `verify-implementation` en verde
+- Ampliar alcance Git más allá del pedido (safe-git)

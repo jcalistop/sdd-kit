@@ -8,5 +8,10 @@
     "file": "sdd-workflow-reference.md",
     "description": "SDD — checklists DoR/DoD, antipatrones y referencia on-demand",
     "alwaysApply": false
+  },
+  "safe_git": {
+    "file": "sdd-safe-git.md",
+    "description": "SDD — contrato safe-git (Git destructivo; guardrail always-on)",
+    "alwaysApply": true
   }
 }

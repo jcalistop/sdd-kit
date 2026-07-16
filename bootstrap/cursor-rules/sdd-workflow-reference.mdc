@@ -37,6 +37,7 @@ No bloquear; alertar y documentar en Riesgos del spec.
 | "reescribamos todo el módulo"        | Big Rewrite — proponer refactor incremental |
 | Patrón complejo para problema simple | Golden Hammer — ¿solución más simple?       |
 | Idea sin exclusiones                 | Preguntar qué NO incluye                    |
+| Ampliar Git más allá del pedido      | Safe-git — no pull/reset/merge “por si acaso”; ver `safe-git-contract.md` |
 
 ---
 
