@@ -287,7 +287,7 @@ for dom, items in by_dom.items():
         if tok > factor * avg:
             print(f"WARN_OUTLIER:{sid}:{dom}:{tok}:{avg:.0f}")
 PY
-)" || true)
+)" || true
     while IFS= read -r line; do
       [[ -z "$line" ]] && continue
       if [[ "$line" == OK_COUNT:* ]]; then
