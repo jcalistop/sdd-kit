@@ -159,6 +159,17 @@ python sdd-kit/bootstrap/install-agents.py install \
 
 Si solo hiciste checkout del tag y **faltan** `sdd-safe-git.mdc` o `sdd-cost-governance`, vuelve a ejecutar el reinstall y el checklist de la skill `sdd-upgrade-kit` (`reference.md`).
 
+### v1.3.1 — Descartado en archive
+
+Si tras el upgrade `validate-sdd` falla por specs en `specs/` con BACKLOG Descartado (o cabecera `Deprecated`/`Descartado`):
+
+1. Renombra cabecera a **`Descartado`** (no uses `Deprecated`).
+2. `git mv` el `.md` a `archive/<YYYY>/<dominio>/` — **sin stub** en `specs/`.
+3. Asegura la fila en BACKLOG «Descartado / en pausa» con enlace al archive.
+4. Vuelve a ejecutar `validate`.
+
+Detalle: `docs/releases/v1.3.1.md`.
+
 ---
 
 ## Prompt para el agente

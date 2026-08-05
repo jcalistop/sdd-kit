@@ -12,7 +12,7 @@
 | **Dominio**           | _(ver `sdd.config.yaml` → domains)_                                               |
 | **Tipo**              | `feature` / `bugfix` / `refactor` / `performance` / `db-change` / `documentation` |
 | **Fecha**             | YYYY-MM-DD                                                                        |
-| **Estado**            | `Draft` / `Ready` / `In Build` / `Validating` — `Released` solo en `archive/`     |
+| **Estado**            | `Draft` / `Ready` / `In Build` / `Validating` — `Released` o `Descartado` solo en `archive/` |
 | **Versión objetivo**  | vX.Y.Z                                                                            |
 | **Owner**             | nombre                                                                            |
 | **Prioridad**         | `P0` / `P1` / `P2` / `P3`                                                         |

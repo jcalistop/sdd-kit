@@ -50,6 +50,8 @@
 
 ## Descartado / en pausa
 
-| Idea / ID | Razón | Fecha |
-| --------- | ----- | ----- |
-| —         | —     | —     |
+| ID | Dominio | Título | Razón | Fecha | Spec |
+| -- | ------- | ------ | ----- | ----- | ---- |
+| —  | —       | —      | —     | —     | —    |
+
+> Spec formalizado Descartado: `git mv` a `archive/<YYYY>/<dominio>/` (sin stub en `specs/`). En pausa sin archivo: ID `—` y sin columna Spec.

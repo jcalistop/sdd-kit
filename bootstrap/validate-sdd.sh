@@ -84,8 +84,9 @@ while IFS= read -r line; do
   fi
 done < "$BACKLOG"
 
-# IDs en archivos specs/
+# IDs en archivos specs/ y archive/
 declare -A FILE_IDS
+declare -A FILE_PATHS
 declare -A FILE_DUP
 while IFS= read -r -d '' f; do
   base=$(basename "$f")
@@ -96,6 +97,7 @@ while IFS= read -r -d '' f; do
     elif [[ "$f" == *"/archive/"* ]]; then
       FILE_IDS["$id"]="archive"
     fi
+    FILE_PATHS["$id"]="$f"
     if [[ -n "${FILE_DUP[$id]:-}" ]]; then
       err specs "ID $id aparece en mas de un archivo"
     fi
@@ -103,14 +105,34 @@ while IFS= read -r -d '' f; do
   fi
 done < <(find "$SDD_PATH/specs" "$SDD_PATH/archive" -name 'SDD-*.md' -print0 2>/dev/null || true)
 
+header_estado() {
+  local f="$1"
+  local line
+  while IFS= read -r line; do
+    if [[ "$line" == *"**Estado**"* ]]; then
+      echo "$line" | cut -d'|' -f3 | sed 's/`//g;s/^[[:space:]]*//;s/[[:space:]]*$//'
+      return 0
+    fi
+  done < <(head -n 40 "$f" 2>/dev/null || true)
+  return 0
+}
+
 # Specs activos deben estar en BACKLOG
 for id in "${!FILE_IDS[@]}"; do
   loc="${FILE_IDS[$id]}"
+  estado=""
+  if [[ -n "${FILE_PATHS[$id]:-}" ]]; then
+    estado=$(header_estado "${FILE_PATHS[$id]}")
+  fi
   if [[ "$loc" == "specs" ]]; then
     if [[ -z "${BACKLOG_IDS[$id]:-}" ]]; then
       err specs "Spec $id en specs/ sin entrada en BACKLOG.md"
     elif [[ "${BACKLOG_SECTION[$id]}" == "Released" ]]; then
       err specs "Spec $id en specs/ pero BACKLOG dice Released (debe estar en archive/)"
+    elif [[ "${BACKLOG_SECTION[$id]}" == "Descartado" ]]; then
+      err specs "Spec $id en specs/ pero BACKLOG dice Descartado (debe estar en archive/)"
+    elif [[ "$estado" =~ ^(Released|Descartado) ]]; then
+      err specs "Spec $id en specs/ con cabecera Estado=$estado (terminales solo en archive/)"
     elif [[ "${BACKLOG_SECTION[$id]}" == "Discovery" ]]; then
       warn specs "Spec $id en specs/ pero BACKLOG aun en Discovery (esperado Draft+)"
     else
@@ -120,10 +142,10 @@ for id in "${!FILE_IDS[@]}"; do
   if [[ "$loc" == "archive" ]]; then
     if [[ -z "${BACKLOG_IDS[$id]:-}" ]]; then
       err specs "Spec archivado $id sin entrada en BACKLOG.md"
-    elif [[ "${BACKLOG_SECTION[$id]}" != "Released" ]]; then
-      err specs "Spec $id en archive/ pero BACKLOG no esta en Released (esta en ${BACKLOG_SECTION[$id]})"
+    elif [[ "${BACKLOG_SECTION[$id]}" == "Released" || "${BACKLOG_SECTION[$id]}" == "Descartado" ]]; then
+      ok specs "Spec archivado $id coherente con BACKLOG (${BACKLOG_SECTION[$id]})"
     else
-      ok specs "Spec archivado $id coherente con BACKLOG"
+      err specs "Spec $id en archive/ pero BACKLOG no esta en Released ni Descartado (esta en ${BACKLOG_SECTION[$id]})"
     fi
   fi
 done
@@ -287,7 +309,7 @@ for dom, items in by_dom.items():
         if tok > factor * avg:
             print(f"WARN_OUTLIER:{sid}:{dom}:{tok}:{avg:.0f}")
 PY
-)" || true)
+)" || true
     while IFS= read -r line; do
       [[ -z "$line" ]] && continue
       if [[ "$line" == OK_COUNT:* ]]; then
