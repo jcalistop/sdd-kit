@@ -10,7 +10,7 @@
 | **Dominio**           | `core`                       |
 | **Tipo**              | `refactor` + `documentation` |
 | **Fecha**             | 2026-08-05                   |
-| **Estado**            | `In Build`                   |
+| **Estado**            | `Released`                   |
 | **Versión objetivo**  | `v1.3.1`                     |
 | **Owner**             | José Luis Calisto Peñafiel   |
 | **Prioridad**         | `P2`                         |
@@ -78,17 +78,17 @@ Además, `workflow.md` dice que Descartado es «solo en BACKLOG (no en cabecera)
 
 ## Impacto técnico
 
-| Pregunta | Respuesta |
-| -------- | --------- |
-| ¿Afecta `core/`? | Sí — workflow, plantillas, concepts, upgrade-guide |
-| ¿Afecta perfiles? | No aplica |
-| ¿Afecta `bootstrap/`? | Sí — validate-sdd, agent-prompts, cursor-rules |
-| ¿Afecta `cli/`? | Parcial — backlog.py |
-| ¿Afecta workflows/reglas Cursor? | Sí — sync desde agent-prompts |
-| ¿README/INSTALL? | Parcial — release notes |
-| ¿Instancia SDD del kit? | Sí — BACKLOG, spec, next_sdd |
-| ¿domain-rules? | Principios 1, 4, 6, 7 |
-| ¿ADR? | No |
+| Pregunta                         | Respuesta                                          |
+| -------------------------------- | -------------------------------------------------- |
+| ¿Afecta `core/`?                 | Sí — workflow, plantillas, concepts, upgrade-guide |
+| ¿Afecta perfiles?                | No aplica                                          |
+| ¿Afecta `bootstrap/`?            | Sí — validate-sdd, agent-prompts, cursor-rules     |
+| ¿Afecta `cli/`?                  | Parcial — backlog.py                               |
+| ¿Afecta workflows/reglas Cursor? | Sí — sync desde agent-prompts                      |
+| ¿README/INSTALL?                 | Parcial — release notes                            |
+| ¿Instancia SDD del kit?          | Sí — BACKLOG, spec, next_sdd                       |
+| ¿domain-rules?                   | Principios 1, 4, 6, 7                              |
+| ¿ADR?                            | No                                                 |
 
 ---
 
@@ -146,10 +146,10 @@ python bootstrap/sync-cursor-rules.py
 
 ## Riesgos y rollback
 
-| Riesgo | Probabilidad | Impacto | Mitigación |
-| ------ | ------------ | ------- | ---------- |
-| Consumidores con Descartado en `specs/` fallan validate | Alta | Medio | v1.3.1 + upgrade-guide |
-| Confusión con SDD-007 safe-git | Media | Bajo | Nota de ID + numeración SDD-015 |
+| Riesgo                                                  | Probabilidad | Impacto | Mitigación                      |
+| ------------------------------------------------------- | ------------ | ------- | ------------------------------- |
+| Consumidores con Descartado en `specs/` fallan validate | Alta         | Medio   | v1.3.1 + upgrade-guide          |
+| Confusión con SDD-007 safe-git                          | Media        | Bajo    | Nota de ID + numeración SDD-015 |
 
 **Rollback:** revertir commit del kit; consumidores revierten submodule.
 
