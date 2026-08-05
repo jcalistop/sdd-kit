@@ -7,6 +7,23 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [1.3.1] - 2026-08-05
+
+Ver [v1.3.1.md](v1.3.1.md).
+
+### Cambiado
+
+- `archive/` acepta specs **Released** o **Descartado** (`validate-sdd`, workflow, prompts de agente) — SDD-015
+- Spec formalizado Descartado: `git mv` completo a `archive/` **sin stub** en `specs/`
+- Estado canónico de cabecera: `Descartado` (dejar de usar `Deprecated`)
+- Plantilla BACKLOG: columnas ID / Dominio / Título / Razón / Fecha / Spec en Descartado
+
+### Migración consumidores
+
+- Specs Descartados o `Deprecated` que sigan en `specs/` fallarán `validate-sdd` tras el upgrade: renombrar estado a `Descartado` y mover a `archive/`
+
+---
+
 ## [1.3.0] - 2026-07-15
 
 Ver [v1.3.0.md](v1.3.0.md).

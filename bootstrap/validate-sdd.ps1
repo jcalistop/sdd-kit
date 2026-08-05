@@ -118,11 +118,26 @@ foreach ($dir in $specDirs) {
 
 foreach ($id in $fileIds.Keys) {
     $loc = $fileIds[$id]
+    $filePath = $seenFiles[$id]
+    $headerEstado = $null
+    if ($filePath -and (Test-Path $filePath)) {
+        $headLines = Get-Content $filePath -Encoding UTF8 -TotalCount 40
+        foreach ($hl in $headLines) {
+            if ($hl -match '\|\s*\*\*Estado\*\*\s*\|\s*`?([^`|]+)`?\s*\|') {
+                $headerEstado = $Matches[1].Trim()
+                break
+            }
+        }
+    }
     if ($loc -eq "specs") {
         if (-not $backlogIds.ContainsKey($id)) {
             Write-Err -Component "specs" -Msg "Spec $id en specs/ sin entrada en BACKLOG.md"
         } elseif ($backlogSection[$id] -eq "Released") {
             Write-Err -Component "specs" -Msg "Spec $id en specs/ pero BACKLOG dice Released (debe estar en archive/)"
+        } elseif ($backlogSection[$id] -eq "Descartado") {
+            Write-Err -Component "specs" -Msg "Spec $id en specs/ pero BACKLOG dice Descartado (debe estar en archive/)"
+        } elseif ($headerEstado -match '^(Released|Descartado)\b') {
+            Write-Err -Component "specs" -Msg "Spec $id en specs/ con cabecera Estado=$headerEstado (terminales solo en archive/)"
         } elseif ($backlogSection[$id] -eq "Discovery") {
             Write-Warn -Component "specs" -Msg "Spec $id en specs/ pero BACKLOG aun en Discovery (esperado Draft+)"
         } else {
@@ -132,10 +147,10 @@ foreach ($id in $fileIds.Keys) {
     if ($loc -eq "archive") {
         if (-not $backlogIds.ContainsKey($id)) {
             Write-Err -Component "specs" -Msg "Spec archivado $id sin entrada en BACKLOG.md"
-        } elseif ($backlogSection[$id] -ne "Released") {
-            Write-Err -Component "specs" -Msg "Spec $id en archive/ pero BACKLOG no esta en Released (esta en $($backlogSection[$id]))"
+        } elseif ($backlogSection[$id] -eq "Released" -or $backlogSection[$id] -eq "Descartado") {
+            Write-Ok -Component "specs" -Msg "Spec archivado $id coherente con BACKLOG ($($backlogSection[$id]))"
         } else {
-            Write-Ok -Component "specs" -Msg "Spec archivado $id coherente con BACKLOG"
+            Write-Err -Component "specs" -Msg "Spec $id en archive/ pero BACKLOG no esta en Released ni Descartado (esta en $($backlogSection[$id]))"
         }
     }
 }

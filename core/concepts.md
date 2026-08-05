@@ -30,7 +30,7 @@ SDD es **escribir el plano** antes de construir. No es burocracia: es evitar tir
 
 1. **BACKLOG.md** — una lista unica con todo lo que hay que hacer (como una pizarra de post-its).
 2. **Spec** — un documento breve que describe UNA iniciativa: que problema resuelve, que incluye, que NO incluye, y como sabras que esta lista.
-3. **El spec se mueve por 6 estados:** Discovery → Draft → Ready → In Build → Validating → Released. Cada estado dice "en que momento va esto".
+3. **El spec se mueve por estados activos:** Discovery → Draft → Ready → In Build → Validating → Released. Cada estado dice "en que momento va esto". Terminales fuera del flujo feliz: **Released** (entregado) y **Descartado** (cerrado sin entrega) viven en `archive/`, no en `specs/`.
 4. **El agente (IA) escribe specs y codigo; el humano aprueba** en Ready (spec) y en merge del PR. Antes de publicar en Git, la implementacion se verifica en local (`verify-implementation`).
 5. **Los prompts del catalogo son opcionales** salvo tareas puntuales; los estados del spec son la fuente de verdad (ver [`workflow.md`](workflow.md)).
 

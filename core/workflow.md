@@ -50,6 +50,7 @@ Discovery → Draft → Ready → In Build → Validating → Released
 | **In Build**   | código local + evidencia de verificación                 | Quality gates en verde; `verify-implementation` OK; **sin push/PR aún** |
 | **Validating** | PR + [`checklist-pr.md`](checklist-pr.md) + perfil stack | DoD cumplida; revisión humana antes de merge                            |
 | **Released**   | `archive/<YYYY>/<dominio>/` + entrada en release         | Mergeado, desplegado, archivado                                         |
+| **Descartado** | `archive/<YYYY>/<dominio>/` (spec formalizado) o solo BACKLOG (pausa) | Cerrado sin entrega; no vuelve a `specs/`                       |
 
 ### Momentos semánticos vs prompts
 
@@ -146,15 +147,20 @@ Alias deprecados (v1.2.x): `approve-ready`, `implement-spec` → usar `build-spe
 Reglas de transición:
 
 1. Cada cambio de estado en **cabecera del spec** y en **BACKLOG.md**.
-2. En `specs/`, estados permitidos: `Draft`, `Ready`, `In Build`, `Validating`. **`Released` solo** tras `git mv` a `archive/`.
-3. Al cerrar: `git mv` del spec y actualizar enlaces en BACKLOG.
+2. En `specs/`, estados permitidos: `Draft`, `Ready`, `In Build`, `Validating`. Estados terminales (**`Released`**, **`Descartado`**) solo tras `git mv` a `archive/` (spec formalizado).
+3. Al cerrar (Released) o descartar (Descartado con archivo): `git mv` del `.md` **completo** a `archive/<YYYY>/<dominio>/` — **sin stub** en `specs/` — y actualizar enlaces en BACKLOG.
 4. Cambios triviales **no requieren spec** — registrar en release con ID `—`.
 5. **`SDD-NNN` es global** en el repositorio (contador en BACKLOG).
 6. **No `push` ni PR** hasta `verify-implementation` en verde.
 
 ### Descartado / en pausa
 
-Solo en BACKLOG (no en cabecera del spec). Documentar razón y fecha.
+| Caso | Cabecera | Ubicación del `.md` | BACKLOG |
+| ---- | -------- | ------------------- | ------- |
+| **Descartado** (spec formalizado) | `Descartado` | `archive/<YYYY>/<dominio>/` (mover completo; sin stub en `specs/`) | Sección Descartado: razón, fecha, enlace al archive y al sucesor si aplica |
+| **En pausa** / idea sin spec | — | Sin archivo | Solo fila en Descartado / en pausa (puede usar `—` como ID) |
+
+Estado canónico en cabecera: **`Descartado`**. No usar `Deprecated` (alias informal de consumidores; migrar a `Descartado`).
 
 ### Hotfix
 

@@ -25,7 +25,9 @@ Capa conceptual complementaria (no reemplaza el vocabulario operativo: verificar
 - **Spec antes de código** para ítems no triviales → `specs/<dominio>/SDD-NNN-slug.md`
 - **Actualizar BACKLOG** al cambiar estado; no inventar `SDD-NNN` sin reflejarlo
 - **ADR** solo si la decisión es transversal
-- Al cerrar: `git mv` a `archive/<YYYY>/<dominio>/` + entrada en `releases/vX.Y.Z/`
+- Al cerrar (Released): `git mv` a `archive/<YYYY>/<dominio>/` + entrada en `releases/vX.Y.Z/`
+- Al descartar (spec formalizado): cabecera `Descartado`; `git mv` completo a `archive/` (sin stub en `specs/`); fila en BACKLOG Descartado
+- En `archive/` solo `Released` o `Descartado`
 - **PR** hacia rama de desarrollo; cambios triviales → ID `—` en release
 - **Reglas de negocio** solo desde `business/domain-rules.md` — no asumir las no escritas
 - No crear documentación SDD fuera de `paths.sdd` salvo petición explícita
@@ -85,13 +87,16 @@ Leer `business/domain-rules.md` (ruta `paths.business` del config) al iniciar sp
 
 **Released** — `git mv` a `archive/<YYYY>/<dominio>/`; BACKLOG → Released; entrada en `releases/vX.Y.Z/`; `validate-sdd`. **Antes** del PR de campaña a producción.
 
+**Descartado** (spec formalizado) — cabecera `Descartado`; `git mv` completo a `archive/<YYYY>/<dominio>/` (**sin stub** en `specs/`); BACKLOG → Descartado con razón/fecha/enlace. No usar `Deprecated`.
+
 ---
 
 ## Anti-patrones (prohibido)
 
 - Inventar `SDD-NNN` sin actualizar BACKLOG
 - Código antes de spec para ítems no triviales en backlog
-- Specs en `archive/` con estado distinto de `Released`
+- Specs en `archive/` con estado distinto de `Released` o `Descartado`
+- Specs `Released`/`Descartado` que permanecen en `specs/`
 - Documentación SDD fuera de `paths.sdd` sin petición explícita
 - Asumir roles de equipo — el humano único decide y aprueba
 - Asumir reglas de negocio no escritas en `domain-rules.md`

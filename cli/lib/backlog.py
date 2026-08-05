@@ -132,15 +132,29 @@ def parse_backlog(path: Path) -> Backlog:
                 )
             )
         elif current == "Descartado":
-            backlog.sections[current].append(
-                BacklogItem(
-                    section=current,
-                    title=cols[0],
-                    extra=cols[1] if len(cols) > 1 else "",
-                    version=cols[2] if len(cols) > 2 else "",
-                    raw_line=line,
+            if cols and cols[0].startswith("SDD-"):
+                backlog.sections[current].append(
+                    BacklogItem(
+                        section=current,
+                        id=cols[0],
+                        domain=cols[1] if len(cols) > 1 else "",
+                        title=cols[2] if len(cols) > 2 else "",
+                        extra=cols[3] if len(cols) > 3 else "",
+                        date=cols[4] if len(cols) > 4 else "",
+                        archived=cols[5] if len(cols) > 5 else "",
+                        raw_line=line,
+                    )
                 )
-            )
+            else:
+                backlog.sections[current].append(
+                    BacklogItem(
+                        section=current,
+                        title=cols[0] if cols else "",
+                        extra=cols[1] if len(cols) > 1 else "",
+                        version=cols[2] if len(cols) > 2 else "",
+                        raw_line=line,
+                    )
+                )
         elif current == "Released" and cols[0].startswith("SDD-"):
             backlog.sections[current].append(
                 BacklogItem(
@@ -263,13 +277,18 @@ def write_backlog(backlog: Backlog) -> None:
     lines.append("")
     lines.append("## Descartado / en pausa")
     lines.append("")
-    lines.append("| Idea / ID | Razón | Fecha |")
-    lines.append("| --------- | ----- | ----- |")
+    lines.append("| ID | Dominio | Título | Razón | Fecha | Spec |")
+    lines.append("| -- | ------- | ------ | ----- | ----- | ---- |")
     desc = backlog.sections.get("Descartado", [])
     if desc:
         for it in desc:
-            lines.append(f"| {it.title} | {it.extra} | {it.version} |")
+            if it.id:
+                lines.append(
+                    f"| {it.id} | {it.domain} | {it.title} | {it.extra} | {it.date} | {it.archived} |"
+                )
+            else:
+                lines.append(f"| — | — | {it.title} | {it.extra} | {it.version} | — |")
     else:
-        lines.append("| — | — | — |")
+        lines.append("| — | — | — | — | — | — |")
 
     backlog.path.write_text("\n".join(lines) + "\n", encoding="utf-8")
