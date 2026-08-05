@@ -31,7 +31,7 @@ paths:
   contributing: CONTRIBUTING.md
 
 ids:
-  next_sdd: 15
+  next_sdd: 16
   next_adr: 3
 
 release:

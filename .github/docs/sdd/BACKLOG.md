@@ -3,9 +3,9 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-015`.
+**Próximo ID disponible:** `SDD-016`.
 
-**Versión acumulada del kit:** `v1.3.0` (ver [docs/releases/](../../../docs/releases/)).
+**Versión acumulada del kit:** `v1.3.0` (ver [docs/releases/](../../../docs/releases/)). Candidata: **v1.3.1** (SDD-015).
 
 ---
 
@@ -28,9 +28,9 @@
 
 ## In Build
 
-| ID  | Dominio | Título | Versión | Spec |
-| --- | ------- | ------ | ------- | ---- |
-| —   | —       | —      | —       | —    |
+| ID      | Dominio | Título                              | Versión    | Spec                                                         |
+| ------- | ------- | ----------------------------------- | ---------- | ------------------------------------------------------------ |
+| SDD-015 | core    | Archivar specs en estado Descartado | **v1.3.1** | [SDD-015](specs/core/SDD-015-archive-specs-descartados.md) |
 
 ## Ready
 
@@ -74,6 +74,6 @@
 
 ## Descartado / en pausa
 
-| Idea / ID | Razón | Fecha |
-| --------- | ----- | ----- |
-| —         | —     | —     |
+| ID | Dominio | Título | Razón | Fecha | Spec |
+| -- | ------- | ------ | ----- | ----- | ---- |
+| —  | —       | —      | —     | —     | —    |
