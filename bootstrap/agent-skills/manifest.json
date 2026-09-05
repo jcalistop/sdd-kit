@@ -61,13 +61,6 @@
         "actualizar kit",
         "upgrade kit"
       ]
-    },
-    {
-      "id": "sdd-cost-governance",
-      "prompt": null,
-      "description": "Governance de costo SDD — límites de sesión, anti-patrones de gasto, circuit breaker. El agente lee esta skill al inicio de cada sesión SDD.",
-      "triggers": [],
-      "session_start": true
     }
   ]
 }

@@ -3,7 +3,7 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-016`.
+**Próximo ID disponible:** `SDD-017`.
 
 **Versión acumulada del kit:** `v1.3.1` (ver [docs/releases/](../../../docs/releases/)).
 
@@ -15,7 +15,6 @@
 | -------- | ------------------------------------------------------------------- | ------- | ----------------------------------------- |
 | cli      | Suite pytest para la CLI (`backlog`, `prompts`, round-trip)         | —       | Prioridad media; CI hoy solo `compileall` |
 | docs     | Validación en producción: ciclo SDD con proyecto consumidor externo | —       | Dogfooding en repo ajeno                  |
-| cli      | Dashboard Canvas de métricas SDD                                    | —       | Opcional; texto en SDD-013; Canvas aparte |
 | profiles | Perfiles adicionales (node-express, go-api, vue-vite) a demanda     | —       | Baja prioridad                            |
 
 ---
@@ -28,9 +27,9 @@
 
 ## In Build
 
-| ID  | Dominio | Título | Versión | Spec |
-| --- | ------- | ------ | ------- | ---- |
-| —   | —       | —      | —       | —    |
+| ID      | Dominio | Título                                              | Versión | Spec |
+| ------- | ------- | --------------------------------------------------- | ------- | ---- |
+| SDD-016 | core    | Deprecar métricas de tokens y cost-governance       | v1.4.0  | [specs/core/SDD-016-deprecar-tokens-cost-governance.md](specs/core/SDD-016-deprecar-tokens-cost-governance.md) |
 
 ## Ready
 

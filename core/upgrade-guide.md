@@ -141,11 +141,9 @@ Tras actualizar a **v1.3.0 o superior**, el bump de submodule **no basta**. Debe
 | Entregable | Cómo verificar |
 | ---------- | -------------- |
 | **Safe-git** (SDD-007) | Existe `.cursor/rules/sdd-safe-git.mdc` con `alwaysApply: true`. Preámbulos Claude/Codex/Copilot mencionan safe-git o `core/safe-git-contract.md`. **No** duplica reglas de migraciones BD de instancia (`safe-migrations`, etc.). |
-| **Cost-governance** (SDD-012) | Skill `sdd-cost-governance` presente tras `install-agents.py` (entrada `session_start` en el manifest de skills del kit). |
 | **Two-zone / reglas** | Reinstall regenera reglas Cursor en orden stable→volatile (`cacheZone` en manifest). |
 | **Plantilla compacta** | Disponible en el kit: `sdd-kit/core/templates/spec-compact-template.md` (no requiere copiar a instancia salvo que uses plantillas locales). |
 | **validate-sdd por componente** (SDD-010) | Salida con prefijos `[backlog]`, `[specs]`, `[config]`, etc. |
-| **Métricas de tokens** (SDD-013) | CLI del submodule: `python sdd-kit/cli/sdd.py metrics tokens --summary` (opcional; no exige merge a instancia). |
 
 ### Comando de reinstall (Cursor)
 
@@ -157,7 +155,7 @@ python sdd-kit/bootstrap/install-agents.py install \
   --kit-path sdd-kit
 ```
 
-Si solo hiciste checkout del tag y **faltan** `sdd-safe-git.mdc` o `sdd-cost-governance`, vuelve a ejecutar el reinstall y el checklist de la skill `sdd-upgrade-kit` (`reference.md`).
+Si solo hiciste checkout del tag y **falta** `sdd-safe-git.mdc`, vuelve a ejecutar el reinstall y el checklist de la skill `sdd-upgrade-kit` (`reference.md`).
 
 ### v1.3.1 — Descartado en archive
 
@@ -169,6 +167,15 @@ Si tras el upgrade `validate-sdd` falla por specs en `specs/` con BACKLOG Descar
 4. Vuelve a ejecutar `validate`.
 
 Detalle: `docs/releases/v1.3.1.md`.
+
+### v1.4.0 — Retiro de metering de tokens y cost-governance (SDD-016)
+
+Breaking change menor respecto a v1.3.x:
+
+- Skill `sdd-cost-governance` **retirada** (ya no se instala). Borra copias huérfanas en `.cursor/skills/sdd-cost-governance/` al reinstalar.
+- Subcomando `sdd metrics tokens` **retirado**. `sdd metrics` sigue midiendo salud del proceso (estados, stagnant).
+- No se usa `paths.sdd/metrics/token-usage.json`.
+- Se conservan two-zone, grafo de dependencias, plantilla compacta y umbral «¿necesita spec?» (A/B/C/F de SDD-012 salvo la skill D).
 
 ---
 

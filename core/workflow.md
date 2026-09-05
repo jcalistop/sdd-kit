@@ -328,34 +328,3 @@ Para iniciativas grandes: spec `00` (visión) + specs `01+` (entregables). IDs c
 ### Cambio de esquema
 
 Seguir la convención del **perfil stack** (p. ej. migraciones, no DDL manual fuera del repo). Documentar en spec y release.
-
----
-
-## Governance de costo (circuit breaker del harness)
-
-> Ver skill completa: `sdd-cost-governance/SKILL.md`. Esta sección es el resumen always-on.
-
-### Límites de sesión
-
-| Límite | Valor | Acción |
-|--------|-------|--------|
-| Turnos máximos por fase | 15 | Pausar, pedir aprobación |
-| Turnos máximos totales | 50 | Terminar, reportar estado |
-| Verify fallidos consecutivos | 3 | **STOP.** No seguir iterando. |
-| Tool calls idénticas consecutivas | 3 | Circuit breaker: cambiar approach |
-
-### Anti-patrones de gasto — STOP inmediato
-
-1. Loop "generar → test falla → mismo error → regenerar" sin cambiar approach
-2. Leer mismo archivo 5+ veces sin modificarlo
-3. Re-escribir specs en Ready sin aprobación humana
-4. Ejecutar tests sin cambiar código
-5. Cargar specs de otras features no relacionadas (usar [grafo de dependencias](#grafo-de-dependencias-sdd))
-6. Debug por fuerza bruta (cambios aleatorios sin entender causa raíz)
-
-### Fundamento (token economics)
-
-- Spec = ~2.4% de tokens. Review iterativo = ~59.4%. Fuente: [Tokenomics paper](https://arxiv.org/abs/2601.14470).
-- Harness con governance: -38% tokens, -41% costo, -44% tiempo. Fuente: [Harness Effect paper](https://arxiv.org/abs/2607.06906).
-- KV-cache hit < 90% → hasta 10× más caro. Fuente: [research/2026-07-15-token-economics-sdd-harness.md](research/2026-07-15-token-economics-sdd-harness.md).
-- Observabilidad: `sdd metrics tokens --summary` (estimación heurística; ver `metrics/README.md`).

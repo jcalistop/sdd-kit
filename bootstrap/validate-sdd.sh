@@ -2,7 +2,7 @@
 # Valida coherencia documental de una instancia SDD.
 # Uso: ./sdd-kit/bootstrap/validate-sdd.sh [.github/docs/sdd]
 # Codigos de salida: 0=OK, 1=fallo del script/entorno (FATAL), 2=incoherencias documentales (ERROR)
-# Salida por componente (SDD-010): [backlog] [specs] [config] [agent] [kit-version] [docs] [metrics]
+# Salida por componente (SDD-010): [backlog] [specs] [config] [agent] [kit-version] [docs]
 
 set -euo pipefail
 
@@ -248,84 +248,6 @@ if [[ -d "$PRODUCT_RELEASES" && -d "$CAMPAIGN_RELEASES" ]]; then
   done
   if [[ $campaign_count -gt 0 && $dual_warns -eq 0 ]]; then
     ok docs "dual-release: actas de campana con nota producto en docs/releases/"
-  fi
-fi
-
-# Token usage (SDD-013): WARN only — nunca ERROR
-METRICS_DIR="$SDD_PATH/metrics"
-TOKEN_USAGE="$METRICS_DIR/token-usage.json"
-if [[ ! -d "$METRICS_DIR" ]]; then
-  warn metrics "Falta directorio metrics/ (opcional; crear con metrics/README.md). No es ERROR."
-elif [[ ! -f "$TOKEN_USAGE" ]]; then
-  warn metrics "Falta metrics/token-usage.json — registrar consumo al cerrar specs (sdd-cost-governance)"
-else
-  if command -v python >/dev/null 2>&1 || command -v python3 >/dev/null 2>&1; then
-    PY_METRICS="$(command -v python 2>/dev/null || command -v python3)"
-    METRICS_OUT="$("$PY_METRICS" - "$SDD_PATH" <<'PY'
-import json, sys
-from pathlib import Path
-sdd = Path(sys.argv[1])
-path = sdd / "metrics" / "token-usage.json"
-try:
-    data = json.loads(path.read_text(encoding="utf-8"))
-except Exception as e:
-    print(f"WARN_JSON:{e}")
-    sys.exit(0)
-entries = data.get("entries") or []
-print(f"OK_COUNT:{len(entries)}")
-usage = {}
-by_dom = {}
-for e in entries:
-    sid = e.get("spec_id")
-    if not sid:
-        continue
-    tok = int(e.get("total_estimated_tokens") or 0)
-    dom = e.get("domain") or "—"
-    usage[sid] = tok
-    by_dom.setdefault(dom, []).append((sid, tok))
-# Released IDs from BACKLOG
-released = set()
-section = ""
-for line in (sdd / "BACKLOG.md").read_text(encoding="utf-8", errors="replace").splitlines():
-    if line.startswith("## "):
-        section = line[3:].strip()
-        continue
-    if not line.startswith("|"):
-        continue
-    cols = [c.strip() for c in line.strip("|").split("|")]
-    if cols and cols[0].startswith("SDD-") and section == "Released":
-        released.add(cols[0])
-for sid in sorted(released):
-    if sid not in usage:
-        print(f"WARN_RELEASED:{sid}")
-min_n, factor = 3, 2.0
-for dom, items in by_dom.items():
-    if len(items) < min_n:
-        continue
-    avg = sum(t for _, t in items) / len(items)
-    if avg <= 0:
-        continue
-    for sid, tok in items:
-        if tok > factor * avg:
-            print(f"WARN_OUTLIER:{sid}:{dom}:{tok}:{avg:.0f}")
-PY
-)" || true
-    while IFS= read -r line; do
-      [[ -z "$line" ]] && continue
-      if [[ "$line" == OK_COUNT:* ]]; then
-        ok metrics "token-usage.json presente (${line#OK_COUNT:} entradas)"
-      elif [[ "$line" == WARN_JSON:* ]]; then
-        warn metrics "token-usage.json no es JSON valido"
-      elif [[ "$line" == WARN_RELEASED:* ]]; then
-        warn metrics "Spec Released ${line#WARN_RELEASED:} sin entrada en token-usage.json"
-      elif [[ "$line" == WARN_OUTLIER:* ]]; then
-        rest="${line#WARN_OUTLIER:}"
-        IFS=':' read -r oid odom otok oavg <<< "$rest"
-        warn metrics "Outlier tokens: $oid en dominio $odom ($otok > 2x promedio $oavg; N>=3)"
-      fi
-    done <<< "$METRICS_OUT"
-  else
-    warn metrics "Python no disponible para validar token-usage.json"
   fi
 fi
 

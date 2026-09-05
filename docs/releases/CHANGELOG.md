@@ -7,6 +7,19 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [Unreleased]
+
+### Eliminado
+
+- Skill `sdd-cost-governance` y registro `token-usage.json` — SDD-016
+- Subcomando CLI `sdd metrics tokens` y WARNs de tokens en `validate-sdd` — SDD-016
+
+### Cambiado
+
+- `upgrade-guide.md` / `sdd-upgrade-kit`: migración v1.4.0 sin metering ni cost-governance (se conservan two-zone, compact, scoping, threshold)
+
+---
+
 ## [1.3.1] - 2026-08-05
 
 Ver [v1.3.1.md](v1.3.1.md).
