@@ -7,7 +7,9 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
-## [Unreleased]
+## [1.3.2] - 2026-09-05
+
+Ver [v1.3.2.md](v1.3.2.md).
 
 ### Eliminado
 
@@ -16,7 +18,7 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ### Cambiado
 
-- `upgrade-guide.md` / `sdd-upgrade-kit`: migración v1.4.0 sin metering ni cost-governance (se conservan two-zone, compact, scoping, threshold)
+- `upgrade-guide.md` / `sdd-upgrade-kit`: migración v1.3.2 sin metering ni cost-governance (se conservan two-zone, compact, scoping, threshold)
 
 ---
 

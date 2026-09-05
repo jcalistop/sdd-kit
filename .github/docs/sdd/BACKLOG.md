@@ -5,7 +5,7 @@
 
 **Próximo ID disponible:** `SDD-017`.
 
-**Versión acumulada del kit:** `v1.3.1` (ver [docs/releases/](../../../docs/releases/)).
+**Versión acumulada del kit:** `v1.3.2` (ver [docs/releases/](../../../docs/releases/)).
 
 ---
 
@@ -27,9 +27,9 @@
 
 ## In Build
 
-| ID      | Dominio | Título                                              | Versión | Spec |
-| ------- | ------- | --------------------------------------------------- | ------- | ---- |
-| SDD-016 | core    | Deprecar métricas de tokens y cost-governance       | v1.4.0  | [specs/core/SDD-016-deprecar-tokens-cost-governance.md](specs/core/SDD-016-deprecar-tokens-cost-governance.md) |
+| ID  | Dominio | Título | Versión | Spec |
+| --- | ------- | ------ | ------- | ---- |
+| —   | —       | —      | —       | —    |
 
 ## Ready
 
@@ -47,6 +47,7 @@
 
 | ID      | Dominio   | Título                                                                                            | Versión | Fecha      | Spec archivado                                                                                                                             |
 | ------- | --------- | ------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| SDD-016 | core      | Deprecar métricas de tokens y cost-governance                                                     | v1.3.2  | 2026-09-05 | [archive/2026/core/SDD-016-deprecar-tokens-cost-governance.md](archive/2026/core/SDD-016-deprecar-tokens-cost-governance.md)               |
 | SDD-015 | core      | Archivar specs en estado Descartado                                                               | v1.3.1  | 2026-08-05 | [archive/2026/core/SDD-015-archive-specs-descartados.md](archive/2026/core/SDD-015-archive-specs-descartados.md)                           |
 | SDD-014 | bootstrap | Alinear flujo agentico upgrade-kit al consumo de v1.3.0+                                          | v1.3.0  | 2026-07-15 | [archive/2026/bootstrap/SDD-014-alinear-flujo-upgrade-kit-v130.md](archive/2026/bootstrap/SDD-014-alinear-flujo-upgrade-kit-v130.md)       |
 | SDD-013 | cli       | Observabilidad de tokens (`sdd metrics tokens`)                                                   | v1.3.0  | 2026-07-15 | [archive/2026/cli/SDD-013-observabilidad-tokens-metrics.md](archive/2026/cli/SDD-013-observabilidad-tokens-metrics.md)                     |

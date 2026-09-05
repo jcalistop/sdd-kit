@@ -26,7 +26,7 @@ Sale una versión nueva del kit (tag SemVer en `docs/releases/`) y quieres actua
 - Actualiza el submodule al tag indicado
 - Compara `sdd-kit/core/` con `.github/docs/sdd/` y propone merge archivo a archivo
 - Reinstala adaptadores si cambió `bootstrap/agent-prompts/` **o** `bootstrap/agent-skills/`
-- Ejecuta checklist post-upgrade (`sdd-upgrade-kit/reference.md`) — p. ej. safe-git en v1.3.0+; en v1.4.0+ ya no existe cost-governance
+- Ejecuta checklist post-upgrade (`sdd-upgrade-kit/reference.md`) — p. ej. safe-git en v1.3.0+; en v1.3.2+ ya no existe cost-governance
 - Ejecuta `validate-sdd` y reporta errores vs advertencias
 - Actualiza `UPGRADE-LOG.md` y `kit.installed_version` solo si el upgrade quedó completo
 
@@ -46,7 +46,7 @@ Instrucciones:
 6. Para cada archivo de instancia modificado en ambos lados: muestra diff y pide confirmación humana antes de escribir.
 7. Si hay prompts/ o prompt-catalog.md nuevos, incorpora solo lo faltante.
 8. Si cambió bootstrap/agent-prompts/ O bootstrap/agent-skills/, ejecuta install-agents.py según sdd.config.yaml → agent.targets y stack.profile (prompts + skills).
-9. Ejecuta el checklist post-upgrade de sdd-kit/bootstrap/agent-skills/sdd-upgrade-kit/reference.md (safe-git, etc. según versión; v1.4.0+ sin cost-governance ni metrics tokens).
+9. Ejecuta el checklist post-upgrade de sdd-kit/bootstrap/agent-skills/sdd-upgrade-kit/reference.md (safe-git, etc. según versión; v1.3.2+ sin cost-governance ni metrics tokens).
 10. Ejecuta python sdd-kit/cli/sdd.py validate — corrige ERROR; explica WARN.
 11. Si el humano aprobó todos los merges: actualiza kit.installed_version y kit.installed_at en sdd.config.yaml y añade fila en UPGRADE-LOG.md.
 12. Si el humano rechazó algún merge: registra pendientes en UPGRADE-LOG.md (Notas) y NO marques installed_version como <VERSION>.

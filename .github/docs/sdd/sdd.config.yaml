@@ -39,7 +39,7 @@ release:
   tag_prefix: v
 
 kit:
-  installed_version: "v1.3.1"
+  installed_version: "v1.3.2"
   installed_at: "2026-08-05"
 
 

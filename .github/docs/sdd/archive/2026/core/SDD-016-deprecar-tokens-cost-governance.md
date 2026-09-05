@@ -10,8 +10,8 @@
 | **Dominio**           | `core`                                                                |
 | **Tipo**              | `feature`                                                             |
 | **Fecha**             | 2026-09-05                                                            |
-| **Estado**            | `In Build`                                                            |
-| **Versión objetivo**  | `v1.4.0`                                                              |
+| **Estado**            | `Released`                                                            |
+| **Versión objetivo**  | `v1.3.2`                                                              |
 | **Owner**             | mantenedor                                                            |
 | **Prioridad**         | `P1`                                                                  |
 | **ADRs relacionados** | —                                                                     |
@@ -27,7 +27,7 @@ La observabilidad de tokens (`sdd metrics tokens`, `token-usage.json`, WARNs en 
 
 **Objetivo:**
 
-Retirar del kit la metering de tokens y la skill de cost-governance. Conservar optimizaciones de harness A/B/C/F (two-zone, scoping, compact, threshold) y el comando `sdd metrics` de salud del proceso. Documentar el breaking change en upgrade-guide hacia `v1.4.0`.
+Retirar del kit la metering de tokens y la skill de cost-governance. Conservar optimizaciones de harness A/B/C/F (two-zone, scoping, compact, threshold) y el comando `sdd metrics` de salud del proceso. Documentar el breaking change en upgrade-guide hacia `v1.3.2`.
 
 ---
 
@@ -91,7 +91,7 @@ Aplica [`domain-rules.md`](../../../business/domain-rules.md):
 - [x] Docs públicas y `workflow.md` sin referencias operativas a metering / governance skill
 - [x] `python -m compileall -q cli/` en verde
 - [x] `python cli/sdd.py validate` sin errores
-- [x] `upgrade-guide.md` menciona retiro en v1.4.0
+- [x] `upgrade-guide.md` menciona retiro en v1.3.2
 
 **Error path:**
 
@@ -113,7 +113,7 @@ Aplica [`domain-rules.md`](../../../business/domain-rules.md):
 | `bootstrap/agent-skills/sdd-build-spec/SKILL.md` | Quitar paso cost-governance |
 | `bootstrap/agent-skills/sdd-upgrade-kit/reference.md` | Migración / quitar checks tokens |
 | `core/workflow.md` | Eliminar sección Governance de costo |
-| `core/upgrade-guide.md` | Breaking change v1.4.0 |
+| `core/upgrade-guide.md` | Breaking change v1.3.2 |
 | `.github/docs/sdd/metrics/` | Eliminar |
 | README / cli/README | Quitar ejemplos |
 
@@ -147,3 +147,4 @@ python cli/sdd.py validate
 - Specs SDD-012/013 permanecen `Released` en archive (histórico).
 - A/B/C/F de SDD-012 no se revierten (salvo skill D retirada).
 - **2026-09-05 (verify):** compileall OK; `metrics` OK; `metrics tokens` → exit 2 argparse; `sdd validate` + `validate-sdd.ps1` 0 errores / 0 WARN tokens; manifest sin cost-governance.
+- **2026-09-05 (close-release):** Campaña `v1.3.2` (humano eligió patch en lugar de minor `v1.4.0`).

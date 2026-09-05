@@ -168,9 +168,9 @@ Si tras el upgrade `validate-sdd` falla por specs en `specs/` con BACKLOG Descar
 
 Detalle: `docs/releases/v1.3.1.md`.
 
-### v1.4.0 — Retiro de metering de tokens y cost-governance (SDD-016)
+### v1.3.2 — Retiro de metering de tokens y cost-governance (SDD-016)
 
-Breaking change menor respecto a v1.3.x:
+Breaking change menor respecto a v1.3.1 (publicado como patch `v1.3.2`):
 
 - Skill `sdd-cost-governance` **retirada** (ya no se instala). Borra copias huérfanas en `.cursor/skills/sdd-cost-governance/` al reinstalar.
 - Subcomando `sdd metrics tokens` **retirado**. `sdd metrics` sigue midiendo salud del proceso (estados, stagnant).

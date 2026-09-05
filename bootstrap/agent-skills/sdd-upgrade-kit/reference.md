@@ -18,7 +18,7 @@ Tras `install-agents.py` cuando cambien prompts, reglas o **agent-skills**.
 
 ## Migración desde v1.3.x (tokens / cost-governance)
 
-A partir de **v1.4.0** (SDD-016):
+A partir de **v1.3.2** (SDD-016):
 
 - La skill `sdd-cost-governance` **ya no se instala**. Si quedó una copia huérfana en `.cursor/skills/sdd-cost-governance/`, bórrala al reinstalar agentes.
 - El subcomando `sdd metrics tokens` **fue retirado**. Usa `sdd metrics` solo para salud del proceso (estados, stagnant).
