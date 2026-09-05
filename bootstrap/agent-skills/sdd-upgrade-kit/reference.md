@@ -13,12 +13,18 @@ Tras `install-agents.py` cuando cambien prompts, reglas o **agent-skills**.
 ## Artefactos v1.3.0+ (si el tag destino es ≥ v1.3.0)
 
 - [ ] Existe `.cursor/rules/sdd-safe-git.mdc` con `alwaysApply: true`
-- [ ] Skill `sdd-cost-governance` instalada (no confundir con skills de workflow)
 - [ ] No se duplicó una regla de migraciones BD de instancia (`safe-migrations`, etc.) al instalar safe-git
 - [ ] `validate-sdd` / `sdd validate` emite prefijos `[componente]`
-- [ ] (Opcional) `python {{KIT_PATH}}/cli/sdd.py metrics tokens --summary` no falla
 
-Si **solo** se actualizó el submodule y faltan safe-git o cost-governance → **reinstalar** adaptadores; no marcar `kit.installed_version` como completo.
+## Migración desde v1.3.x (tokens / cost-governance)
+
+A partir de **v1.3.2** (SDD-016):
+
+- La skill `sdd-cost-governance` **ya no se instala**. Si quedó una copia huérfana en `.cursor/skills/sdd-cost-governance/`, bórrala al reinstalar agentes.
+- El subcomando `sdd metrics tokens` **fue retirado**. Usa `sdd metrics` solo para salud del proceso (estados, stagnant).
+- No se espera `paths.sdd/metrics/token-usage.json`.
+
+Si **solo** se actualizó el submodule y falta safe-git → **reinstalar** adaptadores; no marcar `kit.installed_version` como completo.
 
 ## Si hay divergencia
 

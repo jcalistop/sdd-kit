@@ -42,11 +42,10 @@ Si el spec referencia un ADR, leer solo ese ADR.
 
 ## A. Implementación
 
-1. **Antes de empezar:** Leer governance de costo (`{{SDD_PATH}}/workflow.md` → sección "Governance de costo" / skill `sdd-cost-governance`). Verificar límites de sesión activos.
-2. Draft aprobado → Ready → In Build (spec + BACKLOG).
-3. Preguntar rama local según `branching.md` o rama actual.
-4. Implementar alcance del spec; quality gates del perfil `{{PROFILE}}`.
-5. Al terminar → verify § B + **Smoke manual (humano)**.
+1. Draft aprobado → Ready → In Build (spec + BACKLOG).
+2. Preguntar rama local según `branching.md` o rama actual.
+3. Implementar alcance del spec; quality gates del perfil `{{PROFILE}}`.
+4. Al terminar → verify § B + **Smoke manual (humano)**.
 
 ### Enrutamiento skills de dominio
 

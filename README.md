@@ -229,7 +229,7 @@ Fuente canónica: [`bootstrap/agent-skills/`](bootstrap/agent-skills/) · instal
 ```bash
 python sdd-kit/cli/sdd.py validate
 python sdd-kit/cli/sdd.py backlog
-python sdd-kit/cli/sdd.py metrics tokens --summary
+python sdd-kit/cli/sdd.py metrics
 python sdd-kit/cli/sdd.py spec new --domain ux --type feature --title "Mi feature"
 ```
 
