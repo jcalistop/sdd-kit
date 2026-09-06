@@ -59,3 +59,14 @@ python sdd-kit/cli/sdd.py prompt show discovery-to-draft --full
 ```
 
 Ver también: [core/prompt-catalog.md](../core/prompt-catalog.md).
+
+## Tests (mantenedores del kit)
+
+Solo en el repo **productor** `sdd-kit` (no requerido en instancias consumidoras).
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest cli/tests -q
+```
+
+La CI de GitHub Actions ejecuta el mismo comando tras `compileall`.

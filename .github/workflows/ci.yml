@@ -19,6 +19,12 @@ jobs:
       - name: Compilar módulos Python de la CLI
         run: python -m compileall -q cli/
 
+      - name: Instalar dependencias de desarrollo
+        run: pip install -r requirements-dev.txt
+
+      - name: Suite pytest CLI
+        run: python -m pytest cli/tests -q
+
       - name: Validar JSON de agent-prompts
         run: |
           python -c "import json; json.load(open('bootstrap/agent-prompts/manifest.json'))"

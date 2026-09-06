@@ -177,6 +177,15 @@ Breaking change menor respecto a v1.3.1 (publicado como patch `v1.3.2`):
 - No se usa `paths.sdd/metrics/token-usage.json`.
 - Se conservan two-zone, grafo de dependencias, plantilla compacta y umbral «¿necesita spec?» (A/B/C/F de SDD-012 salvo la skill D).
 
+### v1.4.0 — Suite pytest CLI (SDD-017)
+
+Minor del repo productor: suite `pytest` en `cli/tests/`, step en CI y `requirements-dev.txt`.
+
+- **Consumidores:** sin cambio de API ni de adaptadores. Bump submodule + `kit.installed_version` basta.
+- **Mantenedores del kit:** `pip install -r requirements-dev.txt` y `python -m pytest cli/tests -q` (también en CI).
+
+Detalle: `docs/releases/v1.4.0.md`.
+
 ---
 
 ## Prompt para el agente

@@ -3,29 +3,28 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-017`.
+**Próximo ID disponible:** `SDD-018`.
 
-**Versión acumulada del kit:** `v1.3.2` (ver [docs/releases/](../../../docs/releases/)).
+**Versión acumulada del kit:** `v1.4.0` (ver [docs/releases/](../../../docs/releases/)).
 
 ---
 
 ## Discovery
 
-| Dominio  | Idea / necesidad                                                    | Versión | Notas                                     |
-| -------- | ------------------------------------------------------------------- | ------- | ----------------------------------------- |
-| cli      | Suite pytest para la CLI (`backlog`, `prompts`, round-trip)         | —       | Prioridad media; CI hoy solo `compileall` |
-| docs     | Validación en producción: ciclo SDD con proyecto consumidor externo | —       | Dogfooding en repo ajeno                  |
-| profiles | Perfiles adicionales (node-express, go-api, vue-vite) a demanda     | —       | Baja prioridad                            |
+> **Versión (recomendación SemVer):** bump de producto kit al cerrar la iniciativa, desde `v1.3.2`. Criterio auditoría: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores (ninguna fila actual); **—** = no define release del kit por sí sola.
+
+| Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
+| --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
+| bootstrap | Higiene agentica: retirar `sdd-core.mdc` residual + alinear INSTALL/README       | patch   | H-D01/D04 P1; corrección post v1.2.2                                  |
+| infra     | CI: ejecutar `validate-sdd` / `sdd validate` y gatillar en rama `dev`            | patch   | H-B02/B03/C02; ADOPTION Etapa 3; sin cambio de API consumidor         |
+| bootstrap | Upgrade/paridad multi-agente: wording v1.3.2, `agent.targets`, safe-git doc      | patch   | H-B06/D03/D05–D07; si se cambia comportamiento real de upgrade → reevaluar **minor** |
+| docs      | Índice artefactos `paths.sdd` (audits/research) + banner snapshot ANALYSIS       | patch   | H-A04/E02/B09; versionar `audits/`                                    |
+| docs      | Validación en producción: ciclo SDD con proyecto consumidor externo              | —       | Dogfooding externo; no bump de kit hasta que genere cambios productizados |
+| profiles  | Perfiles adicionales (node-express, go-api, vue-vite) a demanda                  | minor   | Baja prioridad; perfil nuevo = feature compatible                     |
 
 ---
 
 ## Draft
-
-| ID  | Dominio | Título | Versión | Spec |
-| --- | ------- | ------ | ------- | ---- |
-| —   | —       | —      | —       | —    |
-
-## In Build
 
 | ID  | Dominio | Título | Versión | Spec |
 | --- | ------- | ------ | ------- | ---- |
@@ -37,16 +36,25 @@
 | --- | ------- | ------ | ------- | ---- |
 | —   | —       | —      | —       | —    |
 
+## In Build
+
+| ID  | Dominio | Título | Versión | Spec |
+| --- | ------- | ------ | ------- | ---- |
+| —   | —       | —      | —       | —    |
+
 ## Validating
 
 | ID  | Dominio | Título | Versión | Spec |
 | --- | ------- | ------ | ------- | ---- |
 | —   | —       | —      | —       | —    |
 
+
 ## Released
+
 
 | ID      | Dominio   | Título                                                                                            | Versión | Fecha      | Spec archivado                                                                                                                             |
 | ------- | --------- | ------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| SDD-017 | cli       | Suite pytest para la CLI (backlog, prompts, round-trip)                                           | v1.4.0  | 2026-09-05 | [archive/2026/cli/SDD-017-suite-pytest-cli.md](archive/2026/cli/SDD-017-suite-pytest-cli.md)                                               |
 | SDD-016 | core      | Deprecar métricas de tokens y cost-governance                                                     | v1.3.2  | 2026-09-05 | [archive/2026/core/SDD-016-deprecar-tokens-cost-governance.md](archive/2026/core/SDD-016-deprecar-tokens-cost-governance.md)               |
 | SDD-015 | core      | Archivar specs en estado Descartado                                                               | v1.3.1  | 2026-08-05 | [archive/2026/core/SDD-015-archive-specs-descartados.md](archive/2026/core/SDD-015-archive-specs-descartados.md)                           |
 | SDD-014 | bootstrap | Alinear flujo agentico upgrade-kit al consumo de v1.3.0+                                          | v1.3.0  | 2026-07-15 | [archive/2026/bootstrap/SDD-014-alinear-flujo-upgrade-kit-v130.md](archive/2026/bootstrap/SDD-014-alinear-flujo-upgrade-kit-v130.md)       |
@@ -73,8 +81,12 @@
 | —       | profiles  | Limpieza perfil laravel-voyager (sin dominio de negocio ajeno)                                    | v1.0.0  | 2026-06-11 | pre-SDD                                                                                                                                    |
 | —       | docs      | Adopción SDD en el propio repositorio (Etapa 1 documentación)                                     | —       | 2026-06-12 | pre-SDD                                                                                                                                    |
 
+
 ## Descartado / en pausa
+
 
 | ID  | Dominio | Título | Razón | Fecha | Spec |
 | --- | ------- | ------ | ----- | ----- | ---- |
 | —   | —       | —      | —     | —     | —    |
+
+

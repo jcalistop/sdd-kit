@@ -27,7 +27,9 @@ Consumidores del submodule **solo** leen esta carpeta.
 | Recurso                                                          | Uso                                     |
 | ---------------------------------------------------------------- | --------------------------------------- |
 | [CHANGELOG.md](CHANGELOG.md)                                     | Resumen técnico de cambios por versión  |
-| [v1.3.0.md](v1.3.0.md)                                           | Última versión (harness, safe-git, métricas, upgrade-kit) |
+| [v1.4.0.md](v1.4.0.md)                                           | Suite pytest CLI (SDD-017)              |
+| [v1.3.2.md](v1.3.2.md)                                           | Retiro metering tokens / cost-governance |
+| [v1.3.0.md](v1.3.0.md)                                           | Harness, safe-git, métricas, upgrade-kit |
 | [v1.2.2.md](v1.2.2.md)                                           | Optimización de tokens                  |
 | [v1.2.1.md](v1.2.1.md)                                           | Patch bootstrap (bloque `kit`)          |
 | [v1.2.0.md](v1.2.0.md)                                           | Skills + documentación                  |
