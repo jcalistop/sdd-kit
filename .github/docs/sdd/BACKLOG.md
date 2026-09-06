@@ -5,17 +5,17 @@
 
 **Próximo ID disponible:** `SDD-022`.
 
-**Versión acumulada del kit:** `v1.4.0` (ver [docs/releases/](../../../docs/releases/)). Campaña abierta: **v1.4.1** (SDD-018 … SDD-021).
+**Versión acumulada del kit:** `v1.4.1` (ver [docs/releases/](../../../docs/releases/)).
 
 ---
 
 ## Discovery
 
-> **Versión (recomendación SemVer):** bump de producto kit al cerrar la iniciativa, desde `v1.4.0`. Criterio auditoría: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores (ninguna fila actual); **—** = no define release del kit por sí sola.
+> **Versión (recomendación SemVer):** bump de producto kit al cerrar la iniciativa, desde `v1.4.1`. Criterio auditoría: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores (ninguna fila actual); **—** = no define release del kit por sí sola.
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
-| docs      | Validación en producción: ciclo SDD con proyecto consumidor externo              | —       | Dogfooding externo; no bump de kit hasta que genere cambios productizados |
+| docs      | Validación en producción: ciclo SDD con proyecto consumidor externo              | —       | **Auditoría en curso** (sin SDD): [plan](audits/20260906-dogfood-consumidor-externo.md) · corrida post-tag `v1.4.1` |
 | profiles  | Perfiles adicionales (node-express, go-api, vue-vite) a demanda                  | minor   | Baja prioridad; perfil nuevo = feature compatible                     |
 
 ---
@@ -34,12 +34,9 @@
 
 ## In Build
 
-| ID      | Dominio   | Título                                                              | Versión    | Spec |
-| ------- | --------- | ------------------------------------------------------------------- | ---------- | ---- |
-| SDD-021 | docs      | Índice artefactos paths.sdd (audits/research) + banner ANALYSIS     | **v1.4.1** | [SDD-021-indice-audits-research-banner-analysis.md](specs/docs/SDD-021-indice-audits-research-banner-analysis.md) |
-| SDD-020 | bootstrap | Upgrade / paridad multi-agente (wording, targets, safe-git doc)     | **v1.4.1** | [SDD-020-upgrade-paridad-multi-agente.md](specs/bootstrap/SDD-020-upgrade-paridad-multi-agente.md) |
-| SDD-019 | infra     | CI: `sdd validate` y gatillo en rama `dev`                          | **v1.4.1** | [SDD-019-ci-validate-sdd-rama-dev.md](specs/infra/SDD-019-ci-validate-sdd-rama-dev.md) |
-| SDD-018 | bootstrap | Higiene agentica: retirar `sdd-core.mdc` residual + alinear docs   | **v1.4.1** | [SDD-018-higiene-agentica-sdd-core.md](specs/bootstrap/SDD-018-higiene-agentica-sdd-core.md) |
+| ID  | Dominio | Título | Versión | Spec |
+| --- | ------- | ------ | ------- | ---- |
+| —   | —       | —      | —       | —    |
 
 ## Validating
 
@@ -53,6 +50,10 @@
 
 | ID      | Dominio   | Título                                                                                            | Versión | Fecha      | Spec archivado                                                                                                                             |
 | ------- | --------- | ------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| SDD-021 | docs      | Índice artefactos paths.sdd (audits/research) + banner ANALYSIS                                   | v1.4.1  | 2026-09-06 | [archive/2026/docs/SDD-021-indice-audits-research-banner-analysis.md](archive/2026/docs/SDD-021-indice-audits-research-banner-analysis.md) |
+| SDD-020 | bootstrap | Upgrade / paridad multi-agente (wording, targets, safe-git doc)                                   | v1.4.1  | 2026-09-06 | [archive/2026/bootstrap/SDD-020-upgrade-paridad-multi-agente.md](archive/2026/bootstrap/SDD-020-upgrade-paridad-multi-agente.md)           |
+| SDD-019 | infra     | CI: `sdd validate` y gatillo en rama `dev`                                                        | v1.4.1  | 2026-09-06 | [archive/2026/infra/SDD-019-ci-validate-sdd-rama-dev.md](archive/2026/infra/SDD-019-ci-validate-sdd-rama-dev.md)                           |
+| SDD-018 | bootstrap | Higiene agentica: retirar `sdd-core.mdc` residual + alinear docs                                  | v1.4.1  | 2026-09-06 | [archive/2026/bootstrap/SDD-018-higiene-agentica-sdd-core.md](archive/2026/bootstrap/SDD-018-higiene-agentica-sdd-core.md)                 |
 | SDD-017 | cli       | Suite pytest para la CLI (backlog, prompts, round-trip)                                           | v1.4.0  | 2026-09-05 | [archive/2026/cli/SDD-017-suite-pytest-cli.md](archive/2026/cli/SDD-017-suite-pytest-cli.md)                                               |
 | SDD-016 | core      | Deprecar métricas de tokens y cost-governance                                                     | v1.3.2  | 2026-09-05 | [archive/2026/core/SDD-016-deprecar-tokens-cost-governance.md](archive/2026/core/SDD-016-deprecar-tokens-cost-governance.md)               |
 | SDD-015 | core      | Archivar specs en estado Descartado                                                               | v1.3.1  | 2026-08-05 | [archive/2026/core/SDD-015-archive-specs-descartados.md](archive/2026/core/SDD-015-archive-specs-descartados.md)                           |

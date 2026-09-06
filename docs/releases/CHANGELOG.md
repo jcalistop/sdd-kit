@@ -7,6 +7,27 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [1.4.1] - 2026-09-06
+
+Ver [v1.4.1.md](v1.4.1.md).
+
+### Añadido
+
+- Step CI `python cli/sdd.py validate` + gatillo en rama `dev` — SDD-019
+- Índice `.github/docs/sdd/README.md` (audits/research) + banner snapshot ANALYSIS — SDD-021
+
+### Cambiado
+
+- Skill `sdd-upgrade-kit`: `agent.targets` + wording post v1.3.2 — SDD-020
+- INSTALL/README sin `sdd-core` como regla vigente — SDD-018
+- CLI `validate` en Linux vía `bash` + `validate-sdd.sh` ejecutable — fix CI
+
+### Eliminado
+
+- Residual `.cursor/rules/sdd-core.mdc` del repo productor — SDD-018
+
+---
+
 ## [1.4.0] - 2026-09-05
 
 Ver [v1.4.0.md](v1.4.0.md).

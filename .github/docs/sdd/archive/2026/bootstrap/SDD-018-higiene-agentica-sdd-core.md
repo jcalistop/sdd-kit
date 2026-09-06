@@ -12,7 +12,7 @@
 | **Dominio**           | `bootstrap`    |
 | **Tipo**              | `documentation` |
 | **Fecha**             | 2026-09-05     |
-| **Estado**            | `In Build`     |
+| **Estado**            | `Released`     |
 | **Versión objetivo**  | `v1.4.1`       |
 | **Owner**             | mantenedor kit |
 | **Prioridad**         | `P1`           |
