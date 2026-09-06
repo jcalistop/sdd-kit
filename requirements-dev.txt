@@ -1,0 +1,2 @@
+# Dependencias de desarrollo / CI del repo sdd-kit (no runtime de consumidores).
+pytest>=8.0,<9

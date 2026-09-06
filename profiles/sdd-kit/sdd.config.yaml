@@ -5,6 +5,7 @@ stack:
   ci_workflow: .github/workflows/ci.yml
   quality_gates:
     compile: "python -m compileall -q cli/"
+    pytest: "python -m pytest cli/tests -q"
     manifest: 'python -c "import json; json.load(open(''bootstrap/agent-prompts/manifest.json''))"'
     profiles: "verificación archivos obligatorios por perfil (CI)"
     validate_sdd: ".github/docs/sdd — validate-sdd.ps1"

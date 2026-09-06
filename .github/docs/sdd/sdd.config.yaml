@@ -19,6 +19,7 @@ stack:
   ci_workflow: .github/workflows/ci.yml
   quality_gates:
     compile: "python -m compileall -q cli/"
+    pytest: "python -m pytest cli/tests -q"
     manifest: 'python -c "import json; json.load(open(''bootstrap/agent-prompts/manifest.json''))"'
     profiles: "verificación archivos obligatorios por perfil (CI)"
     validate_sdd: ".github/docs/sdd — validate-sdd.ps1"
@@ -31,7 +32,7 @@ paths:
   contributing: CONTRIBUTING.md
 
 ids:
-  next_sdd: 17
+  next_sdd: 18
   next_adr: 3
 
 release:
@@ -39,8 +40,8 @@ release:
   tag_prefix: v
 
 kit:
-  installed_version: "v1.3.2"
-  installed_at: "2026-08-05"
+  installed_version: "v1.4.0"
+  installed_at: "2026-09-05"
 
 
 agent:

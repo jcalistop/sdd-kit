@@ -7,6 +7,7 @@
 ## Calidad técnica
 
 - [ ] `python -m compileall -q cli/` sin errores
+- [ ] `python -m pytest cli/tests -q` en verde _(o No aplica si el PR no toca CLI)_
 - [ ] `bootstrap/agent-prompts/manifest.json` y `stack-descriptions.json` válidos (JSON)
 - [ ] Si se tocó `bootstrap/agent-prompts/`: ejecutado `python bootstrap/sync-cursor-rules.py`
 - [ ] CI GitHub en verde (`.github/workflows/ci.yml`)

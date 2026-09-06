@@ -7,6 +7,19 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [1.4.0] - 2026-09-05
+
+Ver [v1.4.0.md](v1.4.0.md).
+
+### Añadido
+
+- Suite pytest CLI (`cli/tests/`: backlog, prompts, round-trip `spec new`) — SDD-017
+- Step pytest en CI + `requirements-dev.txt` — SDD-017
+- Gate `pytest` en perfil `sdd-kit` — SDD-017
+- Artefactos de auditoría general del kit (`audits/` 2026-09-05)
+
+---
+
 ## [1.3.2] - 2026-09-05
 
 Ver [v1.3.2.md](v1.3.2.md).
