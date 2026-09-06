@@ -62,7 +62,7 @@ Cambios triviales (typo, bump deps, copy) → ID `—` en release; no requieren 
 
 - Refactors riesgosos con spec tipo `refactor`
 - ADRs en `.github/docs/sdd/adr/`
-- Job CI con `validate-sdd` en cada PR
+- [x] Job CI con `validate-sdd` / `sdd validate` en cada PR (también gatilla en `dev`) — SDD-019
 
 ## Flujo para mantenedores
 

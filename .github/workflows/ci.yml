@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
   pull_request:
-    branches: [main]
+    branches: [main, dev]
 
 jobs:
   validate:
@@ -24,6 +24,10 @@ jobs:
 
       - name: Suite pytest CLI
         run: python -m pytest cli/tests -q
+
+      - name: Validar instancia SDD (sdd validate)
+        run: python cli/sdd.py validate
+        # WARN (p. ej. kit-version pre-tag) no falla el job: el CLI sale 0 si solo hay advertencias.
 
       - name: Validar JSON de agent-prompts
         run: |
