@@ -86,7 +86,8 @@ def cmd_validate(args: argparse.Namespace) -> int:
             ["powershell", "-NoProfile", "-File", str(script), "-SddPath", str(sdd)]
         )
     script = root / "bootstrap" / "validate-sdd.sh"
-    return subprocess.call([str(script), str(sdd)])
+    # Invocar vía bash: el .sh puede no tener bit +x en el checkout (p. ej. CI Linux).
+    return subprocess.call(["bash", str(script), str(sdd)])
 
 
 def cmd_backlog_list(args: argparse.Namespace) -> int:

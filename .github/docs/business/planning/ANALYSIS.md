@@ -1,6 +1,10 @@
 # Analisis Critico del SDD Kit
 
-> Evaluacion integral del kit para desarrollo agentico multi-stack.
+> **Snapshot histórico (2026-06-11).** No es el tablero operativo ni la evaluación vigente del kit.
+>
+> Para el estado actual y la deuda operativa usa [BACKLOG](../../sdd/BACKLOG.md) y el informe de auditoría [20260905-1202-auditoria-general-kit-informe.md](../../sdd/audits/20260905-1202-auditoria-general-kit-informe.md).
+>
+> Evaluacion integral del kit para desarrollo agentico multi-stack (baseline original).
 > Fecha: 2026-06-11
 
 ---

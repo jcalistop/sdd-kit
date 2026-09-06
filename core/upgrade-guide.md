@@ -186,6 +186,16 @@ Minor del repo productor: suite `pytest` en `cli/tests/`, step en CI y `requirem
 
 Detalle: `docs/releases/v1.4.0.md`.
 
+### v1.4.1 — Higiene agentica + upgrade multi-agente (SDD-018 / SDD-020)
+
+Patch de higiene y docs/skill:
+
+- El kit ya no versiona ni documenta `.cursor/rules/sdd-core.mdc` (fusionado en `sdd-agent-workflow` desde v1.2.2 / SDD-006). Si queda copia local, **bórrala**; `install-agents` / `sync-cursor-rules` no la regeneran.
+- Skill `sdd-upgrade-kit`: checklist alineado a v1.3.2 (sin `cost-governance` vigente); reinstalación según `agent.targets` (no hardcode solo `cursor`).
+- `agent-setup.md`: dogfood del repo kit = Cursor; asimetría safe-git (regla completa en Cursor vs mención en preamble no-Cursor) documentada.
+
+Detalle: `docs/releases/v1.4.1.md` (al cerrar campaña).
+
 ---
 
 ## Prompt para el agente

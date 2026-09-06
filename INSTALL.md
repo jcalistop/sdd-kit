@@ -55,7 +55,7 @@ Por defecto (`-Agent auto`) detecta tu IDE/agente y muestra un menú si hay ambi
 
 | Adaptador | Archivos instalados                                                                                            |
 | --------- | -------------------------------------------------------------------------------------------------------------- |
-| `cursor`  | `.cursor/rules/sdd-core.mdc`, `sdd-agent-workflow.mdc`, `sdd-workflow-reference.mdc`, `sdd-stack-<perfil>.mdc` |
+| `cursor`  | `.cursor/rules/sdd-agent-workflow.mdc`, `sdd-workflow-reference.mdc`, `sdd-safe-git.mdc`, `sdd-stack-<perfil>.mdc` |
 | `claude`  | `CLAUDE.md` (bloque delimitado)                                                                                |
 | `codex`   | `AGENTS.md` (bloque delimitado)                                                                                |
 | `copilot` | `.github/copilot-instructions.md`                                                                              |

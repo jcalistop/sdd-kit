@@ -190,7 +190,7 @@ Detalle: **[INSTALL.md](INSTALL.md)** — sección «Actualizar el kit».
 | 🔍 Verificación   | Revisas evidencia               | Cruza spec, domain-rules y quality gates  |
 | ✅ PR             | **Revisas y mergeas**           | Publica tras verify OK; checklist y tests |
 
-Adaptadores instalados según tu herramienta (ver `sdd.config.yaml` → `agent.targets`). En Cursor: reglas `sdd-core`, `sdd-agent-workflow`, `sdd-stack-<perfil>` y **6 skills** `sdd-*` (on-demand).
+Adaptadores instalados según tu herramienta (ver `sdd.config.yaml` → `agent.targets`). En Cursor: reglas `sdd-agent-workflow`, `sdd-workflow-reference`, `sdd-safe-git`, `sdd-stack-<perfil>` y **6 skills** `sdd-*` (on-demand).
 
 ### Skills SDD (Cursor, v1.2.0+)
 

@@ -8,10 +8,11 @@
 
 - [ ] `python -m compileall -q cli/` sin errores
 - [ ] `python -m pytest cli/tests -q` en verde _(o No aplica si el PR no toca CLI)_
+- [ ] `python cli/sdd.py validate` en verde _(también en CI: `.github/workflows/ci.yml`)_
 - [ ] `bootstrap/agent-prompts/manifest.json` y `stack-descriptions.json` válidos (JSON)
 - [ ] Si se tocó `bootstrap/agent-prompts/`: ejecutado `python bootstrap/sync-cursor-rules.py`
-- [ ] CI GitHub en verde (`.github/workflows/ci.yml`)
-- [ ] `validate-sdd` en verde sobre `.github/docs/sdd/` si se modificó BACKLOG, specs o config
+- [ ] CI GitHub en verde (`.github/workflows/ci.yml` — incluye `main` y `dev`)
+- [ ] `validate-sdd` en verde sobre `.github/docs/sdd/` si se modificó BACKLOG, specs o config _(cubierto por el step CI; local recomendado antes de push)_
 
 ---
 

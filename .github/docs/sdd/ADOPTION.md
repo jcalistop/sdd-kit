@@ -8,6 +8,7 @@
 | Aspecto                  | Valor                                                           |
 | ------------------------ | --------------------------------------------------------------- |
 | **Ruta de instancia**    | `.github/docs/sdd/` (estándar consumidor; dogfooding)           |
+| **Índice del directorio**| [README.md](README.md) — mapa de `audits/`, `research/`, etc. (`audits/` versionado en git) |
 | **Contexto de producto** | `.github/docs/business/`                                        |
 | **Principio**            | No reescribir el pasado — sin specs retrospectivos obligatorios |
 | **Etapa actual**         | 2 (nuevas features con ciclo completo)                          |
@@ -24,7 +25,9 @@
 
 **Anti-confusión:**
 
+- Índice de carpetas del proceso: [README.md](README.md) (incluye `audits/` y `research/` versionados).
 - `business/planning/ROADMAP.md` = snapshot estratégico histórico.
+- `business/planning/ANALYSIS.md` = snapshot de evaluación 2026-06-11 (no tablero operativo; ver banner allí).
 - `BACKLOG.md` (aquí) = tablero operativo de iniciativas.
 - `docs/releases/` = versiones publicadas del **kit**.
 - `.github/docs/sdd/releases/` = releases de **iniciativas SDD** del kit (acta: specs + gates; narrativa en `docs/releases/`).
@@ -62,7 +65,7 @@ Cambios triviales (typo, bump deps, copy) → ID `—` en release; no requieren 
 
 - Refactors riesgosos con spec tipo `refactor`
 - ADRs en `.github/docs/sdd/adr/`
-- Job CI con `validate-sdd` en cada PR
+- [x] Job CI con `validate-sdd` / `sdd validate` en cada PR (también gatilla en `dev`) — SDD-019
 
 ## Flujo para mantenedores
 

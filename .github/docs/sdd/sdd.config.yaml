@@ -22,7 +22,7 @@ stack:
     pytest: "python -m pytest cli/tests -q"
     manifest: 'python -c "import json; json.load(open(''bootstrap/agent-prompts/manifest.json''))"'
     profiles: "verificación archivos obligatorios por perfil (CI)"
-    validate_sdd: ".github/docs/sdd — validate-sdd.ps1"
+    validate_sdd: "python cli/sdd.py validate (local + CI)"
   schema_changes: null
   deploy_platform: github-releases
 
@@ -32,7 +32,7 @@ paths:
   contributing: CONTRIBUTING.md
 
 ids:
-  next_sdd: 18
+  next_sdd: 22
   next_adr: 3
 
 release:
@@ -40,8 +40,8 @@ release:
   tag_prefix: v
 
 kit:
-  installed_version: "v1.4.0"
-  installed_at: "2026-09-05"
+  installed_version: "v1.4.1"
+  installed_at: "2026-09-06"
 
 
 agent:
