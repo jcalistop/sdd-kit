@@ -3,9 +3,9 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-020`.
+**Próximo ID disponible:** `SDD-021`.
 
-**Versión acumulada del kit:** `v1.4.0` (ver [docs/releases/](../../../docs/releases/)). Campaña abierta: **v1.4.1** (SDD-018, SDD-019).
+**Versión acumulada del kit:** `v1.4.0` (ver [docs/releases/](../../../docs/releases/)). Campaña abierta: **v1.4.1** (SDD-018, SDD-019, SDD-020).
 
 ---
 
@@ -15,7 +15,6 @@
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
-| bootstrap | Upgrade/paridad multi-agente: wording v1.3.2, `agent.targets`, safe-git doc      | patch   | H-B06/D03/D05–D07; si se cambia comportamiento real de upgrade → reevaluar **minor** |
 | docs      | Índice artefactos `paths.sdd` (audits/research) + banner snapshot ANALYSIS       | patch   | H-A04/E02/B09; versionar `audits/`                                    |
 | docs      | Validación en producción: ciclo SDD con proyecto consumidor externo              | —       | Dogfooding externo; no bump de kit hasta que genere cambios productizados |
 | profiles  | Perfiles adicionales (node-express, go-api, vue-vite) a demanda                  | minor   | Baja prioridad; perfil nuevo = feature compatible                     |
@@ -38,6 +37,7 @@
 
 | ID      | Dominio   | Título                                                              | Versión    | Spec |
 | ------- | --------- | ------------------------------------------------------------------- | ---------- | ---- |
+| SDD-020 | bootstrap | Upgrade / paridad multi-agente (wording, targets, safe-git doc)     | **v1.4.1** | [SDD-020-upgrade-paridad-multi-agente.md](specs/bootstrap/SDD-020-upgrade-paridad-multi-agente.md) |
 | SDD-019 | infra     | CI: `sdd validate` y gatillo en rama `dev`                          | **v1.4.1** | [SDD-019-ci-validate-sdd-rama-dev.md](specs/infra/SDD-019-ci-validate-sdd-rama-dev.md) |
 | SDD-018 | bootstrap | Higiene agentica: retirar `sdd-core.mdc` residual + alinear docs   | **v1.4.1** | [SDD-018-higiene-agentica-sdd-core.md](specs/bootstrap/SDD-018-higiene-agentica-sdd-core.md) |
 

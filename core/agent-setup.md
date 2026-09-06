@@ -21,7 +21,9 @@ La fuente única de contenido está en `sdd-kit/bootstrap/agent-prompts/` (regla
 
 **Skills Cursor (v1.2.0+):** `install-agents.py` instala las 6 skills `sdd-*` desde `bootstrap/agent-skills/manifest.json`. Solo sobrescribe carpetas del manifest; no toca skills Boost del proyecto. **Precedencia:** skills SDD on-demand > `sdd prompt show` copy-paste > reglas on-demand.
 
-**Claude / Codex / Copilot:** el preambulo del bloque marcado incluye mapa trigger → prompt kit (paridad con skills Cursor) y mención safe-git.
+**Claude / Codex / Copilot:** el preambulo del bloque marcado incluye mapa trigger → prompt kit (paridad con skills Cursor) y **mención** de safe-git (párrafo corto). **No** reciben la regla completa `sdd-safe-git.mdc`: el contrato íntegro vive en Cursor (`alwaysApply`) y en [`safe-git-contract.md`](safe-git-contract.md). Esa asimetría es intencional (tokens / formato del adaptador); no implica que el contrato no aplique al humano — el agente no-Cursor solo ve el resumen del preamble.
+
+**Dogfood del repositorio sdd-kit:** este repo productor usa `agent.targets: [cursor]` a propósito. No se versionan `CLAUDE.md` / `AGENTS.md` / `copilot-instructions` en el kit salvo decisión explícita de mantenedores. Los consumidores sí pueden declarar varios targets e instalarlos con `install-agents`.
 
 **Cursor — política de tokens:** `sdd-agent-workflow.mdc` y `sdd-safe-git.mdc` usan `alwaysApply: true` (safe-git es texto corto). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Las skills `sdd-draft-spec` y `sdd-build-spec` incluyen la instrucción de lectura previa (`BACKLOG.md`, `sdd.config.yaml`, `domain-rules.md`), evitando cargarla en tareas no-SDD. Detalle: [`.github/docs/business/planning/TOKEN-OPTIMIZATION.md`](../.github/docs/business/planning/TOKEN-OPTIMIZATION.md). Contrato canónico: [`safe-git-contract.md`](safe-git-contract.md).
 
@@ -117,7 +119,7 @@ agent:
   install_mode: auto # auto | explicit | none
 ```
 
-Útil para saber qué archivos deberían existir en el proyecto.
+Útil para saber qué archivos deberían existir en el proyecto. Tras un **upgrade-kit**, reinstalar adaptadores con `--agent` igual a la lista `agent.targets` (coma-separada), no asumir solo `cursor`.
 
 ---
 
