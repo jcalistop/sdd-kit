@@ -150,3 +150,4 @@ python cli/sdd.py validate
 - No mezclar con ampliación del sensor (H-C03).
 - **2026-09-05 (In Build):** step `python cli/sdd.py validate` + gatillos `dev`/`main`; ADOPTION Etapa 3 marcado; quality_gates/checklist actualizados. Criterio CI verde en remoto pendiente de push/smoke humano.
 - **Smoke manual (2026-09-05):** humano confirmó exitoso (step CI / gatillos `dev`).
+- **2026-09-05 (CI fix):** falló en GitHub por `PermissionError` al ejecutar `validate-sdd.sh` sin +x; CLI ahora invoca `bash …/validate-sdd.sh` y el `.sh` queda mode `100755`.
