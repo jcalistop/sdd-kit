@@ -35,7 +35,6 @@ def main() -> None:
     stacks_out.mkdir(parents=True, exist_ok=True)
 
     mappings = {
-        "sdd-core.mdc": "sdd-core.md",
         "sdd-agent-workflow.mdc": "sdd-agent-workflow.md",
     }
     meta_out: dict[str, str] = {}

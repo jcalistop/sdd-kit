@@ -186,6 +186,15 @@ Minor del repo productor: suite `pytest` en `cli/tests/`, step en CI y `requirem
 
 Detalle: `docs/releases/v1.4.0.md`.
 
+### v1.4.1 — Higiene agentica: retirar residual `sdd-core.mdc` (SDD-018)
+
+Patch de higiene: el kit ya no versiona ni documenta `.cursor/rules/sdd-core.mdc` (fusionado en `sdd-agent-workflow` desde v1.2.2 / SDD-006).
+
+- Si tras el upgrade queda `.cursor/rules/sdd-core.mdc` en tu proyecto, **bórralo** a mano; `install-agents` / `sync-cursor-rules` no lo regeneran.
+- Actualiza referencias en docs locales que aún listen `sdd-core` como regla vigente.
+
+Detalle: `docs/releases/v1.4.1.md` (al cerrar campaña).
+
 ---
 
 ## Prompt para el agente

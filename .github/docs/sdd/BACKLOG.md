@@ -3,19 +3,18 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-018`.
+**Próximo ID disponible:** `SDD-019`.
 
-**Versión acumulada del kit:** `v1.4.0` (ver [docs/releases/](../../../docs/releases/)).
+**Versión acumulada del kit:** `v1.4.0` (ver [docs/releases/](../../../docs/releases/)). Campaña abierta: **v1.4.1** (SDD-018).
 
 ---
 
 ## Discovery
 
-> **Versión (recomendación SemVer):** bump de producto kit al cerrar la iniciativa, desde `v1.3.2`. Criterio auditoría: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores (ninguna fila actual); **—** = no define release del kit por sí sola.
+> **Versión (recomendación SemVer):** bump de producto kit al cerrar la iniciativa, desde `v1.4.0`. Criterio auditoría: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores (ninguna fila actual); **—** = no define release del kit por sí sola.
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
-| bootstrap | Higiene agentica: retirar `sdd-core.mdc` residual + alinear INSTALL/README       | patch   | H-D01/D04 P1; corrección post v1.2.2                                  |
 | infra     | CI: ejecutar `validate-sdd` / `sdd validate` y gatillar en rama `dev`            | patch   | H-B02/B03/C02; ADOPTION Etapa 3; sin cambio de API consumidor         |
 | bootstrap | Upgrade/paridad multi-agente: wording v1.3.2, `agent.targets`, safe-git doc      | patch   | H-B06/D03/D05–D07; si se cambia comportamiento real de upgrade → reevaluar **minor** |
 | docs      | Índice artefactos `paths.sdd` (audits/research) + banner snapshot ANALYSIS       | patch   | H-A04/E02/B09; versionar `audits/`                                    |
@@ -38,9 +37,9 @@
 
 ## In Build
 
-| ID  | Dominio | Título | Versión | Spec |
-| --- | ------- | ------ | ------- | ---- |
-| —   | —       | —      | —       | —    |
+| ID      | Dominio   | Título                                                              | Versión    | Spec |
+| ------- | --------- | ------------------------------------------------------------------- | ---------- | ---- |
+| SDD-018 | bootstrap | Higiene agentica: retirar `sdd-core.mdc` residual + alinear docs   | **v1.4.1** | [SDD-018-higiene-agentica-sdd-core.md](specs/bootstrap/SDD-018-higiene-agentica-sdd-core.md) |
 
 ## Validating
 
