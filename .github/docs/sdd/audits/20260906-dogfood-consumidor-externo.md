@@ -2,12 +2,13 @@
 
 | Campo | Valor |
 | ----- | ----- |
-| **Estado** | Plan listo · **corrida pendiente** (post-tag `v1.4.1`) |
+| **Estado** | **Ejecutado** (2026-09-08) |
 | **Fecha plan** | 2026-09-06 |
+| **Fecha corrida** | 2026-09-08 |
 | **SemVer kit** | `—` (no define release; gaps productizados → SDD / ID `—` aparte) |
 | **Sin SDD-NNN** | Intencional — es auditoría operativa, no feature |
-| **Informe** | [20260906-dogfood-consumidor-externo-informe.md](20260906-dogfood-consumidor-externo-informe.md) (stub hasta la corrida) |
-| **Consumidor** | _TBD — humano completa repo/ruta/stack_ |
+| **Informe** | [20260906-dogfood-consumidor-externo-informe.md](20260906-dogfood-consumidor-externo-informe.md) |
+| **Consumidor** | `minsal-centinela` · `laravel-voyager` · `dev` |
 
 ---
 
@@ -23,8 +24,8 @@ Validar en un proyecto **fuera** de `sdd-kit` que el ciclo SDD + upgrade/adaptad
 
 ## Prerrequisito
 
-- [ ] Tag `v1.4.1` publicado en `main`.
-- [ ] Repo consumidor elegido (nombre + perfil stack).
+- [x] Tag `v1.4.1` publicado en `main`.
+- [x] Repo consumidor elegido (nombre + perfil stack): `minsal-centinela` / `laravel-voyager`.
 
 ---
 
