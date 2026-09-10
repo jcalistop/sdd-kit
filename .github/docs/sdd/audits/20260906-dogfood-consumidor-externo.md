@@ -2,9 +2,9 @@
 
 | Campo | Valor |
 | ----- | ----- |
-| **Estado** | **Ejecutado** (2026-09-08) |
+| **Estado** | **Ejecutado** (cierre completo 2026-09-10) |
 | **Fecha plan** | 2026-09-06 |
-| **Fecha corrida** | 2026-09-08 |
+| **Fecha corrida** | 2026-09-08 (pasos 0–1, 3–4 parcial); **2026-09-10** (paso 2 + evidencia final) |
 | **SemVer kit** | `—` (no define release; gaps productizados → SDD / ID `—` aparte) |
 | **Sin SDD-NNN** | Intencional — es auditoría operativa, no feature |
 | **Informe** | [20260906-dogfood-consumidor-externo-informe.md](20260906-dogfood-consumidor-externo-informe.md) |
@@ -45,6 +45,8 @@ Validar en un proyecto **fuera** de `sdd-kit` que el ciclo SDD + upgrade/adaptad
 2. Ready → In Build.
 3. Implementar + verify-implementation + smoke.
 4. Commit / PR a la rama de desarrollo del consumidor.
+
+**Hecho (2026-09-10):** SDD-231 en Centinela — spec `.github/docs/sdd/specs/metas/SDD-231-metas-objetivo-indicador-texto-enriquecido.md`; PR [#172](https://github.com/jcalistop/minsal-centinela/pull/172) mergeado a `dev` (`aff4ae9`).
 
 ### 3. Upgrade (si venía de tag anterior)
 1. `upgrade-kit` a `v1.4.1`.
