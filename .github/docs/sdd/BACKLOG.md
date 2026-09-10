@@ -12,11 +12,18 @@
 ## Discovery
 
 > **Versión (recomendación SemVer):** bump de producto kit al cerrar la iniciativa, desde `v1.4.1`. Criterio auditoría: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores (ninguna fila actual); **—** = no define release del kit por sí sola.
+>
+> Dogfood externo **cerrado** (2026-09-10): [plan](audits/20260906-dogfood-consumidor-externo.md) · [informe](audits/20260906-dogfood-consumidor-externo-informe.md) (`minsal-centinela` / `v1.4.1`). Gaps abajo.
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
-| docs      | Validación en producción: ciclo SDD con proyecto consumidor externo              | —       | **Auditoría en curso** (sin SDD): [plan](audits/20260906-dogfood-consumidor-externo.md) · corrida post-tag `v1.4.1` |
-| profiles  | Perfiles adicionales (node-express, go-api, vue-vite) a demanda                  | minor   | Baja prioridad; perfil nuevo = feature compatible                     |
+| bootstrap | verify/checklist: Pint (u otro gate) = **mismo comando que CI** antes de open-pr | patch   | Dogfood gap #1 P0; `laravel-voyager` / verify-implementation          |
+| bootstrap | `install-agents`: precedencia instancia > global + modo branching (`solo-push-dev` \| `feature-pr-dev`) | **minor** | Dogfood gap #2 P0; skills globales chocan con `branching.md` consumidor |
+| core      | Draft/DoR: sección opcional «Congelado para implementación» (API, tests, lectura máx.) | patch   | Dogfood gap #3 P1; specs flojos para LLM de bajo contexto             |
+| profiles  | verify: tabla perfil → comandos obligatorios (Pint=CI, tests, `npm audit` si tocó JS) | patch   | Dogfood gap #4 P1                                                     |
+| docs      | Runbook dogfood: stub del tag no es fuente de verdad; checklist merge informe → main | patch   | Dogfood gap #5 P2                                                     |
+| bootstrap | Skills: `{{STACK_PROFILE}}` en install; no hardcodear perfil ajeno en skill global | patch   | Dogfood gap #7 P2                                                     |
+| bootstrap | build-spec fail-closed: no Ready/In Build sin frase humana si hay Plan mode / «te guío» | patch   | Dogfood gap #6 P2                                                     |
 
 ---
 
@@ -85,8 +92,8 @@
 ## Descartado / en pausa
 
 
-| ID  | Dominio | Título | Razón | Fecha | Spec |
-| --- | ------- | ------ | ----- | ----- | ---- |
-| —   | —       | —      | —     | —     | —    |
+| ID  | Dominio  | Título                                                              | Razón                                      | Fecha      | Spec |
+| --- | -------- | ------------------------------------------------------------------- | ------------------------------------------ | ---------- | ---- |
+| —   | profiles | Perfiles adicionales (node-express, go-api, vue-vite) a demanda     | En pausa — baja prioridad; retomar a demanda | 2026-09-10 | —    |
 
 

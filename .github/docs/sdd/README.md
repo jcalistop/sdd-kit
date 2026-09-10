@@ -22,8 +22,8 @@
 
 | Artefacto | Nota |
 | --------- | ---- |
-| [20260906-dogfood-consumidor-externo.md](audits/20260906-dogfood-consumidor-externo.md) | Plan dogfood consumidor externo (corrida post-`v1.4.1`) |
-| [20260906-dogfood-consumidor-externo-informe.md](audits/20260906-dogfood-consumidor-externo-informe.md) | Informe stub (pendiente de ejecución) |
+| [20260906-dogfood-consumidor-externo.md](audits/20260906-dogfood-consumidor-externo.md) | Plan dogfood consumidor externo (**Ejecutado** 2026-09-10) |
+| [20260906-dogfood-consumidor-externo-informe.md](audits/20260906-dogfood-consumidor-externo-informe.md) | Informe: Centinela / `v1.4.1` — ciclo OK + gaps harness |
 | [20260905-1202-auditoria-general-kit.md](audits/20260905-1202-auditoria-general-kit.md) | Plan de auditoría general |
 | [20260905-1202-auditoria-general-kit-informe.md](audits/20260905-1202-auditoria-general-kit-informe.md) | Informe A–F (fuente operativa post-2026-09 vs ANALYSIS histórico) |
 
