@@ -22,7 +22,7 @@ El consumidor Centinela actualizó el submodule a `v1.4.1`, portó el delta core
 | ---- | --------- | --------- |
 | 0 Consumidor | OK | Repo `minsal-centinela`; `stack.profile: laravel-voyager`; `agent.targets: [cursor]`; rama `dev` |
 | 1 Baseline / validate | OK | Submodule en tag `v1.4.1`; `sdd validate` OK; `installed_version` alineado post-upgrade |
-| 2 Ciclo SDD mínimo | **OK** | Spec consumidor: `.github/docs/sdd/specs/metas/SDD-231-metas-objetivo-indicador-texto-enriquecido.md`. Ciclo Discovery→Draft→Ready→In Build→verify→commit→PR. PR [#172](https://github.com/jcalistop/minsal-centinela/pull/172) merge `aff4ae9` (2026-09-10). Smoke + Pint CI OK. |
+| 2 Ciclo SDD mínimo | **OK** | Spec consumidor: `.github/docs/sdd/specs/metas/SDD-231-metas-objetivo-indicador-texto-enriquecido.md`. Ciclo Discovery→Draft→Ready→In Build→verify→commit→PR. PR [#172](https://github.com/jcalistop/minsal-centinela/pull/172) merge `aff4ae9` (2026-09-10). Smoke OK. CI: primer run falló Pint (`pint --test`); corregido en `c201fd2` antes del merge (ver Gaps). |
 | 3 Upgrade | OK | Salto v1.3.1→v1.4.1 vía skill upgrade-kit; commits consumidor de bump + merge instancia; fila en `UPGRADE-LOG.md` |
 | 4 Evidencia en kit | OK | Este informe actualizado (paso 2 → OK); plan con fecha de cierre 2026-09-10; rama kit `docs/dogfood-centinela-20260908`; pin consumidor sigue en tag `v1.4.1` |
 
@@ -30,9 +30,10 @@ El consumidor Centinela actualizó el submodule a `v1.4.1`, portó el delta core
 
 | Hallazgo | Acción sugerida | SemVer |
 | -------- | --------------- | ------ |
+| **verify-implementation en verde no implica Pint CI en verde.** En SDD-231 el sensor local pasó (`pint --dirty` + tests acotados + `validate`), pero el PR [#172](https://github.com/jcalistop/minsal-centinela/pull/172) falló en CI con `vendor/bin/pint --test` (4 archivos: `ObjetivoHtml`, form Livewire, tests). Fix: commit `c201fd2` (`style: corrige Pint…`). Causa probable: `--dirty` / alcance incompleto vs `--test` en todo el árbol de archivos tocados, o estilo no re-chequeado tras últimos edits antes del push. | Endurecer `verify-implementation` / perfil `laravel-voyager`: exigir `vendor/bin/pint --test` (o `--dirty` sobre **todos** los paths PHP del diff del spec) **antes** de open-pr; documentar en checklist PR / skill build-spec. | patch (kit: prompts/skills/checklist) |
 | Informe vive en rama kit post-tag | Merge a `main` del kit (o incluir en próximo patch) para que el stub de `v1.4.1` deje de figurar pendiente | patch docs |
 | Quill `=2.0.3` (GHSA-v3m3-f69x-jf25) | Mitigado en consumidor con pin `quill@2.0.2` (fuera del kit) | — |
 
 ## Conclusión
 
-**OK.** Dogfood consumidor externo contra `v1.4.1` cerrado: baseline, upgrade y ciclo SDD mínimo (Draft→verify→PR a `dev`) sin bloqueos del kit.
+**OK.** Dogfood consumidor externo contra `v1.4.1` cerrado: baseline, upgrade y ciclo SDD mínimo (Draft→verify→PR a `dev`) sin bloqueos del kit. Queda gap de harness: alinear el gate Pint local del verify con el de CI.
