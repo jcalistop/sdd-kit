@@ -83,6 +83,24 @@ def load_skills_manifest() -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+VALID_BRANCHING_MODES = ("feature-pr-dev", "solo-push-dev")
+
+BRANCHING_RULES_TEMPLATES = {
+    "feature-pr-dev": (
+        "Modo: feature-pr-dev. Crear rama feature/|bugfix/|maintenance/ según tipo; "
+        "PR obligatorio hacia {{DEV_BRANCH}}; no push directo a origin/{{DEV_BRANCH}}. "
+        "Si el humano pide explícitamente lo contrario (p. ej. push a origin/{{DEV_BRANCH}} sin PR): "
+        "informar el modo, pedir confirmación escrita y seguir al humano."
+    ),
+    "solo-push-dev": (
+        "Modo: solo-push-dev. Trabajar en {{DEV_BRANCH}} (o push a origin/{{DEV_BRANCH}} "
+        "tras verify + confirmación humana). No exigir rama feature/* ni PR. "
+        "Si el humano pide open-pr o rama feature/*: informar que el modo es solo-push-dev, "
+        "preguntar si igual quiere eso y, con confirmación escrita, seguir al humano."
+    ),
+}
+
+
 def read_dev_branch(target: Path, sdd_path: str) -> str:
     config_path = target / sdd_path / "sdd.config.yaml"
     if not config_path.is_file():
@@ -92,6 +110,44 @@ def read_dev_branch(target: Path, sdd_path: str) -> str:
         if stripped.startswith("development_branch:"):
             return stripped.split(":", 1)[1].strip().strip('"').strip("'")
     return "dev"
+
+
+def read_branching_mode(target: Path, sdd_path: str) -> str:
+    """Lee agent.branching_mode; default feature-pr-dev; falla si el valor es inválido."""
+    config_path = target / sdd_path / "sdd.config.yaml"
+    if not config_path.is_file():
+        return "feature-pr-dev"
+    for line in config_path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if stripped.startswith("#"):
+            continue
+        if stripped.startswith("branching_mode:"):
+            value = stripped.split(":", 1)[1].strip()
+            if "#" in value:
+                value = value.split("#", 1)[0].strip()
+            value = value.strip('"').strip("'")
+            if value not in VALID_BRANCHING_MODES:
+                raise ValueError(
+                    f"agent.branching_mode inválido: {value!r}. "
+                    f"Valores válidos: {', '.join(VALID_BRANCHING_MODES)}"
+                )
+            return value
+    return "feature-pr-dev"
+
+
+def branching_rules_text(mode: str, dev_branch: str) -> str:
+    return render_template(BRANCHING_RULES_TEMPLATES[mode], DEV_BRANCH=dev_branch)
+
+
+def remove_global_managed_skills(managed_ids: set[str]) -> None:
+    global_root = Path.home() / ".cursor" / "skills"
+    if not global_root.is_dir():
+        return
+    for skill_id in sorted(managed_ids):
+        dest = global_root / skill_id
+        if dest.is_dir():
+            shutil.rmtree(dest)
+            print(f"removed global skill: {skill_id}")
 
 
 def read_stack_skills_gates(profile: str) -> str:
@@ -107,12 +163,15 @@ def skill_render_context(
     sdd_path: str,
     kit_path: str,
 ) -> dict[str, str]:
+    dev_branch = read_dev_branch(target, sdd_path)
+    mode = read_branching_mode(target, sdd_path)
     return {
         "SDD_PATH": sdd_path.replace("\\", "/"),
         "KIT_PATH": kit_path.replace("\\", "/"),
-        "DEV_BRANCH": read_dev_branch(target, sdd_path),
+        "DEV_BRANCH": dev_branch,
         "PROFILE": profile,
         "STACK_GATES": read_stack_skills_gates(profile),
+        "BRANCHING_RULES": branching_rules_text(mode, dev_branch),
     }
 
 
@@ -153,47 +212,53 @@ def install_cursor_skills(
 ) -> None:
     manifest = load_skills_manifest()
     skills_root = target / ".cursor" / "skills"
+    # Valida branching_mode antes de escribir (falla temprano si es inválido).
     context = skill_render_context(target, profile, sdd_path, kit_path)
 
     managed_ids = {entry["id"] for entry in manifest.get("skills", [])}
 
     # Verificar si las skills ya existen en el proyecto (evitar duplicación)
     project_marker = skills_root / ".sdd-kit-manifest.json"
+    skip_reinstall = False
     if project_marker.is_file():
         try:
             existing = json.loads(project_marker.read_text(encoding="utf-8"))
             if existing.get("kit_path") == kit_path and set(existing.get("managed_skills", [])) == managed_ids:
                 print("SDD Kit: skills ya instaladas en .cursor/skills/, omitiendo.")
-                return
+                skip_reinstall = True
         except (json.JSONDecodeError, KeyError):
             pass  # Marcador corrupto; reinstalar normalmente
 
-    skills_root.mkdir(parents=True, exist_ok=True)
+    if not skip_reinstall:
+        skills_root.mkdir(parents=True, exist_ok=True)
 
-    for skill_id in managed_ids:
-        dest_dir = skills_root / skill_id
-        if dest_dir.exists():
-            shutil.rmtree(dest_dir)
-        dest_dir.mkdir(parents=True)
+        for skill_id in managed_ids:
+            dest_dir = skills_root / skill_id
+            if dest_dir.exists():
+                shutil.rmtree(dest_dir)
+            dest_dir.mkdir(parents=True)
 
-        src_dir = agent_skills_dir() / skill_id
-        if not src_dir.is_dir():
-            raise FileNotFoundError(f"Skill no encontrada en kit: {src_dir}")
+            src_dir = agent_skills_dir() / skill_id
+            if not src_dir.is_dir():
+                raise FileNotFoundError(f"Skill no encontrada en kit: {src_dir}")
 
-        for src_file in src_dir.iterdir():
-            if not src_file.is_file():
-                continue
-            content = render_template(src_file.read_text(encoding="utf-8"), **context)
-            write_file(dest_dir / src_file.name, content)
+            for src_file in src_dir.iterdir():
+                if not src_file.is_file():
+                    continue
+                content = render_template(src_file.read_text(encoding="utf-8"), **context)
+                write_file(dest_dir / src_file.name, content)
 
-    marker = {
-        "managed_skills": sorted(managed_ids),
-        "kit_path": kit_path.replace("\\", "/"),
-    }
-    write_file(
-        skills_root / ".sdd-kit-manifest.json",
-        json.dumps(marker, indent=2) + "\n",
-    )
+        marker = {
+            "managed_skills": sorted(managed_ids),
+            "kit_path": kit_path.replace("\\", "/"),
+        }
+        write_file(
+            skills_root / ".sdd-kit-manifest.json",
+            json.dumps(marker, indent=2) + "\n",
+        )
+
+    # Precedencia instancia > global: siempre limpiar managed en ~/.cursor/skills
+    remove_global_managed_skills(managed_ids)
 
 
 def merge_marked_block(existing: str, new_block: str) -> str:
@@ -454,6 +519,7 @@ def update_sdd_config(target: Path, sdd_path: str, agents: list[str], install_mo
         return
 
     lines = config_path.read_text(encoding="utf-8").splitlines()
+    preserved_branching: str | None = None
     agent_block = [
         "",
         "agent:",
@@ -468,10 +534,16 @@ def update_sdd_config(target: Path, sdd_path: str, agents: list[str], install_mo
         if line.startswith("agent:"):
             i += 1
             while i < len(lines) and (lines[i].startswith("  ") or lines[i].strip() == ""):
+                stripped = lines[i].strip()
+                if stripped.startswith("branching_mode:"):
+                    preserved_branching = stripped
                 i += 1
             continue
         out.append(line)
         i += 1
+
+    if preserved_branching:
+        agent_block.append(f"  {preserved_branching}")
 
     out.extend(agent_block)
 

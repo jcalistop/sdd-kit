@@ -39,3 +39,4 @@ kit:
 agent:
   targets: []
   install_mode: auto # auto | explicit | none
+  branching_mode: feature-pr-dev  # feature-pr-dev | solo-push-dev

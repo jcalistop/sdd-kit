@@ -29,6 +29,7 @@
 
 - [ ] Cambios en prompts: fuente en `bootstrap/agent-prompts/` (no editar solo `.mdc` sin sync)
 - [ ] `install-agents.py` probado si cambia contrato de adaptadores _(o No aplica)_
+- [ ] Tras `install-agents`: no deben quedar skills del manifest (`sdd-*` managed) en `~/.cursor/skills`
 - [ ] Entrada en `stack-descriptions.json` si es perfil nuevo _(o No aplica)_
 
 ---

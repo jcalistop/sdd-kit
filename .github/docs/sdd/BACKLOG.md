@@ -3,20 +3,25 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-022`.
+**Próximo ID disponible:** `SDD-024`.
 
-**Versión acumulada del kit:** `v1.4.1` (ver [docs/releases/](../../../docs/releases/)).
+**Versión acumulada del kit:** `v1.5.0` (ver [docs/releases/](../../../docs/releases/)).
 
 ---
 
 ## Discovery
 
-> **Versión (recomendación SemVer):** bump de producto kit al cerrar la iniciativa, desde `v1.4.1`. Criterio auditoría: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores (ninguna fila actual); **—** = no define release del kit por sí sola.
+> **Versión (recomendación SemVer):** bump de producto kit al cerrar la iniciativa, desde `v1.5.0`. Criterio auditoría: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores (ninguna fila actual); **—** = no define release del kit por sí sola.
+>
+> Dogfood externo **cerrado** (2026-09-10): [plan](audits/20260906-dogfood-consumidor-externo.md) · [informe](audits/20260906-dogfood-consumidor-externo-informe.md) (`minsal-centinela` / `v1.4.1`). Gaps abajo (restantes).
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
-| docs      | Validación en producción: ciclo SDD con proyecto consumidor externo              | —       | **Auditoría en curso** (sin SDD): [plan](audits/20260906-dogfood-consumidor-externo.md) · corrida post-tag `v1.4.1` |
-| profiles  | Perfiles adicionales (node-express, go-api, vue-vite) a demanda                  | minor   | Baja prioridad; perfil nuevo = feature compatible                     |
+| core      | Draft/DoR: sección opcional «Congelado para implementación» (API, tests, lectura máx.) | patch   | Dogfood gap #3 P1; specs flojos para LLM de bajo contexto             |
+| profiles  | verify: tabla perfil → comandos obligatorios (Pint=CI, tests, `npm audit` si tocó JS) | patch   | Dogfood gap #4 P1                                                     |
+| docs      | Runbook dogfood: stub del tag no es fuente de verdad; checklist merge informe → main | patch   | Dogfood gap #5 P2                                                     |
+| bootstrap | Skills: `{{STACK_PROFILE}}` en install; no hardcodear perfil ajeno en skill global | patch   | Dogfood gap #7 P2                                                     |
+| bootstrap | build-spec fail-closed: no Ready/In Build sin frase humana si hay Plan mode / «te guío» | patch   | Dogfood gap #6 P2                                                     |
 
 ---
 
@@ -50,6 +55,8 @@
 
 | ID      | Dominio   | Título                                                                                            | Versión | Fecha      | Spec archivado                                                                                                                             |
 | ------- | --------- | ------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| SDD-023 | bootstrap | install-agents: branching mode + precedencia instancia > global                                   | v1.5.0  | 2026-09-10 | [archive/2026/bootstrap/SDD-023-install-agents-branching-precedencia.md](archive/2026/bootstrap/SDD-023-install-agents-branching-precedencia.md) |
+| SDD-022 | profiles  | Pint local = comando CI (voyager + filament)                                                      | v1.5.0  | 2026-09-10 | [archive/2026/profiles/SDD-022-pint-parity-ci-laravel.md](archive/2026/profiles/SDD-022-pint-parity-ci-laravel.md) |
 | SDD-021 | docs      | Índice artefactos paths.sdd (audits/research) + banner ANALYSIS                                   | v1.4.1  | 2026-09-06 | [archive/2026/docs/SDD-021-indice-audits-research-banner-analysis.md](archive/2026/docs/SDD-021-indice-audits-research-banner-analysis.md) |
 | SDD-020 | bootstrap | Upgrade / paridad multi-agente (wording, targets, safe-git doc)                                   | v1.4.1  | 2026-09-06 | [archive/2026/bootstrap/SDD-020-upgrade-paridad-multi-agente.md](archive/2026/bootstrap/SDD-020-upgrade-paridad-multi-agente.md)           |
 | SDD-019 | infra     | CI: `sdd validate` y gatillo en rama `dev`                                                        | v1.4.1  | 2026-09-06 | [archive/2026/infra/SDD-019-ci-validate-sdd-rama-dev.md](archive/2026/infra/SDD-019-ci-validate-sdd-rama-dev.md)                           |
@@ -85,8 +92,8 @@
 ## Descartado / en pausa
 
 
-| ID  | Dominio | Título | Razón | Fecha | Spec |
-| --- | ------- | ------ | ----- | ----- | ---- |
-| —   | —       | —      | —     | —     | —    |
+| ID  | Dominio  | Título                                                              | Razón                                      | Fecha      | Spec |
+| --- | -------- | ------------------------------------------------------------------- | ------------------------------------------ | ---------- | ---- |
+| —   | profiles | Perfiles adicionales (node-express, go-api, vue-vite) a demanda     | En pausa — baja prioridad; retomar a demanda | 2026-09-10 | —    |
 
 

@@ -14,6 +14,6 @@ Extensión del SDD core para proyectos Laravel 10+ con Filament 3+.
 **Quality gates por defecto:**
 
 - `php artisan test --compact`
-- `vendor/bin/pint --dirty`
+- `vendor/bin/pint --test`
 - Migraciones solo en `database/migrations/`
 - Deploy: Laravel Cloud al merge en `main`

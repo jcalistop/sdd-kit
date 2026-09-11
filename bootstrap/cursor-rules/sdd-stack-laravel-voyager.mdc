@@ -10,7 +10,7 @@ Perfil activo cuando `sdd.config.yaml` → `stack.profile: laravel-voyager`.
 ## Quality gates
 
 - Tests: `php artisan test --compact` (PHPUnit)
-- Formato: `vendor/bin/pint --dirty`
+- Formato: `vendor/bin/pint --test`
 - CI: `.github/workflows/ci.yml` en verde antes de merge
 
 ## Stack UI

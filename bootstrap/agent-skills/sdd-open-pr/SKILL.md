@@ -29,6 +29,10 @@ Abrir PR con checklist SDD hacia **`{{DEV_BRANCH}}`**.
 
 ## Procedimiento
 
+### Ramas / branching
+
+{{BRANCHING_RULES}}
+
 1. Confirmar verify OK previo.
 2. Spec → `Estado: Validating`; BACKLOG In Build → Validating.
 3. `git push -u origin HEAD` con confirmación humana.
