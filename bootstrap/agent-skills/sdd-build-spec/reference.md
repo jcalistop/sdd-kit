@@ -16,7 +16,9 @@
 
 ## Convención de ramas
 
-Según tipo del spec y `{{SDD_PATH}}/branching.md`. PR destino habitual: **`{{DEV_BRANCH}}`**.
+{{BRANCHING_RULES}}
+
+También: tipo del spec y `{{SDD_PATH}}/branching.md`. PR destino habitual (si aplica): **`{{DEV_BRANCH}}`**.
 
 ---
 

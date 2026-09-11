@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import json
-import shutil
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 BOOTSTRAP = Path(__file__).resolve().parent
 sys.path.insert(0, str(BOOTSTRAP))
@@ -52,6 +52,62 @@ class InstallSkillsTest(unittest.TestCase):
         self.assertIn(".github/docs/sdd", content)
         self.assertNotIn("{{SDD_PATH}}", content)
         self.assertNotIn("Backoffice v2", content)
+
+    def test_default_branching_mode_feature_pr_dev(self) -> None:
+        """Sin branching_mode: fragmento feature-pr-dev; sin placeholder crudo."""
+        sdd_path = ".github/docs/sdd"
+        kit_path = ".github/docs/sdd-kit"
+        ia.install_cursor_skills(self.target, "laravel-filament", sdd_path, kit_path)
+
+        for rel in (
+            "sdd-build-spec/SKILL.md",
+            "sdd-build-spec/reference.md",
+            "sdd-open-pr/SKILL.md",
+            "sdd-open-pr/reference.md",
+        ):
+            content = (self.target / ".cursor" / "skills" / rel).read_text(encoding="utf-8")
+            self.assertIn("feature-pr-dev", content, rel)
+            self.assertNotIn("{{BRANCHING_RULES}}", content, rel)
+            self.assertIn("confirmación escrita", content, rel)
+
+    def test_solo_push_dev_branching_mode(self) -> None:
+        sdd_path = ".github/docs/sdd"
+        kit_path = ".github/docs/sdd-kit"
+        config = self.target / sdd_path / "sdd.config.yaml"
+        config.write_text(
+            "project:\n  development_branch: develop\n"
+            "agent:\n  branching_mode: solo-push-dev\n",
+            encoding="utf-8",
+        )
+        ia.install_cursor_skills(self.target, "laravel-filament", sdd_path, kit_path)
+
+        content = (
+            self.target / ".cursor" / "skills" / "sdd-build-spec" / "SKILL.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("solo-push-dev", content)
+        self.assertIn("develop", content)
+        self.assertNotIn("{{BRANCHING_RULES}}", content)
+        self.assertNotIn("{{DEV_BRANCH}}", content)
+
+    def test_removes_global_managed_preserves_other(self) -> None:
+        sdd_path = ".github/docs/sdd"
+        kit_path = ".github/docs/sdd-kit"
+        with tempfile.TemporaryDirectory() as home_tmp:
+            fake_home = Path(home_tmp)
+            global_skills = fake_home / ".cursor" / "skills"
+            managed = global_skills / "sdd-draft-spec"
+            managed.mkdir(parents=True)
+            (managed / "SKILL.md").write_text("global stale", encoding="utf-8")
+            other = global_skills / "other-skill"
+            other.mkdir()
+            (other / "SKILL.md").write_text("keep me", encoding="utf-8")
+
+            with patch.object(ia.Path, "home", return_value=fake_home):
+                ia.install_cursor_skills(self.target, "laravel-filament", sdd_path, kit_path)
+
+            self.assertFalse(managed.exists(), "managed global debió borrarse")
+            self.assertTrue(other.is_dir())
+            self.assertEqual((other / "SKILL.md").read_text(encoding="utf-8"), "keep me")
 
     def test_install_does_not_remove_non_sdd_skills(self) -> None:
         sdd_path = ".github/docs/sdd"

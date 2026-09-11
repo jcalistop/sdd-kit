@@ -10,5 +10,7 @@
 
 ## Destino
 
-- Habitual: **`{{DEV_BRANCH}}`**
+{{BRANCHING_RULES}}
+
+- Habitual (si aplica PR): **`{{DEV_BRANCH}}`**
 - Hotfix producción: rama de producción — ver `{{SDD_PATH}}/branching.md`
