@@ -198,5 +198,6 @@ python cli/sdd.py validate
 
 ## Notas post-implementación
 
+- **Smoke manual (humano):** OK — 2026-09-10. Revisados checklists Voyager/Filament: gate Pint = `vendor/bin/pint --test`; nota `--dirty` ≠ evidencia de verify.
 - Mencionar en `docs/releases/v1.4.2.md` el breaking menor de **documentación de gate** para consumidores Laravel (comando verify local).
 - Gap #4 (tabla verify multi-stack) sigue en Discovery; no mezclar.
