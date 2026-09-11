@@ -41,7 +41,7 @@ Minor post-dogfood Centinela: (1) contrato `agent.branching_mode` + precedencia 
 | -------------- | --------------------------------------------------------- |
 | `sdd validate` | 0 errores (WARN kit-version pre-tag posible)              |
 | pytest         | `bootstrap/test_install_skills.py` + `cli/tests` verde    |
-| Tag producto   | `v1.5.0` (pendiente push `dev` / merge a main / confirmación humana) |
+| Tag producto   | `v1.5.0` en `55ff176` · [GitHub Release](https://github.com/jcalistop/sdd-kit/releases/tag/v1.5.0) |
 
 ---
 

@@ -40,8 +40,8 @@ release:
   tag_prefix: v
 
 kit:
-  installed_version: "v1.4.1"
-  installed_at: "2026-09-06"
+  installed_version: "v1.5.0"
+  installed_at: "2026-09-11"
 
 
 agent:
