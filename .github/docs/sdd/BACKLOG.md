@@ -3,7 +3,7 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-024`.
+**Próximo ID disponible:** `SDD-025`.
 
 **Versión acumulada del kit:** `v1.5.0` (ver [docs/releases/](../../../docs/releases/)).
 
@@ -17,7 +17,6 @@
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
-| core      | Draft/DoR: sección opcional «Congelado para implementación» (API, tests, lectura máx.) | patch   | Dogfood gap #3 P1; specs flojos para LLM de bajo contexto             |
 | profiles  | verify: tabla perfil → comandos obligatorios (Pint=CI, tests, `npm audit` si tocó JS) | patch   | Dogfood gap #4 P1                                                     |
 | docs      | Runbook dogfood: stub del tag no es fuente de verdad; checklist merge informe → main | patch   | Dogfood gap #5 P2                                                     |
 | bootstrap | Skills: `{{STACK_PROFILE}}` en install; no hardcodear perfil ajeno en skill global | patch   | Dogfood gap #7 P2                                                     |
@@ -39,9 +38,9 @@
 
 ## In Build
 
-| ID  | Dominio | Título | Versión | Spec |
-| --- | ------- | ------ | ------- | ---- |
-| —   | —       | —      | —       | —    |
+| ID      | Dominio | Título | Versión | Spec |
+| ------- | ------- | ------ | ------- | ---- |
+| SDD-024 | core    | Draft/DoR: sección opcional «Congelado para implementación» (API, tests, lectura máx.) | patch | [spec](specs/core/SDD-024-congelado-para-implementacion.md) |
 
 ## Validating
 

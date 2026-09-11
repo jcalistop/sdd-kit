@@ -48,6 +48,7 @@ No bloquear; alertar y documentar en Riesgos del spec.
 - [ ] [guía] Riesgos: al menos 1 fila en tabla
 - [ ] [guía] BACKLOG: fila en Draft con mismo `SDD-NNN`
 - [ ] [guía] ID no duplicado en BACKLOG ni en `specs/` / `archive/`
+- [ ] [guía] Si hay decisiones abiertas o riesgo de LLM de bajo contexto: valorar sección opcional «Congelado para implementación» (decisión única, API, tests, lista de lectura + **N** sin default, «prohibido explorar»). Si se incluye: N y lista obligatorios; si se omite: OK (no es DoR bloqueante)
 
 Si falla: completar antes de pedir revisión humana.
 

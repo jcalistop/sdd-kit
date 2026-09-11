@@ -35,6 +35,12 @@
 
 ---
 
+## Congelado para implementación _(opcional)_
+
+> Opcional. Si aplica: decisión única, API, paths de test, lista de lectura, **N** (sin default) y «prohibido explorar». Detalle en [`spec-template.md`](spec-template.md). Si se omite: sin tope de lectura.
+
+---
+
 ## Criterios de aceptación
 
 - [ ] [Criterio 1 — happy path]

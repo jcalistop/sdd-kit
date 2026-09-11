@@ -65,6 +65,21 @@ _(Insertar tabla del perfil o enlazar sección copiada aquí.)_
 
 ---
 
+## Congelado para implementación _(opcional)_
+
+> **Opcional.** Usar cuando queden decisiones abiertas o haya riesgo de LLM de bajo contexto. No es obligatoria ni la valida `validate-sdd`. Si se incluye: completar **todos** los campos (sin N por defecto de plantilla). Si se omite: no hay tope de lectura en In Build.
+
+| Campo | Valor |
+| ----- | ----- |
+| **Decisión única** | _(tecnología/enfoque sin alternativas abiertas)_ |
+| **API / contrato** | _(firma o contrato concreto)_ |
+| **Paths de test** | _(archivos o filtros acordados)_ |
+| **Lista de lectura** | _(paths que el agente sí puede abrir)_ |
+| **Lectura máx. N** | _(entero declarado por el humano; sin default)_ |
+| **Prohibido explorar** | Sí — fuera de la lista: no `grep` / `Glob` / `Read` por curiosidad |
+
+---
+
 ## Cambio de BD _(solo si incluye `db-change`)_
 
 **Contexto:**

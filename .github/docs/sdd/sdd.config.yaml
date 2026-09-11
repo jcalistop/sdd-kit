@@ -32,7 +32,7 @@ paths:
   contributing: CONTRIBUTING.md
 
 ids:
-  next_sdd: 24
+  next_sdd: 25
   next_adr: 3
 
 release:
@@ -42,6 +42,7 @@ release:
 kit:
   installed_version: "v1.5.0"
   installed_at: "2026-09-11"
+
 
 
 

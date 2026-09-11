@@ -49,7 +49,7 @@ Si el spec referencia un ADR, leer solo ese ADR.
 
 {{BRANCHING_RULES}}
 
-3. Implementar alcance del spec; quality gates del perfil `{{PROFILE}}`.
+3. Implementar alcance del spec; quality gates del perfil `{{PROFILE}}`. Si el spec incluye «Congelado para implementación»: leer solo la lista (máx. N) y no explorar fuera (guía; no sensor CI).
 4. Al terminar → verify § B + **Smoke manual (humano)**.
 
 ### Enrutamiento skills de dominio
