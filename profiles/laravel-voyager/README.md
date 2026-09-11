@@ -13,6 +13,6 @@ Extensión del SDD core para proyectos Laravel 10+ con Voyager (admin `/admin`),
 **Quality gates por defecto:**
 
 - `php artisan test --compact`
-- `vendor/bin/pint --dirty`
+- `vendor/bin/pint --test`
 - Migraciones solo en `database/migrations/`
 - Deploy: orquestador interno en servidor intranet (no auto-deploy desde GitHub)

@@ -5,7 +5,7 @@ Perfil activo cuando `sdd.config.yaml` → `stack.profile: laravel-filament`.
 ## Quality gates
 
 - Tests: `php artisan test --compact`
-- Formato: `vendor/bin/pint --dirty`
+- Formato: `vendor/bin/pint --test`
 - CI: `.github/workflows/ci.yml` en verde antes de merge
 
 ## Esquema

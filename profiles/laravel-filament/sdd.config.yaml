@@ -5,7 +5,7 @@ stack:
   ci_workflow: .github/workflows/ci.yml
   quality_gates:
     test: "php artisan test --compact"
-    format: "vendor/bin/pint --dirty"
+    format: "vendor/bin/pint --test"
   schema_changes: database/migrations
   deploy_platform: laravel-cloud
 

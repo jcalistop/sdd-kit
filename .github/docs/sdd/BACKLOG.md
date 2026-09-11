@@ -3,7 +3,7 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-022`.
+**Próximo ID disponible:** `SDD-023`.
 
 **Versión acumulada del kit:** `v1.4.1` (ver [docs/releases/](../../../docs/releases/)).
 
@@ -17,7 +17,6 @@
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
-| bootstrap | verify/checklist: Pint (u otro gate) = **mismo comando que CI** antes de open-pr | patch   | Dogfood gap #1 P0; `laravel-voyager` / verify-implementation          |
 | bootstrap | `install-agents`: precedencia instancia > global + modo branching (`solo-push-dev` \| `feature-pr-dev`) | **minor** | Dogfood gap #2 P0; skills globales chocan con `branching.md` consumidor |
 | core      | Draft/DoR: sección opcional «Congelado para implementación» (API, tests, lectura máx.) | patch   | Dogfood gap #3 P1; specs flojos para LLM de bajo contexto             |
 | profiles  | verify: tabla perfil → comandos obligatorios (Pint=CI, tests, `npm audit` si tocó JS) | patch   | Dogfood gap #4 P1                                                     |
@@ -41,9 +40,9 @@
 
 ## In Build
 
-| ID  | Dominio | Título | Versión | Spec |
-| --- | ------- | ------ | ------- | ---- |
-| —   | —       | —      | —       | —    |
+| ID      | Dominio  | Título                                       | Versión | Spec |
+| ------- | -------- | -------------------------------------------- | ------- | ---- |
+| SDD-022 | profiles | Pint local = comando CI (voyager + filament) | v1.4.2  | [specs/profiles/SDD-022-pint-parity-ci-laravel.md](specs/profiles/SDD-022-pint-parity-ci-laravel.md) |
 
 ## Validating
 

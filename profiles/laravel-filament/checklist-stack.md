@@ -7,7 +7,7 @@
 ## Calidad técnica
 
 - [ ] `php artisan test --compact` sin errores _(local y CI)_
-- [ ] `vendor/bin/pint --dirty` sin diferencias
+- [ ] `vendor/bin/pint --test` sin diferencias _(mismo comando que CI; flag `--dirty` solo ≠ evidencia de verify)_
 - [ ] Sin `dd()`, `dump()`, `var_dump()`, `ray()` en código entregado
 - [ ] CI GitHub en verde (`.github/workflows/ci.yml`)
 

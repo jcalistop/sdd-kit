@@ -110,7 +110,7 @@ Permitir que un usuario registrado solicite un enlace de restablecimiento de con
 
 ```bash
 php artisan test --compact --filter=PasswordReset
-vendor/bin/pint --dirty
+vendor/bin/pint --test
 ```
 
 ---
