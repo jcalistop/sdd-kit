@@ -44,6 +44,8 @@ kit:
   installed_at: "2026-09-11"
 
 
+
 agent:
   targets: [cursor]
   install_mode: explicit
+  branching_mode: solo-push-dev
