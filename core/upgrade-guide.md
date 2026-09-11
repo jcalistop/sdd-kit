@@ -196,6 +196,16 @@ Patch de higiene y docs/skill:
 
 Detalle: `docs/releases/v1.4.1.md` (al cerrar campaña).
 
+### v1.5.0 — Branching mode + Pint CI parity (SDD-022 / SDD-023)
+
+Minor post-dogfood:
+
+- `agent.branching_mode` en `sdd.config.yaml`: `feature-pr-dev` (default) o `solo-push-dev`. Tras declarar (o aceptar default), **reinstalar** agents para renderizar `{{BRANCHING_RULES}}` en skills build-spec/open-pr.
+- `install-agents` elimina skills `sdd-*` del manifest bajo `~/.cursor/skills` (precedencia instancia > global). Skills Boost / no managed no se tocan.
+- Perfiles `laravel-voyager` / `laravel-filament`: verify y checklist usan `vendor/bin/pint --test` (no `--dirty` como evidencia de gate).
+
+Detalle: `docs/releases/v1.5.0.md`.
+
 ---
 
 ## Prompt para el agente

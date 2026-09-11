@@ -7,6 +7,26 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [1.5.0] - 2026-09-10
+
+Ver [v1.5.0.md](v1.5.0.md).
+
+### Añadido
+
+- `agent.branching_mode` (`feature-pr-dev` \| `solo-push-dev`) + `{{BRANCHING_RULES}}` en skills build-spec/open-pr — SDD-023
+- Limpieza de skills managed en `~/.cursor/skills` al instalar (precedencia instancia > global) — SDD-023
+
+### Cambiado
+
+- Perfiles Laravel Voyager/Filament: gate Pint verify/checklist = `vendor/bin/pint --test` — SDD-022
+- Skill `sdd-verify-implementation`: ejecutar `quality_gates` literales del perfil — SDD-022
+
+### Docs
+
+- Dogfood consumidor externo Centinela cerrado (informe + gaps); gaps #1–2 cerrados en producto
+
+---
+
 ## [1.4.1] - 2026-09-06
 
 Ver [v1.4.1.md](v1.4.1.md).

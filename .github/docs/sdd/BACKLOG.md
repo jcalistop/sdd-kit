@@ -5,15 +5,15 @@
 
 **Próximo ID disponible:** `SDD-024`.
 
-**Versión acumulada del kit:** `v1.4.1` (ver [docs/releases/](../../../docs/releases/)).
+**Versión acumulada del kit:** `v1.5.0` (ver [docs/releases/](../../../docs/releases/)).
 
 ---
 
 ## Discovery
 
-> **Versión (recomendación SemVer):** bump de producto kit al cerrar la iniciativa, desde `v1.4.1`. Criterio auditoría: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores (ninguna fila actual); **—** = no define release del kit por sí sola.
+> **Versión (recomendación SemVer):** bump de producto kit al cerrar la iniciativa, desde `v1.5.0`. Criterio auditoría: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores (ninguna fila actual); **—** = no define release del kit por sí sola.
 >
-> Dogfood externo **cerrado** (2026-09-10): [plan](audits/20260906-dogfood-consumidor-externo.md) · [informe](audits/20260906-dogfood-consumidor-externo-informe.md) (`minsal-centinela` / `v1.4.1`). Gaps abajo.
+> Dogfood externo **cerrado** (2026-09-10): [plan](audits/20260906-dogfood-consumidor-externo.md) · [informe](audits/20260906-dogfood-consumidor-externo-informe.md) (`minsal-centinela` / `v1.4.1`). Gaps abajo (restantes).
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
@@ -39,10 +39,9 @@
 
 ## In Build
 
-| ID      | Dominio   | Título                                                           | Versión | Spec |
-| ------- | --------- | ---------------------------------------------------------------- | ------- | ---- |
-| SDD-023 | bootstrap | install-agents: branching mode + precedencia instancia > global  | v1.5.0  | [specs/bootstrap/SDD-023-install-agents-branching-precedencia.md](specs/bootstrap/SDD-023-install-agents-branching-precedencia.md) |
-| SDD-022 | profiles  | Pint local = comando CI (voyager + filament)                     | v1.4.2  | [specs/profiles/SDD-022-pint-parity-ci-laravel.md](specs/profiles/SDD-022-pint-parity-ci-laravel.md) |
+| ID  | Dominio | Título | Versión | Spec |
+| --- | ------- | ------ | ------- | ---- |
+| —   | —       | —      | —       | —    |
 
 ## Validating
 
@@ -56,6 +55,8 @@
 
 | ID      | Dominio   | Título                                                                                            | Versión | Fecha      | Spec archivado                                                                                                                             |
 | ------- | --------- | ------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| SDD-023 | bootstrap | install-agents: branching mode + precedencia instancia > global                                   | v1.5.0  | 2026-09-10 | [archive/2026/bootstrap/SDD-023-install-agents-branching-precedencia.md](archive/2026/bootstrap/SDD-023-install-agents-branching-precedencia.md) |
+| SDD-022 | profiles  | Pint local = comando CI (voyager + filament)                                                      | v1.5.0  | 2026-09-10 | [archive/2026/profiles/SDD-022-pint-parity-ci-laravel.md](archive/2026/profiles/SDD-022-pint-parity-ci-laravel.md) |
 | SDD-021 | docs      | Índice artefactos paths.sdd (audits/research) + banner ANALYSIS                                   | v1.4.1  | 2026-09-06 | [archive/2026/docs/SDD-021-indice-audits-research-banner-analysis.md](archive/2026/docs/SDD-021-indice-audits-research-banner-analysis.md) |
 | SDD-020 | bootstrap | Upgrade / paridad multi-agente (wording, targets, safe-git doc)                                   | v1.4.1  | 2026-09-06 | [archive/2026/bootstrap/SDD-020-upgrade-paridad-multi-agente.md](archive/2026/bootstrap/SDD-020-upgrade-paridad-multi-agente.md)           |
 | SDD-019 | infra     | CI: `sdd validate` y gatillo en rama `dev`                                                        | v1.4.1  | 2026-09-06 | [archive/2026/infra/SDD-019-ci-validate-sdd-rama-dev.md](archive/2026/infra/SDD-019-ci-validate-sdd-rama-dev.md)                           |

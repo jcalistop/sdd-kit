@@ -1,6 +1,6 @@
 # SDD-022 — Pint local = comando CI (Voyager + Filament)
 
-> Spec In Build. Al cerrar: `git mv` a `archive/<YYYY>/profiles/`.
+> Spec Released. Archivado en `archive/2026/profiles/`.
 
 ---
 
@@ -12,8 +12,8 @@
 | **Dominio**           | `profiles`   |
 | **Tipo**              | `bugfix`    |
 | **Fecha**             | 2026-09-10   |
-| **Estado**            | `In Build`   |
-| **Versión objetivo**  | `v1.4.2`     |
+| **Estado**            | `Released`   |
+| **Versión objetivo**  | `v1.5.0`     |
 | **Owner**             | mantenedor   |
 | **Prioridad**         | `P0`         |
 | **ADRs relacionados** | —            |

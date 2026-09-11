@@ -1,6 +1,6 @@
 # SDD-023 — install-agents: branching mode + precedencia instancia > global
 
-> Spec In Build. Al cerrar: `git mv` a `archive/<YYYY>/bootstrap/`.
+> Spec Released. Archivado en `archive/2026/bootstrap/`.
 
 ---
 
@@ -12,7 +12,7 @@
 | **Dominio**           | `bootstrap`  |
 | **Tipo**              | `feature`    |
 | **Fecha**             | 2026-09-10   |
-| **Estado**            | `In Build`   |
+| **Estado**            | `Released`   |
 | **Versión objetivo**  | `v1.5.0`     |
 | **Owner**             | mantenedor   |
 | **Prioridad**         | `P0`         |
