@@ -19,7 +19,7 @@ Si verify ya falló 3 veces en esta sesión → **STOP**. Reportar criterios fal
 
 ## Checklist (sensores)
 
-- [ ] [sensor] Quality gates del perfil en verde (local): ejecutar **comandos literales** de `stack.quality_gates` en `sdd.config.yaml` del proyecto (o checklist-stack del perfil). El gate de formato Laravel es `format` (tras SDD-022: `vendor/bin/pint --test`). `pint --dirty` ≠ evidencia de verify/open-pr.
+- [ ] [sensor] Quality gates del perfil en verde (local): ejecutar la tabla **«Verify — comandos obligatorios»** del `checklist-stack.md` del perfil activo (`stack.profile`). Incluye literales de `quality_gates`, tests filtrados si aplica y condicionales (p. ej. audit de dependencias JS si el diff tocó `package.json` / lockfile / assets JS). Atajos de autofix de formato ≠ evidencia de verify/open-pr.
 - [ ] [sensor] Criterios de aceptación del spec verificados (happy + error) con evidencia
 - [ ] [sensor] Reglas de `domain-rules.md` verificadas (o No aplica documentado)
 - [ ] [sensor] Arquitectura sana — checks: YAGNI, DRY, SRP, sin debug (`dd()`, `dump()`), sin over-engineering
@@ -32,7 +32,7 @@ Si falla: **no** `push` ni PR. Corregir o documentar deuda con acuerdo humano.
 1. Leer spec, `domain-rules.md`.
 2. Criterios → evidencia; arquitectura sana.
 3. `python {{KIT_PATH}}/cli/sdd.py validate`
-4. Quality gates: comandos literales de `stack.quality_gates` / checklist del perfil si hubo cambios de producto en el working tree.
+4. Quality gates: tabla **Verify** del `checklist-stack` del perfil activo (no improvisar comandos).
 5. Reporte + **Smoke manual (humano)**.
 
 Si verify OK: preguntar commit → `sdd-open-pr`.

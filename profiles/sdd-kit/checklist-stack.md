@@ -4,6 +4,22 @@
 
 ---
 
+## Verify — comandos obligatorios
+
+> Gate local antes de open-pr / evidencia de `verify-implementation`. Ejecutar literales de `stack.quality_gates` según lo tocado.
+
+| Gate | Cuándo | Comando |
+| ---- | ------ | ------- |
+| compile | Siempre (si se tocó `cli/`) | `python -m compileall -q cli/` |
+| pytest | Siempre (si se tocó `cli/`) | `python -m pytest cli/tests -q` |
+| manifest | Siempre (si se tocó bootstrap prompts/skills) | validar JSON de `bootstrap/agent-prompts/manifest.json` (y skills si aplica) |
+| profiles | Siempre (si se tocó `profiles/`) | verificación archivos obligatorios por perfil (CI) |
+| validate_sdd | Siempre (si se tocó docs SDD / BACKLOG / specs) | `python cli/sdd.py validate` |
+| Tests (alcance) | Preferir filtro al alcance del spec si el tooling lo permite; si no, suite del gate | p. ej. `python -m pytest cli/tests/test_foo.py -q` |
+| Condicional JS | — | No aplica |
+
+---
+
 ## Calidad técnica
 
 - [ ] `python -m compileall -q cli/` sin errores

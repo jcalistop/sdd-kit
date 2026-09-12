@@ -4,6 +4,19 @@
 
 ---
 
+## Verify — comandos obligatorios
+
+> Gate local antes de open-pr / evidencia de `verify-implementation`. Ejecutar literales; no sustituir por atajos de autofix.
+
+| Gate | Cuándo | Comando |
+| ---- | ------ | ------- |
+| test | Siempre | `php artisan test --compact` |
+| format | Siempre | `vendor/bin/pint --test` _(mismo que CI; `pint --dirty` ≠ evidencia de verify)_ |
+| Tests (alcance) | Preferir filtro al alcance del spec si el tooling lo permite; si no, suite del gate | p. ej. `php artisan test --compact --filter=…` o paths del spec |
+| Condicional JS | Si el diff tocó `package.json`, lockfile o assets JS del front | `npm audit` |
+
+---
+
 ## Calidad técnica
 
 - [ ] `php artisan test --compact` sin errores _(local y CI)_

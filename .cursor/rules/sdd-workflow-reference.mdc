@@ -63,7 +63,7 @@ Si falla: completar antes de pedir revisión humana.
 
 Gate obligatorio en **In Build**, antes de commit de entrega, `push` o PR. Prompt: `verify-implementation`.
 
-- [ ] [sensor] Quality gates del perfil en verde (local)
+- [ ] [sensor] Quality gates del perfil en verde (local): ejecutar la tabla **«Verify — comandos obligatorios»** del `checklist-stack.md` del perfil activo (literales + condicionales documentados; atajos de autofix ≠ evidencia)
 - [ ] [sensor] Criterios de aceptación del spec verificados (happy + error) con evidencia
 - [ ] [sensor] Reglas de `domain-rules.md` verificadas (o No aplica documentado)
 - [ ] [sensor] Checklist de arquitectura sana (sección siguiente) sin bloqueantes

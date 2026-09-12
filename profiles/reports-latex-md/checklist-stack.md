@@ -4,6 +4,21 @@
 
 ---
 
+## Verify — comandos obligatorios
+
+> Gate local antes de open-pr / evidencia de `verify-implementation`. Ejecutar literales de `stack.quality_gates` según lo tocado por el spec.
+
+| Gate | Cuándo | Comando |
+| ---- | ------ | ------- |
+| markdown_lint | Siempre (si hay Markdown tocado) | `markdownlint "content/**/*.md"` |
+| pandoc_pdf | Siempre (si el spec exige PDF vía pandoc) | `pandoc content/manuscript.md -o output/manuscript.pdf` |
+| latex_build | Siempre (si el spec exige LaTeX) | `latexmk -pdf content/manuscript.tex` |
+| scripts | Siempre (si se tocaron scripts) | `python -m pytest scripts/tests/ -q` |
+| Tests (alcance) | Preferir filtro al alcance del spec si el tooling lo permite; si no, suite del gate | p. ej. `python -m pytest scripts/tests/test_foo.py -q` |
+| Condicional JS | — | No aplica |
+
+---
+
 ## Compilación y formato
 
 - [ ] Manuscrito principal compila a PDF sin errores (`pandoc` o `latexmk`)
