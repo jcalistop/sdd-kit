@@ -60,6 +60,8 @@ Validar en un proyecto **fuera** de `sdd-kit` que el ciclo SDD + upgrade/adaptad
 - Filas Discovery o SDD si hay gaps de producto.
 - Actualizar [README.md](../README.md) tabla Audits si hace falta.
 
+> **Reuso (SDD-026):** para corridas nuevas, partir de [METODOLOGIA.md](METODOLOGIA.md) y la plantilla de **registro** (`core/templates/audit-registro-template.md`). En el modelo actual, un dogfood típico es **un solo registro** (no plan+informe dual). Este par histórico se conserva; no migrar.
+
 ### 5. Criterio de cierre
 - Ciclo Draft→verify (y PR) completado sin bloqueos del kit, **o** bloqueos documentados con follow-ups.
 - Informe con OK/FAIL por paso.
@@ -68,6 +70,7 @@ Validar en un proyecto **fuera** de `sdd-kit` que el ciclo SDD + upgrade/adaptad
 
 ## Referencias
 
+- Metodología audits: [METODOLOGIA.md](METODOLOGIA.md)
 - Informe auditoría general: [20260905-1202-auditoria-general-kit-informe.md](20260905-1202-auditoria-general-kit-informe.md)
 - Nota producto: [`docs/releases/v1.4.1.md`](../../../../docs/releases/v1.4.1.md)
-- BACKLOG Discovery (fila docs, SemVer —)
+- BACKLOG Discovery (gaps restantes / research)

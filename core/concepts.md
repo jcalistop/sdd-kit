@@ -109,5 +109,7 @@ Ambas usan los mismos estados (Discovery → Released) y el mismo BACKLOG. No so
 | [`healthy-development.md`](healthy-development.md)                               | Arquitectura, patrones, codigo limpio (humanos y agentes)  |
 | [`templates/spec-template.md`](templates/spec-template.md)                       | Plantilla completa de spec (tecnica)                       |
 | [`templates/spec-simple-template.md`](templates/spec-simple-template.md)         | Plantilla reducida (no tecnica / iniciacion)               |
+| [`templates/audit-registro-template.md`](templates/audit-registro-template.md)   | Registro de auditoría (default por corrida)                |
+| [`templates/audit-plan-template.md`](templates/audit-plan-template.md)           | Plan de auditoría (solo corridas grandes / freeze)         |
 | [`examples/SDD-001-evento-no-tecnico.md`](examples/SDD-001-evento-no-tecnico.md) | Ejemplo de spec con plantilla simple                       |
 | [`../profiles/reports-latex-md/`](../profiles/reports-latex-md/README.md)        | Perfil informes LaTeX/Markdown, transcripcion, publicacion |

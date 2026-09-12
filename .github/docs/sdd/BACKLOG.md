@@ -3,7 +3,7 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-026`.
+**Próximo ID disponible:** `SDD-027`.
 
 **Versión acumulada del kit:** `v1.5.0` (ver [docs/releases/](../../../docs/releases/)).
 
@@ -17,7 +17,7 @@
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
-| docs      | Runbook dogfood: stub del tag no es fuente de verdad; checklist merge informe → main | patch   | Dogfood gap #5 P2                                                     |
+| docs      | Metodología research: guía + plantilla de nota (distinta de audits)              | patch   | Pareja de SDD-026; ver índice README audits vs research               |
 | bootstrap | Skills: `{{STACK_PROFILE}}` en install; no hardcodear perfil ajeno en skill global | patch   | Dogfood gap #7 P2                                                     |
 | bootstrap | build-spec fail-closed: no Ready/In Build sin frase humana si hay Plan mode / «te guío» | patch   | Dogfood gap #6 P2                                                     |
 
@@ -39,6 +39,7 @@
 
 | ID      | Dominio  | Título | Versión | Spec |
 | ------- | -------- | ------ | ------- | ---- |
+| SDD-026 | docs     | Metodología auditorías: registro default; plan solo si grande | patch | [spec](specs/docs/SDD-026-metodologia-auditorias-plantillas.md) |
 | SDD-024 | core     | Draft/DoR: sección opcional «Congelado para implementación» (API, tests, lectura máx.) | patch | [spec](specs/core/SDD-024-congelado-para-implementacion.md) |
 | SDD-025 | profiles | Verify: tabla perfil → comandos obligatorios (Pint=CI, tests, `npm audit` si tocó JS) | patch | [spec](specs/profiles/SDD-025-verify-tabla-comandos-perfil.md) |
 
