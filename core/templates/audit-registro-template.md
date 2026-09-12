@@ -1,7 +1,7 @@
 # Plantilla — Registro de auditoría
 
 > **Default** para toda corrida. Copiar a `paths.sdd/audits/YYYYMMDD-slug.md`.
-> Metodología: instancia SDD → `audits/METODOLOGIA.md` (repo kit) o equivalente.
+> Metodología: [`core/guides/audits.md`](../guides/audits.md). Copiar a `paths.sdd/audits/YYYYMMDD-slug.md`.
 > Agnóstica al stack (sin frameworks concretos).
 
 ---

@@ -111,5 +111,7 @@ Ambas usan los mismos estados (Discovery → Released) y el mismo BACKLOG. No so
 | [`templates/spec-simple-template.md`](templates/spec-simple-template.md)         | Plantilla reducida (no tecnica / iniciacion)               |
 | [`templates/audit-registro-template.md`](templates/audit-registro-template.md)   | Registro de auditoría (default por corrida)                |
 | [`templates/audit-plan-template.md`](templates/audit-plan-template.md)           | Plan de auditoría (solo corridas grandes / freeze)         |
+| [`templates/research-nota-template.md`](templates/research-nota-template.md)     | Nota de research (default; ensayo largo opcional)          |
+| [`guides/`](guides/README.md)                                                    | Metodologías opcionales audits + research                  |
 | [`examples/SDD-001-evento-no-tecnico.md`](examples/SDD-001-evento-no-tecnico.md) | Ejemplo de spec con plantilla simple                       |
 | [`../profiles/reports-latex-md/`](../profiles/reports-latex-md/README.md)        | Perfil informes LaTeX/Markdown, transcripcion, publicacion |

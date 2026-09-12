@@ -15,8 +15,8 @@
 | [archive/](archive/) | Specs Released o Descartado |
 | [releases/](releases/) | Actas de campaña SDD (`vX.Y.Z/`) |
 | [adr/](adr/) | Decisiones arquitectónicas del proceso kit |
-| [audits/](audits/) | Auditorías versionadas: evalúan el kit/proceso **hoy**, con evidencias y gaps → BACKLOG. Guía: [audits/METODOLOGIA.md](audits/METODOLOGIA.md) |
-| [research/](research/) | Notas de investigación: exploran ideas/marcos; **no** son tablero ni spec |
+| [audits/](audits/) | Auditorías versionadas: evalúan el kit/proceso **hoy**, con evidencias y gaps → BACKLOG. Stub: [audits/README.md](audits/README.md) · SoT: [`core/guides/audits.md`](../../../core/guides/audits.md) |
+| [research/](research/) | Notas de investigación: exploran ideas/marcos; **no** son tablero ni spec. Stub: [research/README.md](research/README.md) · SoT: [`core/guides/research.md`](../../../core/guides/research.md) |
 
 ### Audits vs research
 
@@ -25,7 +25,7 @@
 | Pregunta | ¿Está sano y qué hay que arreglar? | ¿Qué aprendimos o qué marco adoptamos? |
 | Forma | Corrida con alcance, evidencias, cierre | Nota / ensayo |
 | Tablero | Alimenta Discovery / specs | No es cola operativa (puede orientar un ADR) |
-| Metodología | [audits/METODOLOGIA.md](audits/METODOLOGIA.md) · plantillas [`audit-registro`](../../../core/templates/audit-registro-template.md) / [`audit-plan`](../../../core/templates/audit-plan-template.md) (solo grandes) | Discovery: guía + plantilla (fila en BACKLOG) |
+| Metodología | [`core/guides/audits.md`](../../../core/guides/audits.md) · stub [audits/README.md](audits/README.md) · plantillas [`audit-registro`](../../../core/templates/audit-registro-template.md) / [`audit-plan`](../../../core/templates/audit-plan-template.md) (solo grandes) | [`core/guides/research.md`](../../../core/guides/research.md) · stub [research/README.md](research/README.md) · plantilla [`research-nota`](../../../core/templates/research-nota-template.md) |
 
 ### Audits actuales
 

@@ -1,7 +1,7 @@
 # Plantilla — Plan de auditoría (solo grandes)
 
 > **Opcional.** Usar solo si la auditoría es grande o el alcance debe congelarse/aprobarse **antes** de ejecutar.
-> Corridas cortas (p. ej. dogfood): usar solo [`audit-registro-template.md`](audit-registro-template.md).
+> Metodología: [`core/guides/audits.md`](../guides/audits.md). Corridas cortas: solo [`audit-registro-template.md`](audit-registro-template.md).
 > Copiar a `paths.sdd/audits/YYYYMMDD-slug.md` y enlazar el registro/informe hermano.
 > Agnóstica al stack (sin frameworks concretos).
 

@@ -3,7 +3,7 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-027`.
+**Próximo ID disponible:** `SDD-029`.
 
 **Versión acumulada del kit:** `v1.5.0` (ver [docs/releases/](../../../docs/releases/)).
 
@@ -17,7 +17,8 @@
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
-| docs      | Metodología research: guía + plantilla de nota (distinta de audits)              | patch   | Pareja de SDD-026; ver índice README audits vs research               |
+| docs      | Reestructurar `README.md` raíz: reflejar v1.3–v1.5 (harness, safe-git, dual-release, audits/research, skills, CI validate) y rutas actuales | patch   | Tras SDD-026/027/028 y move `core/guides/`; no big rewrite de contenido |
+| core      | Reordenar guías de raíz `core/` → `core/guides/` (adoption, upgrade, healthy-development, operations, branching, …); dejar contratos/entrada en raíz | patch   | Post SDD-028; no big rewrite en el mismo PR                           |
 | bootstrap | Skills: `{{STACK_PROFILE}}` en install; no hardcodear perfil ajeno en skill global | patch   | Dogfood gap #7 P2                                                     |
 | bootstrap | build-spec fail-closed: no Ready/In Build sin frase humana si hay Plan mode / «te guío» | patch   | Dogfood gap #6 P2                                                     |
 
@@ -39,6 +40,8 @@
 
 | ID      | Dominio  | Título | Versión | Spec |
 | ------- | -------- | ------ | ------- | ---- |
+| SDD-028 | core     | Guías audits + research en `core/guides/` (stubs en instancia) | patch | [spec](specs/core/SDD-028-guides-audits-research-core.md) |
+| SDD-027 | docs     | Metodología research: guía + plantilla de nota (distinta de audits) | patch | [spec](specs/docs/SDD-027-metodologia-research-plantilla.md) |
 | SDD-026 | docs     | Metodología auditorías: registro default; plan solo si grande | patch | [spec](specs/docs/SDD-026-metodologia-auditorias-plantillas.md) |
 | SDD-024 | core     | Draft/DoR: sección opcional «Congelado para implementación» (API, tests, lectura máx.) | patch | [spec](specs/core/SDD-024-congelado-para-implementacion.md) |
 | SDD-025 | profiles | Verify: tabla perfil → comandos obligatorios (Pint=CI, tests, `npm audit` si tocó JS) | patch | [spec](specs/profiles/SDD-025-verify-tabla-comandos-perfil.md) |

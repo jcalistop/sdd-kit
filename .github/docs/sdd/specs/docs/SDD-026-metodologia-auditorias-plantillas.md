@@ -37,7 +37,7 @@ Publicar una **metodología corta** (guía reutilizable, no plan de una corrida)
 
 **Incluye:**
 
-1. **Metodología (guía)** bajo `.github/docs/sdd/audits/` (p. ej. `audits/README.md` o `audits/METODOLOGIA.md`) — **no** llamarla runbook de release ni “plan” de corrida:
+1. **Metodología (guía)** bajo `.github/docs/sdd/audits/README.md` — **no** llamarla runbook de release ni “plan” de corrida:
    - **Audits vs research** (declarar en la guía y alinear con el índice): audit = evaluar estado y gaps accionables → BACKLOG; research = explorar ideas/marcos, no es tablero ni spec (metodología research = otro ítem Discovery).
    - Cuándo auditoría vs spec SDD (operativa; gaps → Discovery/SDD).
    - **Default:** un **registro** por corrida (un archivo) con secciones alcance/método + resultados + gaps + cierre.
@@ -129,7 +129,7 @@ No aplica.
 
 | Archivo | Cambio |
 | ------- | ------ |
-| `.github/docs/sdd/audits/README.md` o `METODOLOGIA.md` | Guía: default registro; plan solo si grande; stub ≠ SoT; cierre |
+| `.github/docs/sdd/audits/README.md` | Guía: default registro; plan solo si grande; stub ≠ SoT; cierre |
 | `core/templates/audit-registro-template.md` | Plantilla default |
 | `core/templates/audit-plan-template.md` | Plantilla opcional (grandes) |
 | `.github/docs/sdd/README.md` | Índice |
@@ -170,6 +170,7 @@ python cli/sdd.py validate
 
 - Origen gap #5: [informe dogfood](../../audits/20260906-dogfood-consumidor-externo-informe.md).
 - Iteración 2026-09-12: default un registro; plan separado solo auditorías grandes; frontera audits vs research; research → Discovery aparte.
-- **2026-09-12 (In Build):** `audits/METODOLOGIA.md` + plantillas registro/plan + índice + nota Centinela + filas en `core/concepts.md`.
+- **2026-09-12 (In Build):** `audits/README.md` (antes `METODOLOGIA.md`) + plantillas registro/plan + índice + nota Centinela + filas en `core/concepts.md`.
+- **2026-09-12 (SDD-028):** SoT metodología → [`core/guides/audits.md`](../../../../core/guides/audits.md); `audits/README.md` queda stub de instancia.
 - **Smoke manual (2026-09-12):** humano confirmó OK — metodología (default vs plan grande), plantilla registro suficiente para corrida corta, enlaces del índice README.
 - Ejemplos de referencia (no migrar): `20260905-…` (grande / dual de facto) y `20260906-…` (corta / debería ser un registro en el modelo nuevo).

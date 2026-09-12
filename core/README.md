@@ -12,6 +12,7 @@ Documentación **agnóstica al stack**. No editar con referencias a frameworks c
 | [checklist-pr.md](checklist-pr.md)                             | DoD de trazabilidad y release (común a todos los stacks)                |
 | [healthy-development.md](healthy-development.md)               | Arquitectura, patrones, antipatrones, codigo limpio (humanos y agentes) |
 | [templates/](templates/)                                       | Plantillas spec, ADR, PR, release, BACKLOG, dominio                     |
+| [guides/](guides/)                                             | Metodologías opcionales: audits, research                               |
 | [templates/profile-template.md](templates/profile-template.md) | Guía para crear perfiles de nuevos stacks                               |
 | [releases/RUNBOOK.md](releases/RUNBOOK.md)                     | Fases 0 → tag → sync; deploy según perfil                               |
 
