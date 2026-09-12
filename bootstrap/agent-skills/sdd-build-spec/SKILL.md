@@ -28,7 +28,7 @@ Si el spec referencia un ADR, leer solo ese ADR.
 | BACKLOG           | `{{SDD_PATH}}/BACKLOG.md`                   |
 | Config            | `{{SDD_PATH}}/sdd.config.yaml`              |
 | Reglas de negocio | `{{SDD_PATH}}/../business/domain-rules.md`  |
-| Ramas             | `{{SDD_PATH}}/branching.md`                 |
+| Ramas             | `{{SDD_PATH}}/guides/branching.md`                 |
 | Verificación      | `.cursor/rules/sdd-workflow-reference.mdc`  |
 | Perfil stack      | `.cursor/rules/sdd-stack-{{PROFILE}}.mdc`   |
 

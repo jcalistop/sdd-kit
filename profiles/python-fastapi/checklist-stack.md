@@ -1,6 +1,6 @@
 # Checklist de PR — Python + FastAPI (stack)
 
-> Complementa [`../../core/checklist-pr.md`](../../core/checklist-pr.md). Marcar en cada PR junto con el checklist core.
+> Complementa [`../../core/guides/checklist-pr.md`](../../core/guides/checklist-pr.md). Marcar en cada PR junto con el checklist core.
 
 ---
 

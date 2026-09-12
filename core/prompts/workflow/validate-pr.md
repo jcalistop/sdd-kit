@@ -10,7 +10,7 @@ prerequisites:
   - Spec SDD-NNN vinculado
 related:
   - workflow.md#definition-of-done-dod--proceso
-  - checklist-pr.md
+  - guides/checklist-pr.md
 tags: [pr, dod, review]
 human_approval: true
 ---
@@ -31,7 +31,7 @@ Antes de mergear, quieres que el agente verifique DoD y presente evidencia para 
 Valida el PR del spec <SDD-NNN> contra Definition of Done.
 
 Instrucciones:
-1. Lee el PR, specs/<dominio>/SDD-NNN-*.md y checklist-pr.md + perfil stack.
+1. Lee el PR, specs/<dominio>/SDD-NNN-*.md y guides/checklist-pr.md + perfil stack.
 2. Verifica quality gates, criterios de aceptación, trazabilidad y reglas de domain-rules.md.
 3. Lista ítems pendientes numerados.
 4. NO hacer merge sin mi autorización explícita.

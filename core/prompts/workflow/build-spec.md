@@ -10,7 +10,7 @@ prerequisites:
 related:
   - workflow.md#ready
   - workflow.md#in-build
-  - healthy-development.md
+  - guides/healthy-development.md
 tags: [spec, approval, implementation]
 human_approval: true
 deprecated_aliases:
@@ -40,7 +40,7 @@ Apruebo e implementa el spec <SDD-NNN> según sdd-agent-workflow.
 
 Instrucciones:
 1. Si el spec está en Draft: actualiza a Ready (aprobación recibida) y luego In Build en spec y BACKLOG.
-2. Crea rama local según branching.md y perfil stack.
+2. Crea rama local según guides/branching.md y perfil stack.
 3. Implementa solo el alcance del spec; cambios fuera de alcance → actualizar spec primero.
 4. Ejecuta quality gates del perfil en local.
 5. NO hacer push ni abrir PR. Al terminar, indica que sigue verify-implementation.

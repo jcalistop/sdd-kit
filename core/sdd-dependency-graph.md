@@ -20,7 +20,7 @@
 | `sdd-draft-spec` | `BACKLOG.md`, `sdd.config.yaml`, `domain-rules.md`, `spec-template.md` (o `spec-compact-template.md`) | ADR relacionados, `research/` pertinente | 3-5k |
 | `sdd-build-spec` | Spec del SDD-NNN, `domain-rules.md`, `.cursor/rules/sdd-stack-<profile>.mdc` | ADR referenciados en el spec, `research/` pertinente | 4-8k |
 | `sdd-verify-implementation` | Spec del SDD-NNN (solo criterios de aceptación), `domain-rules.md` | `.cursor/rules/sdd-stack-<profile>.mdc` | 2-4k |
-| `sdd-open-pr` | Spec del SDD-NNN (solo cabecera), `BACKLOG.md`, `checklist-pr.md` | — | 1-2k |
+| `sdd-open-pr` | Spec del SDD-NNN (solo cabecera), `BACKLOG.md`, `guides/checklist-pr.md` | — | 1-2k |
 | `sdd-close-release` | `BACKLOG.md`, specs a archivar (solo cabeceras), `sdd.config.yaml`, `releases/RUNBOOK.md` | — | 2-3k |
 | `sdd-upgrade-kit` | `sdd.config.yaml`, `UPGRADE-LOG.md` | — | 1-2k |
 

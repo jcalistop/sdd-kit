@@ -8,7 +8,7 @@ when: Documentación previa fuera de business/; Etapa 3 de adopción
 prerequisites:
   - Instancia SDD activa (Etapa 2+)
 related:
-  - adoption-guide.md#etapa-3
+  - guides/adoption-guide.md#etapa-3
 tags: [migration, documentation]
 human_approval: true
 ---
@@ -32,7 +32,7 @@ Migra documentación legacy al contexto SDD en business/.
 Fuentes: <RUTAS_EN_REPO_O_URLS_O_DESCRIPCION>
 
 Instrucciones:
-1. Lee adoption-guide.md Etapa 3 y templates/business-domain-template.md.
+1. Lee guides/adoption-guide.md Etapa 3 y templates/business-domain-template.md.
 2. Inventaria qué hay en las fuentes (roles, reglas, glosario).
 3. Propone actualización de business/README.md y business/domain-rules.md.
 4. NO eliminar fuentes originales sin confirmación.
@@ -47,4 +47,4 @@ Revisa propuesta y aprueba escritura. Valida con `sdd validate`.
 
 ## Ver también
 
-- [`adoption-guide.md`](../../adoption-guide.md) — Etapa 3
+- [`guides/adoption-guide.md`](../../guides/adoption-guide.md) — Etapa 3

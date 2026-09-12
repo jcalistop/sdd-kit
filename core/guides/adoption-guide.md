@@ -3,9 +3,9 @@
 > Como introducir SDD en proyectos **nuevos** o **existentes** sin detener el desarrollo.
 > Pensado para equipos de 1 persona con desarrollo asistido por agente de IA.
 >
-> **Primera vez con SDD?** Empieza por [`concepts.md`](concepts.md) (5 min) y vuelve aqui.
+> **Primera vez con SDD?** Empieza por [`concepts.md`](../concepts.md) (5 min) y vuelve aqui.
 
-**Relacionado:** [`concepts.md`](concepts.md) · [`workflow.md`](workflow.md) · [`operations.md`](operations.md) · [`.github/docs/business/planning/ROADMAP.md`](../.github/docs/business/planning/ROADMAP.md)
+**Relacionado:** [`concepts.md`](../concepts.md) · [`workflow.md`](../workflow.md) · [`operations.md`](operations.md) · [`.github/docs/business/planning/ROADMAP.md`](../../.github/docs/business/planning/ROADMAP.md)
 
 ---
 
@@ -40,7 +40,7 @@ git submodule add https://github.com/jcalistop/sdd-kit.git sdd-kit
 .\sdd-kit\bootstrap\init-sdd.ps1 -Profile laravel-filament -Project "Mi App"
 ```
 
-**Proyecto existente:** delegar al agente con el prompt `adopt-existing` del [catalogo de prompts](prompt-catalog.md) (`sdd prompt show adopt-existing`). El agente ejecuta `init-sdd` solo si no hay instancia SDD, lee documentacion previa y **no sobrescribe** archivos sin aprobacion.
+**Proyecto existente:** delegar al agente con el prompt `adopt-existing` del [catalogo de prompts](../prompt-catalog.md) (`sdd prompt show adopt-existing`). El agente ejecuta `init-sdd` solo si no hay instancia SDD, lee documentacion previa y **no sobrescribe** archivos sin aprobacion.
 
 Por defecto se detecta el agente/IDE e instalan instrucciones (Cursor, Claude Code, Codex o Copilot). Ver [`agent-setup.md`](agent-setup.md).
 
@@ -59,7 +59,7 @@ Por defecto se detecta el agente/IDE e instalan instrucciones (Cursor, Claude Co
 5. **Inventariar el BACKLOG** — no crear specs retrospectivos:
     - Listar 3–10 capacidades ya existentes en _Released_ con ID `—` y nota "pre-SDD".
     - Agregar 3–5 iniciativas reales como `Discovery` (lo que viene ahora).
-6. **Validar:** `.\sdd-kit\bootstrap\validate-sdd.ps1` (o `.sh`) debe pasar sin errores criticos. Prompt: `validate-setup` en [prompt-catalog.md](prompt-catalog.md).
+6. **Validar:** `.\sdd-kit\bootstrap\validate-sdd.ps1` (o `.sh`) debe pasar sin errores criticos. Prompt: `validate-setup` en [prompt-catalog.md](../prompt-catalog.md).
 
 ### Que NO hacer en Etapa 1
 
@@ -86,7 +86,7 @@ Cuando el repositorio **sdd-kit** publica una version nueva, la instancia local 
 | ---- | ----------------------------------------------------------------------------------------------------- |
 | 1    | Leer [`upgrade-guide.md`](upgrade-guide.md) y changelog en `sdd-kit/docs/releases/`                   |
 | 2    | Revisar `kit.installed_version` en `sdd.config.yaml`                                                  |
-| 3    | Prompt `upgrade-kit` en [prompt-catalog.md](prompt-catalog.md) o `sdd prompt show upgrade-kit --full` |
+| 3    | Prompt `upgrade-kit` en [prompt-catalog.md](../prompt-catalog.md) o `sdd prompt show upgrade-kit --full` |
 | 4    | Tras merge y `validate-sdd`, actualizar `UPGRADE-LOG.md` y `kit.installed_version`                    |
 
 No re-ejecutar `init-sdd` para actualizar — riesgo de pisar customizaciones. Ver exclusiones en upgrade-guide.
@@ -121,12 +121,12 @@ El agente necesita reglas explicitas en `business/domain-rules.md` para no inven
 ### Sesion guiada (humano + agente)
 
 1. El humano describe el sistema en lenguaje natural.
-2. El agente hace las preguntas de [`templates/business-domain-template.md`](templates/business-domain-template.md) (seccion "Sesion guiada").
+2. El agente hace las preguntas de [`templates/business-domain-template.md`](../templates/business-domain-template.md) (seccion "Sesion guiada").
 3. El agente redacta `domain-rules.md` y actualiza `business/README.md`.
 4. El humano revisa y aprueba.
 5. A partir de ahi, cada spec cita que reglas aplican en "Impacto tecnico".
 
-**Prompt al agente:** `formalize-domain-rules` — ver [prompt-catalog.md](prompt-catalog.md) o `sdd prompt show formalize-domain-rules`.
+**Prompt al agente:** `formalize-domain-rules` — ver [prompt-catalog.md](../prompt-catalog.md) o `sdd prompt show formalize-domain-rules`.
 
 ### Valor para desarrollo agentico
 
@@ -168,7 +168,7 @@ Humano: revisa PR → merge
 Agente: al cerrar release → archiva spec, actualiza BACKLOG
 ```
 
-Prompts por transicion: [prompt-catalog.md](prompt-catalog.md) (`discovery-to-draft` → `close-release`).
+Prompts por transicion: [prompt-catalog.md](../prompt-catalog.md) (`discovery-to-draft` → `close-release`).
 
 ### Referencia de calidad
 
@@ -194,7 +194,7 @@ Usar el spec de ejemplo del perfil como modelo de detalle esperado:
 
 1. **Refactors y mejoras** usan spec (tipo `refactor` o `performance`).
 2. **ADRs** para decisiones arquitectonicas pendientes o nuevas.
-3. **Migrar documentacion legacy** a `business/` (cualquier fuente previa: READMEs, docs en repo, herramientas externas, comentarios de arquitectura). Prompt: `migrate-legacy-docs` en [prompt-catalog.md](prompt-catalog.md).
+3. **Migrar documentacion legacy** a `business/` (cualquier fuente previa: READMEs, docs en repo, herramientas externas, comentarios de arquitectura). Prompt: `migrate-legacy-docs` en [prompt-catalog.md](../prompt-catalog.md).
 4. **Completar `business/domain-rules.md`** si aplica — reglas que el agente debe verificar en cada PR (roles, filtros, periodos).
 5. **Revisar dominios** en `sdd.config.yaml` — alinear con la taxonomia real del proyecto.
 
@@ -267,11 +267,11 @@ El script verifica:
 
 | Documento                                                                                              | Uso                                     |
 | ------------------------------------------------------------------------------------------------------ | --------------------------------------- |
-| [`workflow.md`](workflow.md)                                                                           | Ciclo y tipos de spec                   |
+| [`workflow.md`](../workflow.md)                                                                           | Ciclo y tipos de spec                   |
 | [`healthy-development.md`](healthy-development.md)                                                     | Arquitectura, patrones, codigo limpio   |
-| [`templates/spec-template.md`](templates/spec-template.md)                                             | Plantilla de spec                       |
-| [`templates/spec-simple-template.md`](templates/spec-simple-template.md)                               | Plantilla reducida (no tecnica)         |
+| [`templates/spec-template.md`](../templates/spec-template.md)                                             | Plantilla de spec                       |
+| [`templates/spec-simple-template.md`](../templates/spec-simple-template.md)                               | Plantilla reducida (no tecnica)         |
 | [`agent-setup.md`](agent-setup.md)                                                                     | Adaptadores multi-herramienta           |
 | [`upgrade-guide.md`](upgrade-guide.md)                                                                 | Actualizar kit en instancia consumidora |
-| [`../bootstrap/agent-prompts/sdd-agent-workflow.md`](../bootstrap/agent-prompts/sdd-agent-workflow.md) | Flujo agentico (fuente unica)           |
-| [`templates/business-domain-template.md`](templates/business-domain-template.md)                       | Reglas de negocio del proyecto          |
+| [`../bootstrap/agent-prompts/sdd-agent-workflow.md`](../../bootstrap/agent-prompts/sdd-agent-workflow.md) | Flujo agentico (fuente unica)           |
+| [`templates/business-domain-template.md`](../templates/business-domain-template.md)                       | Reglas de negocio del proyecto          |

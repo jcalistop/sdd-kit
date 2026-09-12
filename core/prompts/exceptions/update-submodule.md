@@ -8,7 +8,7 @@ when: Atajo rápido; preferir upgrade-kit para flujo completo con trazabilidad
 prerequisites:
   - sdd-kit/ como submodule
 related:
-  - upgrade-guide.md
+  - guides/upgrade-guide.md
   - upgrade-kit.md
   - INSTALL.md
 tags: [maintenance, submodule]
@@ -28,11 +28,11 @@ Redirige al flujo de [`upgrade-kit.md`](upgrade-kit.md) o ejecuta los pasos mín
 ```
 Usa el prompt upgrade-kit para actualizar el kit SDD a <VERSION>.
 Si solo necesitas el submodule: git -C sdd-kit fetch --tags && git -C sdd-kit checkout <VERSION>.
-Luego sigue upgrade-guide.md para merge de instancia y validate-sdd.
+Luego sigue guides/upgrade-guide.md para merge de instancia y validate-sdd.
 ```
 
 ## Ver también
 
 - [`upgrade-kit.md`](upgrade-kit.md) — **recomendado**
-- [`upgrade-guide.md`](../../upgrade-guide.md)
+- [`guides/upgrade-guide.md`](../../guides/upgrade-guide.md)
 - [`INSTALL.md`](../../../INSTALL.md)

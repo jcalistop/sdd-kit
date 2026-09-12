@@ -18,7 +18,7 @@
 
 {{BRANCHING_RULES}}
 
-También: tipo del spec y `{{SDD_PATH}}/branching.md`. PR destino habitual (si aplica): **`{{DEV_BRANCH}}`**.
+También: tipo del spec y `{{SDD_PATH}}/guides/branching.md`. PR destino habitual (si aplica): **`{{DEV_BRANCH}}`**.
 
 ---
 

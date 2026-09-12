@@ -9,7 +9,7 @@ prerequisites:
   - Cambio no requiere spec según workflow.md
 related:
   - workflow.md#hotfix
-  - branching.md
+  - guides/branching.md
 tags: [hotfix, exception]
 human_approval: true
 ---
@@ -20,7 +20,7 @@ Urgencia extrema o cambio tan pequeño que no justifica spec. Se registra en rel
 
 ## Qué hará el agente
 
-- Crea rama hotfix según branching.md
+- Crea rama hotfix según guides/branching.md
 - Implementa fix mínimo
 - Documenta en PR y prepara entrada ID `—` en próxima release
 - No crea spec SDD-NNN salvo que el bug sea no trivial
@@ -34,7 +34,7 @@ Problema: <DESCRIPCION>
 Urgencia: <critica|media>
 
 Instrucciones:
-1. Lee branching.md (hotfix) y workflow.md (cambios triviales, ID —).
+1. Lee guides/branching.md (hotfix) y workflow.md (cambios triviales, ID —).
 2. Si es trivial (typo, copy, bump): rama corta, sin spec; documentar ID — en release.
 3. Si es bug no trivial pero urgente: evalúa spec bugfix simplificado vs ID — con justificación.
 4. PR con checklist mínimo; quality gates del perfil en verde.
@@ -49,5 +49,5 @@ Aprueba merge y deploy. Verifica que la release documente el cambio con ID `—`
 
 ## Ver también
 
-- [`branching.md`](../../branching.md) — Hotfix
+- [`guides/branching.md`](../../guides/branching.md) — Hotfix
 - [`workflow.md`](../../workflow.md) — Cambios triviales

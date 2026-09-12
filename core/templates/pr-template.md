@@ -1,6 +1,6 @@
 # Pull Request Template — SDD
 
-> Resumen para GitHub. DoD completo: `checklist-pr.md` + `profiles/<stack>/checklist-stack.md`.
+> Resumen para GitHub. DoD completo: `guides/checklist-pr.md` + `profiles/<stack>/checklist-stack.md`.
 > Copiar a `.github/PULL_REQUEST_TEMPLATE.md` en el proyecto.
 
 ---

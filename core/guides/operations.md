@@ -1,6 +1,6 @@
 # Operaciones SDD
 
-Guía de **quién actualiza qué** y **rituales**. Detalle normativo en [`workflow.md`](workflow.md) y [`branching.md`](branching.md).
+Guía de **quién actualiza qué** y **rituales**. Detalle normativo en [`workflow.md`](../workflow.md) y [`branching.md`](branching.md).
 
 ---
 
@@ -41,7 +41,7 @@ Humano da dirección → Agente: Discovery/Draft → Humano aprueba spec (Ready)
 → Humano merge → Agente: release/archivo
 ```
 
-Los **prompts** del catálogo son opcionales; los **estados** del spec son la fuente de verdad. Ver [`workflow.md`](workflow.md).
+Los **prompts** del catálogo son opcionales; los **estados** del spec son la fuente de verdad. Ver [`workflow.md`](../workflow.md).
 
 Ver regla `sdd-agent-workflow.mdc` para detalle por fase.
 

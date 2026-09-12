@@ -5,7 +5,7 @@
 
 **CLI:** `python sdd-kit/cli/sdd.py prompt list` · `prompt show <id>` · `prompt show <id> --full`
 
-**Relacionado:** [`workflow.md`](workflow.md) · [`adoption-guide.md`](adoption-guide.md) · [`agent-setup.md`](agent-setup.md)
+**Relacionado:** [`workflow.md`](workflow.md) · [`adoption-guide.md`](guides/adoption-guide.md) · [`agent-setup.md`](guides/agent-setup.md)
 
 **Notas para mantenedores (arquitectura del catálogo):** [`.github/docs/business/planning/prompt-catalog-meta.md`](../.github/docs/business/planning/prompt-catalog-meta.md)
 

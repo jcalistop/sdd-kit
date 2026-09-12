@@ -1,6 +1,6 @@
 # Checklist de PR — Laravel + Voyager + Livewire (stack)
 
-> Complementa [`../../core/checklist-pr.md`](../../core/checklist-pr.md) o el checklist unificado de la instancia. Marcar en cada PR.
+> Complementa [`../../core/guides/checklist-pr.md`](../../core/guides/checklist-pr.md) o el checklist unificado de la instancia. Marcar en cada PR.
 
 ---
 

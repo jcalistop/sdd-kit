@@ -8,7 +8,7 @@ Metodología para desarrollar **con un plan antes de codear**. Es un **agent har
 [![Spec-first](https://img.shields.io/badge/enfoque-spec--first-2563eb?style=flat-square)](core/workflow.md)
 [![Agent-harness](https://img.shields.io/badge/tipo-agent%20harness-0d9488?style=flat-square)](core/concepts.md)
 [![Multi-stack](https://img.shields.io/badge/stacks-Laravel%20%7C%20Django%20%7C%20FastAPI%20%7C%20React-059669?style=flat-square)](profiles/)
-[![Agent-ready](https://img.shields.io/badge/agente-Cursor%20%7C%20Claude%20%7C%20Codex%20%7C%20Copilot-7c3aed?style=flat-square)](core/agent-setup.md)
+[![Agent-ready](https://img.shields.io/badge/agente-Cursor%20%7C%20Claude%20%7C%20Codex%20%7C%20Copilot-7c3aed?style=flat-square)](core/guides/agent-setup.md)
 
 **Repositorio:** https://github.com/jcalistop/sdd-kit
 
@@ -22,8 +22,8 @@ Metodología para desarrollar **con un plan antes de codear**. Es un **agent har
 | --- | ------------------------------------------------------- | ------------------------------------------- |
 | 🚀  | [Instalación](INSTALL.md)                               | Submodule, copia puntual o solo docs        |
 | 📖  | [Conceptos en 5 min](core/concepts.md)                  | Primera vez con SDD + glosario              |
-| 🗺️  | [Adopción incremental](core/adoption-guide.md)          | Etapas 1–3 en proyectos nuevos o existentes |
-| 🤖  | [Configuración del agente](core/agent-setup.md)         | Cursor, Claude, Codex, Copilot              |
+| 🗺️  | [Adopción incremental](core/guides/adoption-guide.md)          | Etapas 1–3 en proyectos nuevos o existentes |
+| 🤖  | [Configuración del agente](core/guides/agent-setup.md)         | Cursor, Claude, Codex, Copilot              |
 | 🎯  | [Skills SDD](core/prompt-catalog.md#skills-cursor-v120) | 6 skills on-demand en Cursor (v1.2.0+)      |
 | 🧭  | [Ciclo SDD](core/workflow.md)                           | Estados, DoR/DoD, releases                  |
 | 🛠️  | [CLI](cli/README.md)                                    | `validate`, `backlog`, `spec new`           |
@@ -117,7 +117,7 @@ python sdd-kit/cli/sdd.py init --profile laravel-filament --project "Mi App"
 
 Atajos: `./sdd-kit/bootstrap/init-sdd.sh` (bash) · `.\sdd-kit\bootstrap\init-sdd.ps1` (solo PowerShell).
 
-Por defecto detecta tu agente/IDE (`-Agent auto`) e instala reglas SDD y **skills Cursor** (`sdd-*`). Ver **[`core/agent-setup.md`](core/agent-setup.md)**.
+Por defecto detecta tu agente/IDE (`-Agent auto`) e instala reglas SDD y **skills Cursor** (`sdd-*`). Ver **[`core/guides/agent-setup.md`](core/guides/agent-setup.md)**.
 
 #### Proyecto existente — modo agente (recomendado)
 
@@ -125,7 +125,7 @@ Por defecto detecta tu agente/IDE (`-Agent auto`) e instala reglas SDD y **skill
 
 **Tú:** añade el submodule (Paso 2) y abre el chat del agente.
 
-**El agente:** sigue [`core/adoption-guide.md`](core/adoption-guide.md) Etapa 1, lee lo que ya existe y no sobrescribe documentación sin tu aprobación.
+**El agente:** sigue [`core/guides/adoption-guide.md`](core/guides/adoption-guide.md) Etapa 1, lee lo que ya existe y no sobrescribe documentación sin tu aprobación.
 
 Usa el prompt **`adopt-existing`** del [catálogo de prompts](core/prompt-catalog.md):
 
@@ -145,7 +145,7 @@ Si no usaste el prompt anterior, completa a mano o pide al agente:
 | `.github/docs/business/README.md`  | Qué hace el sistema y quién lo usa                             |
 | `.github/docs/sdd/BACKLOG.md`      | 3–5 tareas reales en **Discovery** (lo que viene ahora)        |
 
-Checklist: **[`core/adoption-guide.md`](core/adoption-guide.md)** — Etapa 1.
+Checklist: **[`core/guides/adoption-guide.md`](core/guides/adoption-guide.md)** — Etapa 1.
 
 ### Paso 5 — Valida que todo esté bien
 
@@ -171,7 +171,7 @@ Ejemplos de calidad por perfil: `profiles/<perfil>/examples/SDD-001-*.md`.
 
 Cuando salga una versión nueva del kit, no basta con `git pull` en el submodule: la instancia en `.github/docs/sdd/` y los adaptadores de agente pueden requerir merge manual.
 
-1. Revisa [`core/upgrade-guide.md`](core/upgrade-guide.md) y el changelog en `docs/releases/`.
+1. Revisa [`core/guides/upgrade-guide.md`](core/guides/upgrade-guide.md) y el changelog en `docs/releases/`.
 2. Usa el prompt **`upgrade-kit`**: `python sdd-kit/cli/sdd.py prompt show upgrade-kit --full`
 3. Reinstala adaptadores si cambió `bootstrap/agent-skills/` o `agent-prompts/`: `python sdd-kit/bootstrap/install-agents.py`
 4. Tras validar, actualiza `kit.installed_version` y [`UPGRADE-LOG.md`](.github/docs/sdd/UPGRADE-LOG.md) en tu instancia.
@@ -205,9 +205,9 @@ Fuente canónica: [`bootstrap/agent-skills/`](bootstrap/agent-skills/) · instal
 | cerrar campaña               | `sdd-close-release`         | `close-release`         |
 | upgrade-kit                  | `sdd-upgrade-kit`           | `upgrade-kit`           |
 
-**Precedencia:** skill > prompt copy-paste > regla on-demand. Claude/Codex/Copilot reciben el mismo mapa en el preámbulo del bloque marcado. Detalle: [`core/prompt-catalog.md`](core/prompt-catalog.md#skills-cursor-v120) · [`core/agent-setup.md`](core/agent-setup.md).
+**Precedencia:** skill > prompt copy-paste > regla on-demand. Claude/Codex/Copilot reciben el mismo mapa en el preámbulo del bloque marcado. Detalle: [`core/prompt-catalog.md`](core/prompt-catalog.md#skills-cursor-v120) · [`core/guides/agent-setup.md`](core/guides/agent-setup.md).
 
-> 🌱 **Desarrollo sano:** el agente también aplica [`core/healthy-development.md`](core/healthy-development.md) (evitar sobre-ingeniería y antipatrones).
+> 🌱 **Desarrollo sano:** el agente también aplica [`core/guides/healthy-development.md`](core/guides/healthy-development.md) (evitar sobre-ingeniería y antipatrones).
 
 ---
 
@@ -266,11 +266,11 @@ tu-proyecto/
 | Documento                                                    | Cuándo leerlo                               |
 | ------------------------------------------------------------ | ------------------------------------------- |
 | [`core/concepts.md`](core/concepts.md)                       | Primera vez con SDD                         |
-| [`core/adoption-guide.md`](core/adoption-guide.md)           | Proyecto nuevo o existente, etapas 1–3      |
+| [`core/guides/adoption-guide.md`](core/guides/adoption-guide.md)           | Proyecto nuevo o existente, etapas 1–3      |
 | [`core/workflow.md`](core/workflow.md)                       | Estados, tipos de spec, DoR/DoD             |
-| [`core/healthy-development.md`](core/healthy-development.md) | Buenas prácticas y antipatrones             |
-| [`core/agent-setup.md`](core/agent-setup.md)                 | Cursor, Claude, Codex, Copilot              |
-| [`core/upgrade-guide.md`](core/upgrade-guide.md)             | Actualizar el kit en proyectos existentes   |
+| [`core/guides/healthy-development.md`](core/guides/healthy-development.md) | Buenas prácticas y antipatrones             |
+| [`core/guides/agent-setup.md`](core/guides/agent-setup.md)                 | Cursor, Claude, Codex, Copilot              |
+| [`core/guides/upgrade-guide.md`](core/guides/upgrade-guide.md)             | Actualizar el kit en proyectos existentes   |
 | [`INSTALL.md`](INSTALL.md)                                   | Otras formas de instalar (copia, solo docs) |
 
 ---

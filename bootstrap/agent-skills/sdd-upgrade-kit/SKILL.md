@@ -20,14 +20,14 @@ Actualizar kit SDD (submodule) en la instancia consumidora.
 
 | Artefacto     | Ruta                                              |
 | ------------- | ------------------------------------------------- |
-| Upgrade guide | `{{SDD_PATH}}/upgrade-guide.md`                   |
+| Upgrade guide | `{{SDD_PATH}}/guides/upgrade-guide.md`                   |
 | Config        | `{{SDD_PATH}}/sdd.config.yaml`                    |
 | Log           | `{{SDD_PATH}}/UPGRADE-LOG.md`                     |
 | Adaptadores   | `python {{KIT_PATH}}/bootstrap/install-agents.py` |
 
 ## Procedimiento
 
-Seguir `{{SDD_PATH}}/upgrade-guide.md`:
+Seguir `{{SDD_PATH}}/guides/upgrade-guide.md`:
 
 1. Detectar versión (`kit.installed_version` + submodule)
 2. Changelog destino en `{{KIT_PATH}}/docs/releases/`

@@ -9,8 +9,8 @@ prerequisites:
   - sdd-kit/ como submodule
   - Perfil elegido
 related:
-  - adoption-guide.md#etapa-1
-  - agent-setup.md
+  - guides/adoption-guide.md#etapa-1
+  - guides/agent-setup.md
 cli_alternative: null
 tags: [onboarding, existing-project]
 human_approval: true
@@ -38,7 +38,7 @@ Contexto:
 - El kit está en sdd-kit/ (submodule).
 
 Instrucciones:
-1. Lee sdd-kit/core/adoption-guide.md (Etapa 1) y sdd-kit/core/agent-setup.md.
+1. Lee sdd-kit/core/guides/adoption-guide.md (Etapa 1) y sdd-kit/core/guides/agent-setup.md.
 2. Ejecuta init-sdd solo si no existe .github/docs/sdd/; si ya existe, NO sobrescribas archivos sin preguntar.
 3. Completa sdd.config.yaml, business/README.md y BACKLOG (inventario pre-SDD con ID —, sin specs retrospectivos).
 4. Instala adaptadores de agente (-Agent auto).
@@ -54,5 +54,5 @@ Aprueba cambios en archivos existentes antes de que el agente los sobrescriba. R
 
 ## Ver también
 
-- [`adoption-guide.md`](../../adoption-guide.md) — Etapa 1
+- [`guides/adoption-guide.md`](../../guides/adoption-guide.md) — Etapa 1
 - [`INSTALL.md`](../../../INSTALL.md) — Modo agente

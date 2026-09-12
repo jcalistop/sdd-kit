@@ -8,7 +8,7 @@ when: Tras completar estructura mínima; antes del primer spec
 prerequisites:
   - Instancia SDD creada (.github/docs/sdd/)
 related:
-  - adoption-guide.md#checklist-etapa-1
+  - guides/adoption-guide.md#checklist-etapa-1
 cli_alternative: sdd validate
 tags: [onboarding, validation]
 human_approval: false
@@ -44,4 +44,4 @@ Corrige errores críticos antes de crear el primer spec. Las advertencias puedes
 
 ## Ver también
 
-- [`adoption-guide.md`](../../adoption-guide.md) — Checklist Etapa 1
+- [`guides/adoption-guide.md`](../../guides/adoption-guide.md) — Checklist Etapa 1

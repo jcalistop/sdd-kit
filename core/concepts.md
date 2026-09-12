@@ -92,10 +92,10 @@ Ambas usan los mismos estados (Discovery → Released) y el mismo BACKLOG. No so
 
 | Si eres...                                  | Lee primero                                                                                      | Despues                                                                                    |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| Desarrollador nuevo en SDD                  | Este documento → [`adoption-guide.md`](adoption-guide.md) Etapa 1                                | [`workflow.md`](workflow.md)                                                               |
-| Desarrollador con experiencia en SDD        | [`workflow.md`](workflow.md) directo                                                             | [`adoption-guide.md`](adoption-guide.md) para el setup                                     |
+| Desarrollador nuevo en SDD                  | Este documento → [`adoption-guide.md`](guides/adoption-guide.md) Etapa 1                                | [`workflow.md`](workflow.md)                                                               |
+| Desarrollador con experiencia en SDD        | [`workflow.md`](workflow.md) directo                                                             | [`adoption-guide.md`](guides/adoption-guide.md) para el setup                                     |
 | No tecnico (marketing, operaciones, diseño) | Este documento → ejemplo [`SDD-001-evento-no-tecnico.md`](examples/SDD-001-evento-no-tecnico.md) | [`templates/spec-simple-template.md`](templates/spec-simple-template.md)                   |
-| Quieres formalizar reglas de negocio        | [`adoption-guide.md`](adoption-guide.md) seccion "Formalizar el contexto de negocio"             | [`templates/business-domain-template.md`](templates/business-domain-template.md)           |
+| Quieres formalizar reglas de negocio        | [`adoption-guide.md`](guides/adoption-guide.md) seccion "Formalizar el contexto de negocio"             | [`templates/business-domain-template.md`](templates/business-domain-template.md)           |
 | Produccion de informes (MD, LaTeX, PDF)     | Este documento → [`reports-latex-md`](../profiles/reports-latex-md/README.md)                    | [`workflow-extensions.md`](../profiles/reports-latex-md/workflow-extensions.md) del perfil |
 
 ---
@@ -105,8 +105,8 @@ Ambas usan los mismos estados (Discovery → Released) y el mismo BACKLOG. No so
 | Documento                                                                        | Uso                                                        |
 | -------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | [`workflow.md`](workflow.md)                                                     | Ciclo completo SDD, tipos de spec, DoR/DoD detallados      |
-| [`adoption-guide.md`](adoption-guide.md)                                         | Como instalar SDD en proyectos nuevos y existentes         |
-| [`healthy-development.md`](healthy-development.md)                               | Arquitectura, patrones, codigo limpio (humanos y agentes)  |
+| [`adoption-guide.md`](guides/adoption-guide.md)                                         | Como instalar SDD en proyectos nuevos y existentes         |
+| [`healthy-development.md`](guides/healthy-development.md)                               | Arquitectura, patrones, codigo limpio (humanos y agentes)  |
 | [`templates/spec-template.md`](templates/spec-template.md)                       | Plantilla completa de spec (tecnica)                       |
 | [`templates/spec-simple-template.md`](templates/spec-simple-template.md)         | Plantilla reducida (no tecnica / iniciacion)               |
 | [`templates/audit-registro-template.md`](templates/audit-registro-template.md)   | Registro de auditoría (default por corrida)                |

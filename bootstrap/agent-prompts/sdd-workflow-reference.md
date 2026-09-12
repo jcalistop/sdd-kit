@@ -70,7 +70,7 @@ Si falla: **no** `push` ni PR. Corregir o documentar deuda con acuerdo humano.
 
 ## Verificación de arquitectura sana (dentro de verify-implementation) — [sensor]
 
-Checks contra `healthy-development.md`:
+Checks contra `guides/healthy-development.md`:
 
 - [ ] [sensor] **YAGNI:** abstracción sin al menos 2 usos → simplificar
 - [ ] [sensor] **DRY:** lógica duplicada en 2+ archivos → extraer módulo
@@ -86,7 +86,7 @@ Si alguna respuesta es "sí", **no publicar en Git.** Informar al humano con opc
 
 ## Guardia de arquitectura en PRs — [sensor]
 
-Además del DoD de trazabilidad (`checklist-pr.md`), buscar señales en `healthy-development.md`:
+Además del DoD de trazabilidad (`guides/checklist-pr.md`), buscar señales en `guides/healthy-development.md`:
 
 - **Big Ball of Mud:** cambios en >5 archivos sin límite claro entre capas
 - **God Object:** clase que creció desproporcionadamente

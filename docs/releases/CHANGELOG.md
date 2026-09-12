@@ -149,7 +149,7 @@ Ver [v1.2.0.md](v1.2.0.md).
 - `install-agents.py` — `install_cursor_skills()`, mapa skills en preambulos multi-agente, `--kit-path`
 - `bootstrap/test_install_skills.py` — tests de instalación
 - `validate-sdd` — advertencia si falta `.sdd-kit-manifest.json` con Cursor en targets
-- Sección Skills en `core/prompt-catalog.md` y `core/agent-setup.md`
+- Sección Skills en `core/prompt-catalog.md` y `core/guides/agent-setup.md`
 - `docs/README.md` — glosario de capas releases
 
 ### Cambiado
@@ -167,7 +167,7 @@ Ver [v1.1.0.md](v1.1.0.md).
 
 ### Añadido
 
-- Runbook `core/upgrade-guide.md` y prompt `upgrade-kit` para actualizar instancias consumidoras
+- Runbook `core/guides/upgrade-guide.md` y prompt `upgrade-kit` para actualizar instancias consumidoras
 - `kit.installed_version` / `kit.installed_at` en `sdd.config.yaml` y plantilla `UPGRADE-LOG.md`
 - `bootstrap/kit-version.py` — detección de versión para `init-sdd` y `validate-sdd`
 - Perfil `profiles/sdd-kit/` para mantenedores (SDD-001)
@@ -199,7 +199,7 @@ Primera versión **estable**. Ver [v1.0.0.md](v1.0.0.md).
 
 - Perfiles: `python-fastapi`, `python-django`, `react-vite`, `reports-latex-md`
 - CLI unificada (`validate`, `backlog`, `spec new`, `metrics`, sync con GitHub Issues)
-- Adaptadores multi-agente: Cursor, Claude Code, Codex, GitHub Copilot (`core/agent-setup.md`, `install-agents.py`)
+- Adaptadores multi-agente: Cursor, Claude Code, Codex, GitHub Copilot (`core/guides/agent-setup.md`, `install-agents.py`)
 - Guías: `concepts.md`, `adoption-guide.md`, `healthy-development.md`, plantilla spec simple
 - Flujo agéntico (`sdd-agent-workflow.mdc`) y guardias de arquitectura sana
 - Contexto de negocio: `business/domain-rules.md`, sesión guiada con el agente

@@ -2,7 +2,7 @@
 
 > Runbook para proyectos **consumidores** cuando publica una nueva versión del kit (SemVer en `docs/releases/` del repositorio sdd-kit).
 >
-> **Relacionado:** [`adoption-guide.md`](adoption-guide.md) · [`agent-setup.md`](agent-setup.md) · [`prompt-catalog.md`](prompt-catalog.md) (`upgrade-kit`)
+> **Relacionado:** [`adoption-guide.md`](adoption-guide.md) · [`agent-setup.md`](agent-setup.md) · [`prompt-catalog.md`](../prompt-catalog.md) (`upgrade-kit`)
 
 ---
 
@@ -222,6 +222,6 @@ Sustituye `<VERSION>` por la versión destino (ej. `v1.1.0`).
 
 | Documento                          | Uso                               |
 | ---------------------------------- | --------------------------------- |
-| [`INSTALL.md`](../INSTALL.md)      | Instalación y submodule           |
+| [`INSTALL.md`](../../INSTALL.md)      | Instalación y submodule           |
 | [`UPGRADE-LOG.md`](UPGRADE-LOG.md) | Log de esta instancia (si existe) |
 | `sdd-kit/docs/releases/`           | Changelog del producto kit        |

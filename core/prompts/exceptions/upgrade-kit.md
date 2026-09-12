@@ -9,7 +9,7 @@ prerequisites:
   - sdd-kit/ como submodule (o copia con ruta equivalente)
   - Instancia SDD en .github/docs/sdd/
 related:
-  - upgrade-guide.md
+  - guides/upgrade-guide.md
   - INSTALL.md
 tags: [maintenance, submodule, upgrade]
 human_approval: true
@@ -21,7 +21,7 @@ Sale una versión nueva del kit (tag SemVer en `docs/releases/`) y quieres actua
 
 ## Qué hará el agente
 
-- Lee `sdd-kit/core/upgrade-guide.md` y el changelog `sdd-kit/docs/releases/<VERSION>.md`
+- Lee `sdd-kit/core/guides/upgrade-guide.md` y el changelog `sdd-kit/docs/releases/<VERSION>.md`
 - Detecta `kit.installed_version` en `sdd.config.yaml` y la ref actual del submodule
 - Actualiza el submodule al tag indicado
 - Compara `sdd-kit/core/` con `.github/docs/sdd/` y propone merge archivo a archivo
@@ -35,7 +35,7 @@ Sale una versión nueva del kit (tag SemVer en `docs/releases/`) y quieres actua
 ```
 Actualiza el kit SDD de este proyecto a la versión <VERSION>.
 
-Sigue sdd-kit/core/upgrade-guide.md de punta a punta.
+Sigue sdd-kit/core/guides/upgrade-guide.md de punta a punta.
 
 Instrucciones:
 1. Lee kit.installed_version en .github/docs/sdd/sdd.config.yaml y git -C sdd-kit describe --tags --always.
@@ -60,6 +60,6 @@ Revisa diff de adaptadores. Si quedaron archivos pendientes, agenda otro pase o 
 
 ## Ver también
 
-- [`upgrade-guide.md`](../../upgrade-guide.md)
+- [`guides/upgrade-guide.md`](../../guides/upgrade-guide.md)
 - [`update-submodule.md`](update-submodule.md) — atajo legacy; preferir este prompt
-- [`agent-setup.md`](../../agent-setup.md)
+- [`guides/agent-setup.md`](../../guides/agent-setup.md)

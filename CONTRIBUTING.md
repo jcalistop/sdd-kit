@@ -58,7 +58,7 @@ Si agregas comandos, documenta en [cli/README.md](cli/README.md).
 - **Idioma:** español latino (Chile) en documentación del kit.
 - **Markdown:** enlaces relativos, tablas legibles, sin duplicar contenido entre core y perfiles.
 - **Código:** sigue el estilo existente; evita dependencias nuevas sin justificación.
-- **Desarrollo sano:** [core/healthy-development.md](core/healthy-development.md).
+- **Desarrollo sano:** [core/guides/healthy-development.md](core/guides/healthy-development.md).
 
 ## Pull requests
 
