@@ -23,9 +23,9 @@
 
 ## Draft
 
-| ID      | Dominio   | Título | Versión | Spec |
-| ------- | --------- | ------ | ------- | ---- |
-| SDD-031 | bootstrap | build-spec fail-closed: Plan mode / «te guío» | patch | [spec](specs/bootstrap/SDD-031-build-spec-fail-closed-plan-mode.md) |
+| ID  | Dominio | Título | Versión | Spec |
+| --- | ------- | ------ | ------- | ---- |
+| —   | —       | —      | —       | —    |
 
 ## Ready
 
@@ -37,6 +37,7 @@
 
 | ID      | Dominio  | Título | Versión | Spec |
 | ------- | -------- | ------ | ------- | ---- |
+| SDD-031 | bootstrap | build-spec fail-closed: Plan mode / «te guío» | patch | [spec](specs/bootstrap/SDD-031-build-spec-fail-closed-plan-mode.md) |
 | SDD-030 | bootstrap | Skills: perfil de stack resuelto en install (no hardcodear perfil ajeno) | patch | [spec](specs/bootstrap/SDD-030-skills-stack-profile-install.md) |
 | SDD-029 | core     | Reordenar guías raíz `core/` → `core/guides/` | patch | [spec](specs/core/SDD-029-reordenar-guias-core-guides.md) |
 | SDD-028 | core     | Guías audits + research en `core/guides/` (stubs en instancia) | patch | [spec](specs/core/SDD-028-guides-audits-research-core.md) |

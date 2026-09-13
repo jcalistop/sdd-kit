@@ -40,9 +40,27 @@ Si el spec referencia un ADR, leer solo ese ADR.
 
 ---
 
+## Gate fail-closed (antes de mutar estado)
+
+**Señales** (cualquiera basta): Plan mode activo; el humano dijo «te guío» / «guiame» / «vamos paso a paso» / «no implementes aún»; o guía humana activa (iterar plan/Draft **sin** aprobar Ready).
+
+**Contrato:**
+
+| Contexto | Acción |
+| -------- | ------ |
+| Señal **y** sin frase de aprobación | **STOP.** No actualizar cabecera ni BACKLOG a Ready/In Build. Pedir frase explícita y esperar. |
+| Señal **y** frase de aprobación | Permitido: Draft→Ready→In Build. |
+| Sin señal | Contrato actual: frase de aprobación o invocación `build-spec` basta. |
+
+**Frases de aprobación** (ejemplos): `apruebo SDD-NNN…`, `build-spec`, «apruebo para implementar». Ver [reference.md](reference.md).
+
+**No es señal por sí sola:** adjuntar el skill, «revisa el spec», o Agent mode sin las señales de arriba.
+
+---
+
 ## A. Implementación
 
-1. Draft aprobado → Ready → In Build (spec + BACKLOG).
+1. Pasar el gate fail-closed de arriba. Luego Draft aprobado → Ready → In Build (spec + BACKLOG).
 2. Preguntar rama local según `branching.md` o rama actual.
 
 ### Ramas / branching

@@ -25,8 +25,21 @@ deprecated_aliases:
 
 No hace falta si el agente ya sigue `sdd-agent-workflow` en el mismo hilo: una frase de aprobación basta.
 
+### Gate fail-closed (Plan mode / «te guío»)
+
+**Señales** (cualquiera basta): Plan mode activo; el humano dijo «te guío» / «guiame» / «vamos paso a paso» / «no implementes aún»; o guía humana activa (iterar plan/Draft **sin** aprobar Ready).
+
+| Contexto | Acción |
+| -------- | ------ |
+| Señal **y** sin frase de aprobación | **STOP.** No mutar cabecera/BACKLOG a Ready/In Build. Pedir frase explícita y esperar. |
+| Señal **y** frase de aprobación | Permitido: Draft→Ready→In Build. |
+| Sin señal | Contrato actual: frase o `build-spec` basta. |
+
+Frases válidas (ej.): `apruebo SDD-NNN…`, `build-spec`, «apruebo para implementar». No bastan bajo señal: «sigue», «implementa el plan», «ok» ambiguo.
+
 ## Qué hará el agente
 
+- Comprueba el gate fail-closed antes de cambiar estado.
 - Actualiza cabecera y BACKLOG: **Ready** → **In Build** (si venía de Draft aprobado).
 - Crea rama local según convención del perfil.
 - Implementa según spec, `domain-rules.md` y checklist del stack.
@@ -39,6 +52,7 @@ No hace falta si el agente ya sigue `sdd-agent-workflow` en el mismo hilo: una f
 Apruebo e implementa el spec <SDD-NNN> según sdd-agent-workflow.
 
 Instrucciones:
+0. Gate fail-closed: si hay Plan mode / «te guío» / guía humana activa y no hay frase de aprobación explícita → STOP (no Ready/In Build); pedir frase y esperar. Si no hay esas señales, o hay frase (`apruebo…`, `build-spec`), continuar.
 1. Si el spec está en Draft: actualiza a Ready (aprobación recibida) y luego In Build en spec y BACKLOG.
 2. Crea rama local según guides/branching.md y perfil stack.
 3. Implementa solo el alcance del spec; cambios fuera de alcance → actualizar spec primero.
