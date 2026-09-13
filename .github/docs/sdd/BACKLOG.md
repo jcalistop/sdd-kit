@@ -3,7 +3,7 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-032`.
+**Próximo ID disponible:** `SDD-033`.
 
 **Versión acumulada del kit:** `v1.5.0` (ver [docs/releases/](../../../docs/releases/)).
 
@@ -17,7 +17,7 @@
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
-| docs      | Reestructurar `README.md` raíz: reflejar v1.3–v1.5 (harness, safe-git, dual-release, audits/research, skills, CI validate) y rutas actuales | patch   | Tras SDD-026/027/028 y move `core/guides/`; no big rewrite de contenido |
+| —         | —                                                                                | —       | —                                                                     |
 
 ---
 
@@ -37,6 +37,7 @@
 
 | ID      | Dominio  | Título | Versión | Spec |
 | ------- | -------- | ------ | ------- | ---- |
+| SDD-032 | docs     | Reestructurar README.md raíz (v1.3–v1.5 + rutas actuales) | patch | [spec](specs/docs/SDD-032-reestructurar-readme-raiz.md) |
 | SDD-031 | bootstrap | build-spec fail-closed: Plan mode / «te guío» | patch | [spec](specs/bootstrap/SDD-031-build-spec-fail-closed-plan-mode.md) |
 | SDD-030 | bootstrap | Skills: perfil de stack resuelto en install (no hardcodear perfil ajeno) | patch | [spec](specs/bootstrap/SDD-030-skills-stack-profile-install.md) |
 | SDD-029 | core     | Reordenar guías raíz `core/` → `core/guides/` | patch | [spec](specs/core/SDD-029-reordenar-guias-core-guides.md) |
