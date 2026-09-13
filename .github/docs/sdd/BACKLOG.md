@@ -3,7 +3,7 @@
 > Tablero operativo del repositorio **sdd-kit**. Plan estratégico histórico: [business/planning/ROADMAP.md](../../business/planning/ROADMAP.md).
 > Adopción: [ADOPTION.md](ADOPTION.md) · Ciclo: [core/workflow.md](../../../core/workflow.md).
 
-**Próximo ID disponible:** `SDD-030`.
+**Próximo ID disponible:** `SDD-032`.
 
 **Versión acumulada del kit:** `v1.5.0` (ver [docs/releases/](../../../docs/releases/)).
 
@@ -18,16 +18,14 @@
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
 | docs      | Reestructurar `README.md` raíz: reflejar v1.3–v1.5 (harness, safe-git, dual-release, audits/research, skills, CI validate) y rutas actuales | patch   | Tras SDD-026/027/028 y move `core/guides/`; no big rewrite de contenido |
-| bootstrap | Skills: `{{STACK_PROFILE}}` en install; no hardcodear perfil ajeno en skill global | patch   | Dogfood gap #7 P2                                                     |
-| bootstrap | build-spec fail-closed: no Ready/In Build sin frase humana si hay Plan mode / «te guío» | patch   | Dogfood gap #6 P2                                                     |
 
 ---
 
 ## Draft
 
-| ID  | Dominio | Título | Versión | Spec |
-| --- | ------- | ------ | ------- | ---- |
-| —   | —       | —      | —       | —    |
+| ID      | Dominio   | Título | Versión | Spec |
+| ------- | --------- | ------ | ------- | ---- |
+| SDD-031 | bootstrap | build-spec fail-closed: Plan mode / «te guío» | patch | [spec](specs/bootstrap/SDD-031-build-spec-fail-closed-plan-mode.md) |
 
 ## Ready
 
@@ -39,6 +37,7 @@
 
 | ID      | Dominio  | Título | Versión | Spec |
 | ------- | -------- | ------ | ------- | ---- |
+| SDD-030 | bootstrap | Skills: perfil de stack resuelto en install (no hardcodear perfil ajeno) | patch | [spec](specs/bootstrap/SDD-030-skills-stack-profile-install.md) |
 | SDD-029 | core     | Reordenar guías raíz `core/` → `core/guides/` | patch | [spec](specs/core/SDD-029-reordenar-guias-core-guides.md) |
 | SDD-028 | core     | Guías audits + research en `core/guides/` (stubs en instancia) | patch | [spec](specs/core/SDD-028-guides-audits-research-core.md) |
 | SDD-027 | docs     | Metodología research: guía + plantilla de nota (distinta de audits) | patch | [spec](specs/docs/SDD-027-metodologia-research-plantilla.md) |
