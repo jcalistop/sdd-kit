@@ -1,7 +1,7 @@
 # Adopción SDD en sdd-kit
 
 > Este repositorio **produce** la metodología SDD pero no la usaba para su propio desarrollo.
-> A partir de 2026-06-12 se adopta SDD de forma incremental siguiendo [`core/adoption-guide.md`](../../../core/adoption-guide.md).
+> A partir de 2026-06-12 se adopta SDD de forma incremental siguiendo [`core/guides/adoption-guide.md`](../../../core/guides/adoption-guide.md).
 
 ## Decisión
 

@@ -81,6 +81,13 @@ Confirmar dominio, tipo e idea con el humano antes de continuar.
 
 Completar cabecera, problema/objetivo, alcance, impacto técnico, reglas `DR-*`, criterios happy/error, riesgos. Auto-verificar DoR en [reference.md](reference.md).
 
+### Congelado para implementación _(opcional)_
+
+Ofrecer la sección de plantilla cuando queden decisiones abiertas (tecnología/API/tests) o riesgo de LLM de bajo contexto. **No es obligatoria.**
+
+- Si se incluye: exigir decisión única, API/contrato, paths de test, lista de lectura y **N** (entero; **sin default** de plantilla) + «prohibido explorar». Sin N o sin lista → DoR incompleto; no pedir Ready.
+- Si se omite: no imponer tope de lectura. No endurecer `validate-sdd`.
+
 ---
 
 ## Fase 5 — Actualizar BACKLOG

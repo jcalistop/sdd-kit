@@ -7,7 +7,7 @@
 | Git              | Sí                      | Para submodule o copia versionada                                                                     |
 | Python 3.10+     | Recomendado             | CLI (`python sdd-kit/cli/sdd.py`), `install-agents.py`; atajos `sdd.sh` / `sdd.ps1` (solo PowerShell) |
 | Stack del perfil | Según perfil            | PHP/Composer (Laravel), Node (React), etc. — ver `profiles/<perfil>/README.md`                        |
-| Agente IA        | Recomendado             | Cursor, Claude Code, Codex o Copilot — ver [core/agent-setup.md](core/agent-setup.md)                 |
+| Agente IA        | Recomendado             | Cursor, Claude Code, Codex o Copilot — ver [core/guides/agent-setup.md](core/guides/agent-setup.md)                 |
 | Pandoc + LaTeX   | Solo `reports-latex-md` | Compilación de informes                                                                               |
 | `gh` CLI         | Opcional                | `sdd backlog sync` con GitHub Issues                                                                  |
 
@@ -19,7 +19,7 @@ En repos **con código y documentación previa**, evita ejecutar `init-sdd` manu
 
 1. **Humano:** añade el submodule (un comando Git).
 2. **Humano:** pega el prompt de adopción en el agente (ver [README.md](README.md) — Paso 3, proyecto existente).
-3. **Agente:** lee `core/adoption-guide.md` Etapa 1, ejecuta `init-sdd` solo si no hay instancia SDD, completa config y BACKLOG sin specs retrospectivos, instala adaptadores y corre `validate-sdd`.
+3. **Agente:** lee `core/guides/adoption-guide.md` Etapa 1, ejecuta `init-sdd` solo si no hay instancia SDD, completa config y BACKLOG sin specs retrospectivos, instala adaptadores y corre `validate-sdd`.
 
 El agente debe **preguntar antes de sobrescribir** cualquier archivo en `.github/docs/sdd/` o `business/` que ya exista.
 
@@ -60,7 +60,7 @@ Por defecto (`-Agent auto`) detecta tu IDE/agente y muestra un menú si hay ambi
 | `codex`   | `AGENTS.md` (bloque delimitado)                                                                                |
 | `copilot` | `.github/copilot-instructions.md`                                                                              |
 
-Retrocompat: `-Cursor` / `--cursor` equivale a `-Agent cursor`. Guía completa: [core/agent-setup.md](core/agent-setup.md).
+Retrocompat: `-Cursor` / `--cursor` equivale a `-Agent cursor`. Guía completa: [core/guides/agent-setup.md](core/guides/agent-setup.md).
 
 ## Opción 2: Copia puntual
 
@@ -74,7 +74,7 @@ cp -r /tmp/sdd-kit ./sdd-kit
 
 Si no quieres el submodule, copia manualmente:
 
-- `core/` → `.github/docs/sdd/` (workflow, adoption-guide, templates, etc.)
+- `core/` → `.github/docs/sdd/` (workflow, `guides/`, templates, etc.)
 - `profiles/<stack>/` → `.github/docs/sdd/profiles/<stack>/`
 - `sdd.config.example.yaml` → `.github/docs/sdd/sdd.config.yaml`
 
@@ -83,8 +83,8 @@ Si no quieres el submodule, copia manualmente:
 1. Editar `.github/docs/sdd/sdd.config.yaml` (dominios, ramas, IDs).
 2. Completar `.github/docs/business/README.md` con contexto de producto.
 3. Opcional: completar `.github/docs/business/domain-rules.md` (reglas de negocio transversales).
-4. Leer `.github/docs/sdd/adoption-guide.md` — **proyectos existentes**: empezar por Etapa 1.
-5. Consultar `.github/docs/sdd/healthy-development.md` — arquitectura, patrones y codigo limpio.
+4. Leer `.github/docs/sdd/guides/adoption-guide.md` — **proyectos existentes**: empezar por Etapa 1.
+5. Consultar `.github/docs/sdd/guides/healthy-development.md` — arquitectura, patrones y codigo limpio.
 6. Crear primer spec real desde `templates/spec-template.md` (usar `profiles/<stack>/examples/` como referencia).
 7. Validar: `python sdd-kit/cli/sdd.py validate`
 
@@ -110,7 +110,7 @@ python .\sdd-kit\bootstrap\install-agents.py install --profile laravel-filament 
 python .\sdd-kit\bootstrap\install-agents.py detect
 ```
 
-Ver [core/agent-setup.md](core/agent-setup.md).
+Ver [core/guides/agent-setup.md](core/guides/agent-setup.md).
 
 ## Validación documental
 
@@ -126,7 +126,7 @@ Scripts legacy (misma lógica): `./sdd-kit/bootstrap/validate-sdd.sh` · `.\sdd-
 
 ## Actualizar el kit (submodule)
 
-Cuando publica una versión nueva del kit, sigue el runbook **[`core/upgrade-guide.md`](core/upgrade-guide.md)** (detectar versión → changelog → submodule → merge instancia → adaptadores → validate → log).
+Cuando publica una versión nueva del kit, sigue el runbook **[`core/guides/upgrade-guide.md`](core/guides/upgrade-guide.md)** (detectar versión → changelog → submodule → merge instancia → adaptadores → validate → log).
 
 **Prompt recomendado** (modo agente):
 
@@ -169,7 +169,7 @@ No requiere reescribir documentación ni specs retrospectivos.
 
 **Instalación:** usar [Modo agente](#modo-agente-recomendado-en-proyectos-existentes) arriba. Si instalas a mano, revisa que `init-sdd` no pise archivos ya editados (el script no sobrescribe `business/README.md` si existe, pero sí copia plantillas core a `.github/docs/sdd/`).
 
-Ver [core/adoption-guide.md](core/adoption-guide.md):
+Ver [core/guides/adoption-guide.md](core/guides/adoption-guide.md):
 
 1. **Etapa 1** — BACKLOG + inventario (día 1); sin specs para lo ya en producción
 2. **Etapa 2** — nuevas features con ciclo SDD completo

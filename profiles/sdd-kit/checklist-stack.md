@@ -1,6 +1,22 @@
 # Checklist de PR — SDD Kit (mantenedores)
 
-> Complementa [`../../core/checklist-pr.md`](../../core/checklist-pr.md). Marcar en cada PR junto con el checklist core.
+> Complementa [`../../core/guides/checklist-pr.md`](../../core/guides/checklist-pr.md). Marcar en cada PR junto con el checklist core.
+
+---
+
+## Verify — comandos obligatorios
+
+> Gate local antes de open-pr / evidencia de `verify-implementation`. Ejecutar literales de `stack.quality_gates` según lo tocado.
+
+| Gate | Cuándo | Comando |
+| ---- | ------ | ------- |
+| compile | Siempre (si se tocó `cli/`) | `python -m compileall -q cli/` |
+| pytest | Siempre (si se tocó `cli/`) | `python -m pytest cli/tests -q` |
+| manifest | Siempre (si se tocó bootstrap prompts/skills) | validar JSON de `bootstrap/agent-prompts/manifest.json` (y skills si aplica) |
+| profiles | Siempre (si se tocó `profiles/`) | verificación archivos obligatorios por perfil (CI) |
+| validate_sdd | Siempre (si se tocó docs SDD / BACKLOG / specs) | `python cli/sdd.py validate` |
+| Tests (alcance) | Preferir filtro al alcance del spec si el tooling lo permite; si no, suite del gate | p. ej. `python -m pytest cli/tests/test_foo.py -q` |
+| Condicional JS | — | No aplica |
 
 ---
 
@@ -30,6 +46,7 @@
 - [ ] Cambios en prompts: fuente en `bootstrap/agent-prompts/` (no editar solo `.mdc` sin sync)
 - [ ] `install-agents.py` probado si cambia contrato de adaptadores _(o No aplica)_
 - [ ] Tras `install-agents`: no deben quedar skills del manifest (`sdd-*` managed) en `~/.cursor/skills`
+- [ ] Tras `install-agents`: skills del proyecto reflejan `stack.profile` (p. ej. `sdd-stack-<perfil>` en build-spec; marcador `.sdd-kit-manifest.json` con campo `profile`)
 - [ ] Entrada en `stack-descriptions.json` si es perfil nuevo _(o No aplica)_
 
 ---

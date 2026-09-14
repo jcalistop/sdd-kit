@@ -2,7 +2,7 @@
 
 > **DoD común a todos los stacks.** Completar junto con el checklist del perfil: `profiles/<stack>/checklist-stack.md`.
 >
-> **Flujo:** [`workflow.md`](workflow.md). **Release:** [`releases/RUNBOOK.md`](releases/RUNBOOK.md).
+> **Flujo:** [`workflow.md`](../workflow.md). **Release:** [`releases/RUNBOOK.md`](../releases/RUNBOOK.md).
 
 ---
 
@@ -26,7 +26,7 @@
 | **ADRs relacionados** | enlaces bajo `adr/` _(0..N)_                                                      |
 
 - [ ] Cabecera Spec/ADR completada por cada `SDD-NNN` (o justificación sin spec + registro `—`)
-- [ ] Si el PR agrupa varios specs: criterios de aceptación verificados **por cada** ID (ver [`workflow.md`](workflow.md))
+- [ ] Si el PR agrupa varios specs: criterios de aceptación verificados **por cada** ID (ver [`workflow.md`](../workflow.md))
 
 ---
 

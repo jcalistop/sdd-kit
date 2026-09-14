@@ -68,11 +68,12 @@ domains_suggested:
 
 Secciones recomendadas:
 
-1. **Calidad técnica** — comandos del perfil + CI verde
-2. **Área específica del stack** — UI, API, componentes, etc.
-3. **Reglas de negocio** — referencia a `business/domain-rules.md`
-4. **Cambio de BD** — si aplica
-5. **Post-deploy** — enlace a `deploy.md`
+1. **Verify — comandos obligatorios** _(obligatoria)_ — tabla `| Gate | Cuándo | Comando |` con: literales de `stack.quality_gates` (filas «Siempre»), nota de tests filtrados al alcance del spec si el tooling lo permite, y fila condicional de audit JS (`npm audit` si el diff tocó `package.json` / lockfile / assets JS, o «No aplica»). Título exacto: `## Verify — comandos obligatorios`. Fuente de verdad para `verify-implementation`.
+2. **Calidad técnica** — comandos del perfil + CI verde
+3. **Área específica del stack** — UI, API, componentes, etc.
+4. **Reglas de negocio** — referencia a `business/domain-rules.md`
+5. **Cambio de BD** — si aplica
+6. **Post-deploy** — enlace a `deploy.md`
 
 Cada ítem debe permitir **No aplica**.
 

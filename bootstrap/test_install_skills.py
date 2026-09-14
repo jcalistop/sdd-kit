@@ -127,6 +127,93 @@ class InstallSkillsTest(unittest.TestCase):
         self.assertTrue(marker.is_file())
         data = json.loads(marker.read_text(encoding="utf-8"))
         self.assertIn("sdd-draft-spec", data["managed_skills"])
+        self.assertEqual(data["profile"], "laravel-filament")
+        self.assertEqual(data["kit_path"], kit_path)
+
+    def test_profile_rendered_no_placeholders(self) -> None:
+        """Install perfil A deja A en skills y sin placeholders crudos."""
+        sdd_path = ".github/docs/sdd"
+        kit_path = ".github/docs/sdd-kit"
+        ia.install_cursor_skills(self.target, "laravel-voyager", sdd_path, kit_path)
+
+        content = (
+            self.target / ".cursor" / "skills" / "sdd-build-spec" / "SKILL.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("sdd-stack-laravel-voyager", content)
+        self.assertNotIn("{{PROFILE}}", content)
+        self.assertNotIn("{{STACK_PROFILE}}", content)
+
+        ctx = ia.skill_render_context(self.target, "laravel-voyager", sdd_path, kit_path)
+        self.assertEqual(ctx["PROFILE"], "laravel-voyager")
+        self.assertEqual(ctx["STACK_PROFILE"], "laravel-voyager")
+
+    def test_profile_change_forces_reinstall(self) -> None:
+        """Re-install con perfil B distinto fuerza rewrite a B."""
+        sdd_path = ".github/docs/sdd"
+        kit_path = ".github/docs/sdd-kit"
+        ia.install_cursor_skills(self.target, "laravel-filament", sdd_path, kit_path)
+        content_a = (
+            self.target / ".cursor" / "skills" / "sdd-build-spec" / "SKILL.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("sdd-stack-laravel-filament", content_a)
+
+        ia.install_cursor_skills(self.target, "laravel-voyager", sdd_path, kit_path)
+        content_b = (
+            self.target / ".cursor" / "skills" / "sdd-build-spec" / "SKILL.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("sdd-stack-laravel-voyager", content_b)
+        self.assertNotIn("sdd-stack-laravel-filament", content_b)
+        marker = json.loads(
+            (self.target / ".cursor" / "skills" / ".sdd-kit-manifest.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(marker["profile"], "laravel-voyager")
+
+    def test_legacy_marker_without_profile_rerenders(self) -> None:
+        """Marcador sin campo profile (legado) no hace skip."""
+        sdd_path = ".github/docs/sdd"
+        kit_path = ".github/docs/sdd-kit"
+        ia.install_cursor_skills(self.target, "laravel-filament", sdd_path, kit_path)
+
+        marker_path = self.target / ".cursor" / "skills" / ".sdd-kit-manifest.json"
+        data = json.loads(marker_path.read_text(encoding="utf-8"))
+        del data["profile"]
+        marker_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+        skill_file = self.target / ".cursor" / "skills" / "sdd-draft-spec" / "SKILL.md"
+        skill_file.unlink()
+        self.assertFalse(skill_file.is_file())
+
+        ia.install_cursor_skills(self.target, "laravel-filament", sdd_path, kit_path)
+        self.assertTrue(
+            skill_file.is_file(),
+            "Marcador legado sin profile debió forzar re-render",
+        )
+        refreshed = json.loads(marker_path.read_text(encoding="utf-8"))
+        self.assertEqual(refreshed["profile"], "laravel-filament")
+
+    def test_templates_source_use_profile_placeholder(self) -> None:
+        """Plantillas fuente no hardcodean sdd-stack-<perfil> concreto."""
+        skills_root = BOOTSTRAP / "agent-skills"
+        for skill_dir in skills_root.iterdir():
+            if not skill_dir.is_dir() or skill_dir.name == "stacks":
+                continue
+            for src in skill_dir.iterdir():
+                if not src.is_file():
+                    continue
+                text = src.read_text(encoding="utf-8")
+                if "sdd-stack-" in text:
+                    self.assertIn(
+                        "sdd-stack-{{PROFILE}}",
+                        text,
+                        f"{src} debe usar placeholder, no perfil hardcodeado",
+                    )
+                    self.assertNotRegex(
+                        text,
+                        r"sdd-stack-(?!\{\{PROFILE\}\})[a-z0-9-]+",
+                        f"{src} no debe hardcodear un perfil concreto",
+                    )
 
     def test_install_skills_skips_if_already_installed(self) -> None:
         """Skills no deben reinstalarse si ya existen en el proyecto."""

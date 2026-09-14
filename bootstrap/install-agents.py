@@ -170,6 +170,7 @@ def skill_render_context(
         "KIT_PATH": kit_path.replace("\\", "/"),
         "DEV_BRANCH": dev_branch,
         "PROFILE": profile,
+        "STACK_PROFILE": profile,
         "STACK_GATES": read_stack_skills_gates(profile),
         "BRANCHING_RULES": branching_rules_text(mode, dev_branch),
     }
@@ -218,12 +219,19 @@ def install_cursor_skills(
     managed_ids = {entry["id"] for entry in manifest.get("skills", [])}
 
     # Verificar si las skills ya existen en el proyecto (evitar duplicación)
+    # Skip solo si kit_path + managed_skills + profile coinciden (marcador sin
+    # profile = legado → re-render obligatorio).
     project_marker = skills_root / ".sdd-kit-manifest.json"
     skip_reinstall = False
+    kit_path_norm = kit_path.replace("\\", "/")
     if project_marker.is_file():
         try:
             existing = json.loads(project_marker.read_text(encoding="utf-8"))
-            if existing.get("kit_path") == kit_path and set(existing.get("managed_skills", [])) == managed_ids:
+            if (
+                existing.get("kit_path") == kit_path_norm
+                and set(existing.get("managed_skills", [])) == managed_ids
+                and existing.get("profile") == profile
+            ):
                 print("SDD Kit: skills ya instaladas en .cursor/skills/, omitiendo.")
                 skip_reinstall = True
         except (json.JSONDecodeError, KeyError):
@@ -250,7 +258,8 @@ def install_cursor_skills(
 
         marker = {
             "managed_skills": sorted(managed_ids),
-            "kit_path": kit_path.replace("\\", "/"),
+            "kit_path": kit_path_norm,
+            "profile": profile,
         }
         write_file(
             skills_root / ".sdd-kit-manifest.json",

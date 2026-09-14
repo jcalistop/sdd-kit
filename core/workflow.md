@@ -18,11 +18,18 @@ Todo vive bajo la ruta `paths.sdd` del config (por defecto `.github/docs/sdd/`):
 ├── sdd.config.yaml                 # instancia del proyecto
 ├── PROJECT.md                      # resumen de adopción SDD
 ├── README.md                       # índice
-├── operations.md                   # rituales (puede enlazar al core o copia local)
 ├── workflow.md                     # este archivo (copia o enlace al kit)
 ├── BACKLOG.md                      # tablero único de iniciativas
-├── checklist-pr.md                 # DoD trazabilidad (+ perfil stack)
-├── healthy-development.md          # arquitectura, patrones, codigo limpio
+├── guides/                         # metodologías (copia desde core/guides/)
+│   ├── operations.md
+│   ├── branching.md
+│   ├── checklist-pr.md             # DoD trazabilidad (+ perfil stack)
+│   ├── healthy-development.md
+│   ├── adoption-guide.md
+│   ├── upgrade-guide.md
+│   ├── agent-setup.md
+│   ├── audits.md / research.md     # opcionales
+│   └── README.md
 ├── templates/
 ├── specs/<dominio>/SDD-NNN-*.md
 ├── archive/<YYYY>/<dominio>/SDD-NNN-*.md
@@ -48,7 +55,7 @@ Discovery → Draft → Ready → In Build → Validating → Released
 | **Draft**      | `specs/<dominio>/SDD-NNN-slug.md`                        | Definition of Ready (DoR) cumplida                                      |
 | **Ready**      | spec con `Estado: Ready`                                 | Aprobación humana; alcance congelado; dependencias resueltas            |
 | **In Build**   | código local + evidencia de verificación                 | Quality gates en verde; `verify-implementation` OK; **sin push/PR aún** |
-| **Validating** | PR + [`checklist-pr.md`](checklist-pr.md) + perfil stack | DoD cumplida; revisión humana antes de merge                            |
+| **Validating** | PR + [`checklist-pr.md`](guides/checklist-pr.md) + perfil stack | DoD cumplida; revisión humana antes de merge                            |
 | **Released**   | `archive/<YYYY>/<dominio>/` + entrada en release         | Mergeado, desplegado, archivado                                         |
 | **Descartado** | `archive/<YYYY>/<dominio>/` (spec formalizado) o solo BACKLOG (pausa) | Cerrado sin entrega; no vuelve a `specs/`                       |
 
@@ -62,7 +69,7 @@ Los **estados** del spec son la fuente de verdad del progreso. Los **prompts** d
 | **Prompt**            | Plantilla del catálogo para disparar trabajo del agente              |
 | **Regla always-on**   | Comportamiento del agente sin prompt (p. ej. reglas del IDE)         |
 
-Contratos always-on del kit: workflow SDD y [safe-git](safe-git-contract.md) (Git destructivo). Detalle de instalación: [`agent-setup.md`](agent-setup.md).
+Contratos always-on del kit: workflow SDD y [safe-git](safe-git-contract.md) (Git destructivo). Detalle de instalación: [`agent-setup.md`](guides/agent-setup.md).
 
 | Situación                        | ¿Prompt?    | Notas                                             |
 | -------------------------------- | ----------- | ------------------------------------------------- |
@@ -129,7 +136,7 @@ Un PR puede referenciar **varios** `SDD-NNN` cuando:
 3. La descripción del PR lista todos los IDs y criterios por spec.
 4. Al cerrar release, cada spec se archiva individualmente.
 
-Detalle en [`checklist-pr.md`](checklist-pr.md).
+Detalle en [`checklist-pr.md`](guides/checklist-pr.md).
 
 **Prompts por fase** (catálogo: [`prompt-catalog.md`](prompt-catalog.md)):
 
@@ -164,7 +171,7 @@ Estado canónico en cabecera: **`Descartado`**. No usar `Deprecated` (alias info
 
 ### Hotfix
 
-Rama `hotfix/…` → PR a rama de producción (ver [`branching.md`](branching.md)). Preferir spec `bugfix`; en urgencia extrema, ID `—` en release. Prompt: `hotfix-minor` en [`prompt-catalog.md`](prompt-catalog.md).
+Rama `hotfix/…` → PR a rama de producción (ver [`branching.md`](guides/branching.md)). Preferir spec `bugfix`; en urgencia extrema, ID `—` en release. Prompt: `hotfix-minor` en [`prompt-catalog.md`](prompt-catalog.md).
 
 ---
 

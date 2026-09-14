@@ -30,9 +30,10 @@ $BusinessPath = Join-Path $TargetRoot ".github/docs/business"
 }
 New-Item -ItemType Directory -Force -Path $BusinessPath | Out-Null
 
-@("workflow.md", "operations.md", "branching.md", "checklist-pr.md", "adoption-guide.md", "agent-setup.md", "healthy-development.md", "upgrade-guide.md", "README.md", "prompt-catalog.md") | ForEach-Object {
+@("workflow.md", "README.md", "prompt-catalog.md") | ForEach-Object {
     Copy-Item (Join-Path $KitDir "core\$_") (Join-Path $FullSdd $_) -Force
 }
+Copy-Item (Join-Path $KitDir "core\guides") (Join-Path $FullSdd "guides") -Recurse -Force
 
 Copy-Item (Join-Path $KitDir "core\prompts") (Join-Path $FullSdd "prompts") -Recurse -Force
 Copy-Item (Join-Path $KitDir "core\releases\*") (Join-Path $FullSdd "releases\") -Recurse -Force
@@ -133,5 +134,5 @@ if (Test-Path $installAgents) {
 }
 
 Write-Host "SDD inicializado en $FullSdd (perfil: $Profile)"
-Write-Host "Siguiente: revisar sdd.config.yaml, completar business/ y leer adoption-guide.md"
+Write-Host "Siguiente: revisar sdd.config.yaml, completar business/ y leer guides/adoption-guide.md"
 Write-Host "Validar: .\sdd-kit\bootstrap\validate-sdd.ps1 -SddPath `"$SddPath`""

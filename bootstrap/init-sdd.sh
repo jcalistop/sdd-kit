@@ -45,9 +45,10 @@ mkdir -p "$FULL_SDD"/{specs,archive,adr,releases,templates}
 mkdir -p "$TARGET_ROOT/$BUSINESS_PATH"
 
 # Core docs (copia inicial; proyectos pueden enlazar al kit vía submodule)
-for f in workflow.md operations.md branching.md checklist-pr.md adoption-guide.md agent-setup.md healthy-development.md upgrade-guide.md README.md prompt-catalog.md; do
+for f in workflow.md README.md prompt-catalog.md; do
   cp "$KIT_DIR/core/$f" "$FULL_SDD/$f"
 done
+cp -r "$KIT_DIR/core/guides" "$FULL_SDD/guides"
 
 cp -r "$KIT_DIR/core/prompts" "$FULL_SDD/"
 cp -r "$KIT_DIR/core/releases/"* "$FULL_SDD/releases/"
@@ -98,7 +99,7 @@ Instancia SDD generada con **sdd-kit** (perfil \`$PROFILE\`).
 
 **Config:** [sdd.config.yaml](sdd.config.yaml)
 
-**Checklist PR:** [checklist-pr.md](checklist-pr.md) + [profiles/$PROFILE/checklist-stack.md](profiles/$PROFILE/checklist-stack.md)
+**Checklist PR:** [guides/checklist-pr.md](guides/checklist-pr.md) + [profiles/$PROFILE/checklist-stack.md](profiles/$PROFILE/checklist-stack.md)
 EOF
 
 # Business stub
@@ -145,5 +146,5 @@ else
 fi
 
 echo "SDD inicializado en $FULL_SDD (perfil: $PROFILE)"
-echo "Siguiente: revisar sdd.config.yaml, completar business/ y leer adoption-guide.md."
+echo "Siguiente: revisar sdd.config.yaml, completar business/ y leer guides/adoption-guide.md."
 echo "Validar: ./sdd-kit/bootstrap/validate-sdd.sh $SDD_PATH"

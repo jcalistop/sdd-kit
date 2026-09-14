@@ -23,7 +23,7 @@ Extensiones opcionales (p. ej. rama de dependencias): ver `profiles/<stack>/bran
 
 ## Releases
 
-Referencia: [`releases/RUNBOOK.md`](releases/RUNBOOK.md).
+Referencia: [`releases/RUNBOOK.md`](../releases/RUNBOOK.md).
 
 ### Cierre en desarrollo (antes del PR de campaña)
 

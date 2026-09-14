@@ -15,7 +15,7 @@ Abrir PR con checklist SDD hacia **`{{DEV_BRANCH}}`**.
 
 1. Spec del `SDD-NNN` — **solo cabecera** (ID, título, dominio, tipo, estado)
 2. `{{SDD_PATH}}/BACKLOG.md` — verificar que el spec está en In Build → mover a Validating
-3. `{{SDD_PATH}}/checklist-pr.md` — checklist PR
+3. `{{SDD_PATH}}/guides/checklist-pr.md` — checklist PR
 
 **NO leer** el spec completo ni domain-rules (ya verificado en fase anterior).
 
@@ -23,7 +23,7 @@ Abrir PR con checklist SDD hacia **`{{DEV_BRANCH}}`**.
 
 | Artefacto    | Ruta                               |
 | ------------ | ---------------------------------- |
-| Checklist PR | `{{SDD_PATH}}/checklist-pr.md`     |
+| Checklist PR | `{{SDD_PATH}}/guides/checklist-pr.md`     |
 | Plantilla PR | `.github/PULL_REQUEST_TEMPLATE.md` |
 | Workflow     | `{{SDD_PATH}}/workflow.md`         |
 

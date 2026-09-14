@@ -2,7 +2,7 @@
 
 > Qué herramienta lee qué archivo, cómo reinstalar adaptadores y cómo trabajar sin agente.
 
-**Relacionado:** [`adoption-guide.md`](adoption-guide.md) · [`INSTALL.md`](../INSTALL.md)
+**Relacionado:** [`adoption-guide.md`](adoption-guide.md) · [`INSTALL.md`](../../INSTALL.md)
 
 ---
 
@@ -19,20 +19,20 @@ El **core SDD** (BACKLOG, specs, CLI, `validate-sdd`) no depende de ningún IDE.
 
 La fuente única de contenido está en `sdd-kit/bootstrap/agent-prompts/` (reglas) y `sdd-kit/bootstrap/agent-skills/` (skills Cursor); los adaptadores solo cambian el envoltorio.
 
-**Skills Cursor (v1.2.0+):** `install-agents.py` instala las 6 skills `sdd-*` desde `bootstrap/agent-skills/manifest.json` en `.cursor/skills/` del **proyecto**. Solo sobrescribe carpetas del manifest; no toca skills Boost del proyecto. Tras instalar (o si las skills del proyecto ya estaban al día), elimina del home del usuario (`~/.cursor/skills`) las mismas carpetas `sdd-*` del manifest si existen — log `removed global skill: <id>`. **Precedencia instancia > global:** las skills del repo son la fuente de verdad; no reinstala skills en el home. Las reglas de rama se renderizan según `agent.branching_mode` (`feature-pr-dev` | `solo-push-dev`; default `feature-pr-dev`). Otras precedencias de harness: skills SDD on-demand > `sdd prompt show` copy-paste > reglas on-demand.
+**Skills Cursor (v1.2.0+):** `install-agents.py` instala las 6 skills `sdd-*` desde `bootstrap/agent-skills/manifest.json` en `.cursor/skills/` del **proyecto**. Solo sobrescribe carpetas del manifest; no toca skills Boost del proyecto. Al renderizar, sustituye `{{PROFILE}}` (canónico; alias `{{STACK_PROFILE}}`) con el perfil de install/`stack.profile` y persiste `profile` en `.sdd-kit-manifest.json` — si el perfil cambia, re-escribe las skills (no deja un perfil ajeno hardcodeado). Tras instalar (o si las skills del proyecto ya estaban al día), elimina del home del usuario (`~/.cursor/skills`) las mismas carpetas `sdd-*` del manifest si existen — log `removed global skill: <id>`. **Precedencia instancia > global:** las skills del repo son la fuente de verdad; no reinstala skills en el home. **No adjuntar** skills `sdd-*` desde `~/.cursor` de otro proyecto (pueden traer perfil/branching ajenos). Las reglas de rama se renderizan según `agent.branching_mode` (`feature-pr-dev` | `solo-push-dev`; default `feature-pr-dev`). Otras precedencias de harness: skills SDD on-demand > `sdd prompt show` copy-paste > reglas on-demand.
 
-**Claude / Codex / Copilot:** el preambulo del bloque marcado incluye mapa trigger → prompt kit (paridad con skills Cursor) y **mención** de safe-git (párrafo corto). **No** reciben la regla completa `sdd-safe-git.mdc`: el contrato íntegro vive en Cursor (`alwaysApply`) y en [`safe-git-contract.md`](safe-git-contract.md). Esa asimetría es intencional (tokens / formato del adaptador); no implica que el contrato no aplique al humano — el agente no-Cursor solo ve el resumen del preamble.
+**Claude / Codex / Copilot:** el preambulo del bloque marcado incluye mapa trigger → prompt kit (paridad con skills Cursor) y **mención** de safe-git (párrafo corto). **No** reciben la regla completa `sdd-safe-git.mdc`: el contrato íntegro vive en Cursor (`alwaysApply`) y en [`safe-git-contract.md`](../safe-git-contract.md). Esa asimetría es intencional (tokens / formato del adaptador); no implica que el contrato no aplique al humano — el agente no-Cursor solo ve el resumen del preamble.
 
 **Dogfood del repositorio sdd-kit:** este repo productor usa `agent.targets: [cursor]` a propósito. No se versionan `CLAUDE.md` / `AGENTS.md` / `copilot-instructions` en el kit salvo decisión explícita de mantenedores. Los consumidores sí pueden declarar varios targets e instalarlos con `install-agents`.
 
-**Cursor — política de tokens:** `sdd-agent-workflow.mdc` y `sdd-safe-git.mdc` usan `alwaysApply: true` (safe-git es texto corto). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Las skills `sdd-draft-spec` y `sdd-build-spec` incluyen la instrucción de lectura previa (`BACKLOG.md`, `sdd.config.yaml`, `domain-rules.md`), evitando cargarla en tareas no-SDD. Detalle: [`.github/docs/business/planning/TOKEN-OPTIMIZATION.md`](../.github/docs/business/planning/TOKEN-OPTIMIZATION.md). Contrato canónico: [`safe-git-contract.md`](safe-git-contract.md).
+**Cursor — política de tokens:** `sdd-agent-workflow.mdc` y `sdd-safe-git.mdc` usan `alwaysApply: true` (safe-git es texto corto). `sdd-workflow-reference.mdc` (checklists DoR/DoD, antipatrones) y `sdd-stack-<perfil>.mdc` usan `alwaysApply: false` y se leen en fases Draft, In Build o Validating. Las skills `sdd-draft-spec` y `sdd-build-spec` incluyen la instrucción de lectura previa (`BACKLOG.md`, `sdd.config.yaml`, `domain-rules.md`), evitando cargarla en tareas no-SDD. Detalle: [`.github/docs/business/planning/TOKEN-OPTIMIZATION.md`](../../.github/docs/business/planning/TOKEN-OPTIMIZATION.md). Contrato canónico: [`safe-git-contract.md`](../safe-git-contract.md).
 
 ### Ciclo SDD con agente (resumen)
 
 | Qué                      | Detalle                                                                                |
 | ------------------------ | -------------------------------------------------------------------------------------- |
 | **Estados**              | Discovery → Draft → Ready → In Build → Validating → Released (`workflow.md`)           |
-| **Prompts**              | Disparadores opcionales del [catálogo](prompt-catalog.md); no son fases obligatorias   |
+| **Prompts**              | Disparadores opcionales del [catálogo](../prompt-catalog.md); no son fases obligatorias   |
 | **Aprobaciones humanas** | Ready (spec) y merge del PR — frase corta basta                                        |
 | **Verify local**         | Obligatorio antes de `push`/PR (`verify-implementation`); ver `sdd-workflow-reference` |
 | **Deprecados**           | `approve-ready` / `implement-spec` → `build-spec` (`sdd prompt show` redirige)         |
@@ -81,7 +81,7 @@ Con `--no-prompt` y `--agent auto`: solo instala si hay **un** candidato claro; 
 
 ### Reinstalar o actualizar tras actualizar el kit
 
-Flujo completo (submodule, merge de instancia, log de version): [`upgrade-guide.md`](upgrade-guide.md). Prompt: `upgrade-kit` en [prompt-catalog.md](prompt-catalog.md).
+Flujo completo (submodule, merge de instancia, log de version): [`upgrade-guide.md`](upgrade-guide.md). Prompt: `upgrade-kit` en [prompt-catalog.md](../prompt-catalog.md).
 
 Reinstalar solo adaptadores (paso del runbook):
 
@@ -125,7 +125,7 @@ agent:
 
 ## Trabajar sin adaptador instalado
 
-1. Lee [`workflow.md`](workflow.md) y [`adoption-guide.md`](adoption-guide.md).
+1. Lee [`workflow.md`](../workflow.md) y [`adoption-guide.md`](adoption-guide.md).
 2. Pide al agente explícitamente: _"Sigue el flujo de `sdd-agent-workflow` en sdd-kit; crea spec Draft para [idea]."_
 3. Usa la CLI: `python sdd-kit/cli/sdd.py spec new ...` y `validate`.
 
@@ -152,7 +152,7 @@ Además de la regla Cursor, añade el prompt en:
 sdd-kit/bootstrap/agent-prompts/stacks/<perfil>.md
 ```
 
-Y actualiza `stack-descriptions.json`. Ver [`templates/profile-template.md`](templates/profile-template.md).
+Y actualiza `stack-descriptions.json`. Ver [`templates/profile-template.md`](../templates/profile-template.md).
 
 ---
 

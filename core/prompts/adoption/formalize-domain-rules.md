@@ -8,7 +8,7 @@ when: Antes del primer spec no trivial; domain-rules.md en estado plantilla
 prerequisites:
   - business/domain-rules.md existe (puede ser plantilla)
 related:
-  - adoption-guide.md#formalizar-el-contexto-de-negocio
+  - guides/adoption-guide.md#formalizar-el-contexto-de-negocio
   - templates/business-domain-template.md
 tags: [onboarding, business-context]
 human_approval: true
@@ -45,5 +45,5 @@ Responde las preguntas del agente con el detalle que tengas. Revisa y aprueba lo
 
 ## Ver también
 
-- [`adoption-guide.md`](../../adoption-guide.md) — Formalizar contexto de negocio
+- [`guides/adoption-guide.md`](../../guides/adoption-guide.md) — Formalizar contexto de negocio
 - [`templates/business-domain-template.md`](../../templates/business-domain-template.md)

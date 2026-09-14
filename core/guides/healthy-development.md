@@ -3,7 +3,7 @@
 > Referencia curada de arquitectura, patrones, antipatrones, codigo limpio y calidad.
 > Para **humanos** (diseno, implementacion, revision) y **agentes de IA** (specs, codigo, PRs).
 >
-> **Relacionado:** [`workflow.md`](workflow.md) · [`checklist-pr.md`](checklist-pr.md) · [`adr/README.md`](adr/README.md)
+> **Relacionado:** [`workflow.md`](../workflow.md) · [`checklist-pr.md`](checklist-pr.md) · [`adr/README.md`](../adr/README.md)
 
 ---
 
@@ -43,7 +43,7 @@ Prioriza en este orden:
 | **Fundamentals of Software Architecture** (Richards & Ford)  | Trade-offs entre monolito, microservicios, event-driven, etc.                    |
 | **Software Architecture: The Hard Parts** (Ford et al.)      | Cuando dividir servicios y como manejar datos distribuidos                       |
 | **Building Evolutionary Architectures** (Ford, Parsons, Kua) | Arquitectura que evoluciona con fitness functions y CI                           |
-| **ADR** (Architecture Decision Records)                      | Documentar _por que_ se eligio X y no Y — ver [`adr/`](adr/README.md)            |
+| **ADR** (Architecture Decision Records)                      | Documentar _por que_ se eligio X y no Y — ver [`adr/`](../adr/README.md)            |
 
 **Regla practica:** empieza simple (monolito modular); divide solo cuando el dolor lo justifique.
 
@@ -268,8 +268,8 @@ Orden sugerido si solo puedes leer cinco:
 
 | Documento                                | Uso                         |
 | ---------------------------------------- | --------------------------- |
-| [`workflow.md`](workflow.md)             | Ciclo SDD, DoR/DoD          |
+| [`workflow.md`](../workflow.md)             | Ciclo SDD, DoR/DoD          |
 | [`checklist-pr.md`](checklist-pr.md)     | DoD de trazabilidad en PRs  |
-| [`adr/README.md`](adr/README.md)         | Cuando y como escribir ADRs |
+| [`adr/README.md`](../adr/README.md)         | Cuando y como escribir ADRs |
 | [`adoption-guide.md`](adoption-guide.md) | Adopcion incremental de SDD |
 | `profiles/<stack>/checklist-stack.md`    | Quality gates del stack     |

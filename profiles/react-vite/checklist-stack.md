@@ -1,6 +1,21 @@
 # Checklist de PR — React + Vite (stack)
 
-> Complementa [`../../core/checklist-pr.md`](../../core/checklist-pr.md). Marcar en cada PR junto con el checklist core.
+> Complementa [`../../core/guides/checklist-pr.md`](../../core/guides/checklist-pr.md). Marcar en cada PR junto con el checklist core.
+
+---
+
+## Verify — comandos obligatorios
+
+> Gate local antes de open-pr / evidencia de `verify-implementation`. Ejecutar literales de `stack.quality_gates`.
+
+| Gate | Cuándo | Comando |
+| ---- | ------ | ------- |
+| test | Siempre | `vitest run` |
+| lint | Siempre | `eslint .` |
+| format | Siempre | `prettier --check .` |
+| types | Siempre | `tsc --noEmit` |
+| Tests (alcance) | Preferir filtro al alcance del spec si el tooling lo permite; si no, suite del gate | p. ej. `vitest run path/to/file` |
+| Condicional JS | Si el diff tocó `package.json`, lockfile o assets JS del front | `npm audit` |
 
 ---
 

@@ -40,8 +40,9 @@ Instrucciones:
 1. Asigna SDD-NNN global y crea specs/<dominio>/SDD-NNN-slug.md.
 2. Elige plantilla completa o simple según reglas de sdd-agent-workflow.
 3. Completa DoR; cita reglas de business/domain-rules.md si aplican.
-4. Actualiza BACKLOG.md a Draft.
-5. Presenta el spec para mi revisión.
+4. Si hay decisiones abiertas o riesgo de LLM de bajo contexto, ofrece la sección opcional «Congelado para implementación» (N sin default; incompleto sin N+lista si se usa).
+5. Actualiza BACKLOG.md a Draft.
+6. Presenta el spec para mi revisión.
 ```
 
 ## Después de pegarlo

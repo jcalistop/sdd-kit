@@ -28,7 +28,7 @@ Si el spec referencia un ADR, leer solo ese ADR.
 | BACKLOG           | `{{SDD_PATH}}/BACKLOG.md`                   |
 | Config            | `{{SDD_PATH}}/sdd.config.yaml`              |
 | Reglas de negocio | `{{SDD_PATH}}/../business/domain-rules.md`  |
-| Ramas             | `{{SDD_PATH}}/branching.md`                 |
+| Ramas             | `{{SDD_PATH}}/guides/branching.md`                 |
 | Verificación      | `.cursor/rules/sdd-workflow-reference.mdc`  |
 | Perfil stack      | `.cursor/rules/sdd-stack-{{PROFILE}}.mdc`   |
 
@@ -40,16 +40,34 @@ Si el spec referencia un ADR, leer solo ese ADR.
 
 ---
 
+## Gate fail-closed (antes de mutar estado)
+
+**Señales** (cualquiera basta): Plan mode activo; el humano dijo «te guío» / «guiame» / «vamos paso a paso» / «no implementes aún»; o guía humana activa (iterar plan/Draft **sin** aprobar Ready).
+
+**Contrato:**
+
+| Contexto | Acción |
+| -------- | ------ |
+| Señal **y** sin frase de aprobación | **STOP.** No actualizar cabecera ni BACKLOG a Ready/In Build. Pedir frase explícita y esperar. |
+| Señal **y** frase de aprobación | Permitido: Draft→Ready→In Build. |
+| Sin señal | Contrato actual: frase de aprobación o invocación `build-spec` basta. |
+
+**Frases de aprobación** (ejemplos): `apruebo SDD-NNN…`, `build-spec`, «apruebo para implementar». Ver [reference.md](reference.md).
+
+**No es señal por sí sola:** adjuntar el skill, «revisa el spec», o Agent mode sin las señales de arriba.
+
+---
+
 ## A. Implementación
 
-1. Draft aprobado → Ready → In Build (spec + BACKLOG).
+1. Pasar el gate fail-closed de arriba. Luego Draft aprobado → Ready → In Build (spec + BACKLOG).
 2. Preguntar rama local según `branching.md` o rama actual.
 
 ### Ramas / branching
 
 {{BRANCHING_RULES}}
 
-3. Implementar alcance del spec; quality gates del perfil `{{PROFILE}}`.
+3. Implementar alcance del spec; quality gates del perfil `{{PROFILE}}`. Si el spec incluye «Congelado para implementación»: leer solo la lista (máx. N) y no explorar fuera (guía; no sensor CI).
 4. Al terminar → verify § B + **Smoke manual (humano)**.
 
 ### Enrutamiento skills de dominio

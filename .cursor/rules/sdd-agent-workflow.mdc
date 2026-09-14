@@ -79,7 +79,7 @@ Leer `business/domain-rules.md` (ruta `paths.business` del config) al iniciar sp
 
 **Ready** — Humano aprueba (frase o `build-spec`) → cabecera y BACKLOG a Ready; confirmar dependencias; congelar alcance.
 
-**In Build** — Estado In Build; rama local; implementar según spec y perfil stack; quality gates en verde. **`draft-review` es opcional** (solo ritual DoR formal). **No push ni PR** hasta verificación local.
+**In Build** — Estado In Build; rama local; implementar según spec y perfil stack; quality gates en verde. Si el spec trae «Congelado para implementación»: respetar lista de lectura + N y no explorar fuera (guía). **`draft-review` es opcional** (solo ritual DoR formal). **No push ni PR** hasta verificación local.
 
 **Verify (In Build)** — `verify-implementation` obligatorio (sensor): criterios de aceptación, `domain-rules.md`, arquitectura sana (reference). Presentar evidencia. Solo tras OK → commit, push, PR.
 

@@ -14,6 +14,7 @@
 - ¿Qué queda **fuera** de alcance?
 - ¿Depende de algún SDD en curso?
 - ¿Versión objetivo según campaña abierta en BACKLOG?
+- ¿Hace falta «Congelado para implementación» (decisión única, API, tests, lista + N)? Si sí: ¿cuál es N y la lista?
 
 ---
 

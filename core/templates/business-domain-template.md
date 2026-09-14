@@ -134,4 +134,4 @@ Gestion de stock de productos no perecederos. Usuarios internos de bodega y sucu
 
 - Contexto general: [`README.md`](README.md)
 - Metodologia: `.github/docs/sdd/workflow.md`
-- Formalizacion: `.github/docs/sdd/adoption-guide.md` (seccion "Formalizar el contexto de negocio")
+- Formalizacion: `.github/docs/sdd/guides/adoption-guide.md` (seccion "Formalizar el contexto de negocio")

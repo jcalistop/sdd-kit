@@ -13,4 +13,4 @@
 {{BRANCHING_RULES}}
 
 - Habitual (si aplica PR): **`{{DEV_BRANCH}}`**
-- Hotfix producción: rama de producción — ver `{{SDD_PATH}}/branching.md`
+- Hotfix producción: rama de producción — ver `{{SDD_PATH}}/guides/branching.md`

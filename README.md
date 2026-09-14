@@ -2,13 +2,13 @@
 
 # SDD Kit — Spec-Driven Development
 
-Metodología para desarrollar **con un plan antes de codear**. Es un **agent harness** para desarrollo spec-first: define reglas, verificaciones y ciclo de trabajo alrededor del agente de IA (Cursor, Claude Code, Codex, Copilot). El agente redacta specs y código; tú apruebas en puntos clave.
+Metodología para desarrollar **con un plan antes de escribir código**. Es un **agent harness** para desarrollo spec-first: define reglas, verificaciones y ciclo de trabajo alrededor del agente de IA (Cursor, Claude Code, Codex, Copilot). El agente redacta specs y código; tú apruebas en puntos clave.
 
 [![Repositorio](https://img.shields.io/badge/repo-jcalistop%2Fsdd--kit-24292f?style=flat-square&logo=github)](https://github.com/jcalistop/sdd-kit)
 [![Spec-first](https://img.shields.io/badge/enfoque-spec--first-2563eb?style=flat-square)](core/workflow.md)
 [![Agent-harness](https://img.shields.io/badge/tipo-agent%20harness-0d9488?style=flat-square)](core/concepts.md)
 [![Multi-stack](https://img.shields.io/badge/stacks-Laravel%20%7C%20Django%20%7C%20FastAPI%20%7C%20React-059669?style=flat-square)](profiles/)
-[![Agent-ready](https://img.shields.io/badge/agente-Cursor%20%7C%20Claude%20%7C%20Codex%20%7C%20Copilot-7c3aed?style=flat-square)](core/agent-setup.md)
+[![Agent-ready](https://img.shields.io/badge/agente-Cursor%20%7C%20Claude%20%7C%20Codex%20%7C%20Copilot-7c3aed?style=flat-square)](core/guides/agent-setup.md)
 
 **Repositorio:** https://github.com/jcalistop/sdd-kit
 
@@ -22,10 +22,13 @@ Metodología para desarrollar **con un plan antes de codear**. Es un **agent har
 | --- | ------------------------------------------------------- | ------------------------------------------- |
 | 🚀  | [Instalación](INSTALL.md)                               | Submodule, copia puntual o solo docs        |
 | 📖  | [Conceptos en 5 min](core/concepts.md)                  | Primera vez con SDD + glosario              |
-| 🗺️  | [Adopción incremental](core/adoption-guide.md)          | Etapas 1–3 en proyectos nuevos o existentes |
-| 🤖  | [Configuración del agente](core/agent-setup.md)         | Cursor, Claude, Codex, Copilot              |
+| 🗺️  | [Adopción incremental](core/guides/adoption-guide.md)   | Etapas 1–3 en proyectos nuevos o existentes |
+| 🤖  | [Configuración del agente](core/guides/agent-setup.md)  | Cursor, Claude, Codex, Copilot              |
 | 🎯  | [Skills SDD](core/prompt-catalog.md#skills-cursor-v120) | 6 skills on-demand en Cursor (v1.2.0+)      |
 | 🧭  | [Ciclo SDD](core/workflow.md)                           | Estados, DoR/DoD, releases                  |
+| 🔐  | [Safe-git](core/safe-git-contract.md)                   | Contrato Git destructivo (harness)          |
+| 📚  | [Mapa del core](core/README.md)                         | Contratos en raíz vs guías en `guides/`     |
+| 🔍  | [Audits](core/guides/audits.md) / [Research](core/guides/research.md) | Metodologías opcionales bajo `paths.sdd` |
 | 🛠️  | [CLI](cli/README.md)                                    | `validate`, `backlog`, `spec new`           |
 | 💬  | [Catálogo de prompts](core/prompt-catalog.md)           | Plantillas copy-paste por fase y adopción   |
 
@@ -46,7 +49,7 @@ Metodología para desarrollar **con un plan antes de codear**. Es un **agent har
 ## La idea en 30 segundos
 
 1. Tienes una **idea o tarea** → la anotas en `BACKLOG.md`.
-2. Antes de codear, escribes un **spec** (documento corto): qué quieres, qué no incluye, cómo sabrás que está listo.
+2. Antes de escribir código, escribes un **spec** (documento corto): qué quieres, qué no incluye, cómo sabrás que está listo.
 3. Cuando el spec está **aprobado**, implementas (o el agente implementa).
 4. Al terminar, archivas el spec y registras la **release**.
 
@@ -117,7 +120,7 @@ python sdd-kit/cli/sdd.py init --profile laravel-filament --project "Mi App"
 
 Atajos: `./sdd-kit/bootstrap/init-sdd.sh` (bash) · `.\sdd-kit\bootstrap\init-sdd.ps1` (solo PowerShell).
 
-Por defecto detecta tu agente/IDE (`-Agent auto`) e instala reglas SDD y **skills Cursor** (`sdd-*`). Ver **[`core/agent-setup.md`](core/agent-setup.md)**.
+Por defecto detecta tu agente/IDE (`-Agent auto`) e instala reglas SDD y **skills Cursor** (`sdd-*`). Ver **[`core/guides/agent-setup.md`](core/guides/agent-setup.md)**.
 
 #### Proyecto existente — modo agente (recomendado)
 
@@ -125,7 +128,7 @@ Por defecto detecta tu agente/IDE (`-Agent auto`) e instala reglas SDD y **skill
 
 **Tú:** añade el submodule (Paso 2) y abre el chat del agente.
 
-**El agente:** sigue [`core/adoption-guide.md`](core/adoption-guide.md) Etapa 1, lee lo que ya existe y no sobrescribe documentación sin tu aprobación.
+**El agente:** sigue [`core/guides/adoption-guide.md`](core/guides/adoption-guide.md) Etapa 1, lee lo que ya existe y no sobrescribe documentación sin tu aprobación.
 
 Usa el prompt **`adopt-existing`** del [catálogo de prompts](core/prompt-catalog.md):
 
@@ -145,7 +148,7 @@ Si no usaste el prompt anterior, completa a mano o pide al agente:
 | `.github/docs/business/README.md`  | Qué hace el sistema y quién lo usa                             |
 | `.github/docs/sdd/BACKLOG.md`      | 3–5 tareas reales en **Discovery** (lo que viene ahora)        |
 
-Checklist: **[`core/adoption-guide.md`](core/adoption-guide.md)** — Etapa 1.
+Checklist: **[`core/guides/adoption-guide.md`](core/guides/adoption-guide.md)** — Etapa 1.
 
 ### Paso 5 — Valida que todo esté bien
 
@@ -171,7 +174,7 @@ Ejemplos de calidad por perfil: `profiles/<perfil>/examples/SDD-001-*.md`.
 
 Cuando salga una versión nueva del kit, no basta con `git pull` en el submodule: la instancia en `.github/docs/sdd/` y los adaptadores de agente pueden requerir merge manual.
 
-1. Revisa [`core/upgrade-guide.md`](core/upgrade-guide.md) y el changelog en `docs/releases/`.
+1. Revisa [`core/guides/upgrade-guide.md`](core/guides/upgrade-guide.md) y el changelog en `docs/releases/`.
 2. Usa el prompt **`upgrade-kit`**: `python sdd-kit/cli/sdd.py prompt show upgrade-kit --full`
 3. Reinstala adaptadores si cambió `bootstrap/agent-skills/` o `agent-prompts/`: `python sdd-kit/bootstrap/install-agents.py`
 4. Tras validar, actualiza `kit.installed_version` y [`UPGRADE-LOG.md`](.github/docs/sdd/UPGRADE-LOG.md) en tu instancia.
@@ -186,11 +189,15 @@ Detalle: **[INSTALL.md](INSTALL.md)** — sección «Actualizar el kit».
 | ----------------- | ------------------------------- | ----------------------------------------- |
 | 💡 Nueva idea     | Describes el problema           | Anota en BACKLOG, propone spec            |
 | 📝 Spec en Draft  | **Apruebas o corriges** el spec | Redacta spec, verifica DoR                |
-| 🔨 Implementación | Autorizas empezar               | Codea en local según spec (sin push aún)  |
+| 🔨 Implementación | Autorizas empezar               | Escribe código en local según spec (sin push aún) |
 | 🔍 Verificación   | Revisas evidencia               | Cruza spec, domain-rules y quality gates  |
 | ✅ PR             | **Revisas y mergeas**           | Publica tras verify OK; checklist y tests |
 
 Adaptadores instalados según tu herramienta (ver `sdd.config.yaml` → `agent.targets`). En Cursor: reglas `sdd-agent-workflow`, `sdd-workflow-reference`, `sdd-safe-git`, `sdd-stack-<perfil>` y **6 skills** `sdd-*` (on-demand).
+
+**Safe-git:** el agente no ejecuta Git destructivo sin petición explícita — contrato [`core/safe-git-contract.md`](core/safe-git-contract.md).
+
+**Ramas:** `agent.branching_mode` (`feature-pr-dev` \| `solo-push-dev`) se aplica al instalar adaptadores; detalle en [`core/guides/agent-setup.md`](core/guides/agent-setup.md) y [upgrade v1.5.0](docs/releases/v1.5.0.md).
 
 ### Skills SDD (Cursor, v1.2.0+)
 
@@ -205,26 +212,30 @@ Fuente canónica: [`bootstrap/agent-skills/`](bootstrap/agent-skills/) · instal
 | cerrar campaña               | `sdd-close-release`         | `close-release`         |
 | upgrade-kit                  | `sdd-upgrade-kit`           | `upgrade-kit`           |
 
-**Precedencia:** skill > prompt copy-paste > regla on-demand. Claude/Codex/Copilot reciben el mismo mapa en el preámbulo del bloque marcado. Detalle: [`core/prompt-catalog.md`](core/prompt-catalog.md#skills-cursor-v120) · [`core/agent-setup.md`](core/agent-setup.md).
+**Precedencia:** skill > prompt copy-paste > regla on-demand. Claude/Codex/Copilot reciben el mismo mapa en el preámbulo del bloque marcado. Detalle: [`core/prompt-catalog.md`](core/prompt-catalog.md#skills-cursor-v120) · [`core/guides/agent-setup.md`](core/guides/agent-setup.md).
 
-> 🌱 **Desarrollo sano:** el agente también aplica [`core/healthy-development.md`](core/healthy-development.md) (evitar sobre-ingeniería y antipatrones).
+> 🌱 **Desarrollo sano:** el agente también aplica [`core/guides/healthy-development.md`](core/guides/healthy-development.md) (evitar sobre-ingeniería y antipatrones).
 
 ---
 
 ## Archivos que usarás seguido
 
-| Archivo                                                    | Para qué                                         |
-| ---------------------------------------------------------- | ------------------------------------------------ |
-| `BACKLOG.md`                                               | Lista única de tareas y su estado                |
-| `specs/<dominio>/SDD-NNN-*.md`                             | Specs activos (una tarea = un spec)              |
-| `business/domain-rules.md`                                 | Reglas de negocio que el agente no debe inventar |
-| `templates/spec-template.md`                               | Plantilla completa (features técnicas)           |
-| `templates/spec-simple-template.md`                        | Plantilla reducida (inicio o tareas simples)     |
-| `checklist-pr.md` + `profiles/<perfil>/checklist-stack.md` | Qué revisar antes del merge                      |
+Bajo `paths.sdd` (por defecto `.github/docs/sdd/`) y `paths.business`, salvo plantillas/checklist del kit:
+
+| Archivo | Para qué |
+| ------- | -------- |
+| `BACKLOG.md` | Lista única de tareas y su estado |
+| `specs/<dominio>/SDD-NNN-*.md` | Specs activos (una tarea = un spec) |
+| `business/domain-rules.md` | Reglas de negocio que el agente no debe inventar |
+| `templates/spec-template.md` | Plantilla completa (features técnicas; origen en `core/templates/`) |
+| `templates/spec-simple-template.md` | Plantilla reducida (inicio o tareas simples) |
+| [`core/guides/checklist-pr.md`](core/guides/checklist-pr.md) + `profiles/<perfil>/checklist-stack.md` | Qué revisar antes del merge |
 
 ---
 
 ## CLI (Python 3.10+)
+
+`validate` corre en local y también en **CI** (ramas `main` y `dev` del kit). `metrics` reporta **salud del proceso SDD** (conteos de BACKLOG, specs estancados) — no es metering de tokens.
 
 ```bash
 python sdd-kit/cli/sdd.py validate
@@ -239,11 +250,11 @@ Detalle: **[cli/README.md](cli/README.md)**.
 
 ## Cómo está organizado el kit
 
-Tres capas — no hace falta memorizarlas el día 1:
+Tres capas — no hace falta memorizarlas el día 1. En `core/`: **contratos/entrada** en la raíz (`workflow`, `concepts`, `safe-git-contract`, …) y **metodologías** en [`core/guides/`](core/guides/README.md).
 
 | Capa             | Dónde                                  | Qué es                                                          |
 | ---------------- | -------------------------------------- | --------------------------------------------------------------- |
-| 🧩 **Core**      | `core/`                                | Ciclo SDD, plantillas, guías (igual para todos)                 |
+| 🧩 **Core**      | `core/` + `core/guides/`               | Ciclo SDD, plantillas, contratos y guías (igual para todos)     |
 | 📦 **Perfil**    | `profiles/<stack>/`                    | Tests, deploy y checklist de tu stack                           |
 | 🔌 **Bootstrap** | `bootstrap/`                           | `init-sdd`, reglas (`agent-prompts/`), skills (`agent-skills/`) |
 | 📁 **Instancia** | `.github/docs/sdd/` en **tu** proyecto | Tu BACKLOG, specs y releases                                    |
@@ -263,27 +274,31 @@ tu-proyecto/
 
 ## Siguiente lectura (cuando avances)
 
-| Documento                                                    | Cuándo leerlo                               |
-| ------------------------------------------------------------ | ------------------------------------------- |
-| [`core/concepts.md`](core/concepts.md)                       | Primera vez con SDD                         |
-| [`core/adoption-guide.md`](core/adoption-guide.md)           | Proyecto nuevo o existente, etapas 1–3      |
-| [`core/workflow.md`](core/workflow.md)                       | Estados, tipos de spec, DoR/DoD             |
-| [`core/healthy-development.md`](core/healthy-development.md) | Buenas prácticas y antipatrones             |
-| [`core/agent-setup.md`](core/agent-setup.md)                 | Cursor, Claude, Codex, Copilot              |
-| [`core/upgrade-guide.md`](core/upgrade-guide.md)             | Actualizar el kit en proyectos existentes   |
-| [`INSTALL.md`](INSTALL.md)                                   | Otras formas de instalar (copia, solo docs) |
+| Documento | Cuándo leerlo |
+| --------- | ------------- |
+| [`core/concepts.md`](core/concepts.md) | Primera vez con SDD |
+| [`core/guides/adoption-guide.md`](core/guides/adoption-guide.md) | Proyecto nuevo o existente, etapas 1–3 |
+| [`core/workflow.md`](core/workflow.md) | Estados, tipos de spec, DoR/DoD |
+| [`core/safe-git-contract.md`](core/safe-git-contract.md) | Límites Git del agente |
+| [`core/guides/healthy-development.md`](core/guides/healthy-development.md) | Buenas prácticas y antipatrones |
+| [`core/guides/agent-setup.md`](core/guides/agent-setup.md) | Cursor, Claude, Codex, Copilot |
+| [`core/guides/upgrade-guide.md`](core/guides/upgrade-guide.md) | Actualizar el kit en proyectos existentes |
+| [`core/guides/audits.md`](core/guides/audits.md) / [`research.md`](core/guides/research.md) | Auditorías e investigación (opcionales bajo `paths.sdd`) |
+| [`INSTALL.md`](INSTALL.md) | Otras formas de instalar (copia, solo docs) |
 
 ---
 
 ## Mantenedores del kit
 
-| Recurso                                                            | Uso                                                                |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| [.github/docs/sdd/BACKLOG.md](.github/docs/sdd/BACKLOG.md)         | Tablero operativo de iniciativas (dogfooding SDD)                  |
-| [.github/docs/sdd/ADOPTION.md](.github/docs/sdd/ADOPTION.md)       | Plan de adopción SDD en este repositorio                           |
-| [.github/docs/business/planning/](.github/docs/business/planning/) | Análisis y roadmap histórico (no se copia a proyectos)             |
-| [docs/releases/](docs/releases/)                                   | Historial de versiones del kit ([v1.2.0](docs/releases/v1.2.0.md)) |
-| [docs/](docs/)                                                     | Glosario de capas en [docs/README.md](docs/README.md)              |
+**Dual-release** al cerrar versión: nota de producto en [`docs/releases/`](docs/releases/) + acta de campaña en [`.github/docs/sdd/releases/`](.github/docs/sdd/releases/) (la acta enlaza la nota; no unificar carpetas).
+
+| Recurso | Uso |
+| ------- | --- |
+| [.github/docs/sdd/BACKLOG.md](.github/docs/sdd/BACKLOG.md) | Tablero operativo de iniciativas (dogfooding SDD) |
+| [.github/docs/sdd/ADOPTION.md](.github/docs/sdd/ADOPTION.md) | Plan de adopción SDD en este repositorio |
+| [.github/docs/business/planning/](.github/docs/business/planning/) | Análisis y roadmap histórico (no se copia a proyectos) |
+| [docs/releases/](docs/releases/) | Historial SemVer del kit ([v1.5.0](docs/releases/v1.5.0.md) actual) |
+| [docs/](docs/) | Glosario de capas en [docs/README.md](docs/README.md) |
 
 Crear perfiles nuevos: **[`core/templates/profile-template.md`](core/templates/profile-template.md)**.
 

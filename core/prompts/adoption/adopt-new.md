@@ -9,8 +9,8 @@ prerequisites:
   - sdd-kit/ como submodule
   - Perfil elegido (ej. laravel-filament)
 related:
-  - adoption-guide.md#etapa-1
-  - agent-setup.md
+  - guides/adoption-guide.md#etapa-1
+  - guides/agent-setup.md
 cli_alternative: sdd init --profile <PERFIL> --project "<NOMBRE>"
 tags: [onboarding, new-project]
 human_approval: false
@@ -38,7 +38,7 @@ Contexto:
 - El kit está en sdd-kit/ (submodule).
 
 Instrucciones:
-1. Lee sdd-kit/core/adoption-guide.md (Etapa 1) y sdd-kit/core/agent-setup.md.
+1. Lee sdd-kit/core/guides/adoption-guide.md (Etapa 1) y sdd-kit/core/guides/agent-setup.md.
 2. Ejecuta init-sdd con perfil <PERFIL> y nombre de proyecto "<NOMBRE_PROYECTO>".
 3. Completa sdd.config.yaml, business/README.md y BACKLOG (3–5 ítems en Discovery).
 4. Instala adaptadores de agente (-Agent auto).
@@ -53,6 +53,6 @@ Revisa `sdd.config.yaml`, `business/README.md` y el BACKLOG propuesto. Aprueba o
 
 ## Ver también
 
-- [`adoption-guide.md`](../../adoption-guide.md) — Etapa 1
-- [`agent-setup.md`](../../agent-setup.md)
+- [`guides/adoption-guide.md`](../../guides/adoption-guide.md) — Etapa 1
+- [`guides/agent-setup.md`](../../guides/agent-setup.md)
 - `sdd prompt show formalize-domain-rules` — antes del primer spec no trivial

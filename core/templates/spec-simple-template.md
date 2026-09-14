@@ -1,7 +1,7 @@
 # Spec Simple Template — SDD
 
 > Plantilla reducida para tareas no tecnicas, flujos de proceso, mejoras organizacionales o iniciacion en SDD.
-> Si necesitas secciones tecnicas (BD, diseño tecnico, ADR), usa [`spec-template.md`](spec-template.md) en su lugar.
+> Si necesitas secciones tecnicas (BD, diseño tecnico, ADR) o el bloque «Congelado para implementación», usa [`spec-template.md`](spec-template.md) en su lugar.
 >
 > Copiar como `specs/<dominio>/SDD-NNN-slug.md`. Al cerrar: `git mv` a `archive/<YYYY>/<dominio>/`.
 

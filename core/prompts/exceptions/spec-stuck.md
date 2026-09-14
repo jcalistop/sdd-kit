@@ -9,7 +9,7 @@ prerequisites:
   - Spec SDD-NNN existente
 related:
   - workflow.md#revision-semanal-30-min
-  - adoption-guide.md
+  - guides/adoption-guide.md
 tags: [exception, replanning]
 human_approval: true
 ---
@@ -45,4 +45,4 @@ Elige una opción y confirma cambios en spec o BACKLOG.
 ## Ver también
 
 - [`workflow.md`](../../workflow.md) — Revisión semanal
-- [`operations.md`](../../operations.md)
+- [`guides/operations.md`](../../guides/operations.md)

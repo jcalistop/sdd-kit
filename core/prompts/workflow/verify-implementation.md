@@ -23,7 +23,7 @@ Gate **obligatorio** entre implementación local y publicación en Git. Cruza lo
 
 - Verifica criterios de aceptación (happy + error path) del spec.
 - Cruza `business/domain-rules.md` (o documenta No aplica).
-- Ejecuta checklist de arquitectura sana (`healthy-development.md`).
+- Ejecuta checklist de arquitectura sana (`guides/healthy-development.md`).
 - Presenta evidencia numerada (comandos, salidas, pasos manuales).
 - **No** hace `push` ni abre PR si hay ítems pendientes.
 - Si todo OK, indica que puede proceder `open-pr`.

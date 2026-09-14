@@ -1,6 +1,21 @@
 # Checklist de PR — Python + Django (stack)
 
-> Complementa [`../../core/checklist-pr.md`](../../core/checklist-pr.md). Marcar en cada PR junto con el checklist core.
+> Complementa [`../../core/guides/checklist-pr.md`](../../core/guides/checklist-pr.md). Marcar en cada PR junto con el checklist core.
+
+---
+
+## Verify — comandos obligatorios
+
+> Gate local antes de open-pr / evidencia de `verify-implementation`. Ejecutar literales de `stack.quality_gates`.
+
+| Gate | Cuándo | Comando |
+| ---- | ------ | ------- |
+| test | Siempre | `pytest --cov` |
+| lint | Siempre | `ruff check .` |
+| types | Siempre | `mypy .` |
+| django_check | Siempre | `python manage.py check` |
+| Tests (alcance) | Preferir filtro al alcance del spec si el tooling lo permite; si no, suite del gate | p. ej. `pytest path/to/tests -q` o `-k` |
+| Condicional JS | — | No aplica |
 
 ---
 

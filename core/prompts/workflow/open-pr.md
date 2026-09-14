@@ -9,7 +9,7 @@ prerequisites:
   - verify-implementation completado en verde
   - Quality gates en verde
 related:
-  - checklist-pr.md
+  - guides/checklist-pr.md
   - profiles/<stack>/checklist-stack.md
   - prompts/workflow/verify-implementation.md
 tags: [pr]
@@ -35,7 +35,7 @@ Abre PR para el spec <SDD-NNN> (o specs <SDD-NNN>, <SDD-MMM>).
 Instrucciones:
 1. Confirma que verify-implementation ya pasó en verde. Si no, detente y ejecuta verify primero.
 2. Commit de entrega, push y PR hacia la rama de desarrollo en sdd.config.yaml.
-3. Completa checklist-pr.md y checklist-stack del perfil en la descripción.
+3. Completa guides/checklist-pr.md y checklist-stack del perfil en la descripción.
 4. Referencia cada SDD-NNN, criterios cubiertos y evidencia de verify + tests.
 5. Actualiza spec(s) y BACKLOG a Validating.
 ```
@@ -46,6 +46,6 @@ Revisa el PR con `validate-pr` o frase equivalente antes de mergear.
 
 ## Ver también
 
-- [`checklist-pr.md`](../../checklist-pr.md)
+- [`guides/checklist-pr.md`](../../guides/checklist-pr.md)
 - `sdd prompt show verify-implementation`
 - `sdd prompt show validate-pr`

@@ -1,6 +1,7 @@
 # Harness Engineering -- Informe de investigacion para sdd-kit
 
 > **Fecha:** 2026-07-15 | **Autor:** agente SDD | **Contexto:** evaluacion de adopcion del paradigma harness engineering en sdd-kit.
+> **Metodología (post-SDD-027 / SDD-028):** [`core/guides/research.md`](../../../../core/guides/research.md) · stub [README.md](README.md) · plantilla [`research-nota`](../../../../core/templates/research-nota-template.md). Esta nota es ejemplo histórico (ensayo); **no** migrada al formato corto.
 
 ---
 
