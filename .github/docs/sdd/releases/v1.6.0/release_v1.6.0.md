@@ -46,8 +46,8 @@ Minor de producto: layout `core/guides/`, metodologías audits/research, Congela
 
 | Gate           | Resultado |
 | -------------- | --------- |
-| `sdd validate` | 0 errores (2026-09-13; kit-version aún `v1.5.0` hasta tag) |
-| Tag producto   | Pendiente confirmación humana (Fase 3 RUNBOOK) |
+| `sdd validate` | 0 errores (cierre documental) |
+| Tag producto   | `v1.6.0` en `5d6253b` · [GitHub Release](https://github.com/jcalistop/sdd-kit/releases/tag/v1.6.0) |
 
 ---
 
@@ -55,7 +55,6 @@ Minor de producto: layout `core/guides/`, metodologías audits/research, Congela
 
 | Ítem | Origen | Nota |
 | ---- | ------ | ---- |
-| Tag + GitHub Release | deploy.md | Tras merge a `main` / confirmación |
 | Smoke upgrade en consumidor externo desde v1.2 | SDD-033 | Diferido |
 
 ---
