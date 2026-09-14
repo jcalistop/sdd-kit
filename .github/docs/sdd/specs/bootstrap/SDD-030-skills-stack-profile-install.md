@@ -11,7 +11,7 @@
 | **Tipo**              | `bugfix`           |
 | **Fecha**             | 2026-09-12         |
 | **Estado**            | `In Build`         |
-| **Versión objetivo**  | patch (desde `v1.5.0`) |
+| **Versión objetivo**  | `v1.6.0` |
 | **Owner**             | mantenedor         |
 | **Prioridad**         | `P2`               |
 | **ADRs relacionados** | —                  |

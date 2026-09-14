@@ -40,13 +40,15 @@ Orden fijo — el agente debe seguirlo con prompt `upgrade-kit`:
 1. Detectar versión actual (config + submodule)
 2. Leer changelog de la versión destino
 3. Actualizar submodule a tag o commit
-4. Diff sdd-kit/core/ vs .github/docs/sdd/
+4. Diff guías/contratos kit vs instancia (ver paso 3 abajo; layout `guides/` desde v1.6)
 5. Merge con confirmación humana (nunca --force en instancia)
-6. Reinstalar adaptadores si cambió bootstrap/agent-prompts/
+6. Reinstalar adaptadores si cambió bootstrap/agent-prompts/ o agent-skills/
 7. sdd validate / validate-sdd
 8. Actualizar kit.installed_version y UPGRADE-LOG.md
 9. Commits separados: submodule + instancia
 ```
+
+**Fuente canónica del runbook tras el bump:** `sdd-kit/core/guides/upgrade-guide.md` (no dependas de una copia vieja en la instancia).
 
 ### 1. Detectar versión actual
 
@@ -70,15 +72,21 @@ git add sdd-kit
 
 ### 3. Portar cambios a la instancia
 
-Comparar (ejemplo):
+Desde **v1.6.0** las metodologías viven en `sdd-kit/core/guides/`. Comparar así:
 
 ```bash
-diff -rq sdd-kit/core .github/docs/sdd --exclude=prompts --exclude=profiles
+# Guías (metodologías)
+diff -rq sdd-kit/core/guides .github/docs/sdd/guides
+
+# Contratos / entrada que aún están en raíz de core/ (si los copias a instancia)
+# p. ej. workflow.md, concepts.md — solo si tu instancia los mantiene
 ```
+
+Si tu instancia **aún no** tiene carpeta `guides/` (instalación ≤v1.5): ver § **Tras v1.6.0** — migrar guías desde la raíz de `paths.sdd` antes o durante el merge.
 
 **Reglas de merge:**
 
-- Archivos **nuevos** en `core/` → copiar si no existen en instancia.
+- Archivos **nuevos** en `core/guides/` (o contratos de `core/`) → copiar si no existen en instancia.
 - Archivos **modificados** en ambos → mostrar diff; **pedir confirmación** antes de sobrescribir.
 - `BACKLOG.md`, `specs/`, `archive/` de tu proyecto → **nunca** reemplazar desde el kit.
 - `prompts/` y `prompt-catalog.md` → copiar solo entradas o fichas faltantes.
@@ -206,6 +214,46 @@ Minor post-dogfood:
 
 Detalle: `docs/releases/v1.5.0.md`.
 
+### v1.6.0 — Guías en `core/guides/` + contrato de consumo de la campaña
+
+Minor: layout de guías, Verify por perfil, Congelado opcional, audits/research, skills (profile + fail-closed build-spec), README de producto.
+
+#### Paths del kit
+
+Las metodologías salieron de la raíz de `core/` a **`core/guides/`** (sin stubs en la ruta vieja). Contratos/entrada (`workflow`, `concepts`, `safe-git-contract`, …) siguen en la raíz de `core/`. Índice: `sdd-kit/core/README.md` y `sdd-kit/core/guides/README.md`.
+
+#### Migrar la instancia (`paths.sdd`)
+
+Si en la raíz de tu instancia (p. ej. `.github/docs/sdd/`) aún tienes guías sueltas (`adoption-guide.md`, `upgrade-guide.md`, `agent-setup.md`, `branching.md`, `checklist-pr.md`, `healthy-development.md`, `operations.md`, …):
+
+1. Crea `guides/` si no existe.
+2. Con confirmación humana: `git mv` (o mover) esos archivos a `guides/` — **no** tocar `BACKLOG.md`, `specs/`, `archive/`, `business/`.
+3. Actualiza enlaces internos de la instancia que apunten a las rutas viejas.
+4. Diff canónico: `diff -rq sdd-kit/core/guides .github/docs/sdd/guides`.
+
+No hay script automático de migración; no se reintroducen stubs en `core/<guía>.md`.
+
+#### Novedades de campaña (consumidor)
+
+| Tema | Qué hacer |
+| ---- | --------- |
+| **Plantillas** | Sección opcional «Congelado para implementación» en plantillas de spec del kit |
+| **Verify** | Tabla «comandos obligatorios» en `profiles/*/checklist-stack.md` — al mergear checklist del perfil, conserva/adopta esa tabla |
+| **Audits / research** | Guías opcionales en `core/guides/`; artefactos bajo `paths.sdd` solo si las usas |
+| **Skills** | Reinstall: marcador guarda `profile`; build-spec fail-closed bajo Plan mode / «te guío» |
+| **Branching** | Si usas v1.5+: `agent.branching_mode` + reinstall (ver § v1.5.0) |
+
+#### Salto largo desde ≤v1.2 (recomendado)
+
+**No** hace falta un checkout por cada minor intermedio.
+
+1. Un solo `git checkout v1.6.0` en el submodule.
+2. Leer esta guía desde **`sdd-kit/core/guides/upgrade-guide.md`**.
+3. Aplicar en orden los checklists: **Tras v1.3.0+**, v1.3.1, v1.3.2, v1.4.0, v1.4.1, v1.5.0, **v1.6.0** (esta sección).
+4. Migrar `guides/` en instancia → merge → **reinstalar** adaptadores → `validate` → `kit.installed_version` + `UPGRADE-LOG`.
+
+Detalle producto: `docs/releases/v1.6.0.md` (al cerrar la campaña).
+
 ---
 
 ## Prompt para el agente
@@ -214,7 +262,7 @@ Detalle: `docs/releases/v1.5.0.md`.
 python sdd-kit/cli/sdd.py prompt show upgrade-kit --full
 ```
 
-Sustituye `<VERSION>` por la versión destino (ej. `v1.1.0`).
+Sustituye `<VERSION>` por la versión destino (ej. `v1.6.0`).
 
 ---
 

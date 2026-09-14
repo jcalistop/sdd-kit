@@ -13,7 +13,7 @@
 | **Tipo**              | `documentation`        |
 | **Fecha**             | 2026-09-13             |
 | **Estado**            | `In Build`             |
-| **Versión objetivo**  | patch (desde `v1.5.0`) |
+| **Versión objetivo**  | `v1.6.0` |
 | **Owner**             | mantenedor kit         |
 | **Prioridad**         | `P2`                   |
 | **ADRs relacionados** | —                      |
