@@ -7,6 +7,27 @@ Las notas detalladas en lenguaje accesible están en `vX.Y.Z.md` y en [GitHub Re
 
 ---
 
+## [1.6.0] - 2026-09-13
+
+Ver [v1.6.0.md](v1.6.0.md).
+
+### Añadido
+
+- Guías audits/research + plantillas (`audit-*`, `research-nota`) — SDD-026…028
+- Sección opcional «Congelado para implementación» en plantillas de spec — SDD-024
+- Tabla Verify de comandos obligatorios en checklists de perfil — SDD-025
+- § Tras v1.6.0 en upgrade-guide + checklist skill (salto ≤v1.2, migrate `guides/`) — SDD-033
+- build-spec fail-closed bajo Plan mode / «te guío» — SDD-031
+
+### Cambiado
+
+- Metodologías de raíz `core/` → `core/guides/` (sin stubs) — SDD-029
+- `install-agents`: re-render skills si cambia `profile` (+ alias `STACK_PROFILE`) — SDD-030
+- README raíz alineado a rutas y capacidades v1.3–v1.5 — SDD-032
+- Skill/prompt `upgrade-kit`: runbook canónico desde el kit post-bump — SDD-033
+
+---
+
 ## [1.5.0] - 2026-09-10
 
 Ver [v1.5.0.md](v1.5.0.md).

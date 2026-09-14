@@ -5,15 +5,15 @@
 
 **Próximo ID disponible:** `SDD-034`.
 
-**Versión acumulada del kit:** `v1.5.0` (ver [docs/releases/](../../../docs/releases/)).
+**Versión acumulada del kit:** `v1.6.0` (ver [docs/releases/](../../../docs/releases/)).
 
 ---
 
 ## Discovery
 
-> **Versión (recomendación SemVer):** campaña abierta → **`v1.6.0`** (minor desde `v1.5.0`). Criterio: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores; **—** = no define release del kit por sí sola.
+> **Versión (recomendación SemVer):** bump de producto kit al cerrar la iniciativa, desde `v1.6.0`. Criterio: **patch** = higiene/docs/CI sin API nueva; **minor** = capacidad o perfil nuevo backward-compatible; **major** = ruptura para consumidores; **—** = no define release del kit por sí sola.
 >
-> Dogfood externo **cerrado** (2026-09-10): [plan](audits/20260906-dogfood-consumidor-externo.md) · [informe](audits/20260906-dogfood-consumidor-externo-informe.md) (`minsal-centinela` / `v1.4.1`). Gaps abajo (restantes).
+> Dogfood externo **cerrado** (2026-09-10): [plan](audits/20260906-dogfood-consumidor-externo.md) · [informe](audits/20260906-dogfood-consumidor-externo-informe.md) (`minsal-centinela` / `v1.4.1`).
 
 | Dominio   | Idea / necesidad                                                                 | Versión | Notas                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
@@ -35,18 +35,9 @@
 
 ## In Build
 
-| ID      | Dominio  | Título | Versión | Spec |
-| ------- | -------- | ------ | ------- | ---- |
-| SDD-033 | bootstrap | Gaps de upgrade a v1.6.0 (guía + skill) | v1.6.0 | [spec](specs/bootstrap/SDD-033-upgrade-gaps-v160.md) |
-| SDD-032 | docs     | Reestructurar README.md raíz (v1.3–v1.5 + rutas actuales) | v1.6.0 | [spec](specs/docs/SDD-032-reestructurar-readme-raiz.md) |
-| SDD-031 | bootstrap | build-spec fail-closed: Plan mode / «te guío» | v1.6.0 | [spec](specs/bootstrap/SDD-031-build-spec-fail-closed-plan-mode.md) |
-| SDD-030 | bootstrap | Skills: perfil de stack resuelto en install (no hardcodear perfil ajeno) | v1.6.0 | [spec](specs/bootstrap/SDD-030-skills-stack-profile-install.md) |
-| SDD-029 | core     | Reordenar guías raíz `core/` → `core/guides/` | v1.6.0 | [spec](specs/core/SDD-029-reordenar-guias-core-guides.md) |
-| SDD-028 | core     | Guías audits + research en `core/guides/` (stubs en instancia) | v1.6.0 | [spec](specs/core/SDD-028-guides-audits-research-core.md) |
-| SDD-027 | docs     | Metodología research: guía + plantilla de nota (distinta de audits) | v1.6.0 | [spec](specs/docs/SDD-027-metodologia-research-plantilla.md) |
-| SDD-026 | docs     | Metodología auditorías: registro default; plan solo si grande | v1.6.0 | [spec](specs/docs/SDD-026-metodologia-auditorias-plantillas.md) |
-| SDD-024 | core     | Draft/DoR: sección opcional «Congelado para implementación» (API, tests, lectura máx.) | v1.6.0 | [spec](specs/core/SDD-024-congelado-para-implementacion.md) |
-| SDD-025 | profiles | Verify: tabla perfil → comandos obligatorios (Pint=CI, tests, `npm audit` si tocó JS) | v1.6.0 | [spec](specs/profiles/SDD-025-verify-tabla-comandos-perfil.md) |
+| ID  | Dominio | Título | Versión | Spec |
+| --- | ------- | ------ | ------- | ---- |
+| —   | —       | —      | —       | —    |
 
 ## Validating
 
@@ -60,6 +51,16 @@
 
 | ID      | Dominio   | Título                                                                                            | Versión | Fecha      | Spec archivado                                                                                                                             |
 | ------- | --------- | ------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| SDD-033 | bootstrap | Gaps de upgrade a v1.6.0 (guía + skill)                                                           | v1.6.0  | 2026-09-13 | [archive/2026/bootstrap/SDD-033-upgrade-gaps-v160.md](archive/2026/bootstrap/SDD-033-upgrade-gaps-v160.md) |
+| SDD-032 | docs      | Reestructurar README.md raíz (v1.3–v1.5 + rutas actuales)                                         | v1.6.0  | 2026-09-13 | [archive/2026/docs/SDD-032-reestructurar-readme-raiz.md](archive/2026/docs/SDD-032-reestructurar-readme-raiz.md) |
+| SDD-031 | bootstrap | build-spec fail-closed: Plan mode / «te guío»                                                     | v1.6.0  | 2026-09-13 | [archive/2026/bootstrap/SDD-031-build-spec-fail-closed-plan-mode.md](archive/2026/bootstrap/SDD-031-build-spec-fail-closed-plan-mode.md) |
+| SDD-030 | bootstrap | Skills: perfil de stack resuelto en install (no hardcodear perfil ajeno)                          | v1.6.0  | 2026-09-13 | [archive/2026/bootstrap/SDD-030-skills-stack-profile-install.md](archive/2026/bootstrap/SDD-030-skills-stack-profile-install.md) |
+| SDD-029 | core      | Reordenar guías raíz `core/` → `core/guides/`                                                     | v1.6.0  | 2026-09-13 | [archive/2026/core/SDD-029-reordenar-guias-core-guides.md](archive/2026/core/SDD-029-reordenar-guias-core-guides.md) |
+| SDD-028 | core      | Guías audits + research en `core/guides/` (stubs en instancia)                                    | v1.6.0  | 2026-09-13 | [archive/2026/core/SDD-028-guides-audits-research-core.md](archive/2026/core/SDD-028-guides-audits-research-core.md) |
+| SDD-027 | docs      | Metodología research: guía + plantilla de nota (distinta de audits)                               | v1.6.0  | 2026-09-13 | [archive/2026/docs/SDD-027-metodologia-research-plantilla.md](archive/2026/docs/SDD-027-metodologia-research-plantilla.md) |
+| SDD-026 | docs      | Metodología auditorías: registro default; plan solo si grande                                     | v1.6.0  | 2026-09-13 | [archive/2026/docs/SDD-026-metodologia-auditorias-plantillas.md](archive/2026/docs/SDD-026-metodologia-auditorias-plantillas.md) |
+| SDD-025 | profiles  | Verify: tabla perfil → comandos obligatorios (Pint=CI, tests, `npm audit` si tocó JS)               | v1.6.0  | 2026-09-13 | [archive/2026/profiles/SDD-025-verify-tabla-comandos-perfil.md](archive/2026/profiles/SDD-025-verify-tabla-comandos-perfil.md) |
+| SDD-024 | core      | Draft/DoR: sección opcional «Congelado para implementación» (API, tests, lectura máx.)            | v1.6.0  | 2026-09-13 | [archive/2026/core/SDD-024-congelado-para-implementacion.md](archive/2026/core/SDD-024-congelado-para-implementacion.md) |
 | SDD-023 | bootstrap | install-agents: branching mode + precedencia instancia > global                                   | v1.5.0  | 2026-09-10 | [archive/2026/bootstrap/SDD-023-install-agents-branching-precedencia.md](archive/2026/bootstrap/SDD-023-install-agents-branching-precedencia.md) |
 | SDD-022 | profiles  | Pint local = comando CI (voyager + filament)                                                      | v1.5.0  | 2026-09-10 | [archive/2026/profiles/SDD-022-pint-parity-ci-laravel.md](archive/2026/profiles/SDD-022-pint-parity-ci-laravel.md) |
 | SDD-021 | docs      | Índice artefactos paths.sdd (audits/research) + banner ANALYSIS                                   | v1.4.1  | 2026-09-06 | [archive/2026/docs/SDD-021-indice-audits-research-banner-analysis.md](archive/2026/docs/SDD-021-indice-audits-research-banner-analysis.md) |

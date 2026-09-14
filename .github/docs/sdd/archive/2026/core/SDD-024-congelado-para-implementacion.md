@@ -10,7 +10,7 @@
 | **Dominio**           | `core`             |
 | **Tipo**              | `documentation`    |
 | **Fecha**             | 2026-09-11         |
-| **Estado**            | `In Build`         |
+| **Estado**            | `Released`         |
 | **Versión objetivo**  | `v1.6.0` |
 | **Owner**             | mantenedor         |
 | **Prioridad**         | `P1`               |
